@@ -39,6 +39,9 @@ double SensorParam::getParamValue()
         case constParam:
             return value;
             break;
+        case dbusParam:
+            return dbusSensor->getSensorValue();
+            break;
         default:
             throw std::invalid_argument("param type not supported");
     }
@@ -92,7 +95,30 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
         }
     }
 
-    /* TODO: Check for dbus parameter */
+    /* Check for dbus parameter */
+    auto dbusParams = params.value("DbusParam", empty);
+    if (!dbusParams.empty())
+    {
+        for (auto& j : dbusParams)
+        {
+            /* Get parameter dbus sensor descriptor */
+            auto desc = j.value("Desc", empty);
+            if ((!desc.empty()) && (j.find("ParamName") != j.end()))
+            {
+                std::string sensorType = desc.value("SensorType", "");
+                std::string name = desc.value("Name", "");
+
+                if (!sensorType.empty() && !name.empty())
+                {
+                    std::string objPath(sensorDbusPath);
+                    objPath += sensorType + "/" + name;
+
+                    auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
+                    paramMap.emplace(j["ParamName"], std::move(paramPtr));
+                }
+            }
+        }
+    }
 
     /* Print all parameters for debug purpose only */
     if (DEBUG)
