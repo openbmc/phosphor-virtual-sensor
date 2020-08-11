@@ -1,0 +1,11 @@
+[Unit]
+Description=Virtual sensors
+
+[Service]
+ExecStart=@bindir@/virtual-sensor
+Type=dbus
+BusName=xyz.openbmc_project.VirtualSensor
+SyslogIdentifier=phosphor-virtual-sensor
+
+[Install]
+WantedBy=multi-user.target
