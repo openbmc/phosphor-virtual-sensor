@@ -1,3 +1,5 @@
+#include "dbusSensor.hpp"
+
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Critical/server.hpp>
@@ -44,11 +46,22 @@ class SensorParam
     explicit SensorParam(double value) : value(value), paramType(constParam)
     {}
 
+    /** @brief Constructs SensorParam (type = dbusParam)
+     *
+     * @param[in] bus     - Handle to system dbus
+     * @param[in] path    - The Dbus path of sensor
+     */
+    SensorParam(sdbusplus::bus::bus& bus, std::string path) :
+        dbusSensor(std::make_shared<DbusSensor>(bus, path)),
+        paramType(dbusParam)
+    {}
+
     /** @brief Get sensor value property from D-bus interface */
     double getParamValue();
 
   private:
-    double value;
+    std::shared_ptr<DbusSensor> dbusSensor = nullptr;
+    double value = 0;
     ParamType paramType;
 };
 
