@@ -1,4 +1,5 @@
 #include "dbusSensor.hpp"
+#include "exprtk.hpp"
 
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
@@ -105,6 +106,12 @@ class VirtualSensor : public sensorIfaces
     std::string exprStr;
     /** @brief Sensor Threshold config values */
     struct Threshold sensorThreshold;
+    /** @brief symbol table from exprtk */
+    exprtk::symbol_table<double> symbols{};
+    /** @brief expression from exprtk to calculate sensor value */
+    exprtk::expression<double> expression{};
+    /** @brief parser from exprtk */
+    exprtk::parser<double> parser{};
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
