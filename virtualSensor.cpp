@@ -85,6 +85,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
             {
                 auto paramPtr = std::make_unique<SensorParam>(j["Value"]);
                 paramMap.emplace(j["ParamName"], std::move(paramPtr));
+                symbols.create_variable(j["ParamName"]);
             }
             else
             {
@@ -115,10 +116,15 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
 
                     auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
                     paramMap.emplace(j["ParamName"], std::move(paramPtr));
+                    symbols.create_variable(j["ParamName"]);
                 }
             }
         }
     }
+
+    symbols.add_constants();
+    expression.register_symbol_table(symbols);
+    parser.compile(exprStr, expression);
 
     /* Print all parameters for debug purpose only */
     if (DEBUG)
@@ -138,9 +144,19 @@ void VirtualSensor::setSensorThreshold()
     WarningInterface::warningLow(sensorThreshold.warningLow);
 }
 
-/* TBD */
 void VirtualSensor::updateVirtualSensor()
-{}
+{
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        auto& data = param.second;
+        symbols.get_variable(name)->ref() = data->getParamValue();
+    }
+    double val = expression.value();
+    setSensorValue(val);
+    if (DEBUG)
+        std::cout << "Sensor value is " << val << "\n";
+}
 
 /** @brief Parsing Virtual Sensor config JSON file  */
 Json VirtualSensors::parseConfigFile(const std::string configFile)
@@ -193,6 +209,7 @@ void VirtualSensors::createVirtualSensors()
 
                 log<level::INFO>("Added a new virtual sensor",
                                  entry("NAME = %s", name.c_str()));
+                virtualSensorPtr->updateVirtualSensor();
             }
             else
             {
