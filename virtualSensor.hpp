@@ -1,4 +1,5 @@
 #include "dbusSensor.hpp"
+#include "exprtk.hpp"
 
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
@@ -95,6 +96,8 @@ class VirtualSensor : public sensorIfaces
 
     /** @brief Set sensor value */
     void setSensorValue(double value);
+    /** @brief Update sensor at regular intrval */
+    void updateVirtualSensor();
 
     /** @brief Map of list of parameters */
     using ParamMap =
@@ -108,6 +111,10 @@ class VirtualSensor : public sensorIfaces
     std::string exprStr;
     /** @brief Sensor Threshold config values */
     struct Threshold sensorThreshold;
+    /** @brief symbol table from exprtk */
+    exprtk::symbol_table<double> symbols{};
+    /** @brief expression from exprtk to calculate sensor value */
+    exprtk::expression<double> expression{};
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
@@ -115,8 +122,6 @@ class VirtualSensor : public sensorIfaces
     void initVirtualSensor(const Json& sensorConfig);
     /** @brief Set Sensor Threshold to D-bus at beginning */
     void setSensorThreshold();
-    /** @brief Update sensor at regular intrval */
-    void updateVirtualSensor();
 };
 
 class VirtualSensors
