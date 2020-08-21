@@ -7,6 +7,17 @@ project(
     ],
 )
 
+cpp = meson.get_compiler('cpp')
+if cpp.has_header('exprtk.hpp')
+    exprtk = declare_dependency()
+else
+    subproject('exprtk', required: false)
+    exprtk = declare_dependency(
+        include_directories: 'subprojects/exprtk'
+    )
+endif
+
+
 executable(
     'virtual-sensor',
     [
@@ -17,6 +28,7 @@ executable(
         dependency('sdbusplus'),
         dependency('phosphor-dbus-interfaces'),
         dependency('sdeventplus'),
+        exprtk,
     ],
     install: true,
     install_dir: get_option('bindir')
