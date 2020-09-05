@@ -52,7 +52,7 @@ class SensorParam
      * @param[in] path    - The Dbus path of sensor
      */
     SensorParam(sdbusplus::bus::bus& bus, std::string path) :
-        dbusSensor(std::make_shared<DbusSensor>(bus, path)),
+        dbusSensor(std::make_unique<DbusSensor>(bus, path)),
         paramType(dbusParam)
     {}
 
@@ -60,7 +60,7 @@ class SensorParam
     double getParamValue();
 
   private:
-    std::shared_ptr<DbusSensor> dbusSensor = nullptr;
+    std::unique_ptr<DbusSensor> dbusSensor = nullptr;
     double value = 0;
     ParamType paramType;
 };
@@ -96,7 +96,9 @@ class VirtualSensor : public sensorIfaces
     void setSensorValue(double value);
 
     /** @brief Map of list of parameters */
-    std::unordered_map<std::string, std::shared_ptr<SensorParam>> paramMap;
+    using ParamMap =
+        std::unordered_map<std::string, std::unique_ptr<SensorParam>>;
+    ParamMap paramMap;
 
   private:
     /** @brief sdbusplus bus client connection. */
@@ -138,7 +140,7 @@ class VirtualSensors
     Json parseConfigFile(const std::string configFile);
 
     /** @brief Map of the object VirtualSensor */
-    std::unordered_map<std::string, std::shared_ptr<VirtualSensor>>
+    std::unordered_map<std::string, std::unique_ptr<VirtualSensor>>
         virtualSensorsMap;
 
     /** @brief Create list of virtual sensors */

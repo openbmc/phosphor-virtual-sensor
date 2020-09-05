@@ -1,6 +1,5 @@
-#include "virtualSensor.hpp"
-
 #include "config.hpp"
+#include "virtualSensor.hpp"
 
 #include <phosphor-logging/log.hpp>
 #include <sdeventplus/event.hpp>
@@ -21,8 +20,7 @@ namespace phosphor
 namespace virtualSensor
 {
 
-void printParams(
-    std::unordered_map<std::string, std::shared_ptr<SensorParam>> paramMap)
+void printParams(const VirtualSensor::ParamMap& paramMap)
 {
     for (const auto& p : paramMap)
     {
@@ -84,8 +82,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
         {
             if (j.find("ParamName") != j.end())
             {
-                auto paramPtr = std::make_shared<SensorParam>(j["Value"]);
-                paramMap.emplace(j["ParamName"], paramPtr);
+                auto paramPtr = std::make_unique<SensorParam>(j["Value"]);
+                paramMap.emplace(j["ParamName"], std::move(paramPtr));
             }
             else
             {
@@ -114,8 +112,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
-                    auto paramPtr = std::make_shared<SensorParam>(bus, objPath);
-                    paramMap.emplace(j["ParamName"], paramPtr);
+                    auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
+                    paramMap.emplace(j["ParamName"], std::move(paramPtr));
                 }
             }
         }
@@ -189,7 +187,7 @@ void VirtualSensors::createVirtualSensors()
                 objPath += sensorType + "/" + name;
 
                 auto virtualSensorPtr =
-                    std::make_shared<VirtualSensor>(bus, objPath.c_str(), j);
+                    std::make_unique<VirtualSensor>(bus, objPath.c_str(), j);
                 virtualSensorsMap.emplace(name, std::move(virtualSensorPtr));
 
                 log<level::INFO>("Added a new virtual sensor",
