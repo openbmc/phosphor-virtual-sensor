@@ -1,8 +1,11 @@
 #include "dbusUtils.hpp"
 
 #include <sdbusplus/bus.hpp>
+#include <sdbusplus/server.hpp>
 
 const char* sensorIntf = "xyz.openbmc_project.Sensor.Value";
+
+int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error* err);
 
 class DbusSensor
 {
@@ -15,8 +18,12 @@ class DbusSensor
      * @param[in] bus     - Handle to system dbus
      * @param[in] path    - The Dbus path of sensor
      */
-    DbusSensor(sdbusplus::bus::bus& bus, const std::string& path) :
-        bus(bus), path(path)
+    DbusSensor(sdbusplus::bus::bus& bus, const std::string& path, void* ctx) :
+        bus(bus), path(path),
+        signal(
+            bus,
+            sdbusplus::bus::match::rules::propertiesChanged(path, sensorIntf),
+            handleDbusSignal, ctx)
     {
         servName = getService(bus, path, sensorIntf);
     }
@@ -35,4 +42,6 @@ class DbusSensor
     std::string path;
     /** @brief service name for the sensor daemon */
     std::string servName;
+    /** @brief signal for sensor value change */
+    sdbusplus::server::match::match signal;
 };
