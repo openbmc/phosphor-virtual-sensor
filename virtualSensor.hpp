@@ -51,9 +51,10 @@ class SensorParam
      *
      * @param[in] bus     - Handle to system dbus
      * @param[in] path    - The Dbus path of sensor
+     * @param[in] ctx     - sensor context for update
      */
-    SensorParam(sdbusplus::bus::bus& bus, std::string path) :
-        dbusSensor(std::make_unique<DbusSensor>(bus, path)),
+    SensorParam(sdbusplus::bus::bus& bus, std::string path, void* ctx) :
+        dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
     {}
 
