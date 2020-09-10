@@ -16,6 +16,14 @@ static constexpr uint8_t defaultLowThreshold = 0;
 
 using namespace phosphor::logging;
 
+int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error* err)
+{
+    using namespace phosphor::virtualSensor;
+    VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+    obj->updateVirtualSensor();
+
+    return 0;
+}
 namespace phosphor
 {
 namespace virtualSensor
@@ -115,7 +123,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
-                    auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
+                    auto paramPtr =
+                        std::make_unique<SensorParam>(bus, objPath, this);
                     std::string name = j["ParamName"];
                     paramMap.emplace(name, std::move(paramPtr));
                     symbols.create_variable(name);
