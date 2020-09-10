@@ -16,6 +16,31 @@ static constexpr uint8_t defaultLowThreshold = 0;
 
 using namespace phosphor::logging;
 
+int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
+{
+    if (usrData == nullptr)
+    {
+        throw std::runtime_error("Invalid match");
+    }
+
+    auto sdbpMsg = sdbusplus::message::message(msg);
+    std::string msgIfce;
+    std::map<std::string, std::variant<int64_t, double, bool>> msgData;
+
+    sdbpMsg.read(msgIfce, msgData);
+
+    if (msgData.find("Value") != msgData.end())
+    {
+        using namespace phosphor::virtualSensor;
+        VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+        // TODO(openbmc/phosphor-virtual-sensor#1): updateVirtualSensor should
+        // be changed to take the information we got from the signal, to avoid
+        // having to do numerous dbus queries.
+        obj->updateVirtualSensor();
+    }
+    return 0;
+}
+
 namespace phosphor
 {
 namespace virtualSensor
@@ -115,7 +140,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
-                    auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
+                    auto paramPtr =
+                        std::make_unique<SensorParam>(bus, objPath, this);
                     std::string name = j["ParamName"];
                     symbols.create_variable(name);
                     paramMap.emplace(std::move(name), std::move(paramPtr));
