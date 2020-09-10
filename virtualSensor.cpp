@@ -11,10 +11,29 @@
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
+static constexpr auto sensorValueIfce = "xyz.openbmc_project.Sensor.Value";
 static constexpr uint8_t defaultHighThreshold = 100;
 static constexpr uint8_t defaultLowThreshold = 0;
 
 using namespace phosphor::logging;
+
+int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error* err)
+{
+    auto sdbpMsg = sdbusplus::message::message(msg);
+    std::string msgIfce;
+    std::map<std::string, std::variant<int64_t, double, bool>> msgData;
+
+    sdbpMsg.read(msgIfce, msgData);
+
+    if ((msgIfce == sensorValueIfce) &&
+        (msgData.find("Value") != msgData.end()))
+    {
+        using namespace phosphor::virtualSensor;
+        VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+        obj->updateVirtualSensor();
+    }
+    return 0;
+}
 
 namespace phosphor
 {
@@ -115,7 +134,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
-                    auto paramPtr = std::make_unique<SensorParam>(bus, objPath);
+                    auto paramPtr =
+                        std::make_unique<SensorParam>(bus, objPath, this);
                     std::string name = j["ParamName"];
                     paramMap.emplace(name, std::move(paramPtr));
                     symbols.create_variable(name);
