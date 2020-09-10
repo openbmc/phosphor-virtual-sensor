@@ -172,6 +172,51 @@ void VirtualSensor::setSensorThreshold(Threshold& sensorThreshold)
     WarningInterface::warningLow(sensorThreshold.warningLow);
 }
 
+void VirtualSensor::checkSensorThreshold(const double value)
+{
+    auto criticalHigh = CriticalInterface::criticalHigh();
+    auto criticalLow = CriticalInterface::criticalLow();
+    auto warningHigh = WarningInterface::warningHigh();
+    auto warningLow = WarningInterface::warningLow();
+
+    if (value > criticalHigh)
+    {
+        if (!CriticalInterface::criticalAlarmHigh())
+        {
+            CriticalInterface::criticalAlarmHigh(true);
+            log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
+                            "critical high threshold",
+                            entry("NAME = %s", name.c_str()));
+        }
+    }
+    else
+    {
+        if (CriticalInterface::criticalAlarmHigh())
+        {
+            CriticalInterface::criticalAlarmHigh(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is under "
+                             "critical high threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
+
+        if ((value > warningHigh) && (!WarningInterface::warningAlarmHigh()))
+        {
+            WarningInterface::warningAlarmHigh(true);
+            log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
+                            "warning high threshold",
+                            entry("NAME = %s", name.c_str()));
+        }
+        else if ((value <= warningHigh) &&
+                 (WarningInterface::warningAlarmHigh()))
+        {
+            WarningInterface::warningAlarmHigh(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is under "
+                             "warning high threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
+    }
+}
+
 void VirtualSensor::updateVirtualSensor()
 {
     for (auto& param : paramMap)
@@ -181,9 +226,15 @@ void VirtualSensor::updateVirtualSensor()
         symbols.get_variable(name)->ref() = data->getParamValue();
     }
     double val = expression.value();
+
+    /* Set sensor value to dbus interface */
     setSensorValue(val);
+
     if (DEBUG)
         std::cout << "Sensor value is " << val << "\n";
+
+    /* Check sensor threshold and log required message */
+    checkSensorThreshold(val);
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */
@@ -231,8 +282,8 @@ void VirtualSensors::createVirtualSensors()
                 std::string objPath(sensorDbusPath);
                 objPath += sensorType + "/" + name;
 
-                auto virtualSensorPtr =
-                    std::make_unique<VirtualSensor>(bus, objPath.c_str(), j);
+                auto virtualSensorPtr = std::make_unique<VirtualSensor>(
+                    bus, objPath.c_str(), j, name);
 
                 log<level::INFO>("Added a new virtual sensor",
                                  entry("NAME = %s", name.c_str()));
