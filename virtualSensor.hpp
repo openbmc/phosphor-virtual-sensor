@@ -110,8 +110,6 @@ class VirtualSensor : public sensorIfaces
     sdbusplus::bus::bus& bus;
     /** @brief Expression string for virtual sensor value calculations */
     std::string exprStr;
-    /** @brief Sensor Threshold config values */
-    struct Threshold sensorThreshold;
     /** @brief symbol table from exprtk */
     exprtk::symbol_table<double> symbols{};
     /** @brief expression from exprtk to calculate sensor value */
@@ -122,7 +120,7 @@ class VirtualSensor : public sensorIfaces
      */
     void initVirtualSensor(const Json& sensorConfig);
     /** @brief Set Sensor Threshold to D-bus at beginning */
-    void setSensorThreshold();
+    void setSensorThreshold(Threshold& sensorThreshold);
 };
 
 class VirtualSensors
