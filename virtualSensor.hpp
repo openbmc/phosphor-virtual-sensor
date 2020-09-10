@@ -80,9 +80,9 @@ class VirtualSensor : public sensorIfaces
      * @param[in] sensorConfig - Json object for sensor config
      */
     VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
-                  const Json& sensorConfig) :
+                  const Json& sensorConfig, const std::string& name) :
         sensorIfaces(bus, objPath),
-        bus(bus)
+        bus(bus), name(name)
     {
         initVirtualSensor(sensorConfig);
     }
@@ -108,6 +108,8 @@ class VirtualSensor : public sensorIfaces
   private:
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus::bus& bus;
+    /** @brief name of sensor */
+    std::string name;
     /** @brief Expression string for virtual sensor value calculations */
     std::string exprStr;
     /** @brief symbol table from exprtk */
@@ -121,6 +123,8 @@ class VirtualSensor : public sensorIfaces
     void initVirtualSensor(const Json& sensorConfig);
     /** @brief Set Sensor Threshold to D-bus at beginning */
     void setSensorThreshold(Threshold& sensorThreshold);
+    /** @brief Check Sensor threshold and update alarm and log */
+    void checkSensorThreshold(const double value);
 };
 
 class VirtualSensors
