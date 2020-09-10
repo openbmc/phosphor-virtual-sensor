@@ -81,6 +81,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
     auto threshold = sensorConfig.value("Threshold", empty);
     if (!threshold.empty())
     {
+        Threshold sensorThreshold;
         sensorThreshold.criticalHigh =
             threshold.value("CriticalHigh", defaultHighThreshold);
         sensorThreshold.criticalLow =
@@ -89,10 +90,10 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
             threshold.value("WarningHigh", defaultHighThreshold);
         sensorThreshold.warningLow =
             threshold.value("WarningLow", defaultLowThreshold);
-    }
 
-    /* Set threshold value to dbus */
-    setSensorThreshold();
+        /* Set threshold value to dbus */
+        setSensorThreshold(sensorThreshold);
+    }
 
     /* Get expression string */
     exprStr = sensorConfig.value("Expression", "");
@@ -167,7 +168,7 @@ void VirtualSensor::setSensorValue(double value)
     ValueIface::value(value);
 }
 
-void VirtualSensor::setSensorThreshold()
+void VirtualSensor::setSensorThreshold(Threshold& sensorThreshold)
 {
     CriticalInterface::criticalHigh(sensorThreshold.criticalHigh);
     CriticalInterface::criticalLow(sensorThreshold.criticalLow);
