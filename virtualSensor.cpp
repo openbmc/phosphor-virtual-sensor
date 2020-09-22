@@ -311,6 +311,16 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     return data;
 }
 
+std::map<std::string, ValueIface::Unit> unitMap = {
+    {"temperature", ValueIface::Unit::DegreesC},
+    {"fan_tach", ValueIface::Unit::RPMS},
+    {"voltage", ValueIface::Unit::Volts},
+    {"altitude", ValueIface::Unit::Meters},
+    {"current", ValueIface::Unit::Amperes},
+    {"power", ValueIface::Unit::Watts},
+    {"energy", ValueIface::Unit::Joules},
+    {"utilization", ValueIface::Unit::Percent}};
+
 void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
@@ -331,17 +341,29 @@ void VirtualSensors::createVirtualSensors()
 
             if (!name.empty() && !sensorType.empty())
             {
-                std::string objPath(sensorDbusPath);
-                objPath += sensorType + "/" + name;
+                if (unitMap.find(sensorType) == unitMap.end())
+                {
+                    log<level::ERR>("Sensor type is not supported",
+                                    entry("TYPE = %s", sensorType.c_str()));
+                }
+                else
+                {
+                    std::string objPath(sensorDbusPath);
+                    objPath += sensorType + "/" + name;
 
-                auto virtualSensorPtr = std::make_unique<VirtualSensor>(
-                    bus, objPath.c_str(), j, name);
+                    auto virtualSensorPtr = std::make_unique<VirtualSensor>(
+                        bus, objPath.c_str(), j, name);
 
-                log<level::INFO>("Added a new virtual sensor",
-                                 entry("NAME = %s", name.c_str()));
-                virtualSensorPtr->updateVirtualSensor();
-                virtualSensorsMap.emplace(std::move(name),
-                                          std::move(virtualSensorPtr));
+                    log<level::INFO>("Added a new virtual sensor",
+                                     entry("NAME = %s", name.c_str()));
+                    virtualSensorPtr->updateVirtualSensor();
+
+                    /* Initialize unit value for virtual sensor */
+                    virtualSensorPtr->ValueIface::unit(unitMap[sensorType]);
+
+                    virtualSensorsMap.emplace(std::move(name),
+                                              std::move(virtualSensorPtr));
+                }
             }
             else
             {
