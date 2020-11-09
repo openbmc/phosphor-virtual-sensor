@@ -2,6 +2,8 @@
 
 #include "config.hpp"
 
+#include <fmt/format.h>
+
 #include <phosphor-logging/log.hpp>
 #include <sdeventplus/event.hpp>
 
@@ -156,7 +158,22 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
 
     /* parser from exprtk */
     exprtk::parser<double> parser{};
-    parser.compile(exprStr, expression);
+    if (!parser.compile(exprStr, expression))
+    {
+        log<level::ERR>("Expression compilation failed");
+
+        for (std::size_t i = 0; i < parser.error_count(); ++i)
+        {
+            auto error = parser.get_error(i);
+
+            log<level::ERR>(
+                fmt::format(
+                    "Position: {} Type: {} Message: {}", error.token.position,
+                    exprtk::parser_error::to_str(error.mode), error.diagnostic)
+                    .c_str());
+        }
+        throw std::runtime_error("Expression compilation failed");
+    }
 
     /* Print all parameters for debug purpose only */
     if (DEBUG)

@@ -28,6 +28,7 @@ executable(
         dependency('sdbusplus'),
         dependency('phosphor-dbus-interfaces'),
         dependency('sdeventplus'),
+        dependency('fmt'),
         exprtk,
     ],
     install: true,
