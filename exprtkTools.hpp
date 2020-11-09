@@ -31,7 +31,6 @@
 #define exprtk_disable_string_capabilities
 
 #define exprtk_disable_rtl_io_file
-#define exprtk_disable_rtl_vecops
 #define exprtk_disable_return_statement
 #define exprtk_disable_rtl_io
 #define exprtk_disable_superscalar_unroll

@@ -116,6 +116,8 @@ class VirtualSensor : public sensorIfaces
     exprtk::symbol_table<double> symbols{};
     /** @brief expression from exprtk to calculate sensor value */
     exprtk::expression<double> expression{};
+    /** @brief The vecops package so the expression can use vectors */
+    exprtk::rtl::vecops::package<double> vecopsPackage;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
