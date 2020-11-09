@@ -1,3 +1,4 @@
+#include "config.hpp"
 #include "dbusSensor.hpp"
 #include "exprtkTools.hpp"
 
@@ -114,6 +115,10 @@ class VirtualSensor : public sensorIfaces
     exprtk::symbol_table<double> symbols{};
     /** @brief expression from exprtk to calculate sensor value */
     exprtk::expression<double> expression{};
+#if ENABLE_VECOPS_PACKAGE
+    /** @brief The vecops package so the expression can use vectors */
+    exprtk::rtl::vecops::package<double> vecopsPackage;
+#endif
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
