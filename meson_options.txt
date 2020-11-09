@@ -1,0 +1,5 @@
+option(
+  'vecops-package',
+  description: 'Enable the vecops package which enables vector handling',
+  type: 'feature',
+  value: 'disabled')

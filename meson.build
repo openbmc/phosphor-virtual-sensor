@@ -52,6 +52,8 @@ install_data(sources : configfile, install_dir : packagedir)
 conf_data = configuration_data()
 conf_data.set('VIRTUAL_SENSOR_CONFIG_FILE', confpath)
 
+conf_data.set10('ENABLE_VECOPS_PACKAGE', get_option('vecops-package').enabled())
+
 configure_file(output : 'config.hpp',
                configuration : conf_data)
 

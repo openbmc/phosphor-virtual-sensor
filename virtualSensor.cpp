@@ -154,6 +154,11 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
     }
 
     symbols.add_constants();
+
+#if ENABLE_VECOPS_PACKAGE
+    symbols.add_package(vecopsPackage);
+#endif
+
     expression.register_symbol_table(symbols);
 
     /* parser from exprtk */
