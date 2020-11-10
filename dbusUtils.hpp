@@ -40,14 +40,13 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
     }
     catch (const sdbusplus::exception::SdBusError& ex)
     {
-        log<level::ERR>("ObjectMapper call failure",
-                        entry("WHAT=%s", ex.what()));
-        throw;
+        // The service isn't on D-Bus yet.
+        return std::string{};
     }
 
     if (resp.begin() == resp.end())
     {
-        throw std::runtime_error("Unable to find Object: " + path);
+        return std::string{};
     }
 
     return resp.begin()->first;
