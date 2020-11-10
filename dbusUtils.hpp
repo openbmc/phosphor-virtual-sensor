@@ -40,13 +40,19 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
     }
     catch (const sdbusplus::exception::SdBusError& ex)
     {
-        log<level::ERR>("ObjectMapper call failure",
-                        entry("WHAT=%s", ex.what()));
+        if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
+                                         Error::ResourceNotFound::errName))
+        {
+            // The service isn't on D-Bus yet.
+            return std::string{};
+        }
+
         throw;
     }
 
     if (resp.begin() == resp.end())
     {
+        // Shouldn't happen, if the mapper can't find it it is handled above.
         throw std::runtime_error("Unable to find Object: " + path);
     }
 
