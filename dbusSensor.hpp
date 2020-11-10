@@ -31,6 +31,15 @@ class DbusSensor
     /** @brief Get sensor value property from D-bus interface */
     double getSensorValue()
     {
+        if (servName.empty())
+        {
+            servName = getService(bus, path, sensorIntf);
+            if (servName.empty())
+            {
+                return std::numeric_limits<double>::quiet_NaN();
+            }
+        }
+
         return getDbusProperty<double>(bus, servName, path, sensorIntf,
                                        "Value");
     }
