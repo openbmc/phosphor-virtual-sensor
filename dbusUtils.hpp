@@ -30,13 +30,7 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
     try
     {
         auto msg = bus.call(mapper);
-
         msg.read(resp);
-        if (msg.is_method_error())
-        {
-            log<level::ERR>("Error in mapper call");
-            elog<InternalFailure>();
-        }
     }
     catch (const sdbusplus::exception::SdBusError& ex)
     {
@@ -74,16 +68,6 @@ T getDbusProperty(sdbusplus::bus::bus& bus, const std::string& service,
     method.append(intf, property);
 
     auto msg = bus.call(method);
-
-    if (msg.is_method_error())
-    {
-        log<level::ERR>("Failed to get property",
-                        entry("PROPERTY=%s", property.c_str()),
-                        entry("PATH=%s", path.c_str()),
-                        entry("INTERFACE=%s", intf.c_str()));
-        elog<InternalFailure>();
-    }
-
     msg.read(value);
 
     return std::get<T>(value);
