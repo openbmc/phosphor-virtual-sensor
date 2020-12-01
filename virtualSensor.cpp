@@ -201,27 +201,7 @@ void VirtualSensor::checkSensorThreshold(const double value)
     auto warningHigh = WarningInterface::warningHigh();
     auto warningLow = WarningInterface::warningLow();
 
-    if (value > criticalHigh)
-    {
-        if (!CriticalInterface::criticalAlarmHigh())
-        {
-            CriticalInterface::criticalAlarmHigh(true);
-            log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
-                            "critical high threshold",
-                            entry("NAME = %s", name.c_str()));
-        }
-        return;
-    }
-
-    if (CriticalInterface::criticalAlarmHigh())
-    {
-        CriticalInterface::criticalAlarmHigh(false);
-        log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                         "critical high threshold",
-                         entry("NAME = %s", name.c_str()));
-    }
-
-    if (value > warningHigh)
+    if (value >= warningHigh)
     {
         if (!WarningInterface::warningAlarmHigh())
         {
@@ -230,10 +210,8 @@ void VirtualSensor::checkSensorThreshold(const double value)
                             "warning high threshold",
                             entry("NAME = %s", name.c_str()));
         }
-        return;
     }
-
-    if (WarningInterface::warningAlarmHigh())
+    else if (WarningInterface::warningAlarmHigh())
     {
         WarningInterface::warningAlarmHigh(false);
         log<level::INFO>("DEASSERT: Virtual Sensor is under "
@@ -241,27 +219,25 @@ void VirtualSensor::checkSensorThreshold(const double value)
                          entry("NAME = %s", name.c_str()));
     }
 
-    if (value < criticalLow)
+    if (value >= criticalHigh)
     {
-        if (!CriticalInterface::criticalAlarmLow())
+        if (!CriticalInterface::criticalAlarmHigh())
         {
-            CriticalInterface::criticalAlarmLow(true);
-            log<level::ERR>("ASSERT: Virtual Sensor is under "
-                            "critical low threshold",
+            CriticalInterface::criticalAlarmHigh(true);
+            log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
+                            "critical high threshold",
                             entry("NAME = %s", name.c_str()));
         }
-        return;
     }
-
-    if (CriticalInterface::criticalAlarmLow())
+    else if (CriticalInterface::criticalAlarmHigh())
     {
-        CriticalInterface::criticalAlarmLow(false);
-        log<level::ERR>("DEASSERT: Virtual Sensor is above "
-                        "critical low threshold",
-                        entry("NAME = %s", name.c_str()));
+        CriticalInterface::criticalAlarmHigh(false);
+        log<level::INFO>("DEASSERT: Virtual Sensor is under "
+                         "critical high threshold",
+                         entry("NAME = %s", name.c_str()));
     }
 
-    if (value < warningLow)
+    if (value <= warningLow)
     {
         if (!WarningInterface::warningAlarmLow())
         {
@@ -270,15 +246,31 @@ void VirtualSensor::checkSensorThreshold(const double value)
                             "warning low threshold",
                             entry("NAME = %s", name.c_str()));
         }
-        return;
     }
-
-    if (WarningInterface::warningAlarmLow())
+    else if (WarningInterface::warningAlarmLow())
     {
         WarningInterface::warningAlarmLow(false);
-        log<level::ERR>("DEASSERT: Virtual Sensor is above "
-                        "warning low threshold",
-                        entry("NAME = %s", name.c_str()));
+        log<level::INFO>("DEASSERT: Virtual Sensor is above "
+                         "warning low threshold",
+                         entry("NAME = %s", name.c_str()));
+    }
+
+    if (value <= criticalLow)
+    {
+        if (!CriticalInterface::criticalAlarmLow())
+        {
+            CriticalInterface::criticalAlarmLow(true);
+            log<level::ERR>("ASSERT: Virtual Sensor is under "
+                            "critical low threshold",
+                            entry("NAME = %s", name.c_str()));
+        }
+    }
+    else if (CriticalInterface::criticalAlarmLow())
+    {
+        CriticalInterface::criticalAlarmLow(false);
+        log<level::INFO>("DEASSERT: Virtual Sensor is above "
+                         "critical low threshold",
+                         entry("NAME = %s", name.c_str()));
     }
 }
 
