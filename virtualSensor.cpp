@@ -15,6 +15,7 @@ static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr uint8_t defaultHighThreshold = 100;
 static constexpr uint8_t defaultLowThreshold = 0;
+static constexpr uint8_t defaultHysteresis = 0;
 
 using namespace phosphor::logging;
 
@@ -92,6 +93,15 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig)
             threshold.value("WarningHigh", defaultHighThreshold);
         sensorThreshold.warningLow =
             threshold.value("WarningLow", defaultLowThreshold);
+
+        criticalHighHysteresis =
+            threshold.value("CriticalHighHysteresis", defaultHysteresis);
+        criticalLowHysteresis =
+            threshold.value("CriticalLowHysteresis", defaultHysteresis);
+        warningHighHysteresis =
+            threshold.value("WarningHighHysteresis", defaultHysteresis);
+        warningLowHysteresis =
+            threshold.value("WarningLowHysteresis", defaultHysteresis);
 
         /* Set threshold value to dbus */
         setSensorThreshold(sensorThreshold);
@@ -213,10 +223,13 @@ void VirtualSensor::checkSensorThreshold(const double value)
     }
     else if (WarningInterface::warningAlarmHigh())
     {
-        WarningInterface::warningAlarmHigh(false);
-        log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                         "warning high threshold",
-                         entry("NAME = %s", name.c_str()));
+        if (value < (warningHigh - warningHighHysteresis))
+        {
+            WarningInterface::warningAlarmHigh(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is under "
+                             "warning high threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
     }
 
     if (value >= criticalHigh)
@@ -231,10 +244,13 @@ void VirtualSensor::checkSensorThreshold(const double value)
     }
     else if (CriticalInterface::criticalAlarmHigh())
     {
-        CriticalInterface::criticalAlarmHigh(false);
-        log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                         "critical high threshold",
-                         entry("NAME = %s", name.c_str()));
+        if (value < (criticalHigh - criticalHighHysteresis))
+        {
+            CriticalInterface::criticalAlarmHigh(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is under "
+                             "critical high threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
     }
 
     if (value <= warningLow)
@@ -249,10 +265,13 @@ void VirtualSensor::checkSensorThreshold(const double value)
     }
     else if (WarningInterface::warningAlarmLow())
     {
-        WarningInterface::warningAlarmLow(false);
-        log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                         "warning low threshold",
-                         entry("NAME = %s", name.c_str()));
+        if (value > (warningLow + warningLowHysteresis))
+        {
+            WarningInterface::warningAlarmLow(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is above "
+                             "warning low threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
     }
 
     if (value <= criticalLow)
@@ -267,10 +286,13 @@ void VirtualSensor::checkSensorThreshold(const double value)
     }
     else if (CriticalInterface::criticalAlarmLow())
     {
-        CriticalInterface::criticalAlarmLow(false);
-        log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                         "critical low threshold",
-                         entry("NAME = %s", name.c_str()));
+        if (value > (criticalLow + criticalLowHysteresis))
+        {
+            CriticalInterface::criticalAlarmLow(false);
+            log<level::INFO>("DEASSERT: Virtual Sensor is above "
+                             "critical low threshold",
+                             entry("NAME = %s", name.c_str()));
+        }
     }
 }
 

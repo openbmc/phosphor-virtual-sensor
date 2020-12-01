@@ -118,6 +118,14 @@ class VirtualSensor : public sensorIfaces
     exprtk::expression<double> expression{};
     /** @brief The vecops package so the expression can use vectors */
     exprtk::rtl::vecops::package<double> vecopsPackage;
+    /** @brief The warning high threshold hysteresis value */
+    double warningHighHysteresis = 0;
+    /** @brief The warning low threshold hysteresis value */
+    double warningLowHysteresis = 0;
+    /** @brief The critical high threshold hysteresis value */
+    double criticalHighHysteresis = 0;
+    /** @brief The critical low threshold hysteresis value */
+    double criticalLowHysteresis = 0;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
