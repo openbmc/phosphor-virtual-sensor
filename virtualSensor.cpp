@@ -406,6 +406,9 @@ int main()
     // Get a handle to system dbus
     auto bus = sdbusplus::bus::new_default();
 
+    // Add the ObjectManager interface
+    sdbusplus::server::manager::manager objManager(bus, "/");
+
     // Create an virtual sensors object
     phosphor::virtualSensor::VirtualSensors virtualSensors(bus);
 
