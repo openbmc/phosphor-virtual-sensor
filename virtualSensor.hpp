@@ -4,6 +4,8 @@
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Critical/server.hpp>
+#include <xyz/openbmc_project/Sensor/Threshold/HardShutdown/server.hpp>
+#include <xyz/openbmc_project/Sensor/Threshold/SoftShutdown/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Warning/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
@@ -16,17 +18,28 @@ namespace virtualSensor
 {
 
 using Json = nlohmann::json;
+
+template <typename... T>
+using ServerObject = typename sdbusplus::server::object::object<T...>;
+
 using ValueIface = sdbusplus::xyz::openbmc_project::Sensor::server::Value;
+using ValueObject = ServerObject<ValueIface>;
 
-using CriticalInterface =
+using CriticalIface =
     sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Critical;
+using CriticalObject = ServerObject<CriticalIface>;
 
-using WarningInterface =
+using WarningIface =
     sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Warning;
+using WarningObject = ServerObject<WarningIface>;
 
-using sensorIfaces =
-    sdbusplus::server::object::object<ValueIface, CriticalInterface,
-                                      WarningInterface>;
+using SoftShutdownIface =
+    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::SoftShutdown;
+using SoftShutdownObject = ServerObject<SoftShutdownIface>;
+
+using HardShutdownIface =
+    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::HardShutdown;
+using HardShutdownObject = ServerObject<HardShutdownIface>;
 
 class SensorParam
 {
@@ -67,7 +80,7 @@ class SensorParam
     ParamType paramType;
 };
 
-class VirtualSensor : public sensorIfaces
+class VirtualSensor : public ValueObject
 {
   public:
     VirtualSensor() = delete;
@@ -81,19 +94,11 @@ class VirtualSensor : public sensorIfaces
      */
     VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
                   const Json& sensorConfig, const std::string& name) :
-        sensorIfaces(bus, objPath),
+        ValueObject(bus, objPath),
         bus(bus), name(name)
     {
-        initVirtualSensor(sensorConfig);
+        initVirtualSensor(sensorConfig, objPath);
     }
-
-    struct Threshold
-    {
-        double criticalHigh;
-        double criticalLow;
-        double warningHigh;
-        double warningLow;
-    };
 
     /** @brief Set sensor value */
     void setSensorValue(double value);
@@ -119,12 +124,21 @@ class VirtualSensor : public sensorIfaces
     /** @brief The vecops package so the expression can use vectors */
     exprtk::rtl::vecops::package<double> vecopsPackage;
 
+    /** @brief The critical threshold interface object */
+    std::unique_ptr<CriticalObject> criticalIface;
+    /** @brief The warning threshold interface object */
+    std::unique_ptr<WarningObject> warningIface;
+    /** @brief The soft shutdown threshold interface object */
+    std::unique_ptr<SoftShutdownObject> softShutdownIface;
+    /** @brief The hard shutdown threshold interface object */
+    std::unique_ptr<HardShutdownObject> hardShutdownIface;
+
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
      */
-    void initVirtualSensor(const Json& sensorConfig);
-    /** @brief Set Sensor Threshold to D-bus at beginning */
-    void setSensorThreshold(Threshold& sensorThreshold);
+    void initVirtualSensor(const Json& sensorConfig,
+                           const std::string& objPath);
+
     /** @brief Check Sensor threshold and update alarm and log */
     void checkSensorThreshold(const double value);
 };
