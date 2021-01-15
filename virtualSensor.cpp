@@ -223,165 +223,6 @@ void VirtualSensor::setSensorValue(double value)
     ValueIface::value(value);
 }
 
-void VirtualSensor::checkSensorThreshold(const double value)
-{
-    if (warningIface)
-    {
-        if (value >= warningIface->warningHigh())
-        {
-            if (!warningIface->warningAlarmHigh())
-            {
-                warningIface->warningAlarmHigh(true);
-                log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
-                                "warning high threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (warningIface->warningAlarmHigh())
-        {
-            warningIface->warningAlarmHigh(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                             "warning high threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-
-        if (value <= warningIface->warningLow())
-        {
-            if (!warningIface->warningAlarmLow())
-            {
-                warningIface->warningAlarmLow(true);
-                log<level::ERR>("ASSERT: Virtual Sensor is under "
-                                "warning low threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (warningIface->warningAlarmLow())
-        {
-            warningIface->warningAlarmLow(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                             "warning low threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-    }
-
-    if (criticalIface)
-    {
-        if (value >= criticalIface->criticalHigh())
-        {
-            if (!criticalIface->criticalAlarmHigh())
-            {
-                criticalIface->criticalAlarmHigh(true);
-                log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
-                                "critical high threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (criticalIface->criticalAlarmHigh())
-        {
-            criticalIface->criticalAlarmHigh(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                             "critical high threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-
-        if (value <= criticalIface->criticalLow())
-        {
-            if (!criticalIface->criticalAlarmLow())
-            {
-                criticalIface->criticalAlarmLow(true);
-                log<level::ERR>("ASSERT: Virtual Sensor is under "
-                                "critical low threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (criticalIface->criticalAlarmLow())
-        {
-            criticalIface->criticalAlarmLow(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                             "critical low threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-    }
-
-    if (softShutdownIface)
-    {
-        if (value >= softShutdownIface->softShutdownHigh())
-        {
-            if (!softShutdownIface->softShutdownAlarmHigh())
-            {
-                softShutdownIface->softShutdownAlarmHigh(true);
-                log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
-                                "softShutdown high threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (softShutdownIface->softShutdownAlarmHigh())
-        {
-            softShutdownIface->softShutdownAlarmHigh(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                             "softShutdown high threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-
-        if (value <= softShutdownIface->softShutdownLow())
-        {
-            if (!softShutdownIface->softShutdownAlarmLow())
-            {
-                softShutdownIface->softShutdownAlarmLow(true);
-                log<level::ERR>("ASSERT: Virtual Sensor is under "
-                                "softShutdown low threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (softShutdownIface->softShutdownAlarmLow())
-        {
-            softShutdownIface->softShutdownAlarmLow(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                             "softShutdown low threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-    }
-
-    if (hardShutdownIface)
-    {
-        if (value >= hardShutdownIface->hardShutdownHigh())
-        {
-            if (!hardShutdownIface->hardShutdownAlarmHigh())
-            {
-                hardShutdownIface->hardShutdownAlarmHigh(true);
-                log<level::ERR>("ASSERT: Virtual Sensor has exceeded "
-                                "hardShutdown high threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (hardShutdownIface->hardShutdownAlarmHigh())
-        {
-            hardShutdownIface->hardShutdownAlarmHigh(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is under "
-                             "hardShutdown high threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-
-        if (value <= hardShutdownIface->hardShutdownLow())
-        {
-            if (!hardShutdownIface->hardShutdownAlarmLow())
-            {
-                hardShutdownIface->hardShutdownAlarmLow(true);
-                log<level::ERR>("ASSERT: Virtual Sensor is under "
-                                "hardShutdown low threshold",
-                                entry("NAME = %s", name.c_str()));
-            }
-        }
-        else if (hardShutdownIface->hardShutdownAlarmLow())
-        {
-            hardShutdownIface->hardShutdownAlarmLow(false);
-            log<level::INFO>("DEASSERT: Virtual Sensor is above "
-                             "hardShutdown low threshold",
-                             entry("NAME = %s", name.c_str()));
-        }
-    }
-}
-
 void VirtualSensor::updateVirtualSensor()
 {
     for (auto& param : paramMap)
@@ -406,8 +247,11 @@ void VirtualSensor::updateVirtualSensor()
     if (DEBUG)
         std::cout << "Sensor value is " << val << "\n";
 
-    /* Check sensor threshold and log required message */
-    checkSensorThreshold(val);
+    /* Check sensor thresholds and log required message */
+    checkThresholds(val, warningIface.get());
+    checkThresholds(val, criticalIface.get());
+    checkThresholds(val, softShutdownIface.get());
+    checkThresholds(val, hardShutdownIface.get());
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */

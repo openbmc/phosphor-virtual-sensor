@@ -1,12 +1,11 @@
 #include "dbusSensor.hpp"
 #include "exprtkTools.hpp"
+#include "thresholds.hpp"
+
+#include <fmt/format.h>
 
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
-#include <xyz/openbmc_project/Sensor/Threshold/Critical/server.hpp>
-#include <xyz/openbmc_project/Sensor/Threshold/HardShutdown/server.hpp>
-#include <xyz/openbmc_project/Sensor/Threshold/SoftShutdown/server.hpp>
-#include <xyz/openbmc_project/Sensor/Threshold/Warning/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
 #include <map>
@@ -24,22 +23,6 @@ using ServerObject = typename sdbusplus::server::object::object<T...>;
 
 using ValueIface = sdbusplus::xyz::openbmc_project::Sensor::server::Value;
 using ValueObject = ServerObject<ValueIface>;
-
-using CriticalIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Critical;
-using CriticalObject = ServerObject<CriticalIface>;
-
-using WarningIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Warning;
-using WarningObject = ServerObject<WarningIface>;
-
-using SoftShutdownIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::SoftShutdown;
-using SoftShutdownObject = ServerObject<SoftShutdownIface>;
-
-using HardShutdownIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::HardShutdown;
-using HardShutdownObject = ServerObject<HardShutdownIface>;
 
 class SensorParam
 {
@@ -140,7 +123,52 @@ class VirtualSensor : public ValueObject
                            const std::string& objPath);
 
     /** @brief Check Sensor threshold and update alarm and log */
-    void checkSensorThreshold(const double value);
+    template <typename T>
+    void checkThresholds(double value, T* iface)
+    {
+        if (iface)
+        {
+            if (value >= Threshold<T>::high(iface))
+            {
+                if (!Threshold<T>::alarmHigh(iface))
+                {
+                    Threshold<T>::alarmHigh(iface, true);
+                    log<level::ERR>(fmt::format("ASSERT: {} has exceeded the "
+                                                "{} high threshold",
+                                                name, Threshold<T>::name())
+                                        .c_str());
+                }
+            }
+            else if (Threshold<T>::alarmHigh(iface))
+            {
+                Threshold<T>::alarmHigh(iface, false);
+                log<level::INFO>(fmt::format("DEASSERT: {} is under the "
+                                             "{} high threshold",
+                                             name, Threshold<T>::name())
+                                     .c_str());
+            }
+
+            if (value <= Threshold<T>::low(iface))
+            {
+                if (!Threshold<T>::alarmLow(iface))
+                {
+                    Threshold<T>::alarmLow(iface, true);
+                    log<level::ERR>(fmt::format("ASSERT: {} is under the "
+                                                "{} high threshold",
+                                                name, Threshold<T>::name())
+                                        .c_str());
+                }
+            }
+            else if (Threshold<T>::alarmLow(iface))
+            {
+                Threshold<T>::alarmLow(iface, false);
+                log<level::INFO>(fmt::format("DEASSERT: {} is above the "
+                                             "{} high threshold",
+                                             name, Threshold<T>::name())
+                                     .c_str());
+            }
+        }
+    }
 };
 
 class VirtualSensors
