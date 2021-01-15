@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e30a580_5a4e4a2c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-01-15T16:46:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7406e05_aca23dc0",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c272bea_74799df9",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -83,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "cc46da10_a0e42fd7",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-01-15T16:46:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a8d8ca_b28e19eb",
+      "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28266cb4_12392ca2",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -97,6 +139,24 @@
       "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97da0a31_036a8e11",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-01-15T16:46:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28266cb4_12392ca2",
+      "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
