@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88718425_e0e65ba2",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-01-15T12:45:38Z",
+      "side": 1,
+      "message": "I\u0027m not really sure why we have these as 100/0 instead of NaN too, but that wasn\u0027t introduced by your commit.  I wouldn\u0027t mind a follow up to switch them to NaN.\n\nI guess we would need to similarly look for .contains and turn these sensors optional too.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c272bea_74799df9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-01-15T12:45:38Z",
+      "side": 1,
+      "message": "This logic is starting to get pretty lengthy.  Would be nice if we could refactor it into a template class to handle the threshold checking, but I wouldn\u0027t require you to do it.",
+      "revId": "36467eebae6b61f60d167c0b9b6faf3d5953248d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
