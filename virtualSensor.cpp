@@ -13,8 +13,6 @@
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
-static constexpr uint8_t defaultHighThreshold = 100;
-static constexpr uint8_t defaultLowThreshold = 0;
 
 using namespace phosphor::logging;
 
@@ -84,20 +82,33 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     auto threshold = sensorConfig.value("Threshold", empty);
     if (!threshold.empty())
     {
-        criticalIface = std::make_unique<CriticalObject>(bus, objPath.c_str());
-        criticalIface->criticalHigh(
-            threshold.value("CriticalHigh", defaultHighThreshold));
-        criticalIface->criticalLow(
-            threshold.value("CriticalLow", defaultLowThreshold));
-
-        warningIface = std::make_unique<WarningObject>(bus, objPath.c_str());
-        warningIface->warningHigh(
-            threshold.value("WarningHigh", defaultHighThreshold));
-        warningIface->warningLow(
-            threshold.value("WarningLow", defaultLowThreshold));
-
-        // Only create the high and low shutdown interfaces if
+        // Only create the threshold interfaces if
         // at least one of their values is present.
+
+        if (threshold.contains("CriticalHigh") ||
+            threshold.contains("CriticalLow"))
+        {
+            criticalIface =
+                std::make_unique<CriticalObject>(bus, objPath.c_str());
+
+            criticalIface->criticalHigh(threshold.value(
+                "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
+            criticalIface->criticalLow(threshold.value(
+                "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
+        }
+
+        if (threshold.contains("WarningHigh") ||
+            threshold.contains("WarningLow"))
+        {
+            warningIface =
+                std::make_unique<WarningObject>(bus, objPath.c_str());
+
+            warningIface->warningHigh(threshold.value(
+                "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
+            warningIface->warningLow(threshold.value(
+                "WarningLow", std::numeric_limits<double>::quiet_NaN()));
+        }
+
         if (threshold.contains("HardShutdownHigh") ||
             threshold.contains("HardShutdownLow"))
         {
