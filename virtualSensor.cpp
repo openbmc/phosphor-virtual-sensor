@@ -88,8 +88,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         if (threshold.contains("CriticalHigh") ||
             threshold.contains("CriticalLow"))
         {
-            criticalIface =
-                std::make_unique<CriticalObject>(bus, objPath.c_str());
+            criticalIface = std::make_unique<Threshold<CriticalObject>>(
+                bus, objPath.c_str());
 
             criticalIface->criticalHigh(threshold.value(
                 "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -100,8 +100,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         if (threshold.contains("WarningHigh") ||
             threshold.contains("WarningLow"))
         {
-            warningIface =
-                std::make_unique<WarningObject>(bus, objPath.c_str());
+            warningIface = std::make_unique<Threshold<WarningObject>>(
+                bus, objPath.c_str());
 
             warningIface->warningHigh(threshold.value(
                 "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -112,8 +112,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         if (threshold.contains("HardShutdownHigh") ||
             threshold.contains("HardShutdownLow"))
         {
-            hardShutdownIface =
-                std::make_unique<HardShutdownObject>(bus, objPath.c_str());
+            hardShutdownIface = std::make_unique<Threshold<HardShutdownObject>>(
+                bus, objPath.c_str());
 
             hardShutdownIface->hardShutdownHigh(threshold.value(
                 "HardShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -124,8 +124,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         if (threshold.contains("SoftShutdownHigh") ||
             threshold.contains("SoftShutdownLow"))
         {
-            softShutdownIface =
-                std::make_unique<SoftShutdownObject>(bus, objPath.c_str());
+            softShutdownIface = std::make_unique<Threshold<SoftShutdownObject>>(
+                bus, objPath.c_str());
 
             softShutdownIface->softShutdownHigh(threshold.value(
                 "SoftShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -248,10 +248,10 @@ void VirtualSensor::updateVirtualSensor()
         std::cout << "Sensor value is " << val << "\n";
 
     /* Check sensor thresholds and log required message */
-    checkThresholds(val, warningIface.get());
-    checkThresholds(val, criticalIface.get());
-    checkThresholds(val, softShutdownIface.get());
-    checkThresholds(val, hardShutdownIface.get());
+    checkThresholds(val, warningIface);
+    checkThresholds(val, criticalIface);
+    checkThresholds(val, softShutdownIface);
+    checkThresholds(val, hardShutdownIface);
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */
