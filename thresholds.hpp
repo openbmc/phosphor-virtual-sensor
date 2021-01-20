@@ -11,179 +11,125 @@ namespace phosphor::virtualSensor
 template <typename... T>
 using ServerObject = typename sdbusplus::server::object::object<T...>;
 
-using CriticalIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Critical;
-using CriticalObject = ServerObject<CriticalIface>;
-
-using WarningIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::Warning;
-using WarningObject = ServerObject<WarningIface>;
-
-using SoftShutdownIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::SoftShutdown;
-using SoftShutdownObject = ServerObject<SoftShutdownIface>;
-
-using HardShutdownIface =
-    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server::HardShutdown;
-using HardShutdownObject = ServerObject<HardShutdownIface>;
+namespace threshold_ns =
+    sdbusplus::xyz::openbmc_project::Sensor::Threshold::server;
+using CriticalObject = ServerObject<threshold_ns::Critical>;
+using WarningObject = ServerObject<threshold_ns::Warning>;
+using SoftShutdownObject = ServerObject<threshold_ns::SoftShutdown>;
+using HardShutdownObject = ServerObject<threshold_ns::HardShutdown>;
 
 template <typename T>
-struct Threshold
-{};
+struct Threshold;
 
 template <>
-struct Threshold<WarningObject>
+struct Threshold<WarningObject> : public WarningObject
 {
-  public:
-    static double high(WarningObject* iface)
+    static constexpr auto name = "Warning";
+    using WarningObject::WarningObject;
+
+    auto high()
     {
-        return iface->warningHigh();
+        return warningHigh();
     }
-    static double low(WarningObject* iface)
+    auto low()
     {
-        return iface->warningLow();
+        return warningLow();
     }
 
-    static bool alarmHigh(WarningObject* iface)
+    template <typename... Args>
+    auto alarmHigh(Args... args)
     {
-        return iface->warningAlarmHigh();
+        return warningAlarmHigh(std::forward<Args>(args)...);
     }
 
-    static bool alarmLow(WarningObject* iface)
+    template <typename... Args>
+    auto alarmLow(Args... args)
     {
-        return iface->warningAlarmLow();
-    }
-
-    static void alarmHigh(WarningObject* iface, bool value)
-    {
-        iface->warningAlarmHigh(value);
-    }
-
-    static void alarmLow(WarningObject* iface, bool value)
-    {
-        iface->warningAlarmLow(value);
-    }
-
-    static const char* name()
-    {
-        return "Warning";
+        return warningAlarmLow(std::forward<Args>(args)...);
     }
 };
 
 template <>
-struct Threshold<CriticalObject>
+struct Threshold<CriticalObject> : public CriticalObject
 {
-  public:
-    static double high(CriticalObject* iface)
+    static constexpr auto name = "Critical";
+    using CriticalObject::CriticalObject;
+
+    auto high()
     {
-        return iface->criticalHigh();
+        return criticalHigh();
     }
-    static double low(CriticalObject* iface)
+    auto low()
     {
-        return iface->criticalLow();
+        return criticalLow();
     }
 
-    static bool alarmHigh(CriticalObject* iface)
+    template <typename... Args>
+    auto alarmHigh(Args... args)
     {
-        return iface->criticalAlarmHigh();
+        return criticalAlarmHigh(std::forward<Args>(args)...);
     }
 
-    static bool alarmLow(CriticalObject* iface)
+    template <typename... Args>
+    auto alarmLow(Args... args)
     {
-        return iface->criticalAlarmLow();
-    }
-
-    static void alarmHigh(CriticalObject* iface, bool value)
-    {
-        iface->criticalAlarmHigh(value);
-    }
-
-    static void alarmLow(CriticalObject* iface, bool value)
-    {
-        iface->criticalAlarmLow(value);
-    }
-
-    static const char* name()
-    {
-        return "Critical";
+        return criticalAlarmLow(std::forward<Args>(args)...);
     }
 };
 
 template <>
-struct Threshold<SoftShutdownObject>
+struct Threshold<SoftShutdownObject> : public SoftShutdownObject
 {
-  public:
-    static double high(SoftShutdownObject* iface)
+    static constexpr auto name = "SoftShutdown";
+    using SoftShutdownObject::SoftShutdownObject;
+
+    auto high()
     {
-        return iface->softShutdownHigh();
+        return softShutdownHigh();
     }
-    static double low(SoftShutdownObject* iface)
+    auto low()
     {
-        return iface->softShutdownLow();
+        return softShutdownLow();
     }
 
-    static bool alarmHigh(SoftShutdownObject* iface)
+    template <typename... Args>
+    auto alarmHigh(Args... args)
     {
-        return iface->softShutdownAlarmHigh();
+        return softShutdownAlarmHigh(std::forward<Args>(args)...);
     }
 
-    static bool alarmLow(SoftShutdownObject* iface)
+    template <typename... Args>
+    auto alarmLow(Args... args)
     {
-        return iface->softShutdownAlarmLow();
-    }
-
-    static void alarmHigh(SoftShutdownObject* iface, bool value)
-    {
-        iface->softShutdownAlarmHigh(value);
-    }
-
-    static void alarmLow(SoftShutdownObject* iface, bool value)
-    {
-        iface->softShutdownAlarmLow(value);
-    }
-
-    static const char* name()
-    {
-        return "SoftShutdown";
+        return softShutdownAlarmLow(std::forward<Args>(args)...);
     }
 };
 
 template <>
-struct Threshold<HardShutdownObject>
+struct Threshold<HardShutdownObject> : public HardShutdownObject
 {
-  public:
-    static double high(HardShutdownObject* iface)
+    static constexpr auto name = "HardShutdown";
+    using HardShutdownObject::HardShutdownObject;
+
+    auto high()
     {
-        return iface->hardShutdownHigh();
+        return hardShutdownHigh();
     }
-    static double low(HardShutdownObject* iface)
+    auto low()
     {
-        return iface->hardShutdownLow();
+        return hardShutdownLow();
     }
 
-    static bool alarmHigh(HardShutdownObject* iface)
+    template <typename... Args>
+    auto alarmHigh(Args... args)
     {
-        return iface->hardShutdownAlarmHigh();
+        return hardShutdownAlarmHigh(std::forward<Args>(args)...);
     }
 
-    static bool alarmLow(HardShutdownObject* iface)
+    template <typename... Args>
+    auto alarmLow(Args... args)
     {
-        return iface->hardShutdownAlarmLow();
-    }
-
-    static void alarmHigh(HardShutdownObject* iface, bool value)
-    {
-        iface->hardShutdownAlarmHigh(value);
-    }
-
-    static void alarmLow(HardShutdownObject* iface, bool value)
-    {
-        iface->hardShutdownAlarmLow(value);
-    }
-
-    static const char* name()
-    {
-        return "HardShutdown";
+        return hardShutdownAlarmLow(std::forward<Args>(args)...);
     }
 };
 

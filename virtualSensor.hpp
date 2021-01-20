@@ -108,13 +108,13 @@ class VirtualSensor : public ValueObject
     exprtk::rtl::vecops::package<double> vecopsPackage;
 
     /** @brief The critical threshold interface object */
-    std::unique_ptr<CriticalObject> criticalIface;
+    std::unique_ptr<Threshold<CriticalObject>> criticalIface;
     /** @brief The warning threshold interface object */
-    std::unique_ptr<WarningObject> warningIface;
+    std::unique_ptr<Threshold<WarningObject>> warningIface;
     /** @brief The soft shutdown threshold interface object */
-    std::unique_ptr<SoftShutdownObject> softShutdownIface;
+    std::unique_ptr<Threshold<SoftShutdownObject>> softShutdownIface;
     /** @brief The hard shutdown threshold interface object */
-    std::unique_ptr<HardShutdownObject> hardShutdownIface;
+    std::unique_ptr<Threshold<HardShutdownObject>> hardShutdownIface;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
@@ -123,50 +123,47 @@ class VirtualSensor : public ValueObject
                            const std::string& objPath);
 
     /** @brief Check Sensor threshold and update alarm and log */
-    template <typename T>
-    void checkThresholds(double value, T* iface)
+    template <typename V, typename T>
+    void checkThresholds(V value, T& threshold)
     {
-        if (iface)
-        {
-            if (value >= Threshold<T>::high(iface))
-            {
-                if (!Threshold<T>::alarmHigh(iface))
-                {
-                    Threshold<T>::alarmHigh(iface, true);
-                    log<level::ERR>(fmt::format("ASSERT: {} has exceeded the "
-                                                "{} high threshold",
-                                                name, Threshold<T>::name())
-                                        .c_str());
-                }
-            }
-            else if (Threshold<T>::alarmHigh(iface))
-            {
-                Threshold<T>::alarmHigh(iface, false);
-                log<level::INFO>(fmt::format("DEASSERT: {} is under the "
-                                             "{} high threshold",
-                                             name, Threshold<T>::name())
-                                     .c_str());
-            }
+        if (!threshold)
+            return;
 
-            if (value <= Threshold<T>::low(iface))
+        static constexpr auto tname = T::element_type::name;
+
+        auto alarmHigh = threshold->alarmHigh();
+        if ((!alarmHigh && value >= threshold->high()) || alarmHigh)
+        {
+            if (!alarmHigh)
             {
-                if (!Threshold<T>::alarmLow(iface))
-                {
-                    Threshold<T>::alarmLow(iface, true);
-                    log<level::ERR>(fmt::format("ASSERT: {} is under the "
-                                                "{} high threshold",
-                                                name, Threshold<T>::name())
-                                        .c_str());
-                }
+                constexpr auto msg =
+                    "ASSERT: {} has exceeded the {} high threshold";
+                log<level::ERR>(fmt::format(msg, name, tname).c_str());
             }
-            else if (Threshold<T>::alarmLow(iface))
+            else
             {
-                Threshold<T>::alarmLow(iface, false);
-                log<level::INFO>(fmt::format("DEASSERT: {} is above the "
-                                             "{} high threshold",
-                                             name, Threshold<T>::name())
-                                     .c_str());
+                constexpr auto msg =
+                    "DEASSERT: {} is under the {} high threshold";
+                log<level::INFO>(fmt::format(msg, name, tname).c_str());
             }
+            threshold->alarmHigh(!alarmHigh);
+        }
+
+        auto alarmLow = threshold->alarmLow();
+        if ((!alarmLow && value <= threshold->low()) || alarmLow)
+        {
+            if (!alarmLow)
+            {
+                constexpr auto msg = "ASSERT: {} is under the {} low threshold";
+                log<level::ERR>(fmt::format(msg, name, tname).c_str());
+            }
+            else
+            {
+                constexpr auto msg =
+                    "DEASSERT: {} is above the {} low threshold";
+                log<level::INFO>(fmt::format(msg, name, tname).c_str());
+            }
+            threshold->alarmLow(!alarmLow);
         }
     }
 };
