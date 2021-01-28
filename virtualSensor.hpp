@@ -132,7 +132,8 @@ class VirtualSensor : public ValueObject
         static constexpr auto tname = T::element_type::name;
 
         auto alarmHigh = threshold->alarmHigh();
-        if ((!alarmHigh && value >= threshold->high()) || alarmHigh)
+        if ((!alarmHigh && value >= threshold->high()) ||
+            (alarmHigh && value < threshold->high()))
         {
             if (!alarmHigh)
             {
@@ -150,7 +151,8 @@ class VirtualSensor : public ValueObject
         }
 
         auto alarmLow = threshold->alarmLow();
-        if ((!alarmLow && value <= threshold->low()) || alarmLow)
+        if ((!alarmLow && value <= threshold->low()) ||
+            (alarmLow && value > threshold->low()))
         {
             if (!alarmLow)
             {
