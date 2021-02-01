@@ -132,6 +132,21 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
             softShutdownIface->softShutdownLow(threshold.value(
                 "SoftShutdownLow", std::numeric_limits<double>::quiet_NaN()));
         }
+
+        if (threshold.contains("PerformanceLossHigh") ||
+            threshold.contains("PerformanceLossLow"))
+        {
+            perfLossIface =
+                std::make_unique<Threshold<PerformanceLossObject>>(
+                    bus, objPath.c_str());
+
+            perfLossIface->performanceLossHigh(
+                threshold.value("PerformanceLossHigh",
+                                std::numeric_limits<double>::quiet_NaN()));
+            perfLossIface->performanceLossLow(
+                threshold.value("PerformanceLossLow",
+                                std::numeric_limits<double>::quiet_NaN()));
+        }
     }
 
     /* Get expression string */
@@ -248,6 +263,7 @@ void VirtualSensor::updateVirtualSensor()
         std::cout << "Sensor value is " << val << "\n";
 
     /* Check sensor thresholds and log required message */
+    checkThresholds(val, perfLossIface);
     checkThresholds(val, warningIface);
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
