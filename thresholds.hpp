@@ -2,6 +2,7 @@
 
 #include <xyz/openbmc_project/Sensor/Threshold/Critical/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/HardShutdown/server.hpp>
+#include <xyz/openbmc_project/Sensor/Threshold/PerformanceLoss/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/SoftShutdown/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Warning/server.hpp>
 
@@ -17,6 +18,7 @@ using CriticalObject = ServerObject<threshold_ns::Critical>;
 using WarningObject = ServerObject<threshold_ns::Warning>;
 using SoftShutdownObject = ServerObject<threshold_ns::SoftShutdown>;
 using HardShutdownObject = ServerObject<threshold_ns::HardShutdown>;
+using PerformanceLossObject = ServerObject<threshold_ns::PerformanceLoss>;
 
 template <typename T>
 struct Threshold;
@@ -130,6 +132,34 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
     auto alarmLow(Args... args)
     {
         return hardShutdownAlarmLow(std::forward<Args>(args)...);
+    }
+};
+
+template <>
+struct Threshold<PerformanceLossObject> : public PerformanceLossObject
+{
+    static constexpr auto name = "PerformanceLoss";
+    using PerformanceLossObject::PerformanceLossObject;
+
+    auto high()
+    {
+        return performanceLossHigh();
+    }
+    auto low()
+    {
+        return performanceLossLow();
+    }
+
+    template <typename... Args>
+    auto alarmHigh(Args... args)
+    {
+        return performanceLossAlarmHigh(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLow(Args... args)
+    {
+        return performanceLossAlarmLow(std::forward<Args>(args)...);
     }
 };
 

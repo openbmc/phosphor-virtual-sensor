@@ -115,6 +115,8 @@ class VirtualSensor : public ValueObject
     std::unique_ptr<Threshold<SoftShutdownObject>> softShutdownIface;
     /** @brief The hard shutdown threshold interface object */
     std::unique_ptr<Threshold<HardShutdownObject>> hardShutdownIface;
+    /** @brief The performance loss threshold interface object */
+    std::unique_ptr<Threshold<PerformanceLossObject>> perfLossIface;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
