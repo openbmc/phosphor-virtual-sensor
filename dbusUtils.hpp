@@ -67,8 +67,15 @@ T getDbusProperty(sdbusplus::bus::bus& bus, const std::string& service,
 
     method.append(intf, property);
 
-    auto msg = bus.call(method);
-    msg.read(value);
+    try
+    {
+        auto msg = bus.call(method);
+        msg.read(value);
+    }
+    catch (const sdbusplus::exception::SdBusError& ex)
+    {
+        return std::numeric_limits<T>::quiet_NaN();
+    }
 
     return std::get<T>(value);
 }
