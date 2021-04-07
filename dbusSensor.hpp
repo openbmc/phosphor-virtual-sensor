@@ -40,8 +40,15 @@ class DbusSensor
             }
         }
 
-        return getDbusProperty<double>(bus, servName, path, sensorIntf,
-                                       "Value");
+        try
+        {
+            return getDbusProperty<double>(bus, servName, path, sensorIntf,
+                                    "Value");
+        }
+        catch(const std::exception& e)
+        {
+            return std::numeric_limits<double>::quiet_NaN();
+        }
     }
 
   private:
