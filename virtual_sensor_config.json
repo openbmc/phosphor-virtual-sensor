@@ -12,6 +12,11 @@
 			"WarningHigh": 70,
 			"WarningLow": 30
 		},
+		"MaxMinValue":
+		{
+			"MaxValue": 127.0,
+			"MinValue": -128.0
+		},
 		"Params":
 		{
 			"ConstParam" :
