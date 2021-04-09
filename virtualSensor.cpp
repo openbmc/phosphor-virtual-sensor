@@ -148,6 +148,19 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         }
     }
 
+    /* Get MaxValue, MinValue setting if defined in config */
+    auto confDesc = sensorConfig.value("Desc", empty);
+    if (auto maxConf = confDesc.find("MaxValue");
+        maxConf != confDesc.end() && maxConf->is_number())
+    {
+        ValueIface::maxValue(maxConf->get<double>());
+    }
+    if (auto minConf = confDesc.find("MinValue");
+        minConf != confDesc.end() && minConf->is_number())
+    {
+        ValueIface::minValue(minConf->get<double>());
+    }
+
     /* Get expression string */
     exprStr = sensorConfig.value("Expression", "");
 
