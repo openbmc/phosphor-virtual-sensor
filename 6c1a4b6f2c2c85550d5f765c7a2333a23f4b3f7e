@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "5cc6a538_6bdaa0b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-09T15:42:13Z",
+      "side": 1,
+      "message": "Considering that the sensors this uses as input have the ability to adjust, I suspect that this value should be calculated at runtime, not hardcoded.  It seems like it should just be a matter of grabbing all your inputs Min/Max values, and plug them each into the equation to determine the possible min and max that this sensor could take.  This would require less complex config files.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb72a660_ff64ec48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-09T15:42:13Z",
+      "side": 1,
+      "message": "Please test a calculation of inputs that takes this value out of range.  I don\u0027t see any code to clamp the values, which would be required here.",
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f45be0c2_5c1e7960",
         "filename": "virtualSensor.cpp",
         "patchSetId": 3
