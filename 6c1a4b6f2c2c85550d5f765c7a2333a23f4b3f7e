@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "42b1d862_d8d31b95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-09T16:59:53Z",
+      "side": 1,
+      "message": "Hi Ed,\nSorry, I don\u0027t really understand your mean. You mean it couldn\u0027t set virtual sensors\u0027 MaxValue/MinValue in its json file?\nBut for example, the phosphor-hwmon sensors\u0027 MaxValue/MinValue can hardcode in conf file, and dbus-sensor\u0027s HwmonTempSensors\u0027 is hardcode(https://github.com/openbmc/dbus-sensors/blob/master/src/HwmonTempSensor.cpp#L37).\nWhy cannot phosphor-virtual-sensor set MaxValue/MinValue in json file? Is there something I misunderstanding?",
+      "parentUuid": "5cc6a538_6bdaa0b7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eb72a660_ff64ec48",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2021-04-09T15:42:13Z",
       "side": 1,
       "message": "Please test a calculation of inputs that takes this value out of range.  I don\u0027t see any code to clamp the values, which would be required here.",
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47de31ad_11b511c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-09T16:59:53Z",
+      "side": 1,
+      "message": "OK, I will change my test case. Thanks.",
+      "parentUuid": "eb72a660_ff64ec48",
       "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "87a63d78_c467975f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-09T16:59:53Z",
+      "side": 1,
+      "message": "I saw your PR. So I don\u0027t need to set default value here? Or I change this to NaN value like  threshold is better?",
+      "parentUuid": "f45be0c2_5c1e7960",
+      "range": {
+        "startLine": 155,
+        "startChar": 51,
+        "endLine": 155,
+        "endChar": 62
+      },
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc1555ec_30774e58",
         "filename": "virtual_sensor_config.json",
         "patchSetId": 3
@@ -79,6 +145,24 @@
       "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d46ba418_28146255",
+        "filename": "virtual_sensor_config.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-09T16:59:53Z",
+      "side": 1,
+      "message": "Thanks for suggestion. It seems better than my origin setting way. I will modified it.",
+      "parentUuid": "bc1555ec_30774e58",
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
