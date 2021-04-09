@@ -148,6 +148,21 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         }
     }
 
+    /* Get MaxValue, MinValue setting if defined in config */
+    auto virtaulSensorDesc = sensorConfig.value("Desc", empty);
+    if (virtaulSensorDesc.contains("MaxValue"))
+    {
+        double max = virtaulSensorDesc.value(
+            "MaxValue", std::numeric_limits<double>::quiet_NaN());
+        ValueIface::maxValue(max);
+    }
+    if (virtaulSensorDesc.contains("MinValue"))
+    {
+        double min = virtaulSensorDesc.value(
+            "MinValue", std::numeric_limits<double>::quiet_NaN());
+        ValueIface::maxValue(min);
+    }
+
     /* Get expression string */
     exprStr = sensorConfig.value("Expression", "");
 
