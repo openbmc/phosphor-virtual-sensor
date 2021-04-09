@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8aac55c9_19417d18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-09T17:43:57Z",
+      "side": 1,
+      "message": "If you have a virtual sensor that based on A and B, with the equation A.Value + B.Value\n\nThe max range for that is:\nA.MaxValue + B.MaxValue\n\nand the min range for that sensor is:\nA.MinValue + B.Minvalue\n\nIf A or B are something like power supplies, and are replaced with variants that have a larger range, the min values and max values need to be updated accordingly, but because they\u0027re hardcoded in this file, they can\u0027t be, or would need new sensors for every possible combination of PSUs.\n\nHwmonTempSensor can pull this from a config file because it\u0027s based on the actual input device, and isn\u0027t based on any other dbus inputs that it needs to consider, and we know the exact range that a tmp75 (for example) allows.\n\nI don\u0027t use phosphor-virtual-sensor because of other reasons, so it\u0027s up to the maintainers if they want to put it into the config file, it just seems like it\u0027s an opportunity to get it wrong, when it\u0027s easy enough to calculate automatically.",
+      "parentUuid": "42b1d862_d8d31b95",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eb72a660_ff64ec48",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
