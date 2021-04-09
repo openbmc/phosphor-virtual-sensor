@@ -3,7 +3,9 @@
 		"Desc" :
 		{
 			"Name" : "Virtual_Inlet_Temp",
-			"SensorType" : "temperature"
+			"SensorType" : "temperature",
+			"MaxValue": 127.0,
+			"MinValue": -128.0
 		},
 		"Threshold" :
 		{
