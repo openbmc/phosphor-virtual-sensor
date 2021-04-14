@@ -49,6 +49,30 @@ struct Threshold<WarningObject> : public WarningObject
     {
         return warningAlarmLow(std::forward<Args>(args)...);
     }
+
+    template <typename... Args>
+    auto alarmHighSignalAsserted(Args... args)
+    {
+        return warningHighAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalDeasserted(Args... args)
+    {
+        return warningHighAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalAsserted(Args... args)
+    {
+        return warningLowAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalDeasserted(Args... args)
+    {
+        return warningLowAlarmDeasserted(std::forward<Args>(args)...);
+    }
 };
 
 template <>
@@ -76,6 +100,30 @@ struct Threshold<CriticalObject> : public CriticalObject
     auto alarmLow(Args... args)
     {
         return criticalAlarmLow(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalAsserted(Args... args)
+    {
+        return criticalHighAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalDeasserted(Args... args)
+    {
+        return criticalHighAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalAsserted(Args... args)
+    {
+        return criticalLowAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalDeasserted(Args... args)
+    {
+        return criticalLowAlarmDeasserted(std::forward<Args>(args)...);
     }
 };
 
@@ -105,6 +153,30 @@ struct Threshold<SoftShutdownObject> : public SoftShutdownObject
     {
         return softShutdownAlarmLow(std::forward<Args>(args)...);
     }
+
+    template <typename... Args>
+    auto alarmHighSignalAsserted(Args... args)
+    {
+        return softShutdownHighAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalDeasserted(Args... args)
+    {
+        return softShutdownHighAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalAsserted(Args... args)
+    {
+        return softShutdownLowAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalDeasserted(Args... args)
+    {
+        return softShutdownLowAlarmDeasserted(std::forward<Args>(args)...);
+    }
 };
 
 template <>
@@ -133,6 +205,30 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
     {
         return hardShutdownAlarmLow(std::forward<Args>(args)...);
     }
+
+    template <typename... Args>
+    auto alarmHighSignalAsserted(Args... args)
+    {
+        return hardShutdownHighAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalDeasserted(Args... args)
+    {
+        return hardShutdownHighAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalAsserted(Args... args)
+    {
+        return hardShutdownLowAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalDeasserted(Args... args)
+    {
+        return hardShutdownLowAlarmDeasserted(std::forward<Args>(args)...);
+    }
 };
 
 template <>
@@ -160,6 +256,30 @@ struct Threshold<PerformanceLossObject> : public PerformanceLossObject
     auto alarmLow(Args... args)
     {
         return performanceLossAlarmLow(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalAsserted(Args... args)
+    {
+        return performanceLossHighAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmHighSignalDeasserted(Args... args)
+    {
+        return performanceLossHighAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalAsserted(Args... args)
+    {
+        return performanceLossLowAlarmAsserted(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    auto alarmLowSignalDeasserted(Args... args)
+    {
+        return performanceLossLowAlarmDeasserted(std::forward<Args>(args)...);
     }
 };
 

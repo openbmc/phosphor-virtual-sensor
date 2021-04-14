@@ -142,12 +142,14 @@ class VirtualSensor : public ValueObject
                 constexpr auto msg =
                     "ASSERT: {} has exceeded the {} high threshold";
                 log<level::ERR>(fmt::format(msg, name, tname).c_str());
+                threshold->alarmHighSignalAsserted(value);
             }
             else
             {
                 constexpr auto msg =
                     "DEASSERT: {} is under the {} high threshold";
                 log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                threshold->alarmHighSignalDeasserted(value);
             }
             threshold->alarmHigh(!alarmHigh);
         }
@@ -160,12 +162,14 @@ class VirtualSensor : public ValueObject
             {
                 constexpr auto msg = "ASSERT: {} is under the {} low threshold";
                 log<level::ERR>(fmt::format(msg, name, tname).c_str());
+                threshold->alarmLowSignalAsserted(value);
             }
             else
             {
                 constexpr auto msg =
                     "DEASSERT: {} is above the {} low threshold";
                 log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                threshold->alarmLowSignalDeasserted(value);
             }
             threshold->alarmLow(!alarmLow);
         }
