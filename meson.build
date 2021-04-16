@@ -3,8 +3,9 @@ project(
     'cpp',
     version: '1.0',
     default_options: [
-        'cpp_std=c++17',
+        'cpp_std=c++20',
     ],
+    meson_version: '>=0.57.0',
 )
 
 cpp = meson.get_compiler('cpp')
