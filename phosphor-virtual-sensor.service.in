@@ -4,6 +4,7 @@ Wants=obmc-mapper.target
 After=obmc-mapper.target
 
 [Service]
+Restart=always
 ExecStart=@bindir@/virtual-sensor
 Type=dbus
 BusName=xyz.openbmc_project.VirtualSensor
