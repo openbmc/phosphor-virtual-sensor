@@ -77,7 +77,21 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 {
 
     static const Json empty{};
-
+    
+    /* Set min and max values if defined */
+    auto desc = sensorConfig.value("Desc", empty);
+    if (desc.contains("MinValue"))
+    {
+        ValueIface::minValue(
+          desc.value("MinValue", std::numeric_limits<double>::quiet_NaN()));
+    }
+    
+    if (desc.contains("MaxValue"))
+    {
+        ValueIface::maxValue(
+          desc.value("MaxValue", std::numeric_limits<double>::quiet_NaN()));
+    }
+    
     /* Get threshold values if defined in config */
     auto threshold = sensorConfig.value("Threshold", empty);
     if (!threshold.empty())
