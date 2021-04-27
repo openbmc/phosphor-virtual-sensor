@@ -18,7 +18,7 @@ else
     )
 endif
 
-if cpp.has_header('nlomann/json.hpp')
+if cpp.has_header('nlohmann/json.hpp')
     nlohmann_json = declare_dependency()
 else
     subproject('nlohmann-json')
