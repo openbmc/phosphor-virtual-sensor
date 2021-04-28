@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "f4fb19eb_a4af54b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-28T04:22:57Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "47de31ad_11b511c9",
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f45be0c2_5c1e7960",
         "filename": "virtualSensor.cpp",
         "patchSetId": 3
@@ -155,6 +173,30 @@
     },
     {
       "key": {
+        "uuid": "c68d3e95_220d12d3",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-28T04:22:57Z",
+      "side": 1,
+      "message": "I set the default value to NaN.",
+      "parentUuid": "87a63d78_c467975f",
+      "range": {
+        "startLine": 155,
+        "startChar": 51,
+        "endLine": 155,
+        "endChar": 62
+      },
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc1555ec_30774e58",
         "filename": "virtual_sensor_config.json",
         "patchSetId": 3
@@ -184,6 +226,24 @@
       "side": 1,
       "message": "Thanks for suggestion. It seems better than my origin setting way. I will modified it.",
       "parentUuid": "bc1555ec_30774e58",
+      "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c0fb94_f9e8fd16",
+        "filename": "virtual_sensor_config.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000847
+      },
+      "writtenOn": "2021-04-28T04:22:57Z",
+      "side": 1,
+      "message": "Done. Move to \"Desc\" group",
+      "parentUuid": "d46ba418_28146255",
       "revId": "6c1a4b6f2c2c85550d5f765c7a2333a23f4b3f7e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
