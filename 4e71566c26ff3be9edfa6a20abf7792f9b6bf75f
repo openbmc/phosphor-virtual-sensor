@@ -70,6 +70,30 @@
       "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99371056_c116249a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-29T16:42:29Z",
+      "side": 1,
+      "message": "OH, this is a nlohmann object?  Sorry, coffee just kicked in.  The way this file parses uses some well trodden antipatterns we\u0027ve found in the past.  Namely you\u0027re doing two key lookups for every value, duplicating the key value, and having to declare an unused default.\n\nin other places we\u0027d do something more like:\n\nauto confDesc \u003d sensorConfig.find(\"Desc\");\nif (confDesc !\u003d sensorConfig.end()){\n    auto* maxIt \u003d confDesc.get_if\u003cdouble\u003e(\"MaxValue\");\n    if (maxIt){\n         max \u003d *maxIt;\n    }\n}",
+      "parentUuid": "c706d9eb_8a20535d",
+      "range": {
+        "startLine": 156,
+        "startChar": 36,
+        "endLine": 156,
+        "endChar": 75
+      },
+      "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
