@@ -1,6 +1,5 @@
-#include "virtualSensor.hpp"
-
 #include "config.hpp"
+#include "virtualSensor.hpp"
 
 #include <fmt/format.h>
 
@@ -249,6 +248,13 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
 void VirtualSensor::setSensorValue(double value)
 {
+    // clamp value at the min/max.
+    // default values in the interface are +/- infinity, and std::min/max
+    // handles this fine.  If a non-default value is set the clamping will
+    // take affect.
+    value = std::min(ValueIface::maxValue(), value);
+    value = std::max(ValueIface::minValue(), value);
+
     ValueIface::value(value);
 }
 
