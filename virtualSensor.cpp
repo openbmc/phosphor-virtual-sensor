@@ -152,8 +152,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     auto confDesc = sensorConfig.value("Desc", empty);
     if (confDesc.contains("MaxValue"))
     {
-        double max = confDesc.value("MaxValue",
-                                    std::numeric_limits<double>::infinity());
+        double max =
+            confDesc.value("MaxValue", std::numeric_limits<double>::infinity());
         ValueIface::maxValue(max);
     }
     if (confDesc.contains("MinValue"))
@@ -249,6 +249,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
 void VirtualSensor::setSensorValue(double value)
 {
+    value = std::clamp(value, ValueIface::minValue(), ValueIface::maxValue());
     ValueIface::value(value);
 }
 
