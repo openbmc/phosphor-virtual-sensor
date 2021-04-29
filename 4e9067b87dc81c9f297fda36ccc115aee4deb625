@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d718afd2_d29a081b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-29T14:07:23Z",
+      "side": 1,
+      "message": "nit: as of c++17, std::clamp is probably what you\u0027d want here.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "4e9067b87dc81c9f297fda36ccc115aee4deb625",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
