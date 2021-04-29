@@ -94,6 +94,30 @@
       "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2c3bff9_e8a77bba",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-04-29T16:45:37Z",
+      "side": 1,
+      "message": "Ug.... hit submit on accident.  Ignore that code\n\nauto confDesc \u003d sensorConfig.find(\"Desc\");\nif (confDesc !\u003d sensorConfig.end()){\n    auto maxValue \u003d confDesc-\u003efind(\"MaxValue\");\n    if (maxValue !\u003d confDesc.end()){\n        auto* maxIt \u003d maxValue-\u003eget_if\u003cdouble\u003e(\"MaxValue\");\n        if (maxIt){\n            max \u003d *maxIt;\n        } else {\n            // LOG \"GOT Max value key of unknown type.\n        }\n    }\n}",
+      "parentUuid": "99371056_c116249a",
+      "range": {
+        "startLine": 156,
+        "startChar": 36,
+        "endLine": 156,
+        "endChar": 75
+      },
+      "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
