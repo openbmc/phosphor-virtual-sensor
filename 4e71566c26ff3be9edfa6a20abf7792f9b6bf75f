@@ -22,6 +22,30 @@
       "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c706d9eb_8a20535d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-04-29T16:35:37Z",
+      "side": 1,
+      "message": "tbh, this code never does anything.  The code is only executed if contains is true, which means \"MaxValue\" is something.  The JSON code doesn\u0027t support a non-default lookup though so you have to supply it with something.   I just made sure the \"something\" is the same \"something\" that the underlying class defaults to.\n\nI want to change the generator to give some static constexprs based on what is in the YAML but that isn\u0027t done yet and nobody else has been enlightened enough to do it for me.",
+      "parentUuid": "8eab4005_5db5780f",
+      "range": {
+        "startLine": 156,
+        "startChar": 36,
+        "endLine": 156,
+        "endChar": 75
+      },
+      "revId": "4e71566c26ff3be9edfa6a20abf7792f9b6bf75f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
