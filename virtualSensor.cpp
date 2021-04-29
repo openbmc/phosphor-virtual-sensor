@@ -249,6 +249,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
 void VirtualSensor::setSensorValue(double value)
 {
+    value = std::clamp(value, ValueIface::minValue(), ValueIface::maxValue());
     ValueIface::value(value);
 }
 
