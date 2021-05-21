@@ -87,6 +87,8 @@ class VirtualSensor : public ValueObject
     void setSensorValue(double value);
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+    /** @brief Check if sensor value is in valid range */
+    bool sensorInRange(double value);
 
     /** @brief Map of list of parameters */
     using ParamMap =
@@ -106,6 +108,10 @@ class VirtualSensor : public ValueObject
     exprtk::expression<double> expression{};
     /** @brief The vecops package so the expression can use vectors */
     exprtk::rtl::vecops::package<double> vecopsPackage;
+    /** @brief maximum valid value of sensor */
+    double maxSensorValue;
+    /** @brief minimum valid value of sensor */
+    double minSensorValue;
 
     /** @brief The critical threshold interface object */
     std::unique_ptr<Threshold<CriticalObject>> criticalIface;
@@ -123,6 +129,9 @@ class VirtualSensor : public ValueObject
      */
     void initVirtualSensor(const Json& sensorConfig,
                            const std::string& objPath);
+
+    /** @brief calculate median value from sensors */
+    double calculateModifiedMedianValue(const VirtualSensor::ParamMap& paramMap);
 
     /** @brief Check Sensor threshold and update alarm and log */
     template <typename V, typename T>
@@ -183,6 +192,10 @@ class VirtualSensors
      * @param[in] bus     - Handle to system dbus
      */
     explicit VirtualSensors(sdbusplus::bus::bus& bus) : bus(bus)
+#ifdef USE_ENTITY_MANAGER_DBUS
+          , match(bus, sdbusplus::bus::match::rules::interfacesAdded(),
+           [this](auto& msg) {this->interfaceAdded(msg);})
+#endif
     {
         createVirtualSensors();
     }
@@ -190,8 +203,14 @@ class VirtualSensors
   private:
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus::bus& bus;
+#ifdef USE_ENTITY_MANAGER_DBUS
+    sdbusplus::bus::match::match match;
+    /** @brief Get virual sensor config from DBus**/
+    Json getConfigFromDBus();
+#else
     /** @brief Parsing virtual sensor config JSON file  */
     Json parseConfigFile(const std::string configFile);
+#endif
 
     /** @brief Map of the object VirtualSensor */
     std::unordered_map<std::string, std::unique_ptr<VirtualSensor>>
@@ -199,6 +218,9 @@ class VirtualSensors
 
     /** @brief Create list of virtual sensors */
     void createVirtualSensors();
+
+    /** @brief Calls createVirtualSensor when interface added */
+    void interfaceAdded(sdbusplus::message::message& msg);
 };
 
 } // namespace virtualSensor

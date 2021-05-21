@@ -29,6 +29,7 @@ executable(
         dependency('phosphor-dbus-interfaces'),
         dependency('sdeventplus'),
         dependency('fmt'),
+        dependency('boost'),
         exprtk,
     ],
     install: true,

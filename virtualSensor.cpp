@@ -10,9 +10,29 @@
 #include <fstream>
 #include <iostream>
 
+#ifdef USE_ENTITY_MANAGER_DBUS
+#include <boost/container/flat_map.hpp>
+#endif
+
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
+#ifdef USE_ENTITY_MANAGER_DBUS
+static constexpr auto entityManagerBusName =
+    "xyz.openbmc_project.EntityManager";
+static constexpr auto vsConfigIntf =
+     "xyz.openbmc_project.Configuration.VirtualSensor";
+static constexpr auto vsCParamsIntfPrefix =
+    "xyz.openbmc_project.Configuration.VirtualSensor.ConstParams";
+static constexpr auto vsDBusParamsIntfPrefix =
+    "xyz.openbmc_project.Configuration.VirtualSensor.Params";
+static constexpr auto vsThresholdsIntfPrefix =
+    "xyz.openbmc_project.Configuration.VirtualSensor.Thresholds";
+static constexpr uint8_t defaultHighThreshold = 100;
+static constexpr uint8_t defaultLowThreshold = 0;
+static const std::map<int, std::string> thresholdTypes{
+    {0, "PerformanceLoss"}, {1, "Warning"}, {2, "Critical"}, {3, "SoftShutdown"}, {4, "HardShutdown"}};
+#endif
 
 using namespace phosphor::logging;
 
@@ -148,6 +168,12 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         }
     }
 
+#ifdef USE_ENTITY_MANAGER_DBUS
+    /* Get valid sensor value range */
+    maxSensorValue = sensorConfig.value("MaxSensorValue", 100);
+    minSensorValue = sensorConfig.value("MinSensorValue", 0);
+#endif
+
     /* Get expression string */
     exprStr = sensorConfig.value("Expression", "");
 
@@ -209,24 +235,26 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     expression.register_symbol_table(symbols);
 
     /* parser from exprtk */
-    exprtk::parser<double> parser{};
-    if (!parser.compile(exprStr, expression))
+    if (exprStr != "modifiedMedian")
     {
-        log<level::ERR>("Expression compilation failed");
-
-        for (std::size_t i = 0; i < parser.error_count(); ++i)
+        exprtk::parser<double> parser{};
+        if (!parser.compile(exprStr, expression))
         {
-            auto error = parser.get_error(i);
+            log<level::ERR>("Expression compilation failed");
 
-            log<level::ERR>(
-                fmt::format(
-                    "Position: {} Type: {} Message: {}", error.token.position,
-                    exprtk::parser_error::to_str(error.mode), error.diagnostic)
-                    .c_str());
+            for (std::size_t i = 0; i < parser.error_count(); ++i)
+            {
+                auto error = parser.get_error(i);
+
+                log<level::ERR>(
+                    fmt::format(
+                        "Position: {} Type: {} Message: {}", error.token.position,
+                        exprtk::parser_error::to_str(error.mode), error.diagnostic)
+                        .c_str());
+            }
+            throw std::runtime_error("Expression compilation failed");
         }
-        throw std::runtime_error("Expression compilation failed");
     }
-
     /* Print all parameters for debug purpose only */
     if (DEBUG)
         printParams(paramMap);
@@ -235,6 +263,15 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 void VirtualSensor::setSensorValue(double value)
 {
     ValueIface::value(value);
+}
+
+bool VirtualSensor::sensorInRange(double value)
+{
+    if (value <= maxSensorValue || value >= minSensorValue)
+    {
+        return true;
+    }
+    return false;
 }
 
 void VirtualSensor::updateVirtualSensor()
@@ -253,7 +290,12 @@ void VirtualSensor::updateVirtualSensor()
             throw std::invalid_argument("ParamName not found in symbols");
         }
     }
-    double val = expression.value();
+    double val;
+    if (exprStr == "modifiedMedian")
+        val = calculateModifiedMedianValue(paramMap);
+    else
+        val = expression.value();
+
 
     /* Set sensor value to dbus interface */
     setSensorValue(val);
@@ -268,6 +310,223 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
 }
+
+double VirtualSensor::calculateModifiedMedianValue(const VirtualSensor::ParamMap& paramMap)
+{
+    std::vector<double> values;
+
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (sensorInRange(var->ref()))
+            {
+                values.push_back(var->ref());
+            }
+        }
+    }
+
+    double val;
+    int size = values.size();
+    switch (size)
+    {
+    case 2:
+        std::sort(values.begin(), values.end());
+        /* Choose biggest value */
+        val = values.at(1);
+        break;
+    case 1:
+        val = values.at(0);
+        break;
+    case 0:
+        val = std::numeric_limits<double>::quiet_NaN();
+        break;
+    default:
+        std::sort(values.begin(), values.end());
+        /* Choose median value */
+        if (size % 2 == 0)
+        {
+            val = (values.at(size / 2) + values.at(size / 2 - 1)) / 2;
+        }
+        else
+        {
+            val = values.at((size - 1) / 2);
+        }
+        break;
+    }
+    return val;
+}
+
+#ifdef USE_ENTITY_MANAGER_DBUS
+using BasicVariantType = std::variant<std::string, int64_t, uint64_t, double, int32_t, uint32_t, int16_t, uint16_t, uint8_t, bool, std::vector<uint8_t>>;
+
+using InterfaceMap =
+     boost::container::flat_map<
+         std::string,
+         boost::container::flat_map<std::string, BasicVariantType>>;
+
+using ManagedObjectType = boost::container::flat_map<
+     sdbusplus::message::object_path, InterfaceMap>;
+
+Json VirtualSensors::getConfigFromDBus()
+{
+    Json configs;
+    ManagedObjectType objects;
+
+    try
+    {
+        auto method = bus.new_method_call(entityManagerBusName, "/",
+                                      "org.freedesktop.DBus.ObjectManager",
+                                      "GetManagedObjects");
+
+        auto reply = bus.call(method);
+        reply.read(objects);
+    }
+    catch (const sdbusplus::exception::SdBusError& ex)
+    {
+        // If entity manager isn't running yet, keep going.
+        if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
+            ex.name())
+        {
+            throw;
+        }
+    }
+
+    for (const auto& [path, interfaceMap] : objects)
+    {
+        Json config;
+        auto& thresholdConfig = config["Threshold"];
+
+        if (!interfaceMap.count(vsConfigIntf))
+        {
+            continue;
+        }
+        for (const auto& [interface, propertyMap] : objects.at(path))
+        {
+            if (interface == vsConfigIntf)
+            {
+                std::string expression = std::get<std::string>(propertyMap.at("Expression"));
+                if (expression != "modifiedMedian")
+                {
+                    throw std::invalid_argument("Invalid expression from entity manager");
+                }
+                config["Expression"] = expression;
+
+                config["Desc"]["Name"] =
+                    std::get<std::string>(propertyMap.at("VirtualSensorName"));
+
+                config["Desc"]["SensorType"] =
+                    std::get<std::string>(propertyMap.at("VirtualSensorType"));
+
+                auto max = std::get_if<double>(&(propertyMap.at("MaxValidSensorValue")));
+                if (max)
+                {
+                    config["Desc"]["MaxSensorValue"] = *max;
+                }
+                else
+                {
+                    config["Desc"]["MaxSensorValue"] =
+                        std::get<uint64_t>(propertyMap.at("MaxValidSensorValue"));
+                }
+
+                auto min = std::get_if<double>(&(propertyMap.at("MinValidSensorValue")));
+                if (min)
+                {
+                    config["Desc"]["MinSensorValue"] = *min;
+                }
+                else
+                {
+                    config["Desc"]["MinSensorValue"] =
+                        std::get<uint64_t>(propertyMap.at("MinValidSensorValue"));
+                }
+            }
+            else if (interface.find(vsCParamsIntfPrefix) != std::string::npos)
+            {
+                Json param;
+                param["ParamName"] =
+                    std::get<std::string>(propertyMap.at("Name"));
+
+                // Sometimes this shows up as a uint64_t, and sometimes
+                // as a double depending on if there's a decimal point.
+                auto v = std::get_if<double>(&(propertyMap.at("Value")));
+                if (v)
+                {
+                    param["Desc"]["Value"] = *v;
+                }
+                else
+                {
+                    param["Desc"]["Value"] =
+                        std::get<uint64_t>(propertyMap.at("Value"));
+                }
+                config["Params"]["ConstParam"].push_back(param);
+            }
+
+            else if (interface.find(vsDBusParamsIntfPrefix) !=
+                     std::string::npos)
+            {
+                Json param;
+                param["ParamName"] =
+                    std::get<std::string>(propertyMap.at("Name"));
+
+                param["Desc"]["Name"] =
+                    std::get<std::string>(propertyMap.at("SensorName"));
+
+                param["Desc"]["SensorType"] =
+                    std::get<std::string>(propertyMap.at("SensorType"));
+
+                config["Params"]["DbusParam"].push_back(param);
+            }
+
+            else if (interface.find(vsThresholdsIntfPrefix) !=
+                     std::string::npos)
+            {
+                // Use severity to find Critical vs Warning etc
+                auto severity = std::get<double>(propertyMap.at("Severity"));
+                std::string type;
+
+                try
+                {
+                    type = thresholdTypes.at(static_cast<int>(severity));
+                }
+                catch (const std::out_of_range& ex)
+                {
+                    log<level::ERR>(
+                        "Invalid severity in entity manager threshold",
+                        entry("SEVERITY=%lf", severity));
+                    throw;
+                }
+
+                std::string suffix{"High"};
+                if (std::get<std::string>(propertyMap.at("Direction")) ==
+                    "less than")
+                {
+                    suffix = "Low";
+                }
+                thresholdConfig[type + suffix] =
+                    std::get<double>(propertyMap.at("Value"));
+
+            }
+        }
+        configs.push_back(std::move(config));
+    }
+
+    return configs;
+}
+
+void VirtualSensors::interfaceAdded(sdbusplus::message::message & msg)
+{
+    sdbusplus::message::object_path path;
+    InterfaceMap interfaces;
+
+    msg.read(path, interfaces);
+
+    if (interfaces.count(vsConfigIntf) > 0)
+    {
+        createVirtualSensors();
+    }
+}
+#else
 
 /** @brief Parsing Virtual Sensor config JSON file  */
 Json VirtualSensors::parseConfigFile(const std::string configFile)
@@ -290,6 +549,7 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
 
     return data;
 }
+#endif
 
 std::map<std::string, ValueIface::Unit> unitMap = {
     {"temperature", ValueIface::Unit::DegreesC},
@@ -302,11 +562,16 @@ std::map<std::string, ValueIface::Unit> unitMap = {
     {"utilization", ValueIface::Unit::Percent},
     {"airflow", ValueIface::Unit::CFM}};
 
+
 void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
 
+#if USE_ENTITY_MANAGER_DBUS
+    auto data = getConfigFromDBus();
+#else
     auto data = parseConfigFile(VIRTUAL_SENSOR_CONFIG_FILE);
+#endif
     // print values
     if (DEBUG)
         std::cout << "Config json data:\n" << data << "\n\n";
@@ -329,6 +594,10 @@ void VirtualSensors::createVirtualSensors()
                 }
                 else
                 {
+                    if (virtualSensorsMap.count(name) > 0)
+                    {
+                        continue;
+                    }
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
