@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0822b0b8_b361179c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "What should I be basing my commits on? openbmc master?",
+      "parentUuid": "18fcc3ee_2aedf1fd",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07deb19a_9c6e4458",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2021-05-24T12:31:03Z",
       "side": 1,
       "message": "Is it possible for us to write this code in a way that does not use an #ifdef?  I prefer we don\u0027t have them because it makes for dead code that is not compiled in CI.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ee8965a_1f6d8532",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "Good point. From the discord discussion I gathered that Ed wanted a restriction on expressions taken from dbus, and you didn\u0027t want this restriction from your config files. I thought this was a way we could do both as I think the code you were referring to would be separate to the code that uses this change.",
+      "parentUuid": "07deb19a_9c6e4458",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "91eb3361_94eed831",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "Yes tested manually using busctl.",
+      "parentUuid": "5e111c5f_18437f16",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f92eab1d_d479a081",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73e4d391_9267a0e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "Thanks for pointing this out!",
+      "parentUuid": "f92eab1d_d479a081",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a47ca294_dea92522",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7d8e9bbd_bfe9a944",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "139aa914_0282ca20",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2021-05-24T12:31:03Z",
       "side": 1,
       "message": "Is there corresponding code from EM for this?  Is there any YAML definition of the config?\n\nIs there any reason why we couldn\u0027t have made the EM contents the same as the existing virtual sensor config and/or change the virtual sensor config to match the proposed EM config?  I don\u0027t like having this huge blob of code that is transposing from one JSON format to another.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f31d2d85_5d60f46c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "I have CC\u0027d you on those changes. We can make them the same. I also assumed that there wasn\u0027t a straightforward way to make a map\u003cstring, map\u003cstring\u003e, variant\u003e into a format that the JSON library can parse, and since I was manually parsing it I figured it would be less churn to change the existing format. Will look into it.",
+      "parentUuid": "139aa914_0282ca20",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "1dd2ba7c_5c178318",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "Oh this could be a nicer way to do it.",
+      "parentUuid": "6a3dc981_e83805f6",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cacdee6_39ff3737",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2021-05-24T12:31:03Z",
       "side": 1,
       "message": "What is this attempting to do?  Can we get some comments?\n\nYou might want to use map::contains rather than a count comparison.  (I know contains is in C++20, but it\u0027s time to upgrade all our repositories to C++20 anyhow).",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ff1888f_f1e648cb",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-24T22:05:48Z",
+      "side": 1,
+      "message": "This is so we don\u0027t add sensors with the same name. Do you think its a reasonable assumption to have unique virtual sensor names?",
+      "parentUuid": "1cacdee6_39ff3737",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
