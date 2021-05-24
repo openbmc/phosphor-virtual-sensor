@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "99bcc713_3988aed6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T22:44:38Z",
+      "side": 1,
+      "message": "You should always base any commits to Gerrit on the most recent code merged in Gerrit.  It would be this repository\u0027s master, not openbmc master.",
+      "parentUuid": "0822b0b8_b361179c",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07deb19a_9c6e4458",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Yes tested manually using busctl.",
       "parentUuid": "5e111c5f_18437f16",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aa96734_2a672332",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T22:44:38Z",
+      "side": 1,
+      "message": "I don\u0027t understand how this is testing then.  We would need to test this code.  How did you even exercise it with busctl since it is a client?",
+      "parentUuid": "91eb3361_94eed831",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -276,6 +312,24 @@
       "side": 1,
       "message": "This is so we don\u0027t add sensors with the same name. Do you think its a reasonable assumption to have unique virtual sensor names?",
       "parentUuid": "1cacdee6_39ff3737",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef023d4_ae860433",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T22:44:38Z",
+      "side": 1,
+      "message": "If this is a problem we shouldn\u0027t silently drop them on the floor.  Raise this as an error or something.  (Throw an exception maybe?  At least log a log\u003clevel:ERR\u003e of what went wrong.  Something is bad if we get to this case.)",
+      "parentUuid": "5ff1888f_f1e648cb",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
