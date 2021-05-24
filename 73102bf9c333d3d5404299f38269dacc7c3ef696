@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18fcc3ee_2aedf1fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "For some reason, Gerrit is showing this commit as a merge conflict.  Maybe you need a rebase?",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07deb19a_9c6e4458",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "Is it possible for us to write this code in a way that does not use an #ifdef?  I prefer we don\u0027t have them because it makes for dead code that is not compiled in CI.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e111c5f_18437f16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "What does it mean to have tested using busctl?  Did you test this code or just tested the bus operations manually?",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d8e9bbd_bfe9a944",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "It looks like the only reason you\u0027re picking up boost is for \u0027flatmap\u0027?  Just use std::map or std::hashmap.  I don\u0027t want to add a dependency on boost for something trivial.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "139aa914_0282ca20",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "Is there corresponding code from EM for this?  Is there any YAML definition of the config?\n\nIs there any reason why we couldn\u0027t have made the EM contents the same as the existing virtual sensor config and/or change the virtual sensor config to match the proposed EM config?  I don\u0027t like having this huge blob of code that is transposing from one JSON format to another.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a3dc981_e83805f6",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "One solution to the #ifdef is to have a config entry that says \"get my config from EM\".  For systems that want to use EM they can just have that single entry in their virtual-sensor config.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cacdee6_39ff3737",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-24T12:31:03Z",
+      "side": 1,
+      "message": "What is this attempting to do?  Can we get some comments?\n\nYou might want to use map::contains rather than a count comparison.  (I know contains is in C++20, but it\u0027s time to upgrade all our repositories to C++20 anyhow).",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
