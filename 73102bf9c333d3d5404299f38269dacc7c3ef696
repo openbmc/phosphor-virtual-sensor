@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7ba2fc61_e78a0303",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "Side note, I wonder if there\u0027s a gerrit setting where we can just reject pushes that aren\u0027t rebased.",
+      "parentUuid": "99bcc713_3988aed6",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07deb19a_9c6e4458",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Good point. From the discord discussion I gathered that Ed wanted a restriction on expressions taken from dbus, and you didn\u0027t want this restriction from your config files. I thought this was a way we could do both as I think the code you were referring to would be separate to the code that uses this change.",
       "parentUuid": "07deb19a_9c6e4458",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81fde9e9_1b09e941",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "I think what patrick is saying here is that we\u0027d like to see it selectable, similar to what phosphor-pid-control does.  If a config file exists, phosphor-pid-control uses it, otherwise it reads from dbus.\n\nAlternatively, if the code is structured such that you can do both, that seems useful too.",
+      "parentUuid": "5ee8965a_1f6d8532",
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -213,6 +249,133 @@
     },
     {
       "key": {
+        "uuid": "ea207ba3_1e30d4cb",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "+1.  Seems like a waste of a dependency just for a map.",
+      "parentUuid": "a47ca294_dea92522",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e492bca_eba2e8f6",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "These don\u0027t look used?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd610fb7_4ab3829a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "This would be a lot more efficient if just coded in a method.  As written this will construct a map on heap every startup.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 103
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa782097_19329386",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "This isn\u0027t the behavior I would expect.  If the sensor value is out of range, I would expect it to be clamped into range, not just simply ignored.",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a62a0047_c9e0f754",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "It seems very unfortunate that we hardcode this specific string all around in a bunch of if conditions.  Can that be cleaned up any?  Or at least put into something else.",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 36
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58216452_3b0edfbc",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "The fact that we\u0027re just writing this out as code makes me wonder if virtual sensor is the right place to do this, as we aren\u0027t really running an \"expression\" at all, but doing code.  dbus-sensors has Exit Air sensor that I think has a lot of this math in it already, although I believe it takes the max instead of the median, I wonder if we\u0027d reduce the code if we put it there.\n\n\nApologies if I lead you astray, I was expecting that this code was going to be directly calling expertk, which is why it made sense at the time to suggest this.",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 1
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "139aa914_0282ca20",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -242,6 +405,70 @@
       "side": 1,
       "message": "I have CC\u0027d you on those changes. We can make them the same. I also assumed that there wasn\u0027t a straightforward way to make a map\u003cstring, map\u003cstring\u003e, variant\u003e into a format that the JSON library can parse, and since I was manually parsing it I figured it would be less churn to change the existing format. Will look into it.",
       "parentUuid": "139aa914_0282ca20",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dea2ea9c_b4ccb029",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "+1, transposing dbus to json just so it can be parsed is messy.  See my comments on the EM review, we\u0027ll need to change some of the interfaces to conform to how the other sensors naming conventions work on that side anyway.\n\nI suspect we\u0027ll need code to just maneuver things into the right config items in the constructor.",
+      "parentUuid": "f31d2d85_5d60f46c",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ed985ed_0d5e2905",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "When reading these in, you should try to avoid using at() as it leads to throwing with no long in the case the user typos their parameter.  You might want to do something like find() and print \"X value not found\" before throwing out of this.",
+      "range": {
+        "startLine": 409,
+        "startChar": 75,
+        "endLine": 409,
+        "endChar": 77
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7250d07_ec6e8fe8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "Considering these configs are user (and attacker) facing crashing generally isn\u0027t the best plan when parsing these (I don\u0027t see the exceptions caught anywhere).",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 412,
+        "endChar": 90
+      },
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -330,6 +557,52 @@
       "side": 1,
       "message": "If this is a problem we shouldn\u0027t silently drop them on the floor.  Raise this as an error or something.  (Throw an exception maybe?  At least log a log\u003clevel:ERR\u003e of what went wrong.  Something is bad if we get to this case.)",
       "parentUuid": "5ff1888f_f1e648cb",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd315c60_a482c787",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "This is really up to the maintainers, but I would\u0027ve expected this in its own commit, as its testing min/max is going to be very different, also, I would expect it to apply to both kinds of configs.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "375371c1_f4f3a245",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-05-24T23:32:51Z",
+      "side": 1,
+      "message": "This is going to match EVERY interfaces added method in the entire system.  Please don\u0027t do that, please take a look at dbus sensors, and use a more efficient match expression here.\n\n\nAlso, you need to match on InterfacesRemoved as well, and appropriately clear the sensors when the configuration gets removed.",
+      "range": {
+        "startLine": 196,
+        "startChar": 53,
+        "endLine": 196,
+        "endChar": 68
+      },
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
