@@ -400,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "74199338_6cdaab92",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-05-25T20:07:14Z",
+      "side": 1,
+      "message": "I don\u0027t see us being able to have a lot of common code between the exit air temp algorithm and this one.\nExitAirTemp:\n* hardcodes its output sensor, input power sensor, and inlet sensor names\n* uses all pwm sensors on d-bus instead of getting them from entity-manager\n* does completely different math\n\nKeeping the code in PVS, all she had to do was add a D-Bus-\u003eJSON translation layer (which it sounds like may be able to be removed), and the actual median code.  The component and output sensor management code already works, which is what I saw as the biggest draw in putting it here in the first place.\n\nIf we were to do this in dbus-sensors, I bet that others may also wish to use entity-manager for their virtual sensor configs with different canned formulas as I have seen this request on discord.",
+      "parentUuid": "d0a397f4_928bcad3",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 1
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "139aa914_0282ca20",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
