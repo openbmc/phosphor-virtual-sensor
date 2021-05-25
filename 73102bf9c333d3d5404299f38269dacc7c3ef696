@@ -376,6 +376,30 @@
     },
     {
       "key": {
+        "uuid": "d0a397f4_928bcad3",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-05-25T00:11:58Z",
+      "side": 1,
+      "message": "I couldn\u0027t find an exprtk function for the median and seems less complicated to write it in C++ than in the exprtk language. But you make a good point about where this code should go. Will chat to Matt to see if we can put this in dbus-sensors.",
+      "parentUuid": "58216452_3b0edfbc",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 1
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "139aa914_0282ca20",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
