@@ -34,14 +34,7 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
     }
     catch (const sdbusplus::exception::SdBusError& ex)
     {
-        if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
-                                         Error::ResourceNotFound::errName))
-        {
-            // The service isn't on D-Bus yet.
-            return std::string{};
-        }
-
-        throw;
+        return {};
     }
 
     if (resp.begin() == resp.end())
