@@ -16,6 +16,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c694966f_988e6993",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2021-05-27T02:11:23Z",
+      "side": 1,
+      "message": "Yes, the build contains this commit.\nIn my case it gets `org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable` exception, which does not seem to be handled by phosphor-objmgr.\n\nIn virtual-sensor, it already handles the case when it fails to get the service that it will retry as long as the service name string is empty.\nSo I think it\u0027s perfectly safe to return empty string here.",
+      "parentUuid": "5bb2ea3d_a48f8337",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
