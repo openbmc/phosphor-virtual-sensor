@@ -72,6 +72,24 @@ double SensorParam::getParamValue()
     }
 }
 
+using AssociationList =
+    std::vector<std::tuple<std::string, std::string, std::string>>;
+
+AssociationList getAssociationsFromJson(const Json& j)
+{
+    AssociationList assocs{};
+    try
+    {
+        j.get_to(assocs);
+    }
+    catch (const std::exception& ex)
+    {
+        log<level::ERR>("Failed to parse association",
+                        entry("EX=%s", ex.what()));
+    }
+    return assocs;
+}
+
 void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
                                       const std::string& objPath)
 {
@@ -159,6 +177,19 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         minConf != confDesc.end() && minConf->is_number())
     {
         ValueIface::minValue(minConf->get<double>());
+    }
+
+    /* Get optional association */
+    auto assocJson = sensorConfig.value("Associations", empty);
+    if (!assocJson.empty())
+    {
+        auto assocs = getAssociationsFromJson(assocJson);
+        if (!assocs.empty())
+        {
+            associationIface =
+                std::make_unique<AssociationObject>(bus, objPath.c_str());
+            associationIface->associations(assocs);
+        }
     }
 
     /* Get expression string */

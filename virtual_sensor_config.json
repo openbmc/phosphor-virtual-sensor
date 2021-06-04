@@ -14,6 +14,14 @@
 			"WarningHigh": 70,
 			"WarningLow": 30
 		},
+		"Associations":
+		[
+			[
+				"chassis",
+				"all_sensors",
+				"/xyz/openbmc_project/inventory/system/board/my_board"
+			]
+		],
 		"Params":
 		{
 			"ConstParam" :
