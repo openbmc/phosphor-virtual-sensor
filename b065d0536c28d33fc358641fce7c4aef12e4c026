@@ -52,6 +52,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e819bab2_c44c465a",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-06-04T14:30:56Z",
+      "side": 1,
+      "message": "Isn\u0027t the service here (the one we\u0027re getting ServiceUnknown) mapper?  Is this a systemd service file ordering problem where phosphor-virtual-sensor doesn\u0027t correctly depend on mapper?",
+      "parentUuid": "5a1f223e_752d0dad",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
