@@ -6,6 +6,7 @@
 
 #include <nlohmann/json.hpp>
 #include <sdbusplus/bus.hpp>
+#include <xyz/openbmc_project/Association/Definitions/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
 #include <map>
@@ -23,6 +24,10 @@ using ServerObject = typename sdbusplus::server::object::object<T...>;
 
 using ValueIface = sdbusplus::xyz::openbmc_project::Sensor::server::Value;
 using ValueObject = ServerObject<ValueIface>;
+
+using AssociationIface =
+    sdbusplus::xyz::openbmc_project::Association::server::Definitions;
+using AssociationObject = ServerObject<AssociationIface>;
 
 class SensorParam
 {
@@ -117,6 +122,9 @@ class VirtualSensor : public ValueObject
     std::unique_ptr<Threshold<HardShutdownObject>> hardShutdownIface;
     /** @brief The performance loss threshold interface object */
     std::unique_ptr<Threshold<PerformanceLossObject>> perfLossIface;
+
+    /** @brief The association interface object */
+    std::unique_ptr<AssociationObject> associationIface;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
