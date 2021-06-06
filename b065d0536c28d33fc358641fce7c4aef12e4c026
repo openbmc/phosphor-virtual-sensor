@@ -70,6 +70,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a08bc55c_aedb0e6a",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2021-06-06T02:21:52Z",
+      "side": 1,
+      "message": "Yes, it is related to the service dependency.\n\nBefore this change, we tried:\n1. Add \"After\u003dxxx.service\" to make sure phosphor-virtual-sensor runs after the dependent service, it does not work because the dependent object is not created when the service starts, it is created after a while (e.g. a sensor is created after EM probes the i2c buses). We get the crash intermittently.\n2. Add \"After\u003dmapper-waitxxx\" to make sure phosphor-virtual-sensor runs after the dependent DBus objects appears.\nThis way works, but it has problems:\n* When we add a new virtual sensor, the \"After\u003d\" will have to add the new dependent dbus objects;\n* Due to the fact that the dbus objects are created quite late after probing the i2c buses, the phosphor-virtual-sensor will be started very late, and thus the BMC_READY state is very late.\nThis results in HW CI failure because it checkes the BMC_READY time.\n\nThis patch resolves the above issues, that phosphor-virtual-sensor does not need to add dependency to any service, it just starts, try to get the service, and retry if it fails to get it.",
+      "parentUuid": "e819bab2_c44c465a",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
