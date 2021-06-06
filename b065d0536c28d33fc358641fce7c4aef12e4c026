@@ -88,6 +88,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2607943d_ac11484f",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-06-06T16:23:02Z",
+      "side": 1,
+      "message": "You misunderstand me.  This shouldn\u0027t be the result of the service providing the sensor not loaded yet, because mapper returns ResourceNotFound.  Mapper doesn\u0027t return the ServiceUnknown error you put in the commit message.\n\nThe only way, I think, we can get the ServiceUnknown error is if *mapper itself* isn\u0027t loaded yet.  _This_ is a service file issue, isn\u0027t it?  But, I see `Wants/After\u003dobmc-mapper.target` already, so I don\u0027t know what is going on.\n\nI understand \"catching all exceptions and ignoring them\" solves the problem you\u0027re seeing, but to be honest, that is really heavy handed.  I\u0027d like some more information on where the ServiceUnknown error is coming from.\n\nI suspect there might be some issues with the mapper service file itself.  Is `xyz.openbmc_project.ObjectMapper.service` missing a WantedBy\u003dobmc-mapper.target?  It looks like right now it just has a \u0027Before\u0027 but that means there is no dependency to ensure it has fully started (including the BusName being registered) before obmc-mapper.target is started.",
+      "parentUuid": "a08bc55c_aedb0e6a",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
