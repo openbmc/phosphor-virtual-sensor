@@ -106,6 +106,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb877113_fe4c2563",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2021-06-07T02:11:24Z",
+      "side": 1,
+      "message": "\u003e I\u0027d like some more information on where the ServiceUnknown error is coming from.\nYup this is the root cause, I just did not know where it comes from.\n\n\u003e I suspect there might be some issues with the mapper service file itself.  Is `xyz.openbmc_project.ObjectMapper.service` missing a WantedBy\u003dobmc-mapper.target? \n\nAlthough it does not has a `WantedBy`, the service does run before the obmc-mapper.target:\n\n # systemctl list-dependencies --after obmc-mapper.target\n obmc-mapper.target\n ● └─xyz.openbmc_project.ObjectMapper.service\n\nDo you have any suggestion on how to debug the issue? Maybe it could be related to dbus-broker?",
+      "parentUuid": "2607943d_ac11484f",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
