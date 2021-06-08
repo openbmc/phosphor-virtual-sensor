@@ -124,6 +124,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bec536c0_cacef2f7",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-06-08T11:57:55Z",
+      "side": 1,
+      "message": "Before/After and Wants/WantedBy are two different aspects of systemd startup.  Before/After are order.  Wants/WantedBy are requirements.\n\nIf service X is \"Before\" service Y, systemd will ensure that service X is simply launched before Y.  If service X is \"WantedBy\" service Y, systemd will ensure that the resources specified as being provided by X are available before it launches Y (and will not launch Y if those resources are never supplied).\n\nIn this case, ObjectMapper lists a BusName, which is a resource it supplies.  That BusName is what we need to be available before phosphor-virtual-sensor is launched.  By relying exclusively on ordering and not resource dependency, there is a race condition where ObjectMapper and P-V-S can be started at nearly the same time and ObjectMapper hasn\u0027t supplied its own BusName by the time P-V-S goes looking for it.\n\nThis is actually a race condition that affects nearly every daemon, but I suspect many of them use mapper-wait which ends up setting up the stronger ordering.  I think this warrants some discussion in a bigger audience (maybe mailing list?) but I suspect solving it is as simple as adding a WantedBy\u003dobmc-mapper.target in the ObjectMapper.service file.",
+      "parentUuid": "eb877113_fe4c2563",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
