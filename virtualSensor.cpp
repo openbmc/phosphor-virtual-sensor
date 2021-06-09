@@ -80,73 +80,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
     /* Get threshold values if defined in config */
     auto threshold = sensorConfig.value("Threshold", empty);
-    if (!threshold.empty())
-    {
-        // Only create the threshold interfaces if
-        // at least one of their values is present.
 
-        if (threshold.contains("CriticalHigh") ||
-            threshold.contains("CriticalLow"))
-        {
-            criticalIface = std::make_unique<Threshold<CriticalObject>>(
-                bus, objPath.c_str());
-
-            criticalIface->criticalHigh(threshold.value(
-                "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
-            criticalIface->criticalLow(threshold.value(
-                "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
-        }
-
-        if (threshold.contains("WarningHigh") ||
-            threshold.contains("WarningLow"))
-        {
-            warningIface = std::make_unique<Threshold<WarningObject>>(
-                bus, objPath.c_str());
-
-            warningIface->warningHigh(threshold.value(
-                "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
-            warningIface->warningLow(threshold.value(
-                "WarningLow", std::numeric_limits<double>::quiet_NaN()));
-        }
-
-        if (threshold.contains("HardShutdownHigh") ||
-            threshold.contains("HardShutdownLow"))
-        {
-            hardShutdownIface = std::make_unique<Threshold<HardShutdownObject>>(
-                bus, objPath.c_str());
-
-            hardShutdownIface->hardShutdownHigh(threshold.value(
-                "HardShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
-            hardShutdownIface->hardShutdownLow(threshold.value(
-                "HardShutdownLow", std::numeric_limits<double>::quiet_NaN()));
-        }
-
-        if (threshold.contains("SoftShutdownHigh") ||
-            threshold.contains("SoftShutdownLow"))
-        {
-            softShutdownIface = std::make_unique<Threshold<SoftShutdownObject>>(
-                bus, objPath.c_str());
-
-            softShutdownIface->softShutdownHigh(threshold.value(
-                "SoftShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
-            softShutdownIface->softShutdownLow(threshold.value(
-                "SoftShutdownLow", std::numeric_limits<double>::quiet_NaN()));
-        }
-
-        if (threshold.contains("PerformanceLossHigh") ||
-            threshold.contains("PerformanceLossLow"))
-        {
-            perfLossIface = std::make_unique<Threshold<PerformanceLossObject>>(
-                bus, objPath.c_str());
-
-            perfLossIface->performanceLossHigh(
-                threshold.value("PerformanceLossHigh",
-                                std::numeric_limits<double>::quiet_NaN()));
-            perfLossIface->performanceLossLow(
-                threshold.value("PerformanceLossLow",
-                                std::numeric_limits<double>::quiet_NaN()));
-        }
-    }
+    createThresholds(threshold, objPath);
 
     /* Get MaxValue, MinValue setting if defined in config */
     auto confDesc = sensorConfig.value("Desc", empty);
@@ -281,6 +216,77 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
+}
+
+void VirtualSensor::createThresholds(const Json& threshold, const std::string &objPath)
+{
+    if (threshold.empty())
+    {
+      return;
+    }
+    // Only create the threshold interfaces if
+    // at least one of their values is present.
+    if (threshold.contains("CriticalHigh") ||
+        threshold.contains("CriticalLow"))
+    {
+        criticalIface = std::make_unique<Threshold<CriticalObject>>(
+            bus, objPath.c_str());
+
+        criticalIface->criticalHigh(threshold.value(
+            "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
+        criticalIface->criticalLow(threshold.value(
+            "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
+    }
+
+    if (threshold.contains("WarningHigh") ||
+        threshold.contains("WarningLow"))
+    {
+        warningIface = std::make_unique<Threshold<WarningObject>>(
+            bus, objPath.c_str());
+
+        warningIface->warningHigh(threshold.value(
+            "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
+        warningIface->warningLow(threshold.value(
+            "WarningLow", std::numeric_limits<double>::quiet_NaN()));
+    }
+
+    if (threshold.contains("HardShutdownHigh") ||
+        threshold.contains("HardShutdownLow"))
+    {
+        hardShutdownIface = std::make_unique<Threshold<HardShutdownObject>>(
+            bus, objPath.c_str());
+
+        hardShutdownIface->hardShutdownHigh(threshold.value(
+            "HardShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
+        hardShutdownIface->hardShutdownLow(threshold.value(
+            "HardShutdownLow", std::numeric_limits<double>::quiet_NaN()));
+    }
+
+    if (threshold.contains("SoftShutdownHigh") ||
+        threshold.contains("SoftShutdownLow"))
+    {
+        softShutdownIface = std::make_unique<Threshold<SoftShutdownObject>>(
+            bus, objPath.c_str());
+
+        softShutdownIface->softShutdownHigh(threshold.value(
+            "SoftShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
+        softShutdownIface->softShutdownLow(threshold.value(
+            "SoftShutdownLow", std::numeric_limits<double>::quiet_NaN()));
+    }
+
+    if (threshold.contains("PerformanceLossHigh") ||
+        threshold.contains("PerformanceLossLow"))
+    {
+        perfLossIface = std::make_unique<Threshold<PerformanceLossObject>>(
+            bus, objPath.c_str());
+
+        perfLossIface->performanceLossHigh(
+            threshold.value("PerformanceLossHigh",
+                            std::numeric_limits<double>::quiet_NaN()));
+        perfLossIface->performanceLossLow(
+            threshold.value("PerformanceLossLow",
+                            std::numeric_limits<double>::quiet_NaN()));
+    }
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */
