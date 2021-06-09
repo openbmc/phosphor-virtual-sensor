@@ -124,6 +124,9 @@ class VirtualSensor : public ValueObject
     void initVirtualSensor(const Json& sensorConfig,
                            const std::string& objPath);
 
+    /** @brief create threshold objects from json config */
+    void createThresholds(const Json& threshold, const std::string& objPath);
+
     /** @brief Check Sensor threshold and update alarm and log */
     template <typename V, typename T>
     void checkThresholds(V value, T& threshold)
