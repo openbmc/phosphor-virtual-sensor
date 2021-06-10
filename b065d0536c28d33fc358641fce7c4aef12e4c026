@@ -142,6 +142,24 @@
       "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c171a1f0_79925088",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2021-06-10T06:42:07Z",
+      "side": 1,
+      "message": "I finally got the root cause: there is *NO* obmc-mapper.target at all!\n\nThe target is expected to be installed by meta-phosphor/recipes-core/systemd/obmc-targets.bb, which just declares the dependency to \"phosphor-state-manager\". The \"phosphor-state-manager\" is the package that installs the \"obmc-mapper.target\".\n\nOn x86 systems, the state manager is usually replaced by x86-power-control, e.g.\n\n g220a.conf:VIRTUAL-RUNTIME_obmc-host-state-manager ?\u003d \"x86-power-control\"\n\nso the system does not really install the \"phosphor-state-manager\" at all, and thus the obmc-mapper.target does not exist!\n\nI tried to add the target manually and then we could see the services are really starting with the expected order, and the issue is gone.\n\nSo the question is, should x86-power-control add the target? Probably no. We really should make obmc-targets.bb to install the expected targets, is it?",
+      "parentUuid": "bec536c0_cacef2f7",
+      "revId": "b065d0536c28d33fc358641fce7c4aef12e4c026",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
