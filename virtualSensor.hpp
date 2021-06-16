@@ -16,6 +16,16 @@ namespace phosphor
 namespace virtualSensor
 {
 
+using BasicVariantType =
+    std::variant<std::string, int64_t, uint64_t, double, int32_t, uint32_t,
+                 int16_t, uint16_t, uint8_t, bool, std::vector<uint8_t>>;
+
+using InterfaceMap =
+    std::map<std::string, std::map<std::string, BasicVariantType>>;
+
+using ManagedObjectType =
+    std::map<sdbusplus::message::object_path, InterfaceMap>;
+
 using Json = nlohmann::json;
 
 template <typename... T>
@@ -83,10 +93,31 @@ class VirtualSensor : public ValueObject
         initVirtualSensor(sensorConfig, objPath);
     }
 
+    /** @brief Constructs VirtualSensor
+     *
+     * @param[in] bus          - Handle to system dbus
+     * @param[in] objPath      - The Dbus path of sensor
+     * @param[in] ifacemap     - All the sensor information
+     * @param[in] name         - Virtual sensor name
+     * @param[in] type         - Virtual sensor type/unit
+     * @param[in] calcType     - Calculation used to calculate sensor value
+     *
+     */
+    VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
+                  const InterfaceMap& ifacemap, const std::string& name,
+                  const std::string& type, const std::string& calculationType) :
+        ValueObject(bus, objPath),
+        bus(bus), name(name)
+    {
+        initVirtualSensor(ifacemap, objPath, type, calculationType);
+    }
+
     /** @brief Set sensor value */
     void setSensorValue(double value);
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+    /** @brief Check if sensor value is in valid range */
+    bool sensorInRange(double value);
 
     /** @brief Map of list of parameters */
     using ParamMap =
@@ -124,6 +155,22 @@ class VirtualSensor : public ValueObject
     void initVirtualSensor(const Json& sensorConfig,
                            const std::string& objPath);
 
+    /** @brief Read config from interface map and initialize sensor data
+     * for each virtual sensor
+     */
+    void initVirtualSensor(const InterfaceMap& interfaceMap,
+                           const std::string& objPath,
+                           const std::string& sensorType,
+                           const std::string& calculationType);
+
+    /** @brief Returns which calculation function or expression to use */
+    double calculateValue(std::string sensortype,
+                          const VirtualSensor::ParamMap& paramMap);
+    /** @brief Calculate median value from sensors */
+    double
+        calculateModifiedMedianValue(const VirtualSensor::ParamMap& paramMap);
+    /** @brief Converts threshold information from entity manager format */
+    std::string getThresholdType(std::string name, int severity);
     /** @brief create threshold objects from json config */
     void createThresholds(const Json& threshold, const std::string& objPath);
 
@@ -193,10 +240,14 @@ class VirtualSensors
     {
         createVirtualSensors();
     }
+    /** @brief Calls createVirtualSensor when interface added */
+    void interfaceAdded(sdbusplus::message::message& msg);
 
   private:
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus::bus& bus;
+    /** @brief Get virual sensor config from DBus**/
+    ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
     Json parseConfigFile(const std::string configFile);
 
@@ -204,8 +255,10 @@ class VirtualSensors
     std::unordered_map<std::string, std::unique_ptr<VirtualSensor>>
         virtualSensorsMap;
 
-    /** @brief Create list of virtual sensors */
+    /** @brief Create list of virtual sensors from JSON config*/
     void createVirtualSensors();
+    /** @brief Create list of virtual sensors from DBus config */
+    void createVirtualSensorsFromDBus(const std::string& calculationType);
 };
 
 } // namespace virtualSensor
