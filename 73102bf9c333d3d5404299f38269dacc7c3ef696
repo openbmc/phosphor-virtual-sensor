@@ -313,6 +313,30 @@
     },
     {
       "key": {
+        "uuid": "a07759f0_10dafed6",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-17T08:30:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bd610fb7_4ab3829a",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 103
+      },
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa782097_19329386",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -327,6 +351,24 @@
       "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04d3bb13_da441ee4",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-17T08:30:33Z",
+      "side": 1,
+      "message": "You\u0027re right.",
+      "parentUuid": "fa782097_19329386",
+      "revId": "73102bf9c333d3d5404299f38269dacc7c3ef696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
