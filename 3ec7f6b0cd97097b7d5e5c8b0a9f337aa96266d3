@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "56756c7e_28b5385e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "478f3d78_2f3a4de2",
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e954149d_d8b7df7c",
         "filename": "virtualSensor.cpp",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2021-06-18T16:33:58Z",
       "side": 1,
       "message": "I believe in the docs, due to IBM\u0027s paranoia, it was supposed to not even include out of range values in the calculation?",
+      "range": {
+        "startLine": 368,
+        "startChar": 12,
+        "endLine": 370,
+        "endChar": 9
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f07e72cd_b11be3cc",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Hmm. You are right. For some reason I thought that requirement was going to be addressed in the code that publishes the data to dbus.",
+      "parentUuid": "e954149d_d8b7df7c",
       "range": {
         "startLine": 368,
         "startChar": 12,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "2037170c_afe6674d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Not quite. This handles the case of 1, which I\u0027ll get rid of. But case 2 is the where this function deviates from a median.",
+      "parentUuid": "58e65c04_9a2e4528",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 13
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "312315b0_7752204a",
         "filename": "virtualSensor.cpp",
         "patchSetId": 4
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "7219fb45_f50bb4c5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "312315b0_7752204a",
+      "range": {
+        "startLine": 405,
+        "startChar": 1,
+        "endLine": 407,
+        "endChar": 17
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba06b9e8_cbac6de8",
         "filename": "virtualSensor.cpp",
         "patchSetId": 4
@@ -99,6 +189,24 @@
       "writtenOn": "2021-06-18T16:33:58Z",
       "side": 1,
       "message": "I\u0027m OK with these numbers if others are.  Maybe when this is all done you could add a README that describes how to use and configure these.",
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be20a217_ff132137",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "That\u0027s a good idea.",
+      "parentUuid": "ba06b9e8_cbac6de8",
       "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "88596213_2fccf5a5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91424f60_27847158",
+      "range": {
+        "startLine": 469,
+        "startChar": 6,
+        "endLine": 469,
+        "endChar": 34
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7e27575_fafc2400",
         "filename": "virtualSensor.cpp",
         "patchSetId": 4
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "ffec7bff_c859cf3b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e27575_fafc2400",
+      "range": {
+        "startLine": 481,
+        "startChar": 15,
+        "endLine": 481,
+        "endChar": 23
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66dc380_90e3a96b",
         "filename": "virtualSensor.cpp",
         "patchSetId": 4
@@ -171,6 +327,30 @@
       "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53a9be33_24792aef",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-21T08:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66dc380_90e3a96b",
+      "range": {
+        "startLine": 816,
+        "startChar": 0,
+        "endLine": 817,
+        "endChar": 15
+      },
+      "revId": "3ec7f6b0cd97097b7d5e5c8b0a9f337aa96266d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
