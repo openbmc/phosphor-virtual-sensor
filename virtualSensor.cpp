@@ -324,7 +324,7 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     if (!jsonFile.is_open())
     {
         log<level::ERR>("config JSON file not found",
-                        entry("FILENAME = %s", configFile.c_str()));
+                        entry("FILENAME=%s", configFile.c_str()));
         throw std::exception{};
     }
 
@@ -332,7 +332,7 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     if (data.is_discarded())
     {
         log<level::ERR>("config readings JSON parser failure",
-                        entry("FILENAME = %s", configFile.c_str()));
+                        entry("FILENAME=%s", configFile.c_str()));
         throw std::exception{};
     }
 
@@ -373,7 +373,7 @@ void VirtualSensors::createVirtualSensors()
                 if (unitMap.find(sensorType) == unitMap.end())
                 {
                     log<level::ERR>("Sensor type is not supported",
-                                    entry("TYPE = %s", sensorType.c_str()));
+                                    entry("TYPE=%s", sensorType.c_str()));
                 }
                 else
                 {
@@ -384,7 +384,7 @@ void VirtualSensors::createVirtualSensors()
                         bus, objPath.c_str(), j, name);
 
                     log<level::INFO>("Added a new virtual sensor",
-                                     entry("NAME = %s", name.c_str()));
+                                     entry("NAME=%s", name.c_str()));
                     virtualSensorPtr->updateVirtualSensor();
 
                     /* Initialize unit value for virtual sensor */
