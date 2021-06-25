@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72d9e4e6_6908aebc",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "const std::string\u0026  is preferred",
+      "range": {
+        "startLine": 280,
+        "startChar": 37,
+        "endLine": 280,
+        "endChar": 48
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07bc01d1_19f898e4",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "I don\u0027t think this can be hit?",
+      "range": {
+        "startLine": 293,
+        "startChar": 2,
+        "endLine": 293,
+        "endChar": 52
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f3e583a_cfbc937b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "if you moved this up to betwene lines 315 \u0026 316 you wouldn\u0027t also have to have it on line 327.",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9395051e_f9bac361",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "maybe add a comment here saying what this is doing?  I\u0027m having a hard time following it.",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaa6a026_ddd56a03",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "const std::string\u0026",
+      "range": {
+        "startLine": 469,
+        "startChar": 37,
+        "endLine": 469,
+        "endChar": 49
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d16fab6_fb0ae91d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "Something the IBM specs specified was that they wanted to have a hysteresis on the thresholds so the conditions wouldn\u0027t clear unless the ambient was X degrees below the trip point (looks like they used a value of 3 deg for all the alarms).\n\nI had actually attempted to put that support in awhile ago: https://gerrit.openbmc-project.xyz/c/openbmc/phosphor-virtual-sensor/+/38700  but never got around to finishing it when I hit other roadblocks.\n\nI think it would reasonable to handle this in a new commit. Currently entity-manager lets the dbus-sensors apps all determine their own hysteresis values, so I\u0027m not sure the best way to add hysteresis into any entity-manager interfaces.",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc716d19_f5ac3c95",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "If this file doesn\u0027t need to be there if using d-bus, then it probably shouldn\u0027t print an error trace.  That being said, I remember Patrick saying something about still requiring a config file but having it just contain some JSON that says it should use D-Bus instead.\n\nI\u0027ll defer to him on if that\u0027s what he really wants.",
+      "range": {
+        "startLine": 719,
+        "startChar": 12,
+        "endLine": 719,
+        "endChar": 23
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4a00ceb_cb88cd74",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-25T18:54:26Z",
+      "side": 1,
+      "message": "this would be due to invalid JSON.  It probably still needs to throw.",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
