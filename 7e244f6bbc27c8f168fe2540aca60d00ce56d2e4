@@ -295,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "e919fbb6_d8476008",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-28T13:48:48Z",
+      "side": 1,
+      "message": "I guess we should probably support getting the config from d-bus and from the JSON file, since entity-manager won\u0027t allow exprk expressions in there, and there may still be use cases for using other exprtk virtual sensors along with this median one.",
+      "parentUuid": "37b891e8_7565d97b",
+      "range": {
+        "startLine": 719,
+        "startChar": 12,
+        "endLine": 719,
+        "endChar": 23
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4a00ceb_cb88cd74",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
