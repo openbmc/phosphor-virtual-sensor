@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0ec8e21c_7ff3a6a6",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "72d9e4e6_6908aebc",
+      "range": {
+        "startLine": 280,
+        "startChar": 37,
+        "endLine": 280,
+        "endChar": 48
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07bc01d1_19f898e4",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2021-06-25T18:54:26Z",
       "side": 1,
       "message": "I don\u0027t think this can be hit?",
+      "range": {
+        "startLine": 293,
+        "startChar": 2,
+        "endLine": 293,
+        "endChar": 52
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd9561cd_9b54bd14",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "It can\u0027t at this stage but if someone added another entry into calculationTypes but didn\u0027t update this function it could.",
+      "parentUuid": "07bc01d1_19f898e4",
       "range": {
         "startLine": 293,
         "startChar": 2,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "d82691e0_a1b2b0d1",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8f3e583a_cfbc937b",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9395051e_f9bac361",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
@@ -79,6 +145,24 @@
       "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8f5df0b_62122c76",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9395051e_f9bac361",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "808afd36_7e720320",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aaa6a026_ddd56a03",
+      "range": {
+        "startLine": 469,
+        "startChar": 37,
+        "endLine": 469,
+        "endChar": 49
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d16fab6_fb0ae91d",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
@@ -119,6 +227,24 @@
       "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b90be97_42aebe10",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "I\u0027ll have a look into that, thanks.",
+      "parentUuid": "3d16fab6_fb0ae91d",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "37b891e8_7565d97b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Good point. If we use a config file to indicate that we want to use D-Bus then we can probably get rid of the matching on PropertiesChanged. \n\nIs that what you would prefer Patrick?",
+      "parentUuid": "fc716d19_f5ac3c95",
+      "range": {
+        "startLine": 719,
+        "startChar": 12,
+        "endLine": 719,
+        "endChar": 23
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4a00ceb_cb88cd74",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
@@ -159,6 +309,24 @@
       "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21ea833b_5994642c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-28T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b4a00ceb_cb88cd74",
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
