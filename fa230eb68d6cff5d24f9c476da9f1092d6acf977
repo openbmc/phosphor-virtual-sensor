@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29f4e4c5_2c6aaee4",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-28T22:09:24Z",
+      "side": 1,
+      "message": "Maybe also mention that if it\u0027s configured via D-Bus/entity-manager then it only supports the modified median expression?  Don\u0027t want to give people false hope that they can put exprk in entity-manager ;)",
+      "revId": "fa230eb68d6cff5d24f9c476da9f1092d6acf977",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
