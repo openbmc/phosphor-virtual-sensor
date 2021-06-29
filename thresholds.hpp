@@ -38,6 +38,16 @@ struct Threshold<WarningObject> : public WarningObject
         return warningLow();
     }
 
+    auto lowHysteresis()
+    {
+        return warningLowHysteresis();
+    }
+
+    auto highHysteresis()
+    {
+        return warningHighHysteresis();
+    }
+
     template <typename... Args>
     auto alarmHigh(Args... args)
     {
@@ -88,6 +98,16 @@ struct Threshold<CriticalObject> : public CriticalObject
     auto low()
     {
         return criticalLow();
+    }
+
+    auto lowHysteresis()
+    {
+        return criticalLowHysteresis();
+    }
+
+    auto highHysteresis()
+    {
+        return criticalHighHysteresis();
     }
 
     template <typename... Args>
@@ -142,6 +162,16 @@ struct Threshold<SoftShutdownObject> : public SoftShutdownObject
         return softShutdownLow();
     }
 
+    auto lowHysteresis()
+    {
+        return softShutdownLowHysteresis();
+    }
+
+    auto highHysteresis()
+    {
+        return softShutdownHighHysteresis();
+    }
+
     template <typename... Args>
     auto alarmHigh(Args... args)
     {
@@ -194,6 +224,16 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
         return hardShutdownLow();
     }
 
+    auto lowHysteresis()
+    {
+        return hardShutdownLowHysteresis();
+    }
+
+    auto highHysteresis()
+    {
+        return hardShutdownHighHysteresis();
+    }
+
     template <typename... Args>
     auto alarmHigh(Args... args)
     {
@@ -244,6 +284,16 @@ struct Threshold<PerformanceLossObject> : public PerformanceLossObject
     auto low()
     {
         return performanceLossLow();
+    }
+
+    auto lowHysteresis()
+    {
+        return performanceLossLowHysteresis();
+    }
+
+    auto highHysteresis()
+    {
+        return performanceLossHighHysteresis();
     }
 
     template <typename... Args>
