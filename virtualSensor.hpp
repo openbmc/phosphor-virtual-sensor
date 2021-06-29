@@ -192,8 +192,9 @@ class VirtualSensor : public ValueObject
         static constexpr auto tname = T::element_type::name;
 
         auto alarmHigh = threshold->alarmHigh();
+        auto highHysteresis = threshold->highHysteresis();
         if ((!alarmHigh && value >= threshold->high()) ||
-            (alarmHigh && value < threshold->high()))
+            (alarmHigh && value < (threshold->high() - highHysteresis)))
         {
             if (!alarmHigh)
             {
@@ -204,17 +205,21 @@ class VirtualSensor : public ValueObject
             }
             else
             {
-                constexpr auto msg =
-                    "DEASSERT: {} is under the {} high threshold";
-                log<level::INFO>(fmt::format(msg, name, tname).c_str());
-                threshold->alarmHighSignalDeasserted(value);
+                if (value < (threshold->high() - highHysteresis))
+                {
+                    constexpr auto msg =
+                        "DEASSERT: {} is under the {} high threshold";
+                    log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                    threshold->alarmHighSignalDeasserted(value);
+                }
             }
             threshold->alarmHigh(!alarmHigh);
         }
 
         auto alarmLow = threshold->alarmLow();
+        auto lowHysteresis = threshold->lowHysteresis();
         if ((!alarmLow && value <= threshold->low()) ||
-            (alarmLow && value > threshold->low()))
+            (alarmLow && value > (threshold->low() + lowHysteresis)))
         {
             if (!alarmLow)
             {
@@ -224,10 +229,13 @@ class VirtualSensor : public ValueObject
             }
             else
             {
-                constexpr auto msg =
-                    "DEASSERT: {} is above the {} low threshold";
-                log<level::INFO>(fmt::format(msg, name, tname).c_str());
-                threshold->alarmLowSignalDeasserted(value);
+                if (value > (threshold->low() + lowHysteresis))
+                {
+                    constexpr auto msg =
+                        "DEASSERT: {} is above the {} low threshold";
+                    log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                    threshold->alarmLowSignalDeasserted(value);
+                }
             }
             threshold->alarmLow(!alarmLow);
         }
