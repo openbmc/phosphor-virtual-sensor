@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "972fcef4_3d6c5b4b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-30T21:19:12Z",
+      "side": 1,
+      "message": "I guess now that you\u0027re matching on propertiesChanged signals, a name change is probably in order here.",
+      "range": {
+        "startLine": 611,
+        "startChar": 21,
+        "endLine": 611,
+        "endChar": 35
+      },
+      "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8270acf_f80042df",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-06-30T21:19:12Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing it, but how does this create a virtual sensor if entity-manager is already up and running so no signals are coming in?",
+      "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
