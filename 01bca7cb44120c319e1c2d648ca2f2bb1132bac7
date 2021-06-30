@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "53594bd6_ea861ba6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-30T01:26:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e7d2a26_69d6fecb",
+      "revId": "01bca7cb44120c319e1c2d648ca2f2bb1132bac7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f934710_ee0bcf91",
         "filename": "README.md",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2021-06-30T00:55:08Z",
       "side": 1,
       "message": "I thought all of these are supported:\nhttp://www.partow.net/programming/exprtk/\n\nI have used \"Expression\": \"44330.0 * (1.0 - ((P0/101325.0) ^ (1/5.255)))\"\nand seems to work fine.",
+      "revId": "01bca7cb44120c319e1c2d648ca2f2bb1132bac7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "475c96e0_61c0baef",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-06-30T01:26:45Z",
+      "side": 1,
+      "message": "The current way to add a virtual sensor is a standalone JSON config file like the one in your patch. phosphor-virtual-sensor reads in this file directly. Sensors added this way can use arbitrary expressions.\n\nhttps://gerrit.openbmc-project.xyz/c/openbmc/phosphor-virtual-sensor/+/43482 adds in being able to get a virtual sensor config from D-Bus (the config info is added in Entity Manager which publishes it onto D-Bus). Ed had concerns about taking an arbitrary expression from D-Bus, and so sensors added this way are restricted as to what calculations they can use.\n\nI\u0027ll try to make this clearer in the README.",
+      "parentUuid": "2f934710_ee0bcf91",
       "revId": "01bca7cb44120c319e1c2d648ca2f2bb1132bac7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
