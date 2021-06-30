@@ -378,6 +378,13 @@ void VirtualSensors::createVirtualSensors()
                 }
                 else
                 {
+                    if (virtualSensorsMap.find(name) != virtualSensorsMap.end())
+                    {
+                        log<level::ERR>(
+                            "A virtual sensor with this name already exists",
+                            entry("TYPE=%s", name.c_str()));
+                        continue;
+                    }
                     std::string objPath(sensorDbusPath);
                     objPath += sensorType + "/" + name;
 
