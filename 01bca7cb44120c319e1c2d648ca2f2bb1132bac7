@@ -16,6 +16,23 @@
       "revId": "01bca7cb44120c319e1c2d648ca2f2bb1132bac7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f934710_ee0bcf91",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000524
+      },
+      "writtenOn": "2021-06-30T00:55:08Z",
+      "side": 1,
+      "message": "I thought all of these are supported:\nhttp://www.partow.net/programming/exprtk/\n\nI have used \"Expression\": \"44330.0 * (1.0 - ((P0/101325.0) ^ (1/5.255)))\"\nand seems to work fine.",
+      "revId": "01bca7cb44120c319e1c2d648ca2f2bb1132bac7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
