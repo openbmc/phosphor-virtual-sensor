@@ -13,6 +13,13 @@
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
+static constexpr auto entityManagerBusName =
+    "xyz.openbmc_project.EntityManager";
+static constexpr auto vsConfigIntfPrefix = "xyz.openbmc_project.Configuration.";
+static constexpr auto vsCParamsIntfSuffix = ".ConstParams";
+static constexpr auto vsDBusParamsIntfSuffix = ".Sensors";
+static constexpr auto vsThresholdsIntfSuffix = ".Thresholds";
+static constexpr std::array<const char*, 0> calculationTypes = {};
 
 using namespace phosphor::logging;
 
@@ -88,6 +95,36 @@ AssociationList getAssociationsFromJson(const Json& j)
                         entry("EX=%s", ex.what()));
     }
     return assocs;
+}
+
+double getNumber(const BasicVariantType& v)
+{
+    if (auto val = std::get_if<double>(&v))
+    {
+        return *val;
+    }
+    else if (auto val = std::get_if<uint64_t>(&v))
+    {
+        return *val;
+    }
+    else if (auto val = std::get_if<uint32_t>(&v))
+    {
+        return *val;
+    }
+
+    throw std::invalid_argument("Invalid number type");
+}
+
+const std::string getCalculationType(const std::string& interface)
+{
+    for (std::string type : calculationTypes)
+    {
+        if (interface.find(type) != std::string::npos)
+        {
+            return type;
+        }
+    }
+    return "";
 }
 
 void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
@@ -211,10 +248,168 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         printParams(paramMap);
 }
 
+void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
+                                      const std::string& objPath,
+                                      const std::string& sensorType,
+                                      const std::string& calculationType)
+{
+    Json thresholds;
+    const std::string vsCParamsIntf =
+        vsConfigIntfPrefix + calculationType + vsCParamsIntfSuffix;
+    const std::string vsDBusParamsIntf =
+        vsConfigIntfPrefix + calculationType + vsDBusParamsIntfSuffix;
+    const std::string vsThresholdsIntf =
+        vsConfigIntfPrefix + calculationType + vsThresholdsIntfSuffix;
+
+    for (const auto& [interface, propertyMap] : interfaceMap)
+    {
+        /* Parse constant params */
+        if (interface.find(vsCParamsIntf) != std::string::npos)
+        {
+            double value = std::numeric_limits<double>::quiet_NaN();
+            auto itr = propertyMap.find("Value");
+            if (itr != propertyMap.end())
+            {
+                value = getNumber(itr->second);
+            }
+            itr = propertyMap.find("Name");
+            if (value != std::numeric_limits<double>::quiet_NaN() &&
+                itr != propertyMap.end())
+            {
+                std::string paramName = std::get<std::string>(itr->second);
+                auto paramPtr = std::make_unique<SensorParam>(value);
+                symbols.create_variable(paramName);
+                paramMap.emplace(std::move(paramName), std::move(paramPtr));
+            }
+            else
+            {
+                throw std::invalid_argument(
+                    "Invalid const param in configuration");
+            }
+        }
+        /* Parse sensors / DBus params */
+        else if (interface.find(vsDBusParamsIntf) != std::string::npos)
+        {
+            auto itr = propertyMap.find("SensorName");
+            auto paramitr = propertyMap.find("Name");
+            if (itr != propertyMap.end() && paramitr != propertyMap.end())
+            {
+                std::string sensorName = std::get<std::string>(itr->second);
+                std::string paramName = std::get<std::string>(paramitr->second);
+
+                if (!sensorType.empty() && !sensorName.empty() &&
+                    !paramName.empty())
+                {
+                    std::replace(sensorName.begin(), sensorName.end(), ' ',
+                                 '_');
+                    std::string sensorObjPath(sensorDbusPath);
+                    sensorObjPath += sensorType + "/" + sensorName;
+
+                    auto paramPtr =
+                        std::make_unique<SensorParam>(bus, sensorObjPath, this);
+                    symbols.create_variable(paramName);
+                    paramMap.emplace(std::move(paramName), std::move(paramPtr));
+                }
+                else
+                {
+                    log<level::ERR>("Invalid parameter",
+                                    entry("TYPE=%s", sensorType.c_str()),
+                                    entry("PARAM_NAME=%s", paramName.c_str()),
+                                    entry("NAME=%s", sensorName.c_str()));
+                    throw std::invalid_argument(
+                        "Invalid DBus sensor in configuration");
+                }
+            }
+            else
+            {
+                throw std::invalid_argument(
+                    "Invalid DBus sensor name or param name in configuration");
+            }
+        }
+        /* Parse thresholds */
+        else if (interface.find(vsThresholdsIntf) != std::string::npos)
+        {
+            std::string name = "", threshold = "";
+            int severity = -1;
+            double value;
+            auto itr = propertyMap.find("Name");
+            if (itr != propertyMap.end())
+            {
+                name = std::get<std::string>(itr->second);
+            }
+            itr = propertyMap.find("Severity");
+            if (itr != propertyMap.end())
+            {
+                severity = getNumber(itr->second);
+            }
+            itr = propertyMap.find("Value");
+            if (itr != propertyMap.end())
+            {
+                value = getNumber(itr->second);
+            }
+            else
+            {
+                throw std::invalid_argument(
+                    "Invalid threshold value in configuration");
+            }
+
+            if ((threshold = getThresholdType(name, severity)) == "")
+            {
+                throw std::invalid_argument(
+                    "Invalid threshold specified in entity manager");
+            }
+            thresholds[threshold] = value;
+        }
+        else if (interface.find(vsConfigIntfPrefix) != std::string::npos)
+        {
+            /* Get expression string */
+            exprStr = getCalculationType(interface);
+            if (exprStr.empty())
+            {
+                throw std::invalid_argument("Invalid expression in interface");
+            }
+
+            /* Get MaxValue, MinValue setting if defined in config */
+            auto itr = propertyMap.find("MaxValue");
+            if (itr != propertyMap.end())
+            {
+                ValueIface::maxValue(getNumber(itr->second));
+            }
+            itr = propertyMap.find("MinValue");
+            if (itr != propertyMap.end())
+            {
+                ValueIface::minValue(getNumber(itr->second));
+            }
+        }
+    }
+
+    createThresholds(thresholds, objPath);
+    symbols.add_constants();
+    symbols.add_package(vecopsPackage);
+    expression.register_symbol_table(symbols);
+
+    /* Print all parameters for debug purpose only */
+    if (DEBUG)
+    {
+        printParams(paramMap);
+    }
+}
+
 void VirtualSensor::setSensorValue(double value)
 {
     value = std::clamp(value, ValueIface::minValue(), ValueIface::maxValue());
     ValueIface::value(value);
+}
+
+double VirtualSensor::calculateValue(const std::string& calculation)
+{
+    auto itr = std::find(calculationTypes.begin(), calculationTypes.end(),
+                         calculation);
+    if (itr == calculationTypes.end())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    return std::numeric_limits<double>::quiet_NaN();
 }
 
 void VirtualSensor::updateVirtualSensor()
@@ -233,13 +428,24 @@ void VirtualSensor::updateVirtualSensor()
             throw std::invalid_argument("ParamName not found in symbols");
         }
     }
-    double val = expression.value();
-
+    double val;
+    auto itr =
+        std::find(calculationTypes.begin(), calculationTypes.end(), exprStr);
+    if (itr == calculationTypes.end())
+    {
+        val = expression.value();
+    }
+    else
+    {
+        val = calculateValue(exprStr);
+    }
     /* Set sensor value to dbus interface */
     setSensorValue(val);
 
     if (DEBUG)
+    {
         std::cout << "Sensor value is " << val << "\n";
+    }
 
     /* Check sensor thresholds and log required message */
     checkThresholds(val, perfLossIface);
@@ -317,6 +523,108 @@ void VirtualSensor::createThresholds(const Json& threshold,
     }
 }
 
+const std::string VirtualSensor::getThresholdType(const std::string& name,
+                                                  int severity)
+{
+    std::string threshold;
+    std::string suffix;
+
+    if (name.find("lower") != std::string::npos)
+    {
+        suffix = "Low";
+    }
+    else if (name.find("upper") != std::string::npos)
+    {
+        suffix = "High";
+    }
+    else
+    {
+        return "";
+    }
+
+    if (name.find("non critical") != std::string::npos)
+    {
+        if (severity == 0)
+        {
+            threshold = "PerformanceLoss";
+        }
+        else if (severity == 1)
+        {
+            threshold = "Warning";
+        }
+        else
+        {
+            return "";
+        }
+    }
+    else if (name.find("critical") != std::string::npos)
+    {
+        if (severity == 0)
+        {
+            threshold = "Critical";
+        }
+        else if (severity == 1)
+        {
+            threshold = "SoftShutdown";
+        }
+        else if (severity == 2)
+        {
+            threshold = "HardShutdown";
+        }
+        else
+        {
+            return "";
+        }
+    }
+    else
+    {
+        return "";
+    }
+    return threshold + suffix;
+}
+
+ManagedObjectType VirtualSensors::getObjectsFromDBus()
+{
+    ManagedObjectType objects;
+
+    try
+    {
+        auto method = bus.new_method_call(entityManagerBusName, "/",
+                                          "org.freedesktop.DBus.ObjectManager",
+                                          "GetManagedObjects");
+        auto reply = bus.call(method);
+        reply.read(objects);
+    }
+    catch (const sdbusplus::exception::SdBusError& ex)
+    {
+        // If entity manager isn't running yet, keep going.
+        if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
+            ex.name())
+        {
+            throw ex.name();
+        }
+    }
+
+    return objects;
+}
+
+void VirtualSensors::interfaceAdded(sdbusplus::message::message& msg)
+{
+    std::string path;
+    std::map<std::string, BasicVariantType> interfaces;
+
+    msg.read(path, interfaces);
+
+    /* We get multiple callbacks for one sensor. 'Type' is a required field and
+     * is a unique label so use to to only proceed once per sensor */
+    auto itr = interfaces.find("Type");
+    if (itr != interfaces.end())
+    {
+        const std::string calculationType = getCalculationType(path);
+        createVirtualSensorsFromDBus(calculationType);
+    }
+}
+
 /** @brief Parsing Virtual Sensor config JSON file  */
 Json VirtualSensors::parseConfigFile(const std::string configFile)
 {
@@ -325,7 +633,7 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     {
         log<level::ERR>("config JSON file not found",
                         entry("FILENAME=%s", configFile.c_str()));
-        throw std::exception{};
+        return {};
     }
 
     auto data = Json::parse(jsonFile, nullptr, false);
@@ -350,14 +658,94 @@ std::map<std::string, ValueIface::Unit> unitMap = {
     {"utilization", ValueIface::Unit::Percent},
     {"airflow", ValueIface::Unit::CFM}};
 
+void VirtualSensors::createVirtualSensorsFromDBus(
+    const std::string& calculationType)
+{
+    auto objects = getObjectsFromDBus();
+
+    /* Get virtual sensors config data */
+    for (const auto& [path, interfaceMap] : objects)
+    {
+        auto objpath = static_cast<std::string>(path);
+        std::string name = path.filename();
+        std::string sensorType;
+        std::string vsConfigIntf = vsConfigIntfPrefix + calculationType;
+
+        if (interfaceMap.find(vsConfigIntf) == interfaceMap.end())
+        {
+            continue;
+        }
+
+        /* Extract the virtual sensor type as we need this for DBus params */
+        for (const auto& [interface, propertyMap] : interfaceMap)
+        {
+            auto itr = propertyMap.find("Unit");
+            if (itr != propertyMap.end())
+            {
+                sensorType = std::get<std::string>(itr->second);
+            }
+        }
+
+        if (!name.empty() && !sensorType.empty())
+        {
+            if (unitMap.find(sensorType) == unitMap.end())
+            {
+                log<level::ERR>("Sensor type is not supported",
+                                entry("TYPE=%s", sensorType.c_str()));
+                continue;
+            }
+
+            if (virtualSensorsMap.find(name) != virtualSensorsMap.end())
+            {
+                log<level::ERR>(
+                    "A virtual sensor with this name already exists",
+                    entry("NAME=%s", name.c_str()));
+                continue;
+            }
+
+            try
+            {
+                std::string objPath(sensorDbusPath);
+                objPath += sensorType + "/" + name;
+
+                auto virtualSensorPtr = std::make_unique<VirtualSensor>(
+                    bus, objpath.c_str(), interfaceMap, name, sensorType,
+                    calculationType);
+                log<level::INFO>("Added a new virtual sensor",
+                                 entry("NAME=%s", name.c_str()));
+                virtualSensorPtr->updateVirtualSensor();
+
+                /* Initialize unit value for virtual sensor */
+                virtualSensorPtr->ValueIface::unit(unitMap[sensorType]);
+
+                virtualSensorsMap.emplace(std::move(name),
+                                          std::move(virtualSensorPtr));
+            }
+            catch (std::invalid_argument& ia)
+            {
+                log<level::ERR>("Failed to set up virtual sensor",
+                                entry("Error=%s", ia.what()));
+            }
+        }
+        else
+        {
+            log<level::ERR>(
+                "Sensor type or name not found from entity manager");
+        }
+    }
+}
+
 void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
 
     auto data = parseConfigFile(VIRTUAL_SENSOR_CONFIG_FILE);
+
     // print values
     if (DEBUG)
+    {
         std::cout << "Config json data:\n" << data << "\n\n";
+    }
 
     /* Get virtual sensors  config data */
     for (const auto& j : data)
@@ -435,6 +823,30 @@ int main()
 
     // Create an virtual sensors object
     phosphor::virtualSensor::VirtualSensors virtualSensors(bus);
+
+    // Setup matches
+    std::vector<std::unique_ptr<sdbusplus::bus::match::match>> matches;
+    std::function<void(sdbusplus::message::message&)> eventHandler =
+        [&virtualSensors](sdbusplus::message::message& message) {
+            if (message.is_method_error())
+            {
+                log<level::ERR>("Callback method error");
+                return;
+            }
+            virtualSensors.interfaceAdded(message);
+        };
+
+    for (const char* type : calculationTypes)
+    {
+        auto match = std::make_unique<sdbusplus::bus::match::match>(
+            bus,
+            std::string("type='signal',member='PropertiesChanged',"
+                        "path_namespace='/xyz/openbmc_project/inventory',"
+                        "arg0namespace='") +
+                vsConfigIntfPrefix + type + "'",
+            eventHandler);
+        matches.emplace_back(std::move(match));
+    }
 
     // Request service bus name
     bus.request_name(busName);
