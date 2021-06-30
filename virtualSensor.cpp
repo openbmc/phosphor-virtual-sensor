@@ -19,7 +19,8 @@ static constexpr auto vsConfigIntfPrefix = "xyz.openbmc_project.Configuration.";
 static constexpr auto vsCParamsIntfSuffix = ".ConstParams";
 static constexpr auto vsDBusParamsIntfSuffix = ".Sensors";
 static constexpr auto vsThresholdsIntfSuffix = ".Thresholds";
-static constexpr std::array<const char*, 0> calculationTypes = {};
+static constexpr std::array<const char*, 1> calculationTypes = {
+    "modifiedMedian"};
 
 using namespace phosphor::logging;
 
@@ -379,7 +380,8 @@ void VirtualSensor::setSensorValue(double value)
     ValueIface::value(value);
 }
 
-double VirtualSensor::calculateValue(const std::string& calculation)
+double VirtualSensor::calculateValue(const std::string& calculation,
+                                     const VirtualSensor::ParamMap& paramMap)
 {
     auto itr = std::find(calculationTypes.begin(), calculationTypes.end(),
                          calculation);
@@ -387,7 +389,20 @@ double VirtualSensor::calculateValue(const std::string& calculation)
     {
         return std::numeric_limits<double>::quiet_NaN();
     }
+    else if (calculation == "modifiedMedian")
+    {
+        return calculateModifiedMedianValue(paramMap);
+    }
     return std::numeric_limits<double>::quiet_NaN();
+}
+
+bool VirtualSensor::sensorInRange(double value)
+{
+    if (value <= ValueIface::maxValue() && value >= ValueIface::minValue())
+    {
+        return true;
+    }
+    return false;
 }
 
 void VirtualSensor::updateVirtualSensor()
@@ -415,7 +430,7 @@ void VirtualSensor::updateVirtualSensor()
     }
     else
     {
-        val = calculateValue(exprStr);
+        val = calculateValue(exprStr, paramMap);
     }
     /* Set sensor value to dbus interface */
     setSensorValue(val);
@@ -431,6 +446,52 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
+}
+
+double VirtualSensor::calculateModifiedMedianValue(
+    const VirtualSensor::ParamMap& paramMap)
+{
+    std::vector<double> values;
+
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (!sensorInRange(var->ref()))
+            {
+                continue;
+            }
+            values.push_back(var->ref());
+        }
+    }
+
+    double val;
+    size_t size = values.size();
+    std::sort(values.begin(), values.end());
+    switch (size)
+    {
+        case 2:
+            /* Choose biggest value */
+            val = values.at(1);
+            break;
+        case 0:
+            val = std::numeric_limits<double>::quiet_NaN();
+            break;
+        default:
+            /* Choose median value */
+            if (size % 2 == 0)
+            {
+                // Average of the two middle values
+                val = (values.at(size / 2) + values.at(size / 2 - 1)) / 2;
+            }
+            else
+            {
+                val = values.at((size - 1) / 2);
+            }
+            break;
+    }
+    return val;
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,
