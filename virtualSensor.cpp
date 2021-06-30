@@ -367,6 +367,7 @@ void VirtualSensors::createVirtualSensors()
         {
             std::string sensorType = desc.value("SensorType", "");
             std::string name = desc.value("Name", "");
+            std::replace(name.begin(), name.end(), ' ', '_');
 
             if (!name.empty() && !sensorType.empty())
             {
