@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f6dac911_f0db949a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-01T20:37:29Z",
+      "side": 1,
+      "message": "Probably not a lambda.  If you like this current name the best I\u0027m OK with it.",
+      "parentUuid": "e30a8cd0_be54cff9",
+      "range": {
+        "startLine": 611,
+        "startChar": 21,
+        "endLine": 611,
+        "endChar": 35
+      },
+      "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8270acf_f80042df",
         "filename": "virtualSensor.cpp",
         "patchSetId": 15
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "You\u0027re right, it doesn\u0027t. This is possibly a limitation in how I have been testing... I veered away from using a string in the config file to indicate that we should look for a virtual sensor configuration on D-Bus, because in simics this code is run well before entity manager has put the config on D-Bus. \n\nPerhaps we can do both this and look for a string in the config file (like Patrick suggested initially), so regardless of whether entity-manager is up and running before or after this app runs we will create a virtual sensor. If we want to just use the string in the config file we will need to decide how often we should check if the config is on D-Bus and how many times we will try before giving up.",
       "parentUuid": "c8270acf_f80042df",
+      "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9928b774_461c4473",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-01T20:37:29Z",
+      "side": 1,
+      "message": "If, for example, you put the calculation type (the arg to createVirtualSensorsFromDbus) into the JSON file, then on startup you could look for that.  If it\u0027s there, you could make the matches and call createVirtualSensorsFromDBus(type), so it would create the sensor if EM was ready and listen for it using the matches if it isn\u0027t.",
+      "parentUuid": "c94ae8ab_30f2777f",
       "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
