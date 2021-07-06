@@ -141,6 +141,24 @@
       "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "778ad321_79d5adc9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-06T14:39:27Z",
+      "side": 1,
+      "message": "If you make the match objects before you check on D-Bus, it closes that window.",
+      "parentUuid": "b6300d3a_f2cbc52b",
+      "revId": "d8cfdc1f3c942073d5de6941c47415aba74fa3aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
