@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f1f82b8_84615c6a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-07T16:10:32Z",
+      "side": 1,
+      "message": "you don\u0027t really need this check, as the desc.value(\"config\", \"\") will already return an empty string if \u0027Config\u0027 isn\u0027t there.\n\nAlso nlohmann has a \u0027contains\u0027 method that is pretty handy for this, such as below you could do: if (desc.contains(\"Type\"))",
+      "range": {
+        "startLine": 793,
+        "startChar": 16,
+        "endLine": 793,
+        "endChar": 49
+      },
+      "revId": "80e478c00793b27db5d55e5c7885653e5d45fea2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
