@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73642b29_bd932588",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-08T10:57:52Z",
+      "side": 1,
+      "message": "Prefer something like:\n\n\u003e README: add config via d-bus\n\nYou want the \u0027git log --oneline\u0027 to be more useful to help casual readers trying to figure out where a problem might have been introduced.",
+      "revId": "21a67fd1fed7aaa03033ba69ee6ab905a98bf419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae64354d_36466405",
+        "filename": "README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-08T10:57:52Z",
+      "side": 1,
+      "message": "Can we point to the file?  `virtual_sensor_config.json`, I think.",
+      "range": {
+        "startLine": 5,
+        "startChar": 46,
+        "endLine": 5,
+        "endChar": 77
+      },
+      "revId": "21a67fd1fed7aaa03033ba69ee6ab905a98bf419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ba340e7_cd106841",
+        "filename": "README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-08T10:57:52Z",
+      "side": 1,
+      "message": "Can you expand on this slightly?  I think you\u0027re saying to insert a sensor with these additional \u0027Desc\u0027 fields, but the wording makes it sound like you could just create a JSON with these blob.\n\nWhere are \u0027Type\u0027s defined?  Can you document them as well?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 3
+      },
+      "revId": "21a67fd1fed7aaa03033ba69ee6ab905a98bf419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6785caad_34fc531d",
+        "filename": "README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-08T10:57:52Z",
+      "side": 1,
+      "message": "It isn\u0027t obvious to me what this is referring to.",
+      "range": {
+        "startLine": 23,
+        "startChar": 59,
+        "endLine": 32,
+        "endChar": 39
+      },
+      "revId": "21a67fd1fed7aaa03033ba69ee6ab905a98bf419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
