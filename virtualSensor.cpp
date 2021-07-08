@@ -348,7 +348,8 @@ std::map<std::string, ValueIface::Unit> unitMap = {
     {"power", ValueIface::Unit::Watts},
     {"energy", ValueIface::Unit::Joules},
     {"utilization", ValueIface::Unit::Percent},
-    {"airflow", ValueIface::Unit::CFM}};
+    {"airflow", ValueIface::Unit::CFM},
+    {"pressure", ValueIface::Unit::Pascals}};
 
 void VirtualSensors::createVirtualSensors()
 {
