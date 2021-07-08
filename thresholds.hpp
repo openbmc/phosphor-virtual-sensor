@@ -28,6 +28,8 @@ struct Threshold<WarningObject> : public WarningObject
 {
     static constexpr auto name = "Warning";
     using WarningObject::WarningObject;
+    double warningHighHysteresis;
+    double warningLowHysteresis;
 
     auto high()
     {
@@ -36,6 +38,26 @@ struct Threshold<WarningObject> : public WarningObject
     auto low()
     {
         return warningLow();
+    }
+
+    auto getHighHysteresis()
+    {
+        return this->warningHighHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->warningLowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->warningHighHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->warningLowHysteresis = value;
     }
 
     template <typename... Args>
@@ -80,6 +102,8 @@ struct Threshold<CriticalObject> : public CriticalObject
 {
     static constexpr auto name = "Critical";
     using CriticalObject::CriticalObject;
+    double criticalHighHysteresis;
+    double criticalLowHysteresis;
 
     auto high()
     {
@@ -88,6 +112,26 @@ struct Threshold<CriticalObject> : public CriticalObject
     auto low()
     {
         return criticalLow();
+    }
+
+    auto getHighHysteresis()
+    {
+        return this->criticalHighHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->criticalLowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->criticalHighHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->criticalLowHysteresis = value;
     }
 
     template <typename... Args>
@@ -132,6 +176,8 @@ struct Threshold<SoftShutdownObject> : public SoftShutdownObject
 {
     static constexpr auto name = "SoftShutdown";
     using SoftShutdownObject::SoftShutdownObject;
+    double softShutdownHighHysteresis;
+    double softShutdownLowHysteresis;
 
     auto high()
     {
@@ -140,6 +186,26 @@ struct Threshold<SoftShutdownObject> : public SoftShutdownObject
     auto low()
     {
         return softShutdownLow();
+    }
+
+    auto getHighHysteresis()
+    {
+        return this->softShutdownHighHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->softShutdownLowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->softShutdownHighHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->softShutdownLowHysteresis = value;
     }
 
     template <typename... Args>
@@ -184,6 +250,8 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
 {
     static constexpr auto name = "HardShutdown";
     using HardShutdownObject::HardShutdownObject;
+    double hardShutdownHighHysteresis;
+    double hardShutdownLowHysteresis;
 
     auto high()
     {
@@ -192,6 +260,26 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
     auto low()
     {
         return hardShutdownLow();
+    }
+
+    auto getHighHysteresis()
+    {
+        return this->hardShutdownHighHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->hardShutdownLowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->hardShutdownHighHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->hardShutdownLowHysteresis = value;
     }
 
     template <typename... Args>
@@ -236,6 +324,8 @@ struct Threshold<PerformanceLossObject> : public PerformanceLossObject
 {
     static constexpr auto name = "PerformanceLoss";
     using PerformanceLossObject::PerformanceLossObject;
+    double performanceLossHighHysteresis;
+    double performanceLossLowHysteresis;
 
     auto high()
     {
@@ -244,6 +334,26 @@ struct Threshold<PerformanceLossObject> : public PerformanceLossObject
     auto low()
     {
         return performanceLossLow();
+    }
+
+    auto getHighHysteresis()
+    {
+        return this->performanceLossHighHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->performanceLossLowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->performanceLossHighHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->performanceLossLowHysteresis = value;
     }
 
     template <typename... Args>
