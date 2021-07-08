@@ -21,6 +21,7 @@ static constexpr auto vsDBusParamsIntfSuffix = ".Sensors";
 static constexpr auto vsThresholdsIntfSuffix = ".Thresholds";
 static constexpr std::array<const char*, 1> calculationTypes = {
     "modifiedMedian"};
+static constexpr auto defaultHysteresis = 0;
 
 using namespace phosphor::logging;
 
@@ -321,6 +322,13 @@ void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
                     "Invalid threshold specified in entity manager");
             }
             thresholds[threshold] = value;
+
+            itr = propertyMap.find("Hysteresis");
+            if (itr != propertyMap.end())
+            {
+                auto hysteresis = getNumber(itr->second);
+                thresholds[threshold + "Hysteresis"] = hysteresis;
+            }
         }
         else if (interface.find(vsConfigIntfPrefix) != std::string::npos)
         {
@@ -512,6 +520,10 @@ void VirtualSensor::createThresholds(const Json& threshold,
             "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
         criticalIface->criticalLow(threshold.value(
             "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
+        criticalIface->setHighHysteresis(
+            threshold.value("CriticalHighHysteresis", defaultHysteresis));
+        criticalIface->setLowHysteresis(
+            threshold.value("CriticalLowHysteresis", defaultHysteresis));
     }
 
     if (threshold.contains("WarningHigh") || threshold.contains("WarningLow"))
@@ -523,6 +535,10 @@ void VirtualSensor::createThresholds(const Json& threshold,
             "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
         warningIface->warningLow(threshold.value(
             "WarningLow", std::numeric_limits<double>::quiet_NaN()));
+        warningIface->setHighHysteresis(
+            threshold.value("WarningHighHysteresis", defaultHysteresis));
+        warningIface->setLowHysteresis(
+            threshold.value("WarningLowHysteresis", defaultHysteresis));
     }
 
     if (threshold.contains("HardShutdownHigh") ||
@@ -535,6 +551,10 @@ void VirtualSensor::createThresholds(const Json& threshold,
             "HardShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
         hardShutdownIface->hardShutdownLow(threshold.value(
             "HardShutdownLow", std::numeric_limits<double>::quiet_NaN()));
+        hardShutdownIface->setHighHysteresis(
+            threshold.value("HardShutdownHighHysteresis", defaultHysteresis));
+        hardShutdownIface->setLowHysteresis(
+            threshold.value("HardShutdownLowHysteresis", defaultHysteresis));
     }
 
     if (threshold.contains("SoftShutdownHigh") ||
@@ -547,6 +567,10 @@ void VirtualSensor::createThresholds(const Json& threshold,
             "SoftShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
         softShutdownIface->softShutdownLow(threshold.value(
             "SoftShutdownLow", std::numeric_limits<double>::quiet_NaN()));
+        softShutdownIface->setHighHysteresis(
+            threshold.value("SoftShutdownHighHysteresis", defaultHysteresis));
+        softShutdownIface->setLowHysteresis(
+            threshold.value("SoftShutdownLowHysteresis", defaultHysteresis));
     }
 
     if (threshold.contains("PerformanceLossHigh") ||
@@ -559,6 +583,10 @@ void VirtualSensor::createThresholds(const Json& threshold,
             "PerformanceLossHigh", std::numeric_limits<double>::quiet_NaN()));
         perfLossIface->performanceLossLow(threshold.value(
             "PerformanceLossLow", std::numeric_limits<double>::quiet_NaN()));
+        perfLossIface->setHighHysteresis(threshold.value(
+            "PerformanceLossHighHysteresis", defaultHysteresis));
+        perfLossIface->setLowHysteresis(
+            threshold.value("PerformanceLossLowHysteresis", defaultHysteresis));
     }
 }
 
