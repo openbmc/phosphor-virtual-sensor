@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ec156ab7_7f0ace1e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-07-08T06:04:16Z",
+      "side": 1,
+      "message": "It makes sense for this to have all the units available, I\u0027ll add it in a separate commit.",
+      "parentUuid": "76bea52f_26ae1cf1",
+      "revId": "80e478c00793b27db5d55e5c7885653e5d45fea2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f1f82b8_84615c6a",
         "filename": "virtualSensor.cpp",
         "patchSetId": 16
@@ -39,6 +57,30 @@
       "revId": "80e478c00793b27db5d55e5c7885653e5d45fea2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c8bc386_0ac4404f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-07-08T06:04:16Z",
+      "side": 1,
+      "message": "both good points, thanks!",
+      "parentUuid": "4f1f82b8_84615c6a",
+      "range": {
+        "startLine": 793,
+        "startChar": 16,
+        "endLine": 793,
+        "endChar": 49
+      },
+      "revId": "80e478c00793b27db5d55e5c7885653e5d45fea2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
