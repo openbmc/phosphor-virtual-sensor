@@ -34,6 +34,24 @@
       "revId": "86ad08203f965bc943a4c43350778c2487838db7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91496bd1_d5f0d292",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-09T18:26:57Z",
+      "side": 1,
+      "message": "I call it mysterious because the entity-manager schema lists severity as an unrestricted number:  https://github.com/openbmc/entity-manager/blob/master/schemas/legacy.json#L548  instead of being a string enum, or even a number with a min and a max with a description on what those mean.",
+      "parentUuid": "814d3c16_7f1c575b",
+      "revId": "86ad08203f965bc943a4c43350778c2487838db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
