@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70e83563_1956a64e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2021-07-09T17:54:16Z",
+      "side": 1,
+      "message": "It sounds like Patrick wants the actual threshold names here instead of these mysterious ones that entity-manager/dbus-sensors/etc all use.\n\nAs it stands now, since the entity-manager schema for Thresholds is all strings and no enums, it would not take any schema changes to do this, so I guess maybe it\u0027s the way to go.",
+      "revId": "86ad08203f965bc943a4c43350778c2487838db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
