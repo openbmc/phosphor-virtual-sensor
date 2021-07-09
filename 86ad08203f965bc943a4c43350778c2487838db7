@@ -16,6 +16,24 @@
       "revId": "86ad08203f965bc943a4c43350778c2487838db7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "814d3c16_7f1c575b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-07-09T18:17:53Z",
+      "side": 1,
+      "message": "This code doesn\u0027t even look correct for the \"mysterious\" entity-manager/dbus-sensors ones.  We should not be doing direct matching on name.  Name is an opaque thing that the user can name whatever they want.  We should be keying off direction and severity.\n\nThis is all handled today with code in dbus-sensors;  At most you should be building something similar to it:\nhttps://github.com/openbmc/dbus-sensors/blob/12c2c0ef533842d2e66f8c82c6b586f6df31d577/src/Thresholds.cpp#L60\n\nI\u0027m still of the opinion that if we\u0027re not going to have a dependency on expertk expressions, phosphor-virtual-sensor is probably the wrong place to put this implementation.  Dbus-sensors already has examples of this kind of \"virtual\" sensors, and already has code for doing exactly this kind of config-to-thresholds operation that we could reuse.  If Patrick or the author wants to own maintainership an implementation in that repo, I\u0027m happy to mess around with the OWNERS files to make that happen.",
+      "parentUuid": "70e83563_1956a64e",
+      "revId": "86ad08203f965bc943a4c43350778c2487838db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }

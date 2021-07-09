@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a51692de_8dac0103",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-07-09T18:17:53Z",
+      "side": 1,
+      "message": "You should look into variantToFloatVisitor in dbus-sensors.  It handles this method in more complete ways (ie it can convert any int type, not just a list of specified ones).",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 16
+      },
+      "revId": "80e478c00793b27db5d55e5c7885653e5d45fea2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "76bea52f_26ae1cf1",
         "filename": "virtualSensor.cpp",
         "patchSetId": 16
