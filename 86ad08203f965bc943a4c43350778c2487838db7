@@ -52,6 +52,24 @@
       "revId": "86ad08203f965bc943a4c43350778c2487838db7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f67ed30a_06085324",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2021-07-09T18:38:38Z",
+      "side": 1,
+      "message": "The thresholds were created before we had json schemas for EM configs.  I think the original generation of the schemas was automated using some tool, so there\u0027s cases where they\u0027re more permissive than intended;  This is one of those cases.  I suspect the schemas could be updated to constrain Severity to min of 1 and max of 2 to be more accurate if we wanted (possibly max of 3 or 4 after we support the new threshold types).",
+      "parentUuid": "91496bd1_d5f0d292",
+      "revId": "86ad08203f965bc943a4c43350778c2487838db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
