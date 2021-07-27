@@ -23,8 +23,33 @@ using PerformanceLossObject = ServerObject<threshold_ns::PerformanceLoss>;
 template <typename T>
 struct Threshold;
 
+struct Hysteresis
+{
+    double highHysteresis;
+    double lowHysteresis;
+    auto getHighHysteresis()
+    {
+        return this->highHysteresis;
+    }
+
+    auto getLowHysteresis()
+    {
+        return this->lowHysteresis;
+    }
+
+    auto setHighHysteresis(double value)
+    {
+        this->highHysteresis = value;
+    }
+
+    auto setLowHysteresis(double value)
+    {
+        this->lowHysteresis = value;
+    }
+};
+
 template <>
-struct Threshold<WarningObject> : public WarningObject
+struct Threshold<WarningObject> : public WarningObject, public Hysteresis
 {
     static constexpr auto name = "Warning";
     using WarningObject::WarningObject;
@@ -76,7 +101,7 @@ struct Threshold<WarningObject> : public WarningObject
 };
 
 template <>
-struct Threshold<CriticalObject> : public CriticalObject
+struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
 {
     static constexpr auto name = "Critical";
     using CriticalObject::CriticalObject;
@@ -128,7 +153,9 @@ struct Threshold<CriticalObject> : public CriticalObject
 };
 
 template <>
-struct Threshold<SoftShutdownObject> : public SoftShutdownObject
+struct Threshold<SoftShutdownObject> :
+    public SoftShutdownObject,
+    public Hysteresis
 {
     static constexpr auto name = "SoftShutdown";
     using SoftShutdownObject::SoftShutdownObject;
@@ -180,7 +207,9 @@ struct Threshold<SoftShutdownObject> : public SoftShutdownObject
 };
 
 template <>
-struct Threshold<HardShutdownObject> : public HardShutdownObject
+struct Threshold<HardShutdownObject> :
+    public HardShutdownObject,
+    public Hysteresis
 {
     static constexpr auto name = "HardShutdown";
     using HardShutdownObject::HardShutdownObject;
@@ -232,10 +261,14 @@ struct Threshold<HardShutdownObject> : public HardShutdownObject
 };
 
 template <>
-struct Threshold<PerformanceLossObject> : public PerformanceLossObject
+struct Threshold<PerformanceLossObject> :
+    public PerformanceLossObject,
+    public Hysteresis
 {
     static constexpr auto name = "PerformanceLoss";
     using PerformanceLossObject::PerformanceLossObject;
+    double performanceLossHighHysteresis;
+    double performanceLossLowHysteresis;
 
     auto high()
     {
