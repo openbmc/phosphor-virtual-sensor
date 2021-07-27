@@ -197,8 +197,9 @@ class VirtualSensor : public ValueObject
         static constexpr auto tname = T::element_type::name;
 
         auto alarmHigh = threshold->alarmHigh();
+        auto highHysteresis = threshold->getHighHysteresis();
         if ((!alarmHigh && value >= threshold->high()) ||
-            (alarmHigh && value < threshold->high()))
+            (alarmHigh && value < (threshold->high() - highHysteresis)))
         {
             if (!alarmHigh)
             {
@@ -218,8 +219,9 @@ class VirtualSensor : public ValueObject
         }
 
         auto alarmLow = threshold->alarmLow();
+        auto lowHysteresis = threshold->getLowHysteresis();
         if ((!alarmLow && value <= threshold->low()) ||
-            (alarmLow && value > threshold->low()))
+            (alarmLow && value > (threshold->low() + lowHysteresis)))
         {
             if (!alarmLow)
             {
