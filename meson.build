@@ -55,7 +55,6 @@ executable(
             'sdeventplus',
             fallback: ['sdeventplus', 'sdeventplus_dep'],
         ),
-        dependency('fmt'),
         exprtk,
         nlohmann_json,
     ],
