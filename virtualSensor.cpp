@@ -2,9 +2,7 @@
 
 #include "config.hpp"
 
-#include <fmt/format.h>
-
-#include <phosphor-logging/log.hpp>
+#include <phosphor-logging/lg2.hpp>
 #include <sdeventplus/event.hpp>
 
 #include <fstream>
@@ -20,7 +18,7 @@ static constexpr std::array<const char*, 1> calculationIfaces = {
     "xyz.openbmc_project.Configuration.ModifiedMedian"};
 static constexpr auto defaultHysteresis = 0;
 
-using namespace phosphor::logging;
+PHOSPHOR_LOG2_USING_WITH_FLAGS;
 
 int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
 {
@@ -90,8 +88,7 @@ AssociationList getAssociationsFromJson(const Json& j)
     }
     catch (const std::exception& ex)
     {
-        log<level::ERR>("Failed to parse association",
-                        entry("EX=%s", ex.what()));
+        error("Failed to parse association: {ERROR}", "ERROR", ex);
     }
     return assocs;
 }
@@ -120,8 +117,7 @@ U getNumberFromConfig(const PropertyMap& map, const std::string& name,
     }
     else if (required)
     {
-        log<level::ERR>("Required field missing in config",
-                        entry("NAME=%s", name.c_str()));
+        error("Required field {NAME} missing in config", "NAME", name);
         throw std::invalid_argument("Required field missing in config");
     }
     return std::numeric_limits<U>::quiet_NaN();
@@ -332,17 +328,15 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     exprtk::parser<double> parser{};
     if (!parser.compile(exprStr, expression))
     {
-        log<level::ERR>("Expression compilation failed");
+        error("Expression compilation failed");
 
         for (std::size_t i = 0; i < parser.error_count(); ++i)
         {
-            auto error = parser.get_error(i);
-
-            log<level::ERR>(
-                fmt::format(
-                    "Position: {} Type: {} Message: {}", error.token.position,
-                    exprtk::parser_error::to_str(error.mode), error.diagnostic)
-                    .c_str());
+            auto err = parser.get_error(i);
+            error("Error parsing token at {POSITION}: {ERROR}", "POSITION",
+                  err.token.position, "TYPE",
+                  exprtk::parser_error::to_str(err.mode), "ERROR",
+                  err.diagnostic);
         }
         throw std::runtime_error("Expression compilation failed");
     }
@@ -634,16 +628,15 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     std::ifstream jsonFile(configFile);
     if (!jsonFile.is_open())
     {
-        log<level::ERR>("config JSON file not found",
-                        entry("FILENAME=%s", configFile.c_str()));
+        error("config JSON file {FILENAME} not found", "FILENAME", configFile);
         return {};
     }
 
     auto data = Json::parse(jsonFile, nullptr, false);
     if (data.is_discarded())
     {
-        log<level::ERR>("config readings JSON parser failure",
-                        entry("FILENAME=%s", configFile.c_str()));
+        error("config readings JSON parser failure with {FILENAME}", "FILENAME",
+              configFile);
         throw std::exception{};
     }
 
@@ -688,7 +681,7 @@ void VirtualSensors::setupMatches()
     auto eventHandler = [this](sdbusplus::message::message& message) {
         if (message.is_method_error())
         {
-            log<level::ERR>("Callback method error");
+            error("Callback method error");
             return;
         }
         this->propertiesChanged(message);
@@ -710,7 +703,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 {
     if (calculationIface.empty())
     {
-        log<level::ERR>("No calculation type supplied");
+        error("No calculation type supplied");
         return;
     }
     auto objects = getObjectsFromDBus();
@@ -729,14 +722,12 @@ void VirtualSensors::createVirtualSensorsFromDBus(
         }
         if (name.empty())
         {
-            log<level::ERR>(
-                "Virtual Sensor name not found in entity manager config");
+            error("Virtual Sensor name not found in entity manager config");
             continue;
         }
         if (virtualSensorsMap.contains(name))
         {
-            log<level::ERR>("A virtual sensor with this name already exists",
-                            entry("NAME=%s", name.c_str()));
+            error("A virtual sensor named {NAME} already exists", "NAME", name);
             continue;
         }
 
@@ -758,8 +749,8 @@ void VirtualSensors::createVirtualSensorsFromDBus(
         sensorType = getSensorTypeFromUnit(sensorUnit);
         if (sensorType.empty())
         {
-            log<level::ERR>("Sensor unit is not supported",
-                            entry("TYPE=%s", sensorUnit.c_str()));
+            error("Sensor unit type {TYPE} is not supported", "TYPE",
+                  sensorUnit);
             continue;
         }
 
@@ -770,8 +761,8 @@ void VirtualSensors::createVirtualSensorsFromDBus(
             auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                 bus, virtObjPath.c_str(), interfaceMap, name, sensorType,
                 calculationIface);
-            log<level::INFO>("Added a new virtual sensor",
-                             entry("NAME=%s", name.c_str()));
+            info("Added a new virtual sensor: {NAME} {TYPE}", "NAME", name,
+                 "TYPE", sensorType);
             virtualSensorPtr->updateVirtualSensor();
 
             /* Initialize unit value for virtual sensor */
@@ -791,8 +782,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
                 message.read(path);
                 if (static_cast<const std::string&>(path) == objpath)
                 {
-                    log<level::INFO>("Removed a virtual sensor",
-                                     entry("NAME=%s", name.c_str()));
+                    info("Removed a virtual sensor: {NAME}", "NAME", name);
                     virtualSensorsMap.erase(name);
                 }
             };
@@ -807,8 +797,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
         }
         catch (std::invalid_argument& ia)
         {
-            log<level::ERR>("Failed to set up virtual sensor",
-                            entry("Error=%s", ia.what()));
+            error("Failed to set up virtual sensor: {ERROR}", "ERROR", ia);
         }
     }
 }
@@ -840,13 +829,13 @@ void VirtualSensors::createVirtualSensors()
 
                 if (desc.contains("Type"))
                 {
-                    auto path = "xyz.openbmc_project.Configuration." +
-                                desc.value("Type", "");
+                    auto type = desc.value("Type", "");
+                    auto path = "xyz.openbmc_project.Configuration." + type;
+
                     if (!isCalculationType(path))
                     {
-                        log<level::ERR>(
-                            "Invalid calculation type supplied\n",
-                            entry("TYPE=%s", desc.value("Type", "").c_str()));
+                        error("Invalid calculation type {TYPE} supplied.",
+                              "TYPE", type);
                         continue;
                     }
                     createVirtualSensorsFromDBus(path);
@@ -862,16 +851,15 @@ void VirtualSensors::createVirtualSensors()
             {
                 if (unitMap.find(sensorType) == unitMap.end())
                 {
-                    log<level::ERR>("Sensor type is not supported",
-                                    entry("TYPE=%s", sensorType.c_str()));
+                    error("Sensor type {TYPE} is not supported", "TYPE",
+                          sensorType);
                 }
                 else
                 {
                     if (virtualSensorsMap.find(name) != virtualSensorsMap.end())
                     {
-                        log<level::ERR>(
-                            "A virtual sensor with this name already exists",
-                            entry("TYPE=%s", name.c_str()));
+                        error("A virtual sensor named {NAME} already exists",
+                              "NAME", name);
                         continue;
                     }
                     auto objPath = sensorDbusPath + sensorType + "/" + name;
@@ -879,8 +867,7 @@ void VirtualSensors::createVirtualSensors()
                     auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                         bus, objPath.c_str(), j, name);
 
-                    log<level::INFO>("Added a new virtual sensor",
-                                     entry("NAME=%s", name.c_str()));
+                    info("Added a new virtual sensor: {NAME}", "NAME", name);
                     virtualSensorPtr->updateVirtualSensor();
 
                     /* Initialize unit value for virtual sensor */
@@ -893,13 +880,14 @@ void VirtualSensors::createVirtualSensors()
             }
             else
             {
-                log<level::ERR>("Sensor type or name not found in config file");
+                error(
+                    "Sensor type ({TYPE}) or name ({NAME}) not found in config file",
+                    "NAME", name, "TYPE", sensorType);
             }
         }
         else
         {
-            log<level::ERR>(
-                "Descriptor for new virtual sensor not found in config file");
+            error("Descriptor for new virtual sensor not found in config file");
         }
     }
 }
