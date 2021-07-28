@@ -1,5 +1,4 @@
 #include <phosphor-logging/elog-errors.hpp>
-#include <phosphor-logging/log.hpp>
 #include <xyz/openbmc_project/Common/error.hpp>
 
 const char* propIntf = "org.freedesktop.DBus.Properties";
@@ -10,7 +9,6 @@ const char* mapperIntf = "xyz.openbmc_project.ObjectMapper";
 const char* methodGetObject = "GetObject";
 const char* methodGet = "Get";
 
-using namespace phosphor::logging;
 using namespace sdbusplus::xyz::openbmc_project::Common::Error;
 
 using Value = std::variant<int64_t, double, std::string, bool>;

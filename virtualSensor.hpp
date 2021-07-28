@@ -2,9 +2,8 @@
 #include "exprtkTools.hpp"
 #include "thresholds.hpp"
 
-#include <fmt/format.h>
-
 #include <nlohmann/json.hpp>
+#include <phosphor-logging/lg2.hpp>
 #include <sdbusplus/bus.hpp>
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
@@ -16,7 +15,7 @@ namespace phosphor
 {
 namespace virtualSensor
 {
-
+PHOSPHOR_LOG2_USING_WITH_FLAGS;
 using Json = nlohmann::json;
 
 template <typename... T>
@@ -150,16 +149,16 @@ class VirtualSensor : public ValueObject
         {
             if (!alarmHigh)
             {
-                constexpr auto msg =
-                    "ASSERT: {} has exceeded the {} high threshold";
-                log<level::ERR>(fmt::format(msg, name, tname).c_str());
+                error("ASSERT: sensor {SENSOR} is above the upper threshold "
+                      "{THRESHOLD}.",
+                      "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmHighSignalAsserted(value);
             }
             else
             {
-                constexpr auto msg =
-                    "DEASSERT: {} is under the {} high threshold";
-                log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                info("DEASSERT: sensor {SENSOR} is under the upper threshold "
+                     "{THRESHOLD}.",
+                     "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmHighSignalDeasserted(value);
             }
             threshold->alarmHigh(!alarmHigh);
@@ -171,15 +170,16 @@ class VirtualSensor : public ValueObject
         {
             if (!alarmLow)
             {
-                constexpr auto msg = "ASSERT: {} is under the {} low threshold";
-                log<level::ERR>(fmt::format(msg, name, tname).c_str());
+                error("ASSERT: sensor {SENSOR} is below the lower threshold "
+                      "{THRESHOLD}.",
+                      "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmLowSignalAsserted(value);
             }
             else
             {
-                constexpr auto msg =
-                    "DEASSERT: {} is above the {} low threshold";
-                log<level::INFO>(fmt::format(msg, name, tname).c_str());
+                info("DEASSERT: sensor {SENSOR} is above the lower threshold "
+                     "{THRESHOLD}.",
+                     "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmLowSignalDeasserted(value);
             }
             threshold->alarmLow(!alarmLow);

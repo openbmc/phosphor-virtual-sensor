@@ -1,10 +1,7 @@
+#include "config.hpp"
 #include "virtualSensor.hpp"
 
-#include "config.hpp"
-
-#include <fmt/format.h>
-
-#include <phosphor-logging/log.hpp>
+#include <phosphor-logging/lg2.hpp>
 #include <sdeventplus/event.hpp>
 
 #include <fstream>
@@ -14,7 +11,7 @@ static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 
-using namespace phosphor::logging;
+PHOSPHOR_LOG2_USING_WITH_FLAGS;
 
 int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
 {
@@ -84,8 +81,7 @@ AssociationList getAssociationsFromJson(const Json& j)
     }
     catch (const std::exception& ex)
     {
-        log<level::ERR>("Failed to parse association",
-                        entry("EX=%s", ex.what()));
+        error("Failed to parse association: {ERROR}", "ERROR", ex);
     }
     return assocs;
 }
@@ -191,17 +187,15 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     exprtk::parser<double> parser{};
     if (!parser.compile(exprStr, expression))
     {
-        log<level::ERR>("Expression compilation failed");
+        error("Expression compilation failed");
 
         for (std::size_t i = 0; i < parser.error_count(); ++i)
         {
-            auto error = parser.get_error(i);
-
-            log<level::ERR>(
-                fmt::format(
-                    "Position: {} Type: {} Message: {}", error.token.position,
-                    exprtk::parser_error::to_str(error.mode), error.diagnostic)
-                    .c_str());
+            auto err = parser.get_error(i);
+            error("Error parsing token at {POSITION}: {MESSAGE}", "POSITION",
+                  err.token.position, "TYPE",
+                  exprtk::parser_error::to_str(err.mode), "MESSAGE",
+                  err.diagnostic);
         }
         throw std::runtime_error("Expression compilation failed");
     }
@@ -323,16 +317,15 @@ Json VirtualSensors::parseConfigFile(const std::string configFile)
     std::ifstream jsonFile(configFile);
     if (!jsonFile.is_open())
     {
-        log<level::ERR>("config JSON file not found",
-                        entry("FILENAME=%s", configFile.c_str()));
+        error("config JSON file {FILENAME} not found", "FILENAME", configFile);
         throw std::exception{};
     }
 
     auto data = Json::parse(jsonFile, nullptr, false);
     if (data.is_discarded())
     {
-        log<level::ERR>("config readings JSON parser failure",
-                        entry("FILENAME=%s", configFile.c_str()));
+        error("config readings JSON parser failure with {FILENAME}", "FILENAME",
+              configFile);
         throw std::exception{};
     }
 
@@ -374,16 +367,15 @@ void VirtualSensors::createVirtualSensors()
             {
                 if (unitMap.find(sensorType) == unitMap.end())
                 {
-                    log<level::ERR>("Sensor type is not supported",
-                                    entry("TYPE=%s", sensorType.c_str()));
+                    error("Sensor type {TYPE} is not supported", "TYPE",
+                          sensorType);
                 }
                 else
                 {
                     if (virtualSensorsMap.find(name) != virtualSensorsMap.end())
                     {
-                        log<level::ERR>(
-                            "A virtual sensor with this name already exists",
-                            entry("TYPE=%s", name.c_str()));
+                        error("A virtual sensor named {NAME} already exists",
+                              "NAME", name);
                         continue;
                     }
                     std::string objPath(sensorDbusPath);
@@ -392,8 +384,7 @@ void VirtualSensors::createVirtualSensors()
                     auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                         bus, objPath.c_str(), j, name);
 
-                    log<level::INFO>("Added a new virtual sensor",
-                                     entry("NAME=%s", name.c_str()));
+                    info("Added a new virtual sensor: {NAME}", "NAME", name);
                     virtualSensorPtr->updateVirtualSensor();
 
                     /* Initialize unit value for virtual sensor */
@@ -405,13 +396,14 @@ void VirtualSensors::createVirtualSensors()
             }
             else
             {
-                log<level::ERR>("Sensor type or name not found in config file");
+                error("Sensor type ({TYPE}) or name ({NAME}) not found in "
+                      "config file",
+                      "NAME", name, "TYPE", sensorType);
             }
         }
         else
         {
-            log<level::ERR>(
-                "Descriptor for new virtual sensor not found in config file");
+            error("Descriptor for new virtual sensor not found in config file");
         }
     }
 }
