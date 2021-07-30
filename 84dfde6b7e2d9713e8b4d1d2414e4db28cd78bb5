@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "60381f87_dccd064f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-07-30T04:43:35Z",
+      "side": 1,
+      "message": "I separated out \u0027getting a config from DBus\u0027 from adding the modifiedMedian into separate commits to make it easier to review. Since none of this code can be used until a calculation type is added I figured as long as this compiled and didn\u0027t break anything it would be ok.",
+      "parentUuid": "ef2f0536_53a0ee7d",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 66
+      },
+      "revId": "84dfde6b7e2d9713e8b4d1d2414e4db28cd78bb5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6257346_ca6011d7",
         "filename": "virtualSensor.cpp",
         "patchSetId": 19
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0dd34ef7_13bdc030",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-07-30T04:43:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6257346_ca6011d7",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 67
+      },
+      "revId": "84dfde6b7e2d9713e8b4d1d2414e4db28cd78bb5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2242bc2c_b3d30809",
         "filename": "virtualSensor.cpp",
         "patchSetId": 19
@@ -59,6 +107,24 @@
       "writtenOn": "2021-07-29T18:21:51Z",
       "side": 1,
       "message": "Need a match for InterfacesRemoved to delete objects when they\u0027ve been destroyed?",
+      "revId": "84dfde6b7e2d9713e8b4d1d2414e4db28cd78bb5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1726044d_181a2c59",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-07-30T04:43:35Z",
+      "side": 1,
+      "message": "To clarify, should we match on InterfacesRemoved for the config files from entity-manager, the sensors we read, or both? I think we can get away without the sensors, as when we try to read sensors that aren\u0027t there we just get back a NaN and don\u0027t error out.",
+      "parentUuid": "2242bc2c_b3d30809",
       "revId": "84dfde6b7e2d9713e8b4d1d2414e4db28cd78bb5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
