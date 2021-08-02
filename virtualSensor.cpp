@@ -822,6 +822,30 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
             virtualSensorsMap.emplace(std::move(name),
                                       std::move(virtualSensorPtr));
+
+            /* Setup match for interfaces removed */
+            std::function<void(sdbusplus::message::message&)> intfRemoved =
+                [this, virtObjPath,
+                 name](sdbusplus::message::message& message) {
+                    if (message.is_method_error())
+                    {
+                        log<level::ERR>("Callback method error");
+                        return;
+                    }
+                    sdbusplus::message::object_path path;
+                    message.read(path);
+                    if (path == virtObjPath)
+                    {
+                        virtualSensorsMap.erase(name);
+                    }
+                };
+            auto matchOnRemove = std::make_unique<sdbusplus::bus::match::match>(
+                bus,
+                std::string("type='signal',member='InterfacesRemoved'"
+                            "arg0namespace='") +
+                    virtObjPath + "'",
+                intfRemoved);
+            this->matches.emplace_back(std::move(matchOnRemove));
         }
         catch (std::invalid_argument& ia)
         {
