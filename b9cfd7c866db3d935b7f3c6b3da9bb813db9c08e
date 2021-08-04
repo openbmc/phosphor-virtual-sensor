@@ -22,6 +22,30 @@
       "revId": "b9cfd7c866db3d935b7f3c6b3da9bb813db9c08e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b484c74_160ca6e6",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-04T08:07:14Z",
+      "side": 1,
+      "message": "Missed your comment - you\u0027re right.",
+      "parentUuid": "61dbbaee_0438ad00",
+      "range": {
+        "startLine": 208,
+        "startChar": 16,
+        "endLine": 208,
+        "endChar": 65
+      },
+      "revId": "b9cfd7c866db3d935b7f3c6b3da9bb813db9c08e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
