@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbefe0e7_770d38d2",
+        "filename": "README.md",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:53:29Z",
+      "side": 1,
+      "message": "Can we open an issue to get these changed to real strings down the road?  I think we\u0027ve discussed that already but it also requires changes in dbus-sensors.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 23
+      },
+      "revId": "507c734f4f12473bb9885be164a64e45e4d0b5c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
