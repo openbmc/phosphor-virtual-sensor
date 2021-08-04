@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d776341_8096d2a6",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:52:27Z",
+      "side": 1,
+      "message": "I\u0027m fine if you want to change these all to `return values.at(1);`  I prefer early return rather than trying to trace through the rest of the logic.",
+      "revId": "421e62915a29e3f6796bb4a2437dbc7b4c58c445",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
