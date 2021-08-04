@@ -1,0 +1,702 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b78521de_b295777b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "This can be significantly simplified with a std::visit and probably std::is_convertible\u003cdouble\u003e.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f52e4a2_419af0de",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Are we really looking for the calculation type to contain the string or be the string?  Can we get some comments here if it is expected to just contain the string?\n\nI wonder what you are expecting to happen when the interface value is \"modified-median\" and one of the types is \"median\", but happens to be earlier in calculationTypes than \"modified-median\".\n\n(Yes, the example above might not match your definitions exactly but the scenario is valid going forward as people add additional types.)",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "366a1f9a_9b709a9b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Can you make these two parsing routines a function?  The code is getting pretty long at this point just parsing the first one.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4abd8b19_2e3ac8ea",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Also here.  Are you expecting equality or contains?  Your code is doing a \u0027contains\u0027.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6773a31d_796b8546",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Should we initialize this to NaN?\n\nPlease add some whitespace through here.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d37e633_82e9577a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Prefer C++17 scoped-variable if statement syntax here.  Don\u0027t reuse the iterator variable.\n\n\u003e `attr(optional) if constexpr(optional) ( init-statement(optional) condition ) statement-true`\n\nhttps://en.cppreference.com/w/cpp/language/if",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 41
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed60d4aa_75677b5d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "throw string doesn\u0027t match the code.  I think this is a missing threshold value, not an invalid one.",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 13
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6bfc992_f3db6d93",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": ".empty()?  If you really want a comparison with an invalid string, add an invalid string constant somewhere for comparison rather than a magic.",
+      "range": {
+        "startLine": 298,
+        "startChar": 67,
+        "endLine": 298,
+        "endChar": 73
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bacd62ac_1faa03e9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "threshold type?",
+      "range": {
+        "startLine": 301,
+        "startChar": 29,
+        "endLine": 301,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "099089ff_d0cfb01f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Follow similar comments as \"threshold\" case.  A lot of duplication from comments I made there.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2009dc73_f02bd4cf",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Interesting that here you used .empty() but above you used `\u003d\u003d \"\"`. ;)",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "626e2fd0_aea9ac72",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "These if-trees imply to me it might be useful to implement some kind of map-apply function:\n\nvoid config_apply(auto map, auto fns)\n{\n    for(auto [name, fn] : fns)\n    {\n        if (auto itr \u003d map.find(name); itr !\u003d std::end(map))\n        {\n            fn(itr-\u003esecond);\n        }\n    }\n}\n\nWhich you could call with:\n\n{\n    { \"MaxValue\", [](auto v){ ValueIface::maxValue(getNumber(v)); }},\n    { \"MinValue\", [](auto v){ ValueIface::minValue(getNumber(v)); }},\n    ...\n}",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44c15509_0e61ab86",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "In both cases we\u0027re returning quiet_NaN?  Something doesn\u0027t feel right here.",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 52
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5f6d9c0_17d0f6dc",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "I\u0027d be fine with a ternary operator here.\n\n  auto val \u003d (itr \u003d\u003d calculationTypes.end()) ? expression.value() : calculateValue(exprStr);",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 410,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65dd5b2_dd05b22d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Should we just throw in these cases?",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb0f432f_eb728ce0",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Should we use the sdbus++ strings here?  Does that make life easier later?\n\nxyz::openbmc_project::Sensor::Threshold::Warning::interface",
+      "range": {
+        "startLine": 516,
+        "startChar": 20,
+        "endLine": 516,
+        "endChar": 30
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f7b471_ff48a904",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Can you use a map or array+std::find?",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d27adcd_c2866305",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "I\u0027m very confused by this function name vs the match vs the parameters here (and it may show by my comment on line 575).\n\nThe match is PropertiesChanged, but the function is interfaceAdded.\n\nPropertiesChanged signal is:\n              org.freedesktop.DBus.Properties.PropertiesChanged (STRING interface_name,\n                                                                 DICT\u003cSTRING,VARIANT\u003e changed_properties,\n                                                                 ARRAY\u003cSTRING\u003e invalidated_properties);\n\nInterfaceAdded signal is:\n          org.freedesktop.DBus.ObjectManager.InterfacesAdded (OBJPATH object_path,\n                                                              DICT\u003cSTRING,DICT\u003cSTRING,VARIANT\u003e\u003e interfaces_and_properties);\n\n\nI suspect you started with InterfaceAdded and later changed to PropertiesChanged but didn\u0027t fix up the names.  Please do so now.",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 55
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a0f212_2da2904a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "This is a very vague \"contains\" search.  Can we search for more of the interface name than just Type?  \"com.foobar.ProcessorType\" also matches this.  Can we at a minimum make sure it is \".Type\"?",
+      "range": {
+        "startLine": 575,
+        "startChar": 15,
+        "endLine": 575,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db788dc5_1585d626",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Prefer use sdbusplus::message::convert_to_string now, but this works.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ca4aa4f_02fc7029",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure what is going on here.  Are the EM configs just short strings like \"Joules\"?  Can we please make them full enumeration strings?\n\nRather than `substr`, which returns a freshly allocated string, I think you could do a comparison with a string_view constructed using rfind(.).  \n\nThis also allows 0-code refactoring if we were to move Sensor somewhere else (for example).  Any time you\u0027re hard coding a string or portion of a string from something in one of the phosphor-dbus-interface headers there is likely a better way to do it.",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56fa066a_ab58ea34",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "\u0027auto\u0027 doesn\u0027t work here?",
+      "range": {
+        "startLine": 640,
+        "startChar": 4,
+        "endLine": 640,
+        "endChar": 53
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aff3081b_567ac50e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Please use helpers from sdbusplus::bus::match rather than coding your own strings.  There is even a propertiesChanged helper already there, but looks like you\u0027re wanting to do a path_namespace match instead of a fixed path.  Maybe you could add a new helper for this search.",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 656,
+        "endChar": 42
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb08e36_f1453924",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "What are the cases where we expect this to happen?  Should this be an exception?",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0fef711_f7db293b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "What if our configuration (sensor names) have hierarchy?  For example, multi-host configs.  This is a non-obvious requirement that we name all sensors with hostN_sensor rather than hostN/sensor.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68af808e_37fe6965",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "As mentioned elsewhere, I\u0027d prefer if these were fully formed dbus strings rather than carrying around a prefix ourselves.",
+      "range": {
+        "startLine": 678,
+        "startChar": 35,
+        "endLine": 678,
+        "endChar": 71
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f207a95_8cddeeb8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "if (!interfaceMap.contains(vsConfigIntf)) continue; ?",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc54e3d3_7d1095d0",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Use contains to better express intent.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15736ee_3a876a33",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Is there a particular interface we should be looking for here?  What happens if we end up with two interfaces with the property Units?  How do we know we got the right one?",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6961486c_be45c03b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "I prefer direct initialization but it looks like there is other code that follows this pattern.  Maybe you could quickly refactor them all.  You might change sensorDbusPath to be string by appending a `_s` to it.",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 51
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fa50169_9c02af82",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "This seems bad.  We\u0027re going to have a InterfaceAdded signal go out with the wrong unit and then we\u0027re going to send out a PropertyChanged signal with the right one?",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 68
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799cbded_e0ce913d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "auto doesn\u0027t work on this?",
+      "range": {
+        "startLine": 735,
+        "startChar": 12,
+        "endLine": 735,
+        "endChar": 61
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d37d1d96_7faae0c9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "Please use interfacesRemoved helper on this one.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee0f41d_0d9e57c1",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-04T11:49:57Z",
+      "side": 1,
+      "message": "There is a slight race condition here I think we need to deal with.  We got a signal for InterfacesAdded and then we spent time processing it and then added a watch for InterfacesRemoved.  It is possible that the interface has already been removed.  Ideally we\u0027d do a dbus query here to confirm the underlying config still exists, right?\n\nThis is complicated, so I am ok if you leave it as a comment + GH issue as it isn\u0027t super likely.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
