@@ -841,6 +841,30 @@
     },
     {
       "key": {
+        "uuid": "bac72806_5da983e1",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T21:49:13Z",
+      "side": 1,
+      "message": "Doh.  I saw so many string::find operations in this whole commit that I forgot that other types exist.  Yes, map::find is fine here.",
+      "parentUuid": "2a5a2181_cdbab97f",
+      "range": {
+        "startLine": 575,
+        "startChar": 15,
+        "endLine": 575,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db788dc5_1585d626",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
