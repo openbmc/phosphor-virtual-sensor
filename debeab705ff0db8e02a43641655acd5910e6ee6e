@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d98ba164_2c178780",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T14:23:30Z",
+      "side": 1,
+      "message": "Done.  Also https://gerrit.openbmc-project.xyz/c/openbmc/phosphor-logging/+/45645 .",
+      "parentUuid": "57cb4978_df91b064",
+      "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "742209c2_130a4075",
         "filename": "virtualSensor.hpp",
         "patchSetId": 3
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "BreakStringLiterals\u003dfalse ?\n\nWe do have the file and line information now though",
       "parentUuid": "4a5fc612_97407098",
+      "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e69af08_b9ba338d",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T14:23:30Z",
+      "side": 1,
+      "message": "I\u0027m thinking we should tackle that suggestion in docs if we want to pursue it.  It should be done across the board in all our repositories.",
+      "parentUuid": "4b5c63e6_0a851371",
       "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
