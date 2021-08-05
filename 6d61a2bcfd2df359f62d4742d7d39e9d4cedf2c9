@@ -236,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "4f2f17ab_a52e36c9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "I don\u0027t think contains works for you because you need the itr-\u003esecond?",
+      "parentUuid": "ea2615d8_d896cbc8",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 41
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ed60d4aa_75677b5d",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -675,6 +699,30 @@
     },
     {
       "key": {
+        "uuid": "7a99a6dc_6e000888",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "\u003e Do we need to use a find with an array? \n\nAh, right, these are integers.",
+      "parentUuid": "87440a1c_ff5a589f",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9d27adcd_c2866305",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -745,6 +793,30 @@
     },
     {
       "key": {
+        "uuid": "0fff5ee8_4d8e2cba",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "I think that Type is still too short.  Probably want a full match string match rather than find.",
+      "parentUuid": "2d15d431_d84c4cbf",
+      "range": {
+        "startLine": 575,
+        "startChar": 15,
+        "endLine": 575,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db788dc5_1585d626",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -797,6 +869,30 @@
       "side": 1,
       "message": "Yes they are short strings defined here: https://gerrit.openbmc-project.xyz/c/openbmc/entity-manager/+/45481/1/schemas/legacy.json\n\nI\u0027m not clear what you mean by \"full enumeration strings\". Do you mean \"xyz.openbmc_project.Sensor.Value.Unit.Joules\" instead of \"Joules\"?\n\nI will get rid of substr().",
       "parentUuid": "8ca4aa4f_02fc7029",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0545ed9_423360d1",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "\u003e Do you mean \"xyz.openbmc_project.Sensor.Value.Unit.Joules\" instead of \"Joules\"?\n\nYes, exactly.  Ideally EM would use the full names here instead of the short names.  If that can\u0027t be done now due to compatibility with dbus-sensors, we should open an issue and get that fixed.",
+      "parentUuid": "39a6a266_ed694396",
       "range": {
         "startLine": 623,
         "startChar": 0,
@@ -985,6 +1081,24 @@
     },
     {
       "key": {
+        "uuid": "0f008a3b_3d6c8847",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "It isn\u0027t a \"which host we are on\" question.  The same BMC manages N host compute cards.  Probably need a discussion with Ed, et. al.",
+      "parentUuid": "9688dae2_e58181fb",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68af808e_37fe6965",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -1020,6 +1134,30 @@
       "side": 1,
       "message": "So you\u0027d be happy with 2 separate strings (the interface and the interface.Thresholds) for each calculation type? I assume some getter functions would be preferred to a global map.",
       "parentUuid": "68af808e_37fe6965",
+      "range": {
+        "startLine": 678,
+        "startChar": 35,
+        "endLine": 678,
+        "endChar": 71
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3073b15a_cfcc4f56",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "I think I meant that \u0027calculationType\u0027 should be a fully formed dbus name?\n\nLike \"xyz.openbmc_project.Configuration.ModifiedMedian\"?  (I forget what values calcuationType is expected to contain.)",
+      "parentUuid": "0d661f15_6b845dd9",
       "range": {
         "startLine": 678,
         "startChar": 35,
@@ -1195,6 +1333,30 @@
       "side": 1,
       "message": "I don\u0027t understand why it is going out with the wrong unit?",
       "parentUuid": "0fa50169_9c02af82",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 68
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5c6499e_121ffd53",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T12:11:35Z",
+      "side": 1,
+      "message": "The `std::make_unique\u003cVirtualSensor\u003e` call is going to construct the object and send an IntefaceAdded signal for it as a side-effect.\n\nI think there are parameters you can pass to the constructor to say \"don\u0027t send the InterfaceAdded signal now but defer it until I call back later.  Alternatively there should be constructors that allow you to pass all the properties in right away.",
+      "parentUuid": "149fbf6c_de48b456",
       "range": {
         "startLine": 729,
         "startChar": 0,
