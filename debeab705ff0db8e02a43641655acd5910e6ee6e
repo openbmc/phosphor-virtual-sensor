@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "57cb4978_df91b064",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T11:38:57Z",
+      "side": 1,
+      "message": "Oops!  I should probably add some of these special ones to phosphor-logging to flag, right?",
+      "parentUuid": "fe846d9a_d6264028",
+      "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "742209c2_130a4075",
         "filename": "virtualSensor.hpp",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2021-08-05T05:20:03Z",
       "side": 1,
       "message": "Log strings should be the exception to any wrapping rules. Otherwise you can\u0027t `grep -F` for the format string you pull out of the journal.",
+      "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a5fc612_97407098",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-05T11:38:57Z",
+      "side": 1,
+      "message": "Unfortunately, clang doesn\u0027t make exceptions.",
+      "parentUuid": "742209c2_130a4075",
       "revId": "debeab705ff0db8e02a43641655acd5910e6ee6e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
