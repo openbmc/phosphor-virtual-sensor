@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "01714495_fdb663f8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b78521de_b295777b",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f52e4a2_419af0de",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -36,6 +60,24 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "Are we really looking for the calculation type to contain the string or be the string?  Can we get some comments here if it is expected to just contain the string?\n\nI wonder what you are expecting to happen when the interface value is \"modified-median\" and one of the types is \"median\", but happens to be earlier in calculationTypes than \"modified-median\".\n\n(Yes, the example above might not match your definitions exactly but the scenario is valid going forward as people add additional types.)",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2045e1bd_b95cba6e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Yeah, good point. It is supposed to contain the string. I could be less lazy and do an exact match on the suffix of the interface path?",
+      "parentUuid": "5f52e4a2_419af0de",
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "7328d843_375c77a3",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "366a1f9a_9b709a9b",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4abd8b19_2e3ac8ea",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -73,6 +133,24 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c58dbf6a_31f67237",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4abd8b19_2e3ac8ea",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "9f02f96e_1752bc7c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6773a31d_796b8546",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d37e633_82e9577a",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -104,6 +200,30 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "Prefer C++17 scoped-variable if statement syntax here.  Don\u0027t reuse the iterator variable.\n\n\u003e `attr(optional) if constexpr(optional) ( init-statement(optional) condition ) statement-true`\n\nhttps://en.cppreference.com/w/cpp/language/if",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 41
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea2615d8_d896cbc8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Can do that, but should I be using contains() here instead?",
+      "parentUuid": "0d37e633_82e9577a",
       "range": {
         "startLine": 277,
         "startChar": 0,
@@ -139,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "932a2886_3fd2bfc1",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed60d4aa_75677b5d",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 13
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6bfc992_f3db6d93",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -159,6 +303,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c80d3e3_0654164d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a6bfc992_f3db6d93",
+      "range": {
+        "startLine": 298,
+        "startChar": 67,
+        "endLine": 298,
+        "endChar": 73
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -185,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "a886b813_56f4d496",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bacd62ac_1faa03e9",
+      "range": {
+        "startLine": 301,
+        "startChar": 29,
+        "endLine": 301,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "099089ff_d0cfb01f",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -202,6 +394,24 @@
     },
     {
       "key": {
+        "uuid": "9303c5f9_6c2249b3",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "099089ff_d0cfb01f",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2009dc73_f02bd4cf",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -216,6 +426,24 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2285b3_0d6a361e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "😜",
+      "parentUuid": "2009dc73_f02bd4cf",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -259,6 +487,30 @@
     },
     {
       "key": {
+        "uuid": "2840582d_19b3e64a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Yeah, we don\u0027t need the second one.",
+      "parentUuid": "44c15509_0e61ab86",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 52
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5f6d9c0_17d0f6dc",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -282,6 +534,30 @@
     },
     {
       "key": {
+        "uuid": "a04926f9_98689a10",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5f6d9c0_17d0f6dc",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 410,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b65dd5b2_dd05b22d",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -302,6 +578,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea526b97_24cefe7e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "I guess it makes more sense to throw here than to return an empty string and throw on that.",
+      "parentUuid": "b65dd5b2_dd05b22d",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -339,6 +639,30 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "Can you use a map or array+std::find?",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87440a1c_ff5a589f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Yeah I guess so. Do we need to use a find with an array? \n threshold \u003d thresholdTypes[severity] \nseems nice and simple (with a prior check for severity \u003e\u003d array size).",
+      "parentUuid": "12f7b471_ff48a904",
       "range": {
         "startLine": 514,
         "startChar": 0,
@@ -397,6 +721,30 @@
     },
     {
       "key": {
+        "uuid": "2d15d431_d84c4cbf",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "I mislabeled the variable - it\u0027s a property map not interfaces. Will rename it.",
+      "parentUuid": "a3a0f212_2da2904a",
+      "range": {
+        "startLine": 575,
+        "startChar": 15,
+        "endLine": 575,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db788dc5_1585d626",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -437,6 +785,30 @@
     },
     {
       "key": {
+        "uuid": "39a6a266_ed694396",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Yes they are short strings defined here: https://gerrit.openbmc-project.xyz/c/openbmc/entity-manager/+/45481/1/schemas/legacy.json\n\nI\u0027m not clear what you mean by \"full enumeration strings\". Do you mean \"xyz.openbmc_project.Sensor.Value.Unit.Joules\" instead of \"Joules\"?\n\nI will get rid of substr().",
+      "parentUuid": "8ca4aa4f_02fc7029",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "56fa066a_ab58ea34",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -457,6 +829,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a93909_55ad28c0",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "It does. I\u0027m fresh to C++ from C so using auto is not instinctive yet! Thanks for your patience in reviewing this.",
+      "parentUuid": "56fa066a_ab58ea34",
+      "range": {
+        "startLine": 640,
+        "startChar": 4,
+        "endLine": 640,
+        "endChar": 53
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -483,6 +879,30 @@
     },
     {
       "key": {
+        "uuid": "300c6faf_5f86cf62",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "aff3081b_567ac50e",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 656,
+        "endChar": 42
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbb08e36_f1453924",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -494,6 +914,30 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "What are the cases where we expect this to happen?  Should this be an exception?",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09355cac_454bc5cf",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "We should at the very least log an error. I was avoiding throwing exceptions that I wasn\u0027t catching.",
+      "parentUuid": "fbb08e36_f1453924",
       "range": {
         "startLine": 666,
         "startChar": 0,
@@ -523,6 +967,24 @@
     },
     {
       "key": {
+        "uuid": "9688dae2_e58181fb",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Hmm. How is this dealt with elsewhere? I don\u0027t know enough to know how we would work out at runtime which host we are on (and so which sensor we should be using) in this case.",
+      "parentUuid": "f0fef711_f7db293b",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68af808e_37fe6965",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -534,6 +996,30 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "As mentioned elsewhere, I\u0027d prefer if these were fully formed dbus strings rather than carrying around a prefix ourselves.",
+      "range": {
+        "startLine": 678,
+        "startChar": 35,
+        "endLine": 678,
+        "endChar": 71
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d661f15_6b845dd9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "So you\u0027d be happy with 2 separate strings (the interface and the interface.Thresholds) for each calculation type? I assume some getter functions would be preferred to a global map.",
+      "parentUuid": "68af808e_37fe6965",
       "range": {
         "startLine": 678,
         "startChar": 35,
@@ -563,6 +1049,24 @@
     },
     {
       "key": {
+        "uuid": "16844d68_4689dba8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f207a95_8cddeeb8",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc54e3d3_7d1095d0",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -580,6 +1084,24 @@
     },
     {
       "key": {
+        "uuid": "7de851f8_5d187fe0",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc54e3d3_7d1095d0",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c15736ee_3a876a33",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -594,6 +1116,24 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4cc78a6_2c262663",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Good point, I\u0027ll add a check for the correct interface.",
+      "parentUuid": "c15736ee_3a876a33",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -643,6 +1183,30 @@
     },
     {
       "key": {
+        "uuid": "149fbf6c_de48b456",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "I don\u0027t understand why it is going out with the wrong unit?",
+      "parentUuid": "0fa50169_9c02af82",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 68
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "799cbded_e0ce913d",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -666,6 +1230,30 @@
     },
     {
       "key": {
+        "uuid": "7895e39f_0700b064",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "799cbded_e0ce913d",
+      "range": {
+        "startLine": 735,
+        "startChar": 12,
+        "endLine": 735,
+        "endChar": 61
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d37d1d96_7faae0c9",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -683,6 +1271,24 @@
     },
     {
       "key": {
+        "uuid": "00dde898_199bd799",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d37d1d96_7faae0c9",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ee0f41d_0d9e57c1",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -694,6 +1300,24 @@
       "writtenOn": "2021-08-04T11:49:57Z",
       "side": 1,
       "message": "There is a slight race condition here I think we need to deal with.  We got a signal for InterfacesAdded and then we spent time processing it and then added a watch for InterfacesRemoved.  It is possible that the interface has already been removed.  Ideally we\u0027d do a dbus query here to confirm the underlying config still exists, right?\n\nThis is complicated, so I am ok if you leave it as a comment + GH issue as it isn\u0027t super likely.",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f17b408_2936e7d9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-05T08:32:36Z",
+      "side": 1,
+      "message": "Good point. I\u0027ll leave this as a TODO for now and come back to it.",
+      "parentUuid": "1ee0f41d_0d9e57c1",
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
