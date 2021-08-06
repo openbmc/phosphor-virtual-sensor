@@ -303,8 +303,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
                 if (!sensorType.empty() && !name.empty())
                 {
-                    std::string objPath(sensorDbusPath);
-                    objPath += sensorType + "/" + name;
+                    auto objPath = sensorDbusPath + sensorType + "/" + name;
 
                     auto paramPtr =
                         std::make_unique<SensorParam>(bus, objPath, this);
@@ -785,8 +784,7 @@ void VirtualSensors::createVirtualSensors()
                             entry("TYPE=%s", name.c_str()));
                         continue;
                     }
-                    std::string objPath(sensorDbusPath);
-                    objPath += sensorType + "/" + name;
+                    auto objPath = sensorDbusPath + sensorType + "/" + name;
 
                     auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                         bus, objPath.c_str(), j, name);
