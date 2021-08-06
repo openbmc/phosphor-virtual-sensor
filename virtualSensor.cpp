@@ -398,6 +398,7 @@ void VirtualSensors::createVirtualSensors()
 
                     /* Initialize unit value for virtual sensor */
                     virtualSensorPtr->ValueIface::unit(unitMap[sensorType]);
+                    virtualSensorPtr->emit_object_added();
 
                     virtualSensorsMap.emplace(std::move(name),
                                               std::move(virtualSensorPtr));
