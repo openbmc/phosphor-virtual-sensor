@@ -82,7 +82,7 @@ class VirtualSensor : public ValueObject
      */
     VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
                   const Json& sensorConfig, const std::string& name) :
-        ValueObject(bus, objPath),
+        ValueObject(bus, objPath, true),
         bus(bus), name(name)
     {
         initVirtualSensor(sensorConfig, objPath);
