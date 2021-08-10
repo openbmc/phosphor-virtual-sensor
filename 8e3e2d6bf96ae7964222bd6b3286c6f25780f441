@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a403a4_94165636",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:12:43Z",
+      "side": 1,
+      "message": "Ed doesn\u0027t want this:\n\n\u003e The config files shouldn\u0027t have anything dbus specific in them, and the old mechanisms for this were better, and don\u0027t require changing everyones config.\n\nSo I\u0027ll change it back to a short string.",
+      "range": {
+        "startLine": 573,
+        "startChar": 8,
+        "endLine": 573,
+        "endChar": 29
+      },
+      "revId": "8e3e2d6bf96ae7964222bd6b3286c6f25780f441",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
