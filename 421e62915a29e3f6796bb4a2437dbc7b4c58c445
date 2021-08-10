@@ -16,6 +16,24 @@
       "revId": "421e62915a29e3f6796bb4a2437dbc7b4c58c445",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9dc3da9_56a77cd5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d776341_8096d2a6",
+      "revId": "421e62915a29e3f6796bb4a2437dbc7b4c58c445",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
