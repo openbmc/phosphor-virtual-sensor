@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "edd29971_3b0e6e05",
+        "filename": "thresholds.hpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c16c8b1_956d5d0c",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "8c843c48e96d0dba36bbc31ef5c994f7c985eb29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb87b0a6_d8967f67",
         "filename": "virtualSensor.cpp",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2021-08-04T11:58:42Z",
       "side": 1,
       "message": "Should you set defaultHysteresis in the else branch here?",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 13
+      },
+      "revId": "8c843c48e96d0dba36bbc31ef5c994f7c985eb29",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9b3b4ee_cee8fb82",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Below (eg lines 514-517) defaultHysteresis is used when there is no \u003cx\u003eHysteresis value for the \u003cx\u003e threshold so we don\u0027t need to do anything in the else branch.",
+      "parentUuid": "eb87b0a6_d8967f67",
       "range": {
         "startLine": 307,
         "startChar": 0,
