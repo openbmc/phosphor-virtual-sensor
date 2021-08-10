@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "bb66c76b_31668956",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2045e1bd_b95cba6e",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "366a1f9a_9b709a9b",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -257,6 +275,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89251724_713c80bb",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "True.",
+      "parentUuid": "4f2f17ab_a52e36c9",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 41
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -488,6 +530,24 @@
     },
     {
       "key": {
+        "uuid": "237cab31_ca4e22a8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Did something similar.",
+      "parentUuid": "626e2fd0_aea9ac72",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44c15509_0e61ab86",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -652,6 +712,30 @@
     },
     {
       "key": {
+        "uuid": "ea32a3b8_b658b080",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "I don\u0027t think it does. Am I missing something?",
+      "parentUuid": "fb0f432f_eb728ce0",
+      "range": {
+        "startLine": 516,
+        "startChar": 20,
+        "endLine": 516,
+        "endChar": 30
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12f7b471_ff48a904",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -723,6 +807,30 @@
     },
     {
       "key": {
+        "uuid": "8a4b33e4_59b69207",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7a99a6dc_6e000888",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d27adcd_c2866305",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -743,6 +851,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc134bfd_85c232fd",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Yeah I did start with InterfacesAdded and kept the name because I felt it represented why we are calling this function (because a relevant interface has been added) and that we don\u0027t actually expect the properties on this interface to change nor do anything if they did somehow change.\n\nBut seeing how other apps use PropertiesChanged to add sensors, I guess this is more confusing. Will change.",
+      "parentUuid": "9d27adcd_c2866305",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 55
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -865,6 +997,30 @@
     },
     {
       "key": {
+        "uuid": "13f490c5_9d4d3330",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bac72806_5da983e1",
+      "range": {
+        "startLine": 575,
+        "startChar": 15,
+        "endLine": 575,
+        "endChar": 38
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db788dc5_1585d626",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -879,6 +1035,24 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b46c53f_9f369080",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db788dc5_1585d626",
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -950,6 +1124,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99f32be0_ef08a392",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0545ed9_423360d1",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -1094,6 +1292,30 @@
     },
     {
       "key": {
+        "uuid": "cf79d022_1556168b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09355cac_454bc5cf",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 5
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0fef711_f7db293b",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -1215,6 +1437,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f580ff5a_8673046a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3073b15a_cfcc4f56",
+      "range": {
+        "startLine": 678,
+        "startChar": 35,
+        "endLine": 678,
+        "endChar": 71
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -1346,6 +1592,30 @@
     },
     {
       "key": {
+        "uuid": "ec0b4bf3_5d55d119",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6961486c_be45c03b",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 51
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fa50169_9c02af82",
         "filename": "virtualSensor.cpp",
         "patchSetId": 22
@@ -1414,6 +1684,30 @@
       "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13639a70_b339ed93",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-10T08:03:19Z",
+      "side": 1,
+      "message": "Ah right, will do that.",
+      "parentUuid": "f5c6499e_121ffd53",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 68
+      },
+      "revId": "6d61a2bcfd2df359f62d4742d7d39e9d4cedf2c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
