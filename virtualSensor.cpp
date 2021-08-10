@@ -16,7 +16,8 @@ static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto entityManagerBusName =
     "xyz.openbmc_project.EntityManager";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
-static constexpr std::array<const char*, 0> calculationIfaces = {};
+static constexpr std::array<const char*, 1> calculationIfaces = {
+    "xyz.openbmc_project.Configuration.ModifiedMedian"};
 
 using namespace phosphor::logging;
 
@@ -376,10 +377,29 @@ void VirtualSensor::setSensorValue(double value)
     ValueIface::value(value);
 }
 
-double VirtualSensor::calculateValue()
+double VirtualSensor::calculateValue(const std::string& calculation,
+                                     const VirtualSensor::ParamMap& paramMap)
 {
-    // Placeholder until calculation types are added
+    auto itr = std::find(calculationIfaces.begin(), calculationIfaces.end(),
+                         calculation);
+    if (itr == calculationIfaces.end())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    else if (calculation == "xyz.openbmc_project.Configuration.ModifiedMedian")
+    {
+        return calculateModifiedMedianValue(paramMap);
+    }
     return std::numeric_limits<double>::quiet_NaN();
+}
+
+bool VirtualSensor::sensorInRange(double value)
+{
+    if (value <= this->maxValidInput && value >= this->minValidInput)
+    {
+        return true;
+    }
+    return false;
 }
 
 void VirtualSensor::updateVirtualSensor()
@@ -400,8 +420,9 @@ void VirtualSensor::updateVirtualSensor()
     }
     auto itr =
         std::find(calculationIfaces.begin(), calculationIfaces.end(), exprStr);
-    auto val = (itr == calculationIfaces.end()) ? expression.value()
-                                                : calculateValue();
+    auto val = (itr == calculationIfaces.end())
+                   ? expression.value()
+                   : calculateValue(exprStr, paramMap);
 
     /* Set sensor value to dbus interface */
     setSensorValue(val);
@@ -417,6 +438,47 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
+}
+
+double VirtualSensor::calculateModifiedMedianValue(
+    const VirtualSensor::ParamMap& paramMap)
+{
+    std::vector<double> values;
+
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (!sensorInRange(var->ref()))
+            {
+                continue;
+            }
+            values.push_back(var->ref());
+        }
+    }
+
+    size_t size = values.size();
+    std::sort(values.begin(), values.end());
+    switch (size)
+    {
+        case 2:
+            /* Choose biggest value */
+            return values.at(1);
+        case 0:
+            return std::numeric_limits<double>::quiet_NaN();
+        default:
+            /* Choose median value */
+            if (size % 2 == 0)
+            {
+                // Average of the two middle values
+                return (values.at(size / 2) + values.at(size / 2 - 1)) / 2;
+            }
+            else
+            {
+                return values.at((size - 1) / 2);
+            }
+    }
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,
