@@ -122,6 +122,8 @@ class VirtualSensor : public ValueObject
     void setSensorValue(double value);
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+    /** @brief Check if sensor value is in valid range */
+    bool sensorInRange(double value);
 
     /** @brief Map of list of parameters */
     using ParamMap =
@@ -175,7 +177,11 @@ class VirtualSensor : public ValueObject
                            const std::string& calculationType);
 
     /** @brief Returns which calculation function or expression to use */
-    double calculateValue();
+    double calculateValue(const std::string& sensortype,
+                          const VirtualSensor::ParamMap& paramMap);
+    /** @brief Calculate median value from sensors */
+    double
+        calculateModifiedMedianValue(const VirtualSensor::ParamMap& paramMap);
     /** @brief create threshold objects from json config */
     void createThresholds(const Json& threshold, const std::string& objPath);
     /** @brief parse config from entity manager **/
