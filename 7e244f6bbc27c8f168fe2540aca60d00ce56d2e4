@@ -343,6 +343,30 @@
     },
     {
       "key": {
+        "uuid": "946aa27b_f41cb2f9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-11T02:41:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e919fbb6_d8476008",
+      "range": {
+        "startLine": 719,
+        "startChar": 12,
+        "endLine": 719,
+        "endChar": 23
+      },
+      "revId": "7e244f6bbc27c8f168fe2540aca60d00ce56d2e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4a00ceb_cb88cd74",
         "filename": "virtualSensor.cpp",
         "patchSetId": 11
