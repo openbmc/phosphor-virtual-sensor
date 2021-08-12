@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "efd0e18e_9835dd16",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "Yes it should be static. Didn\u0027t know about array size not being required anymore, will change.",
+      "parentUuid": "71816a02_227e1e70",
+      "range": {
+        "startLine": 141,
+        "startChar": 32,
+        "endLine": 141,
+        "endChar": 35
+      },
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f340e01_a6daa982",
         "filename": "virtualSensor.cpp",
         "patchSetId": 24
@@ -45,6 +69,30 @@
       "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50080084_bd8fdb26",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "You\u0027re right, have fixed.",
+      "parentUuid": "2f340e01_a6daa982",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 71
+      },
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d5547305_1b768fb3",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec481e8d_ce59c291",
+      "range": {
+        "startLine": 181,
+        "startChar": 49,
+        "endLine": 181,
+        "endChar": 57
+      },
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d222d036_b439793b",
         "filename": "virtualSensor.cpp",
         "patchSetId": 24
@@ -85,6 +157,24 @@
       "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a974eb7_92215276",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "Derp. Yes.",
+      "parentUuid": "d222d036_b439793b",
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "d24d7516_b5727f9f",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a6188e5_f0de5251",
+      "range": {
+        "startLine": 96,
+        "startChar": 34,
+        "endLine": 96,
+        "endChar": 38
+      },
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2e108a6_72442682",
         "filename": "virtualSensor.hpp",
         "patchSetId": 24
@@ -131,6 +245,30 @@
       "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e428bb17_4813101c",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-08-12T09:03:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2e108a6_72442682",
+      "range": {
+        "startLine": 115,
+        "startChar": 34,
+        "endLine": 115,
+        "endChar": 38
+      },
+      "revId": "c0b33a048b6e65d37f9c2f74d71b92f1ed5b29f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
