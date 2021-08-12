@@ -1,0 +1,8 @@
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Patrick Williams <patrick@stwcx.xyz>
+Submitted-by: Patrick Williams <patrick@stwcx.xyz>
+Submitted-at: Thu, 12 Aug 2021 11:50:20 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/phosphor-virtual-sensor/+/38700
+Project: openbmc/phosphor-virtual-sensor
+Branch: refs/heads/master
