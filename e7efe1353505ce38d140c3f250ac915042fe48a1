@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52d9f758_60516436",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-12T11:49:39Z",
+      "side": 1,
+      "message": "🎉",
+      "revId": "e7efe1353505ce38d140c3f250ac915042fe48a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "443d182a_71baf853",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-12T11:49:39Z",
+      "side": 1,
+      "message": "I\u0027m slightly surprised this compiles for a integral-type U (such as uint32), but it seems to...\n\nI like that this changed to a template.  I was going to suggest it but decided not to.  You could potentially go a step further and just call it \u0027getFromConfig\u0027 and handle types like std::string trivially as well.",
+      "revId": "e7efe1353505ce38d140c3f250ac915042fe48a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
