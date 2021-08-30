@@ -6,7 +6,6 @@
 #include <sdeventplus/event.hpp>
 
 #include <fstream>
-#include <iostream>
 
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
@@ -57,7 +56,7 @@ void printParams(const VirtualSensor::ParamMap& paramMap)
         const auto& p1 = p.first;
         const auto& p2 = p.second;
         auto val = p2->getParamValue();
-        std::cout << p1 << " = " << val << "\n";
+        debug("Parameter: {PARAM} = {VALUE}", "PARAM", p1, "VALUE", val);
     }
 }
 
@@ -439,7 +438,7 @@ void VirtualSensor::updateVirtualSensor()
 
     if (DEBUG)
     {
-        std::cout << "Sensor value is " << val << "\n";
+        debug("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
     }
 
     /* Check sensor thresholds and log required message */
@@ -811,7 +810,7 @@ void VirtualSensors::createVirtualSensors()
     // print values
     if (DEBUG)
     {
-        std::cout << "Config json data:\n" << data << "\n\n";
+        debug("JSON: {JSON}", "JSON", data.dump());
     }
 
     /* Get virtual sensors  config data */
