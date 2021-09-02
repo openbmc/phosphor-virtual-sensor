@@ -30,7 +30,7 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
         auto msg = bus.call(mapper);
         msg.read(resp);
     }
-    catch (const sdbusplus::exception::SdBusError& ex)
+    catch (const sdbusplus::exception::exception& ex)
     {
         if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
                                          Error::ResourceNotFound::errName))
@@ -70,7 +70,7 @@ T getDbusProperty(sdbusplus::bus::bus& bus, const std::string& service,
         auto msg = bus.call(method);
         msg.read(value);
     }
-    catch (const sdbusplus::exception::SdBusError& ex)
+    catch (const sdbusplus::exception::exception& ex)
     {
         return std::numeric_limits<T>::quiet_NaN();
     }
