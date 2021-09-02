@@ -590,7 +590,7 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
         auto reply = bus.call(method);
         reply.read(objects);
     }
-    catch (const sdbusplus::exception::SdBusError& ex)
+    catch (const sdbusplus::exception::exception& ex)
     {
         // If entity manager isn't running yet, keep going.
         if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
