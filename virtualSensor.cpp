@@ -794,7 +794,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
              * exists */
             this->matches.emplace_back(std::move(matchOnRemove));
         }
-        catch (std::invalid_argument& ia)
+        catch (const std::invalid_argument& ia)
         {
             error("Failed to set up virtual sensor: {ERROR}", "ERROR", ia);
         }
