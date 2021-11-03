@@ -134,20 +134,20 @@ bool isCalculationType(const std::string& interface)
 }
 
 const std::string getThresholdType(const std::string& direction,
-                                   uint64_t severity)
+                                   const std::string& severity)
 {
-    std::string threshold;
     std::string suffix;
     static const std::array thresholdTypes{"Warning", "Critical",
                                            "PerformanceLoss", "SoftShutdown",
                                            "HardShutdown"};
 
-    if (severity >= thresholdTypes.size())
+    auto itr =
+        std::find(thresholdTypes.begin(), thresholdTypes.end(), severity);
+    if (itr == thresholdTypes.end())
     {
         throw std::invalid_argument(
             "Invalid threshold severity specified in entity manager");
     }
-    threshold = thresholdTypes[severity];
 
     if (direction == "less than")
     {
@@ -162,19 +162,21 @@ const std::string getThresholdType(const std::string& direction,
         throw std::invalid_argument(
             "Invalid threshold direction specified in entity manager");
     }
-    return threshold + suffix;
+    return severity + suffix;
 }
 
 void parseThresholds(Json& thresholds, const PropertyMap& propertyMap)
 {
-    std::string direction;
+    std::string direction, severity;
 
-    auto severity =
-        getNumberFromConfig<uint64_t>(propertyMap, "Severity", true);
     auto value = getNumberFromConfig<double>(propertyMap, "Value", true);
 
-    auto itr = propertyMap.find("Direction");
-    if (itr != propertyMap.end())
+    if (auto itr = propertyMap.find("Severity"); itr != propertyMap.end())
+    {
+        severity = std::get<std::string>(itr->second);
+    }
+
+    if (auto itr = propertyMap.find("Direction"); itr != propertyMap.end())
     {
         direction = std::get<std::string>(itr->second);
     }
