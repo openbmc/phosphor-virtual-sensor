@@ -28,14 +28,4 @@ configurations to have different virtual sensors for each configuration.
 
 The virtual sensor configuration in entity manager follows a different format
 to the JSON in virtual_sensor_config.json (specified in
-entity-manager/schemas/VirtualSensor.json). In particular, the format for
-Thresholds is different. The following table shows the severity fields
-that correspond to a particular threshold.
-
-Threshold       | Severity
-----------------|-----------
-Warning         |     0
-Critical        |     1
-PerformanceLoss |     2
-SoftShutdown    |     3
-HardShutdown    |     4
+entity-manager/schemas/VirtualSensor.json).
