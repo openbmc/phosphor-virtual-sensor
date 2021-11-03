@@ -134,20 +134,9 @@ bool isCalculationType(const std::string& interface)
 }
 
 const std::string getThresholdType(const std::string& direction,
-                                   uint64_t severity)
+                                   const std::string& severity)
 {
-    std::string threshold;
     std::string suffix;
-    static const std::array thresholdTypes{"Warning", "Critical",
-                                           "PerformanceLoss", "SoftShutdown",
-                                           "HardShutdown"};
-
-    if (severity >= thresholdTypes.size())
-    {
-        throw std::invalid_argument(
-            "Invalid threshold severity specified in entity manager");
-    }
-    threshold = thresholdTypes[severity];
 
     if (direction == "less than")
     {
@@ -162,19 +151,54 @@ const std::string getThresholdType(const std::string& direction,
         throw std::invalid_argument(
             "Invalid threshold direction specified in entity manager");
     }
-    return threshold + suffix;
+    return severity + suffix;
+}
+
+std::string getSeverityField(const PropertyMap& propertyMap)
+{
+    static const std::array thresholdTypes{"Warning", "Critical",
+                                           "PerformanceLoss", "SoftShutdown",
+                                           "HardShutdown"};
+
+    std::string severity;
+    if (auto itr = propertyMap.find("Severity"); itr != propertyMap.end())
+    {
+        if (std::holds_alternative<std::string>(itr->second))
+        {
+            severity = std::get<std::string>(itr->second);
+            auto itr = std::find(thresholdTypes.begin(), thresholdTypes.end(),
+                                 severity);
+            if (itr == thresholdTypes.end())
+            {
+                throw std::invalid_argument(
+                    "Invalid threshold severity specified in entity manager");
+            }
+        }
+        else
+        {
+            /* Severity should be a string, but can be an unsigned int */
+            auto sev =
+                getNumberFromConfig<uint64_t>(propertyMap, "Severity", true);
+            if (sev >= thresholdTypes.size())
+            {
+                throw std::invalid_argument(
+                    "Invalid threshold severity specified in entity manager");
+            }
+            severity = thresholdTypes[sev];
+        }
+    }
+    return severity;
 }
 
 void parseThresholds(Json& thresholds, const PropertyMap& propertyMap)
 {
     std::string direction;
 
-    auto severity =
-        getNumberFromConfig<uint64_t>(propertyMap, "Severity", true);
     auto value = getNumberFromConfig<double>(propertyMap, "Value", true);
 
-    auto itr = propertyMap.find("Direction");
-    if (itr != propertyMap.end())
+    auto severity = getSeverityField(propertyMap);
+
+    if (auto itr = propertyMap.find("Direction"); itr != propertyMap.end())
     {
         direction = std::get<std::string>(itr->second);
     }
