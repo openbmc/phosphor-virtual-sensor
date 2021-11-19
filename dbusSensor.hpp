@@ -1,7 +1,7 @@
 #include "dbusUtils.hpp"
 
 #include <sdbusplus/bus.hpp>
-#include <sdbusplus/server.hpp>
+#include <sdbusplus/bus/match.hpp>
 
 const char* sensorIntf = "xyz.openbmc_project.Sensor.Value";
 
@@ -59,5 +59,5 @@ class DbusSensor
     /** @brief service name for the sensor daemon */
     std::string servName;
     /** @brief signal for sensor value change */
-    sdbusplus::server::match::match signal;
+    sdbusplus::bus::match_t signal;
 };
