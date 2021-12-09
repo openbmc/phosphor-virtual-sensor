@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ebe083a_00792091",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-09T15:05:38Z",
+      "side": 1,
+      "message": "if (0 \u003d\u003d std::ranges::count(threadholdTypes, severity))\n{\n    throw ...\n}",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 44
+      },
+      "revId": "cd91b00e2143fe15e5eb013548f75a9f39e52870",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "443f3708_514c8ef0",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-09T15:05:38Z",
+      "side": 1,
+      "message": "severity \u003d thresholdTypes.get(getNumberFromConfig\u003csize_t\u003e(propertyMap, \"Severity\", true));\n\nstd::array::get already does bounds checking.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 43
+      },
+      "revId": "cd91b00e2143fe15e5eb013548f75a9f39e52870",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
