@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd851a39_a1a6d11e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-10T15:20:27Z",
+      "side": 1,
+      "message": "You need to be explicit about using `thresholdTypes.at(sev)` though.  subscript access isn\u0027t bounds checked; get access is.\n\nhttps://en.cppreference.com/w/cpp/container/array\n\nI guess I wrote \u0027get\u0027 instead of \u0027at\u0027 in my previous review, which isn\u0027t even a valid function on arrays.  Apologies.",
+      "revId": "215bc85023d5abcffca42cc9428f8e2e4f3d4190",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
