@@ -34,6 +34,24 @@
       "revId": "215bc85023d5abcffca42cc9428f8e2e4f3d4190",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaaf6355_898172ff",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-14T11:34:30Z",
+      "side": 1,
+      "message": "Ah, ok. A catch around the bounds check with a rethrow of a different type is wasteful. Go ahead and do your own bounds check but leave a comment as to why.",
+      "parentUuid": "fb7391df_bc38699d",
+      "revId": "215bc85023d5abcffca42cc9428f8e2e4f3d4190",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
