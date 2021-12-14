@@ -16,6 +16,24 @@
       "revId": "215bc85023d5abcffca42cc9428f8e2e4f3d4190",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb7391df_bc38699d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-12-14T06:48:35Z",
+      "side": 1,
+      "message": "Ah good point. I didn\u0027t really stop to think when replying last time.\n\nI was going with an approach of checking if all input is valid, if it isn\u0027t throwing an invalid argument type exception, and catching those when creating a sensor. As we probably don\u0027t want to crash the whole app from an invalid config, I should add in a catch for out of bounds accesses. \n\nI think it makes more sense to either check if its within range or catch an out of range exception here and then throw an invalid argument exception (that is caught when creating the sensor)-- rather than catching an out of bounds exception elsewhere. What do you think?",
+      "parentUuid": "bd851a39_a1a6d11e",
+      "revId": "215bc85023d5abcffca42cc9428f8e2e4f3d4190",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
