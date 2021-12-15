@@ -3,21 +3,24 @@
 phosphor-virtual-sensor reads in virtual_sensor_config.json
 There are two types of data in this file:
 
-#### 1) virtual sensor configuration information
+## virtual sensor configuration information
+
 See virtual_sensor_config.json in this repository for an example. Sensors added
 this way can use any expression that is accepted by exprtk.
 
-#### 2) information to get a virtual sensor configuraton from D-Bus
+## information to get a virtual sensor configuraton from D-Bus
+
 For example:
+
+```json
+{
+  "Desc": {
+    "Config": "D-Bus",
+    "Type": "modifiedMedian"
+  }
+}
 ```
-    {
-    "Desc":
-        {
-            "Config" : "D-Bus",
-            "Type" : "modifiedMedian"
-        }
-    }
-```
+
 Sensors added this way can only use a set of restricted calculations. At this
 stage the only type supported is modifiedMedian.
 
