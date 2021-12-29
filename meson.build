@@ -93,4 +93,4 @@ configure_file(
   output: 'phosphor-virtual-sensor.service',
   configuration: conf_data,
   install: true,
-  install_dir: systemd.get_pkgconfig_variable('systemdsystemunitdir'))
+  install_dir: systemd.get_variable(pkgconfig: 'systemdsystemunitdir'))
