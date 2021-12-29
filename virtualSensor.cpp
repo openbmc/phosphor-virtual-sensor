@@ -331,13 +331,13 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
                 if (!sensorType.empty() && !name.empty())
                 {
-                    auto objPath = sensorDbusPath + sensorType + "/" + name;
+                    auto path = sensorDbusPath + sensorType + "/" + name;
 
                     auto paramPtr =
-                        std::make_unique<SensorParam>(bus, objPath, this);
-                    std::string name = j["ParamName"];
-                    symbols.create_variable(name);
-                    paramMap.emplace(std::move(name), std::move(paramPtr));
+                        std::make_unique<SensorParam>(bus, path, this);
+                    std::string paramName = j["ParamName"];
+                    symbols.create_variable(paramName);
+                    paramMap.emplace(std::move(paramName), std::move(paramPtr));
                 }
             }
         }
@@ -646,7 +646,7 @@ void VirtualSensors::propertiesChanged(sdbusplus::message::message& msg)
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */
-Json VirtualSensors::parseConfigFile(const std::string configFile)
+Json VirtualSensors::parseConfigFile(const std::string& configFile)
 {
     std::ifstream jsonFile(configFile);
     if (!jsonFile.is_open())

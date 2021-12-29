@@ -24,9 +24,7 @@ class DbusSensor
             bus,
             sdbusplus::bus::match::rules::propertiesChanged(path, sensorIntf),
             handleDbusSignal, ctx)
-    {
-        servName = getService(bus, path, sensorIntf);
-    }
+    {}
 
     /** @brief Get sensor value property from D-bus interface */
     double getSensorValue()

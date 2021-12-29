@@ -66,7 +66,7 @@ class SensorParam
      * @param[in] path    - The Dbus path of sensor
      * @param[in] ctx     - sensor context for update
      */
-    SensorParam(sdbusplus::bus::bus& bus, std::string path, void* ctx) :
+    SensorParam(sdbusplus::bus::bus& bus, const std::string& path, void* ctx) :
         dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
     {}
@@ -268,7 +268,7 @@ class VirtualSensors
     /** @brief Get virual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
-    Json parseConfigFile(const std::string configFile);
+    Json parseConfigFile(const std::string& configFile);
 
     /** @brief Matches for virtual sensors */
     std::vector<std::unique_ptr<sdbusplus::bus::match::match>> matches;
