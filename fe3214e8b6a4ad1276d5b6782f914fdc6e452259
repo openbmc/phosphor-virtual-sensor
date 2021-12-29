@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecee8823_f41b4e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000271
+      },
+      "writtenOn": "2021-12-29T20:29:46Z",
+      "side": 1,
+      "message": "I don\u0027t have any idea about meson 0.57 change. But if you have tested this then I am fine with it.",
+      "revId": "fe3214e8b6a4ad1276d5b6782f914fdc6e452259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
