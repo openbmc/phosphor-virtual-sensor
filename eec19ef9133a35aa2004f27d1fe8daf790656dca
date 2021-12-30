@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd70daff_6f4feb20",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-30T16:05:57Z",
+      "side": 1,
+      "message": "\u003e The servName variable is only used in the getSensorValue method and it has been judged whether it is empty, so the initialization here is redundant and can be deleted.\n\nI don\u0027t understand what you are saying.  There is still code in getSensorValue that uses this, right?  How can we just not initialize a member variable, which is used, and expect the code to continue along fine?\n\nI think you\u0027re saying we defer initialization of this value anyhow until the first sensor read.  In that case, lets initialize line 56 and 58 with:\n\n    std::string servName{};",
+      "parentUuid": "d8206ab1_df619d2b",
+      "revId": "eec19ef9133a35aa2004f27d1fe8daf790656dca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c45dbd9f_74d43b39",
