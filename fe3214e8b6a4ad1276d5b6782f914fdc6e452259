@@ -16,6 +16,24 @@
       "message": "I don\u0027t have any idea about meson 0.57 change. But if you have tested this then I am fine with it.",
       "revId": "fe3214e8b6a4ad1276d5b6782f914fdc6e452259",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d170da35_7a31883c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-30T00:25:43Z",
+      "side": 1,
+      "message": "Yes, I tested it and it works fine.\nrefer: https://mesonbuild.com/Reference-manual_returned_dep.html#depget_pkgconfig_variable",
+      "parentUuid": "ecee8823_f41b4e52",
+      "revId": "fe3214e8b6a4ad1276d5b6782f914fdc6e452259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
