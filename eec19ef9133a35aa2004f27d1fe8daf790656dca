@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "50e468ed_6ed1f1bc",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-31T01:21:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd70daff_6f4feb20",
+      "revId": "eec19ef9133a35aa2004f27d1fe8daf790656dca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c45dbd9f_74d43b39",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
