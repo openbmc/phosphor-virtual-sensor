@@ -39,25 +39,10 @@ executable(
         'virtualSensor.cpp',
     ],
     dependencies: [
-        dependency(
-            'phosphor-logging',
-            fallback: ['phosphor-logging', 'phosphor_logging_dep'],
-        ),
-        dependency(
-            'sdbusplus',
-            fallback: ['sdbusplus', 'sdbusplus_dep' ],
-        ),
-        dependency(
-            'phosphor-dbus-interfaces',
-            fallback: [
-                'phosphor-dbus-interfaces',
-                'phosphor_dbus_interfaces_dep'
-            ],
-        ),
-        dependency(
-            'sdeventplus',
-            fallback: ['sdeventplus', 'sdeventplus_dep'],
-        ),
+        dependency('phosphor-dbus-interfaces'),
+        dependency('phosphor-logging'),
+        dependency('sdbusplus'),
+        dependency('sdeventplus'),
         exprtk,
         nlohmann_json,
     ],
