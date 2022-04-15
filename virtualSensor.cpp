@@ -292,7 +292,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     static constexpr auto exprKey = "Expression";
     if (sensorConfig.contains(exprKey))
     {
-        auto ref = sensorConfig.at(exprKey);
+        auto& ref = sensorConfig.at(exprKey);
         if (ref.is_array())
         {
             exprStr = std::string{};
