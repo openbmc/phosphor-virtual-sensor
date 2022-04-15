@@ -289,7 +289,23 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     }
 
     /* Get expression string */
-    exprStr = sensorConfig.value("Expression", "");
+    static constexpr auto exprKey = "Expression";
+    if (sensorConfig.contains(exprKey))
+    {
+        auto ref = sensorConfig.at(exprKey);
+        if (ref.is_array())
+        {
+            exprStr = std::string{};
+            for (auto& s : ref)
+            {
+                exprStr += s;
+            }
+        }
+        else if (ref.is_string())
+        {
+            exprStr = std::string{ref};
+        }
+    }
 
     /* Get all the parameter listed in configuration */
     auto params = sensorConfig.value("Params", empty);
