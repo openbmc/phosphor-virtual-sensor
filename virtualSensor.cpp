@@ -108,7 +108,8 @@ struct VariantToNumber
 
 template <typename U>
 U getNumberFromConfig(const PropertyMap& map, const std::string& name,
-                      bool required)
+                      bool required,
+                      U defaultValue = std::numeric_limits<U>::quiet_NaN())
 {
     if (auto itr = map.find(name); itr != map.end())
     {
@@ -119,7 +120,7 @@ U getNumberFromConfig(const PropertyMap& map, const std::string& name,
         error("Required field {NAME} missing in config", "NAME", name);
         throw std::invalid_argument("Required field missing in config");
     }
-    return std::numeric_limits<U>::quiet_NaN();
+    return defaultValue;
 }
 
 bool isCalculationType(const std::string& interface)
@@ -246,9 +247,11 @@ void VirtualSensor::parseConfigInterface(const PropertyMap& propertyMap,
     ValueIface::minValue(
         getNumberFromConfig<double>(propertyMap, "MinValue", false));
     maxValidInput =
-        getNumberFromConfig<double>(propertyMap, "MaxValidInput", false);
+        getNumberFromConfig<double>(propertyMap, "MaxValidInput", false,
+                                    std::numeric_limits<double>::infinity());
     minValidInput =
-        getNumberFromConfig<double>(propertyMap, "MinValidInput", false);
+        getNumberFromConfig<double>(propertyMap, "MinValidInput", false,
+                                    -std::numeric_limits<double>::infinity());
 }
 
 void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
