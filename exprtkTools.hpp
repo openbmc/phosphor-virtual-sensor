@@ -37,3 +37,35 @@
 
 /* include main exprtk header library */
 #include <exprtk.hpp>
+
+#include <cmath>
+#include <limits>
+#include <numeric>
+
+/* For floating types. (float, double, long double et al) */
+template <typename T>
+struct FuncMaxIgnoreNaN : public exprtk::ivararg_function<T>
+{
+    FuncMaxIgnoreNaN()
+    {
+        exprtk::set_min_num_args(*this, 2);
+        exprtk::set_max_num_args(*this, 255);
+    }
+
+    inline T operator()(const std::vector<T>& argList)
+    {
+        return std::reduce(std::begin(argList), std::end(argList),
+                           std::numeric_limits<double>::quiet_NaN(),
+                           [](auto a, auto b) {
+            if (std::isnan(b))
+            {
+                return a;
+            }
+            if (std::isnan(a))
+            {
+                return b;
+            }
+            return std::max(a, b);
+        });
+    }
+};
