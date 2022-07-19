@@ -169,6 +169,8 @@ class VirtualSensor : public ValueObject
     /** @brief The association interface object */
     std::unique_ptr<AssociationObject> associationIface;
 
+    static FuncMaxIgnoreNaN<double> funcMaxIgnoreNaN;
+
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
      */

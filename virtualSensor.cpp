@@ -44,6 +44,8 @@ namespace phosphor
 namespace virtualSensor
 {
 
+FuncMaxIgnoreNaN<double> VirtualSensor::funcMaxIgnoreNaN;
+
 void printParams(const VirtualSensor::ParamMap& paramMap)
 {
     for (const auto& p : paramMap)
@@ -364,6 +366,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
     symbols.add_constants();
     symbols.add_package(vecopsPackage);
+    symbols.add_function("maxIgnoreNaN", funcMaxIgnoreNaN);
+
     expression.register_symbol_table(symbols);
 
     /* parser from exprtk */
