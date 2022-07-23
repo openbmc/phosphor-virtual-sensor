@@ -18,7 +18,7 @@ class DbusSensor
      * @param[in] bus     - Handle to system dbus
      * @param[in] path    - The Dbus path of sensor
      */
-    DbusSensor(sdbusplus::bus::bus& bus, const std::string& path, void* ctx) :
+    DbusSensor(sdbusplus::bus_t& bus, const std::string& path, void* ctx) :
         bus(bus), path(path),
         signal(
             bus,
@@ -51,7 +51,7 @@ class DbusSensor
 
   private:
     /** @brief sdbusplus bus client connection. */
-    sdbusplus::bus::bus& bus;
+    sdbusplus::bus_t& bus;
     /** @brief complete path for sensor */
     std::string path{};
     /** @brief service name for the sensor daemon */

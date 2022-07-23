@@ -32,7 +32,7 @@ using ManagedObjectType =
 using Json = nlohmann::json;
 
 template <typename... T>
-using ServerObject = typename sdbusplus::server::object::object<T...>;
+using ServerObject = typename sdbusplus::server::object_t<T...>;
 
 using ValueIface = sdbusplus::xyz::openbmc_project::Sensor::server::Value;
 using ValueObject = ServerObject<ValueIface>;
@@ -66,7 +66,7 @@ class SensorParam
      * @param[in] path    - The Dbus path of sensor
      * @param[in] ctx     - sensor context for update
      */
-    SensorParam(sdbusplus::bus::bus& bus, const std::string& path, void* ctx) :
+    SensorParam(sdbusplus::bus_t& bus, const std::string& path, void* ctx) :
         dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
     {}
@@ -92,7 +92,7 @@ class VirtualSensor : public ValueObject
      * @param[in] objPath      - The Dbus path of sensor
      * @param[in] sensorConfig - Json object for sensor config
      */
-    VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
+    VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const Json& sensorConfig, const std::string& name) :
         ValueObject(bus, objPath, action::defer_emit),
         bus(bus), name(name)
@@ -110,7 +110,7 @@ class VirtualSensor : public ValueObject
      * @param[in] calcType     - Calculation used to calculate sensor value
      *
      */
-    VirtualSensor(sdbusplus::bus::bus& bus, const char* objPath,
+    VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const InterfaceMap& ifacemap, const std::string& name,
                   const std::string& type, const std::string& calculationType) :
         ValueObject(bus, objPath, action::defer_emit),
@@ -133,7 +133,7 @@ class VirtualSensor : public ValueObject
 
   private:
     /** @brief sdbusplus bus client connection. */
-    sdbusplus::bus::bus& bus;
+    sdbusplus::bus_t& bus;
     /** @brief name of sensor */
     std::string name;
     /** @brief Expression string for virtual sensor value calculations */
@@ -255,23 +255,23 @@ class VirtualSensors
      *
      * @param[in] bus     - Handle to system dbus
      */
-    explicit VirtualSensors(sdbusplus::bus::bus& bus) : bus(bus)
+    explicit VirtualSensors(sdbusplus::bus_t& bus) : bus(bus)
     {
         createVirtualSensors();
     }
     /** @brief Calls createVirtualSensor when interface added */
-    void propertiesChanged(sdbusplus::message::message& msg);
+    void propertiesChanged(sdbusplus::message_t& msg);
 
   private:
     /** @brief sdbusplus bus client connection. */
-    sdbusplus::bus::bus& bus;
+    sdbusplus::bus_t& bus;
     /** @brief Get virual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
     Json parseConfigFile(const std::string& configFile);
 
     /** @brief Matches for virtual sensors */
-    std::vector<std::unique_ptr<sdbusplus::bus::match::match>> matches;
+    std::vector<std::unique_ptr<sdbusplus::bus::match_t>> matches;
     /** @brief Map of the object VirtualSensor */
     std::unordered_map<std::string, std::unique_ptr<VirtualSensor>>
         virtualSensorsMap;

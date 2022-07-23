@@ -10,7 +10,7 @@ namespace phosphor::virtualSensor
 {
 
 template <typename... T>
-using ServerObject = typename sdbusplus::server::object::object<T...>;
+using ServerObject = typename sdbusplus::server::object_t<T...>;
 
 namespace threshold_ns =
     sdbusplus::xyz::openbmc_project::Sensor::Threshold::server;

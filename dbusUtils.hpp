@@ -13,7 +13,7 @@ using namespace sdbusplus::xyz::openbmc_project::Common::Error;
 
 using Value = std::variant<int64_t, double, std::string, bool>;
 
-std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
+std::string getService(sdbusplus::bus_t& bus, const std::string& path,
                        const char* intf)
 {
     /* Get mapper object for sensor path */
@@ -30,7 +30,7 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
         auto msg = bus.call(mapper);
         msg.read(resp);
     }
-    catch (const sdbusplus::exception::exception& ex)
+    catch (const sdbusplus::exception_t& ex)
     {
         if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
                                          Error::ResourceNotFound::errName))
@@ -53,7 +53,7 @@ std::string getService(sdbusplus::bus::bus& bus, const std::string& path,
 
 template <typename T>
 
-T getDbusProperty(sdbusplus::bus::bus& bus, const std::string& service,
+T getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
                   const std::string& path, const std::string& intf,
                   const std::string& property)
 {
@@ -70,7 +70,7 @@ T getDbusProperty(sdbusplus::bus::bus& bus, const std::string& service,
         auto msg = bus.call(method);
         msg.read(value);
     }
-    catch (const sdbusplus::exception::exception& ex)
+    catch (const sdbusplus::exception_t& ex)
     {
         return std::numeric_limits<T>::quiet_NaN();
     }

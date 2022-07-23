@@ -26,7 +26,7 @@ int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
         throw std::runtime_error("Invalid match");
     }
 
-    auto sdbpMsg = sdbusplus::message::message(msg);
+    auto sdbpMsg = sdbusplus::message_t(msg);
     std::string msgIfce;
     std::map<std::string, std::variant<int64_t, double, bool>> msgData;
 
@@ -633,7 +633,7 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
         auto reply = bus.call(method);
         reply.read(objects);
     }
-    catch (const sdbusplus::exception::exception& ex)
+    catch (const sdbusplus::exception_t& ex)
     {
         // If entity manager isn't running yet, keep going.
         if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
@@ -646,7 +646,7 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
     return objects;
 }
 
-void VirtualSensors::propertiesChanged(sdbusplus::message::message& msg)
+void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
 {
     std::string path;
     PropertyMap properties;
@@ -720,7 +720,7 @@ void VirtualSensors::setupMatches()
     }
 
     /* Setup matches */
-    auto eventHandler = [this](sdbusplus::message::message& message) {
+    auto eventHandler = [this](sdbusplus::message_t& message) {
         if (message.is_method_error())
         {
             error("Callback method error");
@@ -731,7 +731,7 @@ void VirtualSensors::setupMatches()
 
     for (const char* iface : calculationIfaces)
     {
-        auto match = std::make_unique<sdbusplus::bus::match::match>(
+        auto match = std::make_unique<sdbusplus::bus::match_t>(
             bus,
             sdbusplus::bus::match::rules::propertiesChangedNamespace(
                 "/xyz/openbmc_project/inventory", iface),
@@ -815,7 +815,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
             /* Setup match for interfaces removed */
             auto intfRemoved = [this, objpath,
-                                name](sdbusplus::message::message& message) {
+                                name](sdbusplus::message_t& message) {
                 if (!virtualSensorsMap.contains(name))
                 {
                     return;
@@ -828,7 +828,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
                     virtualSensorsMap.erase(name);
                 }
             };
-            auto matchOnRemove = std::make_unique<sdbusplus::bus::match::match>(
+            auto matchOnRemove = std::make_unique<sdbusplus::bus::match_t>(
                 bus,
                 sdbusplus::bus::match::rules::interfacesRemoved() +
                     sdbusplus::bus::match::rules::argNpath(0, objpath),
@@ -950,7 +950,7 @@ int main()
     auto bus = sdbusplus::bus::new_default();
 
     // Add the ObjectManager interface
-    sdbusplus::server::manager::manager objManager(bus, "/");
+    sdbusplus::server::manager_t objManager(bus, "/");
 
     // Create an virtual sensors object
     phosphor::virtualSensor::VirtualSensors virtualSensors(bus);
