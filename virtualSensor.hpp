@@ -251,6 +251,10 @@ class VirtualSensor : public ValueObject
             threshold->alarmLow(!alarmLow);
         }
     }
+
+    /** @brief Create Association from path*/
+    void createAssociation(sdbusplus::bus::bus& bus, const std::string& objPath,
+                           const std::string& path);
 };
 
 class VirtualSensors
