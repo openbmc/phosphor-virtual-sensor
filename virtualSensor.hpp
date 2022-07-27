@@ -108,13 +108,15 @@ class VirtualSensor : public ValueObject
      * @param[in] name         - Virtual sensor name
      * @param[in] type         - Virtual sensor type/unit
      * @param[in] calcType     - Calculation used to calculate sensor value
+     * @param[in] entityPath         - Virtual sensor path in entityManager Dbus
      *
      */
     VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const InterfaceMap& ifacemap, const std::string& name,
-                  const std::string& type, const std::string& calculationType) :
+                  const std::string& type, const std::string& calculationType,
+                  const std::string& entityPath = "") :
         ValueObject(bus, objPath, action::defer_emit),
-        bus(bus), name(name)
+        bus(bus), name(name), entityPath(entityPath)
     {
         initVirtualSensor(ifacemap, objPath, type, calculationType);
     }
@@ -136,6 +138,11 @@ class VirtualSensor : public ValueObject
     sdbusplus::bus_t& bus;
     /** @brief name of sensor */
     std::string name;
+
+    /** @brief Virtual sensor path in entityManager Dbus.
+     * This value is used to set thresholds/create association
+     */
+    std::string entityPath;
     /** @brief Expression string for virtual sensor value calculations */
     std::string exprStr;
     /** @brief symbol table from exprtk */
@@ -243,6 +250,10 @@ class VirtualSensor : public ValueObject
             threshold->alarmLow(!alarmLow);
         }
     }
+
+    /** @brief Create Association from entityPath*/
+    void createAssociation(const std::string& objPath,
+                           const std::string& entityPath);
 };
 
 class VirtualSensors
