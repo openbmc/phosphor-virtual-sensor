@@ -53,14 +53,32 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
 {
     static constexpr auto name = "Warning";
     using WarningObject::WarningObject;
+    /** @brief sdbusplus bus client connection. */
+    sdbusplus::bus::bus& bus;
+    std::string objPath;
+
+    /** @brief Virtual sensor path/interface in entityManagerDbus.
+     * This 3 value is used to set thresholds
+     */
+    std::string entityPath;
+    std::string entityInterfaceHigh;
+    std::string entityInterfaceLow;
+
+    /** @brief Constructor to put object onto bus at a dbus path.
+     *  @param[in] bus - Bus to attach to.
+     *  @param[in] path - Path to attach at.
+     */
+    Threshold(sdbusplus::bus::bus& bus, const char* path) :
+        WarningObject(bus, path), bus(bus), objPath(std::string(path))
+    {}
 
     auto high()
     {
-        return warningHigh();
+        return WarningObject::warningHigh();
     }
     auto low()
     {
-        return warningLow();
+        return WarningObject::warningLow();
     }
 
     template <typename... Args>
@@ -98,21 +116,82 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     {
         return warningLowAlarmDeasserted(std::forward<Args>(args)...);
     }
+
+    /** @brief Set value of WarningHigh */
+    virtual double warningHigh(double value)
+    {
+        // persistThreshold
+        setDbusProperty(bus, entityManagerBusName, entityPath,
+                        entityInterfaceHigh, "Value", value);
+        return WarningObject::warningHigh(value);
+    }
+
+    /** @brief Set value of WarningLow */
+    virtual double warningLow(double value)
+    {
+        // persistThreshold
+        setDbusProperty(bus, entityManagerBusName, entityPath,
+                        entityInterfaceLow, "Value", value);
+        return WarningObject::warningLow(value);
+    }
+
+    /** @brief Set the entitymanager interface corresponding to virtualsensor
+     * warningLow
+     */
+    void setEntityInterfaceLow(const std::string& interfaceLow)
+    {
+        entityInterfaceLow = interfaceLow;
+    }
+
+    /** @brief Set the entitymanager interface corresponding to virtualsensor
+     * warningHigh
+     */
+    void setEntityInterfaceHigh(const std::string& interfaceHigh)
+    {
+        entityInterfaceHigh = interfaceHigh;
+    }
+
+    /** @brief Set the entitymanager path corresponding to virtualsensor warning
+     */
+    void setEntityPath(const std::string& path)
+    {
+        entityPath = path;
+    }
 };
 
 template <>
 struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
 {
     static constexpr auto name = "Critical";
+
+    /** @brief sdbusplus bus client connection. */
+    sdbusplus::bus::bus& bus;
+    std::string objPath;
+
+    /** @brief Virtual sensor path/interface in entityManagerDbus.
+     * This 3 value is used to set thresholds
+     */
+    std::string entityPath;
+    std::string entityInterfaceHigh;
+    std::string entityInterfaceLow;
+
     using CriticalObject::CriticalObject;
+
+    /** @brief Constructor to put object onto bus at a dbus path.
+     *  @param[in] bus - Bus to attach to.
+     *  @param[in] path - Path to attach at.
+     */
+    Threshold(sdbusplus::bus::bus& bus, const char* path) :
+        CriticalObject(bus, path), bus(bus), objPath(std::string(path))
+    {}
 
     auto high()
     {
-        return criticalHigh();
+        return CriticalObject::criticalHigh();
     }
     auto low()
     {
-        return criticalLow();
+        return CriticalObject::criticalLow();
     }
 
     template <typename... Args>
@@ -149,6 +228,46 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     auto alarmLowSignalDeasserted(Args... args)
     {
         return criticalLowAlarmDeasserted(std::forward<Args>(args)...);
+    }
+
+    /** @brief Set value of CriticalHigh */
+    virtual double criticalHigh(double value)
+    {
+        // persistThreshold
+        setDbusProperty(bus, entityManagerBusName, entityPath,
+                        entityInterfaceHigh, "Value", value);
+        return CriticalObject::criticalHigh(value);
+    }
+
+    /** @brief Set value of CriticalLow */
+    virtual double criticalLow(double value)
+    {
+        setDbusProperty(bus, entityManagerBusName, entityPath,
+                        entityInterfaceLow, "Value", value);
+        return CriticalObject::criticalLow(value);
+    }
+
+    /** @brief Set the entitymanager interface corresponding to virtualsensor
+     * criticalLow
+     */
+    void setEntityInterfaceLow(const std::string& interfaceLow)
+    {
+        entityInterfaceLow = interfaceLow;
+    }
+
+    /** @brief Set the entitymanager interface corresponding to virtualsensor
+     * criticalLow
+     */
+    void setEntityInterfaceHigh(const std::string& interfaceHigh)
+    {
+        entityInterfaceHigh = interfaceHigh;
+    }
+
+    /** @brief Set the entitymanager path corresponding to virtualsensor warning
+     */
+    void setEntityPath(const std::string& path)
+    {
+        entityPath = path;
     }
 };
 
