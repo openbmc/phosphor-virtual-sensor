@@ -387,6 +387,22 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         printParams(paramMap);
 }
 
+void VirtualSensor::createAssociation(sdbusplus::bus::bus& bus,
+                                      const std::string& objPath,
+                                      const std::string& path)
+{
+    if (objPath.empty() || path.empty())
+    {
+        return;
+    }
+    auto assocsDbus =
+        std::vector<std::tuple<std::string, std::string, std::string>>{
+            {"chassis", "all_sensors", path}};
+    associationIface =
+        std::make_unique<AssociationObject>(bus, objPath.c_str());
+    associationIface->associations(assocsDbus);
+}
+
 void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
                                       const std::string& objPath,
                                       const std::string& sensorType,
@@ -415,6 +431,7 @@ void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
     symbols.add_package(vecopsPackage);
     expression.register_symbol_table(symbols);
 
+    createAssociation(bus, objPath, entityPath);
     /* Print all parameters for debug purpose only */
     if (DEBUG)
     {
@@ -801,7 +818,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
             auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                 bus, virtObjPath.c_str(), interfaceMap, name, sensorType,
-                calculationIface);
+                calculationIface, static_cast<std::string>(path));
             info("Added a new virtual sensor: {NAME} {TYPE}", "NAME", name,
                  "TYPE", sensorType);
             virtualSensorPtr->updateVirtualSensor();
