@@ -10,8 +10,7 @@
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
-static constexpr auto entityManagerBusName =
-    "xyz.openbmc_project.EntityManager";
+
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
 static constexpr std::array<const char*, 1> calculationIfaces = {
     "xyz.openbmc_project.Configuration.ModifiedMedian"};
@@ -191,7 +190,8 @@ std::string getSeverityField(const PropertyMap& propertyMap)
     return severity;
 }
 
-void parseThresholds(Json& thresholds, const PropertyMap& propertyMap)
+void parseThresholds(Json& thresholds, const PropertyMap& propertyMap,
+                     const std::string& entityInterface = "")
 {
     std::string direction;
 
@@ -212,6 +212,11 @@ void parseThresholds(Json& thresholds, const PropertyMap& propertyMap)
     if (hysteresis != std::numeric_limits<double>::quiet_NaN())
     {
         thresholds[threshold + "Hysteresis"] = hysteresis;
+    }
+
+    if (!entityInterface.empty())
+    {
+        thresholds[threshold + "Direction"] = entityInterface;
     }
 }
 
@@ -418,7 +423,7 @@ void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
          * eg xyz.openbmc_project.Configuration.ModifiedMedian.Thresholds1 */
         if (interface.find(vsThresholdsIntf) != std::string::npos)
         {
-            parseThresholds(thresholds, propertyMap);
+            parseThresholds(thresholds, propertyMap, interface);
         }
         else if (interface == calculationIface)
         {
@@ -571,6 +576,34 @@ void VirtualSensor::createThresholds(const Json& threshold,
             threshold.value("CriticalHighHysteresis", defaultHysteresis));
         criticalIface->setLowHysteresis(
             threshold.value("CriticalLowHysteresis", defaultHysteresis));
+
+        if (threshold.contains("CriticalHigh"))
+        {
+            criticalIface->setEntityInterfaceHigh(
+                threshold.value("CriticalHighDirection", ""));
+            if (DEBUG)
+            {
+                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                      "INTF", threshold.value("CriticalHighDirection", ""));
+            }
+        }
+        if (threshold.contains("CriticalLow"))
+        {
+            criticalIface->setEntityInterfaceLow(
+                threshold.value("CriticalLowDirection", ""));
+            if (DEBUG)
+            {
+                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                      "INTF", threshold.value("CriticalLowDirection", ""));
+            }
+        }
+
+        criticalIface->setEntityPath(entityPath);
+        if (DEBUG)
+        {
+            debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
+                  "PATH", entityPath);
+        }
     }
 
     if (threshold.contains("WarningHigh") || threshold.contains("WarningLow"))
@@ -586,6 +619,34 @@ void VirtualSensor::createThresholds(const Json& threshold,
             threshold.value("WarningHighHysteresis", defaultHysteresis));
         warningIface->setLowHysteresis(
             threshold.value("WarningLowHysteresis", defaultHysteresis));
+
+        if (threshold.contains("WarningHigh"))
+        {
+            warningIface->setEntityInterfaceHigh(
+                threshold.value("WarningHighDirection", ""));
+            if (DEBUG)
+            {
+                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                      "INTF", threshold.value("WarningHighDirection", ""));
+            }
+        }
+        if (threshold.contains("WarningLow"))
+        {
+            warningIface->setEntityInterfaceLow(
+                threshold.value("WarningLowDirection", ""));
+            if (DEBUG)
+            {
+                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                      "INTF", threshold.value("WarningLowDirection", ""));
+            }
+        }
+
+        warningIface->setEntityPath(entityPath);
+        if (DEBUG)
+        {
+            debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
+                  "PATH", entityPath);
+        }
     }
 
     if (threshold.contains("HardShutdownHigh") ||

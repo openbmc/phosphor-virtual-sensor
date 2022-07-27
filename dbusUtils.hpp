@@ -1,6 +1,9 @@
 #include <phosphor-logging/elog-errors.hpp>
+#include <phosphor-logging/lg2.hpp>
 #include <xyz/openbmc_project/Common/error.hpp>
 
+const constexpr char* entityManagerBusName =
+    "xyz.openbmc_project.EntityManager";
 const char* propIntf = "org.freedesktop.DBus.Properties";
 const char* mapperBusName = "xyz.openbmc_project.ObjectMapper";
 const char* mapperPath = "/xyz/openbmc_project/object_mapper";
@@ -8,6 +11,7 @@ const char* mapperIntf = "xyz.openbmc_project.ObjectMapper";
 
 const char* methodGetObject = "GetObject";
 const char* methodGet = "Get";
+const char* methodSet = "Set";
 
 using namespace sdbusplus::xyz::openbmc_project::Common::Error;
 
@@ -75,4 +79,27 @@ T getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
     }
 
     return std::get<T>(value);
+}
+
+int setDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
+                    const std::string& path, const std::string& intf,
+                    const std::string& property, const Value& value)
+{
+    try
+    {
+        auto method = bus.new_method_call(service.c_str(), path.c_str(),
+                                          propIntf, methodSet);
+        method.append(intf, property, value);
+        auto msg = bus.call(method);
+    }
+    catch (const sdbusplus::exception_t& e)
+    {
+        lg2::error(
+            "Faild to set dbus property. service:{SERVICE} path:{PATH} intf:{INTF} Property:{PROP},{ERRMSG}",
+            "SERVICE", service, "PATH", path, "INTF", intf, "PROP", property,
+            "ERRMSG", e);
+        return -1;
+    }
+
+    return 0;
 }
