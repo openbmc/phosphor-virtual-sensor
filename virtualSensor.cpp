@@ -257,7 +257,6 @@ void VirtualSensor::parseConfigInterface(const PropertyMap& propertyMap,
 void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
                                       const std::string& objPath)
 {
-
     static const Json empty{};
 
     /* Get threshold values if defined in config */
@@ -942,7 +941,6 @@ void VirtualSensors::createVirtualSensors()
  */
 int main()
 {
-
     // Get a default event loop
     auto event = sdeventplus::Event::get_default();
 

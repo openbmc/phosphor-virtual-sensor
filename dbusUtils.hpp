@@ -57,7 +57,6 @@ T getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
                   const std::string& path, const std::string& intf,
                   const std::string& property)
 {
-
     Value value;
 
     auto method =
