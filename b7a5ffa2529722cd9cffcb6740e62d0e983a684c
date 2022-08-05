@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebafc758_38414cba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2022-08-05T13:24:14Z",
+      "side": 1,
+      "message": "Strange indenting here.\n\nAlso, could you add more to the description, including why you\u0027re doing it?  And maybe a summary of all of the command output you have below?",
+      "revId": "b7a5ffa2529722cd9cffcb6740e62d0e983a684c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
