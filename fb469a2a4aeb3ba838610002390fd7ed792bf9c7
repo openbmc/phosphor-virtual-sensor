@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f36060_88793e2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2022-08-05T02:47:29Z",
+      "side": 1,
+      "message": "Please have a tested field in your commit message\n\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#testing",
+      "revId": "fb469a2a4aeb3ba838610002390fd7ed792bf9c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
