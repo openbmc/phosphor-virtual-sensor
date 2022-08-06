@@ -16,6 +16,24 @@
       "message": "Strange indenting here.\n\nAlso, could you add more to the description, including why you\u0027re doing it?  And maybe a summary of all of the command output you have below?",
       "revId": "b7a5ffa2529722cd9cffcb6740e62d0e983a684c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad5aa0e_76173f8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-06T04:39:20Z",
+      "side": 1,
+      "message": "update commit msg",
+      "parentUuid": "ebafc758_38414cba",
+      "revId": "b7a5ffa2529722cd9cffcb6740e62d0e983a684c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
