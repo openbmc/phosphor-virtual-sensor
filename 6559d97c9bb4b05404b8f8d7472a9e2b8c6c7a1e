@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c524e0ec_d5be1dd4",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-08-08T09:33:03Z",
+      "side": 1,
+      "message": "\u003e Sensor may not be from DBUS,they are empty.\n\nIf so that, it will still go into the catch(L: 202), and return -1 right?",
+      "parentUuid": "9670dc87_b43d4661",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 5
+      },
+      "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8e15ee_30e31e44",
