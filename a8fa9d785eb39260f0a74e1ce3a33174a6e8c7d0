@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48032b38_4416b55e",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-08-08T09:29:39Z",
+      "side": 1,
+      "message": "align",
+      "range": {
+        "startLine": 111,
+        "startChar": 31,
+        "endLine": 111,
+        "endChar": 37
+      },
+      "revId": "a8fa9d785eb39260f0a74e1ce3a33174a6e8c7d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
