@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9670dc87_b43d4661",
+        "filename": "dbusUtils.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-08T07:17:54Z",
+      "side": 1,
+      "message": "Sensor may not be from DBUS,they are empty.",
+      "parentUuid": "66cf283f_494d353c",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 5
+      },
+      "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8e15ee_30e31e44",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-08T02:11:10Z",
       "side": 1,
       "message": "Should we need to update the `warningHigh` property if the return value of the setDbusProperty method is -1?",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 23
+      },
+      "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38fb109_f57b5bb1",
+        "filename": "thresholds.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-08T07:17:54Z",
+      "side": 1,
+      "message": "Sensor may not be from DBus. Only from DBus need to set entityManager.",
+      "parentUuid": "7b8e15ee_30e31e44",
       "range": {
         "startLine": 124,
         "startChar": 8,
@@ -83,6 +131,48 @@
         "endLine": 154,
         "endChar": 22
       },
+      "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "206c9c81_6305a9fd",
+        "filename": "thresholds.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-08T07:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07c6e9da_3a4ecdb9",
+      "range": {
+        "startLine": 154,
+        "startChar": 9,
+        "endLine": 154,
+        "endChar": 22
+      },
+      "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c27d7f_36acc55d",
+        "filename": "thresholds.hpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-08T07:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8a79461_8fe7b775",
       "revId": "6559d97c9bb4b05404b8f8d7472a9e2b8c6c7a1e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
