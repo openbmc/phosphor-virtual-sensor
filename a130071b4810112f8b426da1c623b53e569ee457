@@ -130,6 +130,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b63a44e_c7ecbfae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2022-08-10T13:47:31Z",
+      "side": 1,
+      "message": "the sensor name is \u0027NVMe MAX\u0027, that\u0027s why I was asking.",
+      "parentUuid": "650b250d_abdfeb29",
+      "range": {
+        "startLine": 20,
+        "startChar": 134,
+        "endLine": 20,
+        "endChar": 142
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f93b864_d939076a",
