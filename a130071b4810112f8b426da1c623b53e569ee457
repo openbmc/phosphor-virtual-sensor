@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04323725_16a2e09d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "The saved path is used when updates in entity-manager, that\u0027s all.",
+      "parentUuid": "27e31600_56afee25",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cc832b4_065cd1cf",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b59295d_7ce767dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cc832b4_065cd1cf",
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "117c254b_6356c24a",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-08-09T14:41:27Z",
       "side": 1,
       "message": "just curious, the only \u0027from dbus\u0027 config I see is median.  did you make your own \u0027max\u0027 one?",
+      "range": {
+        "startLine": 20,
+        "startChar": 134,
+        "endLine": 20,
+        "endChar": 142
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650b250d_abdfeb29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "I\u0027m not. It‘s type is still ‘ModifiedMedian‘\n\nIn my conf file:/usr/share/entity-manager/configurations/nvme_test.json\nadd this ；\n{\n        \"Exposes\": [\n            {\n                \"Name\": \"NVMe MAX Temp\",\n                \"Sensors\": [\n                    \"NVMe 0 Temp\",\n                    \"NVMe 1 Temp\",\n                    \"NVMe 2 Temp\",\n                    \"NVMe 3 Temp\",\n                    \"NVMe 4 Temp\",\n                    \"NVMe 5 Temp\",\n                    \"NVMe 6 Temp\",\n                    \"NVMe 7 Temp\",\n                    \"NVMe 8 Temp\",\n                    \"NVMe 9 Temp\",\n                    \"NVMe 10 Temp\",\n                    \"NVMe 11 Temp\"\n                ],\n                \"Thresholds\": [\n                    {\n                        \"Direction\": \"greater than\",\n                        \"Name\": \"upper critical\",\n                        \"Severity\": 1,\n                        \"Value\": 116\n                    },\n                    {\n                        \"Direction\": \"greater than\",\n                        \"Name\": \"upper non critical\",\n                        \"Severity\": 0,\n                        \"Value\": 111\n                    },\n                    {\n                        \"Direction\": \"less than\",\n                        \"Name\": \"lower non critical\",\n                        \"Severity\": 0,\n                        \"Value\": 6\n                    },\n                    {\n                        \"Direction\": \"less than\",\n                        \"Name\": \"lower critical\",\n                        \"Severity\": 1,\n                        \"Value\": 1\n                    }\n                ],\n                \"Type\": \"ModifiedMedian\",\n                \"Units\": \"DegreesC\"\n            }\n        ],\n        \"Logging\": \"Off\",\n        \"Name\": \"NVMe MAX\",\n        \"Probe\": \"TRUE\",\n        \"Type\": \"NVMe\",\n        \"xyz.openbmc_project.Inventory.Item.Chassis\": {}\n}",
+      "parentUuid": "117c254b_6356c24a",
       "range": {
         "startLine": 20,
         "startChar": 134,
@@ -87,6 +153,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b520341_afbb34e5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f93b864_d939076a",
+      "range": {
+        "startLine": 400,
+        "startChar": 8,
+        "endLine": 400,
+        "endChar": 69
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f386aec1_63307f05",
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db73446_6fd27d13",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f386aec1_63307f05",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 52
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4749037_84f3d0fc",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-08-09T14:41:27Z",
       "side": 1,
       "message": "thresholds?",
+      "range": {
+        "startLine": 143,
+        "startChar": 33,
+        "endLine": 143,
+        "endChar": 43
+      },
+      "revId": "a130071b4810112f8b426da1c623b53e569ee457",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af3bd00_2ded78c8",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-08-10T01:27:19Z",
+      "side": 1,
+      "message": "https://gerrit.openbmc.org/c/openbmc/phosphor-virtual-sensor/+/56292/8/virtualSensor.cpp#584\n\nhttps://gerrit.openbmc.org/c/openbmc/phosphor-virtual-sensor/+/56292/8/thresholds.hpp#123\n\nupdates thresholds in entity-manager,need this path.",
+      "parentUuid": "c4749037_84f3d0fc",
       "range": {
         "startLine": 143,
         "startChar": 33,
