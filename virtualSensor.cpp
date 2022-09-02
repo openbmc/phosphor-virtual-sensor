@@ -3,7 +3,6 @@
 #include "config.hpp"
 
 #include <phosphor-logging/lg2.hpp>
-#include <sdeventplus/event.hpp>
 
 #include <fstream>
 
@@ -941,9 +940,6 @@ void VirtualSensors::createVirtualSensors()
  */
 int main()
 {
-    // Get a default event loop
-    auto event = sdeventplus::Event::get_default();
-
     // Get a handle to system dbus
     auto bus = sdbusplus::bus::new_default();
 
@@ -956,9 +952,8 @@ int main()
     // Request service bus name
     bus.request_name(busName);
 
-    // Attach the bus to sd_event to service user requests
-    bus.attach_event(event.get(), SD_EVENT_PRIORITY_NORMAL);
-    event.loop();
+    // Run the dbus loop.
+    bus.process_loop();
 
     return 0;
 }

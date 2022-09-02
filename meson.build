@@ -42,7 +42,6 @@ executable(
         dependency('phosphor-dbus-interfaces'),
         dependency('phosphor-logging'),
         dependency('sdbusplus'),
-        dependency('sdeventplus'),
         exprtk,
         nlohmann_json,
     ],
