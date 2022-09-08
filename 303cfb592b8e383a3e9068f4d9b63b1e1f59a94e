@@ -16,6 +16,24 @@
       "message": "This seems like we are trying to set properties in entity manager configs?  I am not understanding.  I don\u0027t think this is expected.\n\nMaybe Ed can decipher what is going on here.",
       "revId": "303cfb592b8e383a3e9068f4d9b63b1e1f59a94e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c275cd6_e266ddf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2022-09-08T17:50:16Z",
+      "side": 1,
+      "message": "There\u0027s some precedence for this, given that entity-manager owns the \"Configuration\" of the thresholds and there are user-facing APIs (Redfish/IPMI) that allow folks that to dynamically change the thresholds at runtime, which today are mapped to directly modifying the EM config, such that it can survive a reboot.\n\nWhat I don\u0027t really understand about this use case is that it\u0027s debatably trying to do the \"right thing\" in making the actual sensor object modifyable, with a write-through to EM, rather than dropping directly to entity-manager to adjust the config. This is going to birfurcate some flows, which admittedly are probably ill-designed, but doing _both_ seems worse to me, in that there\u0027s no consistent API (some sensors you modify thresholds through EM, some sensors you can modify directly)\n\nNow, in a normal reactor, changing any part of the config generally amounts to the object being destroyed and reconstructed, given that the hysteresis rules need to store reading-to-reading state, and that state needs destroyed when a threshold it changed to give the mathematically correct behavior.\n\nTo summarize:\n1. Yes, your use case is valid, but I think already supported.\n2. Please make your use case more clear about what daemon is actually setting these.  IPMI and Redfish already are capable of setting these parameters directly through EM, so it\u0027s not clear why we would add extra code specific to PVS.",
+      "parentUuid": "31fff143_17c05811",
+      "revId": "303cfb592b8e383a3e9068f4d9b63b1e1f59a94e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
