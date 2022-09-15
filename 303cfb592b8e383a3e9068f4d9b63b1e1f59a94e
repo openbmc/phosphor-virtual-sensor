@@ -34,6 +34,24 @@
       "parentUuid": "31fff143_17c05811",
       "revId": "303cfb592b8e383a3e9068f4d9b63b1e1f59a94e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018dc385_2d187d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2022-09-15T09:59:47Z",
+      "side": 1,
+      "message": "I tried to learn the execution process of the following commands:\nipmitool sensor thresh  SYS_ 5V  ucr 7\n\nThe service that first receives and modifies the threshold is adcsensor; Then adcsensor passes the threshold data to EM.\nAll the sensors on the dbus sensos I know modify the threshold in this way.\n\n### Step 1:\ngetService:\nhttps://github.com/openbmc/phosphor-host-ipmid/blob/master/sensorhandler.cpp#L876\n\n\n```\nroot@NULL:~# busctl call  --verbose   xyz.openbmc_project.ObjectMapper /xyz/openbmc_project/object_mapper  xyz.openbmc_project.ObjectMapper GetObject   sas  /xyz/openbmc_project/sensors/voltage/SYS_5V  3 xyz.openbmc_project.Sensor.Value  xyz.openbmc_project.Sensor.Threshold.Warning xyz.openbmc_project.Sensor.Threshold.Critical\nMESSAGE \"a{sas}\" {\n        ARRAY \"{sas}\" {\n                DICT_ENTRY \"sas\" {\n                        STRING \"xyz.openbmc_project.ADCSensor\";\n                        ARRAY \"s\" {\n                                STRING \"xyz.openbmc_project.Association.Definitions\";\n                                STRING \"xyz.openbmc_project.Sensor.Threshold.Critical\";\n                                STRING \"xyz.openbmc_project.Sensor.Threshold.Warning\";\n                                STRING \"xyz.openbmc_project.Sensor.Value\";\n                                STRING \"xyz.openbmc_project.State.Decorator.Availability\";\n                                STRING \"xyz.openbmc_project.State.Decorator.OperationalStatus\";\n                        };\n                };\n        };\n};\n```\n\n### Step 2:\ngetAllDbusProperties:\nhttps://github.com/openbmc/phosphor-host-ipmid/blob/master/sensorhandler.cpp#L893\n\n```\nroot@NULL:~# busctl  call --verbose xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/SYS_5V org.freedesktop.DBus.Properties GetAll s xyz.openbmc_project.Sensor.Threshold.Critical\nMESSAGE \"a{sv}\" {\n        ARRAY \"{sv}\" {\n                DICT_ENTRY \"sv\" {\n                        STRING \"CriticalHigh\";\n                        VARIANT \"d\" {\n                                DOUBLE 7;\n                        };\n                };\n                DICT_ENTRY \"sv\" {\n                        STRING \"CriticalAlarmHigh\";\n                        VARIANT \"b\" {\n                                BOOLEAN false;\n                        };\n                };\n                DICT_ENTRY \"sv\" {\n                        STRING \"CriticalLow\";\n                        VARIANT \"d\" {\n                                DOUBLE 4.5;\n                        };\n                };\n                DICT_ENTRY \"sv\" {\n                        STRING \"CriticalAlarmLow\";\n                        VARIANT \"b\" {\n                                BOOLEAN true;\n                        };\n                };\n        };\n};\n\nroot@NULL:~#\n```\n\n### Step 3:\nsetDbusProperty\nhttps://github.com/openbmc/phosphor-host-ipmid/blob/master/sensorhandler.cpp#L957\n\n```\nroot@NULL:~# busctl set-property   xyz.openbmc_project.ADCSensor /xyz/openbmc_project/sensors/voltage/SYS_5V xyz.openbmc_project.Sensor.Threshold.Critical CriticalHigh  d 7\n```\n\n### Step 4:\nasync_method_call:Set\nhttps://github.com/openbmc/dbus-sensors/blob/master/src/Thresholds.cpp#L183\n\n```\nroot@NULL:~# busctl set-property xyz.openbmc_project.EntityManager  /xyz/openbmc_project/inventory/system/board/NF5280M7_Motherboard/SYS_5V  xyz.openbmc_project.Configuration.ADC.Thresholds0   Value  d  7.000\nroot@NULL:~# \n```",
+      "parentUuid": "8c275cd6_e266ddf6",
+      "revId": "303cfb592b8e383a3e9068f4d9b63b1e1f59a94e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
