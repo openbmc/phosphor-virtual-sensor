@@ -9,8 +9,6 @@
 static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
-static constexpr auto entityManagerBusName =
-    "xyz.openbmc_project.EntityManager";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
 static constexpr std::array<const char*, 1> calculationIfaces = {
     "xyz.openbmc_project.Configuration.ModifiedMedian"};
@@ -642,7 +640,8 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
 
     try
     {
-        auto method = bus.new_method_call(entityManagerBusName, "/",
+        auto method = bus.new_method_call("xyz.openbmc_project.EntityManager",
+                                          "/xyz/openbmc_project/inventory",
                                           "org.freedesktop.DBus.ObjectManager",
                                           "GetManagedObjects");
         auto reply = bus.call(method);
