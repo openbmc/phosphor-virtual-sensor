@@ -3,7 +3,7 @@
  * Expressions that have comments when parsed with a build that has this
  * option, will result in a compilation failure.
  */
-//#define exprtk_disable_comments
+// #define exprtk_disable_comments
 /*
  * This define will disable the loop-wise 'break' and 'continue'
  * capabilities. Any expression that contains those keywords will result
