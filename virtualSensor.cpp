@@ -960,7 +960,8 @@ int main()
     auto bus = sdbusplus::bus::new_default();
 
     // Add the ObjectManager interface
-    sdbusplus::server::manager_t objManager(bus, "/");
+    sdbusplus::server::manager_t objManager(bus,
+                                            "/xyz/openbmc_project/sensors");
 
     // Create an virtual sensors object
     phosphor::virtualSensor::VirtualSensors virtualSensors(bus);
