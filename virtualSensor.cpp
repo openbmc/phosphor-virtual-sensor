@@ -461,6 +461,10 @@ double VirtualSensor::calculateValue(const std::string& calculation,
     {
         return calculateModifiedMedianValue(paramMap);
     }
+    else if (calculation == "xyz.openbmc_project.Configuration.ModifiedMaximum")
+    {
+        return calculateModifiedMaximumValue(paramMap);
+    }
     return std::numeric_limits<double>::quiet_NaN();
 }
 
@@ -550,6 +554,31 @@ double VirtualSensor::calculateModifiedMedianValue(
                 return values.at((size - 1) / 2);
             }
     }
+}
+
+double VirtualSensor::calculateModifiedMaximumValue(
+    const VirtualSensor::ParamMap& paramMap)
+{
+    std::vector<double> values;
+
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (!sensorInRange(var->ref()))
+            {
+                continue;
+            }
+            values.push_back(var->ref());
+        }
+    }
+    auto maxIt = std::max_element(values.begin(), values.end());
+    if (maxIt == values.end())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    return *maxIt;
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,
