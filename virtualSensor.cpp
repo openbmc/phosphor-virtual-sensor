@@ -10,8 +10,9 @@ static constexpr bool DEBUG = false;
 static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
-static constexpr std::array<const char*, 1> calculationIfaces = {
-    "xyz.openbmc_project.Configuration.ModifiedMedian"};
+static constexpr std::array<const char*, 2> calculationIfaces = {
+    "xyz.openbmc_project.Configuration.ModifiedMedian",
+    "xyz.openbmc_project.Configuration.Maximum"};
 static constexpr auto defaultHysteresis = 0;
 
 PHOSPHOR_LOG2_USING_WITH_FLAGS;
@@ -461,6 +462,10 @@ double VirtualSensor::calculateValue(const std::string& calculation,
     {
         return calculateModifiedMedianValue(paramMap);
     }
+    else if (calculation == "xyz.openbmc_project.Configuration.Maximum")
+    {
+        return calculateMaximumValue(paramMap);
+    }
     return std::numeric_limits<double>::quiet_NaN();
 }
 
@@ -550,6 +555,31 @@ double VirtualSensor::calculateModifiedMedianValue(
                 return values.at((size - 1) / 2);
             }
     }
+}
+
+double VirtualSensor::calculateMaximumValue(
+    const VirtualSensor::ParamMap& paramMap)
+{
+    std::vector<double> values;
+
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (!sensorInRange(var->ref()))
+            {
+                continue;
+            }
+            values.push_back(var->ref());
+        }
+    }
+    auto maxIt = std::max_element(values.begin(), values.end());
+    if (maxIt == values.end())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    return *maxIt;
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,

@@ -190,6 +190,8 @@ class VirtualSensor : public ValueObject
     /** @brief Calculate median value from sensors */
     double
         calculateModifiedMedianValue(const VirtualSensor::ParamMap& paramMap);
+    /** @brief Calculate maximum value from sensors */
+    double calculateMaximumValue(const VirtualSensor::ParamMap& paramMap);
     /** @brief create threshold objects from json config */
     void createThresholds(const Json& threshold, const std::string& objPath);
     /** @brief parse config from entity manager **/
