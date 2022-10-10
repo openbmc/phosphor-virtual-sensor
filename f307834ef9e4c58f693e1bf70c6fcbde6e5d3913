@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d068755_bae69e55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2022-10-10T13:51:42Z",
+      "side": 1,
+      "message": "We only called the other median function a modified median because it was a bit different than the normal median.  Looks like for your case it is just the maximum, so I think you can change the name to just be Maximum.",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "f307834ef9e4c58f693e1bf70c6fcbde6e5d3913",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
