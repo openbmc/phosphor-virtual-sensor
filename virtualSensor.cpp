@@ -653,7 +653,8 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
         if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
             ex.name())
         {
-            throw ex.name();
+            error("Could not reach entity-manager: {ERROR}", "ERROR", ex);
+            throw;
         }
     }
 
