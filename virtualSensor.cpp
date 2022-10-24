@@ -45,6 +45,7 @@ namespace virtualSensor
 {
 
 FuncMaxIgnoreNaN<double> VirtualSensor::funcMaxIgnoreNaN;
+FuncSumIgnoreNaN<double> VirtualSensor::funcSumIgnoreNaN;
 
 void printParams(const VirtualSensor::ParamMap& paramMap)
 {
@@ -367,6 +368,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     symbols.add_constants();
     symbols.add_package(vecopsPackage);
     symbols.add_function("maxIgnoreNaN", funcMaxIgnoreNaN);
+    symbols.add_function("sumIgnoreNaN", funcSumIgnoreNaN);
 
     expression.register_symbol_table(symbols);
 

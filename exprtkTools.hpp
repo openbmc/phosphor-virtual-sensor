@@ -71,3 +71,27 @@ struct FuncMaxIgnoreNaN : public exprtk::ivararg_function<T>
         return result;
     }
 };
+
+template <typename T>
+struct FuncSumIgnoreNaN : public exprtk::ivararg_function<T>
+{
+    inline T operator()(const std::vector<T>& argList)
+    {
+        T result = std::numeric_limits<double>::quiet_NaN();
+        for (std::size_t i = 0; i < argList.size(); ++i)
+        {
+            if (!std::isnan(argList[i]))
+            {
+                if (!std::isnan(result))
+                {
+                    result += argList[i];
+                }
+                else
+                {
+                    result = argList[i];
+                }
+            }
+        }
+        return result;
+    }
+};
