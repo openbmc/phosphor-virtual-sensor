@@ -54,7 +54,7 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     static constexpr auto name = "Warning";
     using WarningObject::WarningObject;
     /** @brief sdbusplus bus client connection. */
-    sdbusplus::bus::bus& bus;
+    sdbusplus::bus_t& bus;
     std::string objPath;
 
     /** @brief Virtual sensor path/interface in entityManagerDbus.
@@ -68,7 +68,7 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
      *  @param[in] bus - Bus to attach to.
      *  @param[in] path - Path to attach at.
      */
-    Threshold(sdbusplus::bus::bus& bus, const char* path) :
+    Threshold(sdbusplus::bus_t& bus, const char* path) :
         WarningObject(bus, path), bus(bus), objPath(std::string(path))
     {}
 
@@ -165,7 +165,7 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     static constexpr auto name = "Critical";
 
     /** @brief sdbusplus bus client connection. */
-    sdbusplus::bus::bus& bus;
+    sdbusplus::bus_t& bus;
     std::string objPath;
 
     /** @brief Virtual sensor path/interface in entityManagerDbus.
@@ -181,7 +181,7 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
      *  @param[in] bus - Bus to attach to.
      *  @param[in] path - Path to attach at.
      */
-    Threshold(sdbusplus::bus::bus& bus, const char* path) :
+    Threshold(sdbusplus::bus_t& bus, const char* path) :
         CriticalObject(bus, path), bus(bus), objPath(std::string(path))
     {}
 
