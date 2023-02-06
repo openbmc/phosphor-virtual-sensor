@@ -120,18 +120,24 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     /** @brief Set value of WarningHigh */
     virtual double warningHigh(double value)
     {
-        // persistThreshold
-        setDbusProperty(bus, entityManagerBusName, entityPath,
-                        entityInterfaceHigh, "Value", value);
+        if (!entityPath.empty() && !entityInterfaceHigh.empty())
+        {
+            // persistThreshold
+            setDbusProperty(bus, entityManagerBusName, entityPath,
+                            entityInterfaceHigh, "Value", value);
+        }
         return WarningObject::warningHigh(value);
     }
 
     /** @brief Set value of WarningLow */
     virtual double warningLow(double value)
     {
-        // persistThreshold
-        setDbusProperty(bus, entityManagerBusName, entityPath,
-                        entityInterfaceLow, "Value", value);
+        if (!entityPath.empty() && !entityInterfaceLow.empty())
+        {
+            // persistThreshold
+            setDbusProperty(bus, entityManagerBusName, entityPath,
+                            entityInterfaceLow, "Value", value);
+        }
         return WarningObject::warningLow(value);
     }
 
@@ -234,16 +240,22 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     virtual double criticalHigh(double value)
     {
         // persistThreshold
-        setDbusProperty(bus, entityManagerBusName, entityPath,
-                        entityInterfaceHigh, "Value", value);
+        if (!entityPath.empty() && !entityInterfaceHigh.empty())
+        {
+            setDbusProperty(bus, entityManagerBusName, entityPath,
+                            entityInterfaceHigh, "Value", value);
+        }
         return CriticalObject::criticalHigh(value);
     }
 
     /** @brief Set value of CriticalLow */
     virtual double criticalLow(double value)
     {
-        setDbusProperty(bus, entityManagerBusName, entityPath,
-                        entityInterfaceLow, "Value", value);
+        if (!entityPath.empty() && !entityInterfaceLow.empty())
+        {
+            setDbusProperty(bus, entityManagerBusName, entityPath,
+                            entityInterfaceLow, "Value", value);
+        }
         return CriticalObject::criticalLow(value);
     }
 

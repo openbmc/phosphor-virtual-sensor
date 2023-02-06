@@ -596,15 +596,6 @@ void VirtualSensor::createThresholds(const Json& threshold,
         criticalIface =
             std::make_unique<Threshold<CriticalObject>>(bus, objPath.c_str());
 
-        criticalIface->criticalHigh(threshold.value(
-            "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
-        criticalIface->criticalLow(threshold.value(
-            "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
-        criticalIface->setHighHysteresis(
-            threshold.value("CriticalHighHysteresis", defaultHysteresis));
-        criticalIface->setLowHysteresis(
-            threshold.value("CriticalLowHysteresis", defaultHysteresis));
-
         if (threshold.contains("CriticalHigh"))
         {
             criticalIface->setEntityInterfaceHigh(
@@ -632,21 +623,22 @@ void VirtualSensor::createThresholds(const Json& threshold,
             debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
                   "PATH", entityPath);
         }
+
+        criticalIface->criticalHigh(threshold.value(
+            "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
+        criticalIface->criticalLow(threshold.value(
+            "CriticalLow", std::numeric_limits<double>::quiet_NaN()));
+        criticalIface->setHighHysteresis(
+            threshold.value("CriticalHighHysteresis", defaultHysteresis));
+        criticalIface->setLowHysteresis(
+            threshold.value("CriticalLowHysteresis", defaultHysteresis));
+
     }
 
     if (threshold.contains("WarningHigh") || threshold.contains("WarningLow"))
     {
         warningIface =
             std::make_unique<Threshold<WarningObject>>(bus, objPath.c_str());
-
-        warningIface->warningHigh(threshold.value(
-            "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
-        warningIface->warningLow(threshold.value(
-            "WarningLow", std::numeric_limits<double>::quiet_NaN()));
-        warningIface->setHighHysteresis(
-            threshold.value("WarningHighHysteresis", defaultHysteresis));
-        warningIface->setLowHysteresis(
-            threshold.value("WarningLowHysteresis", defaultHysteresis));
 
         if (threshold.contains("WarningHigh"))
         {
@@ -675,6 +667,16 @@ void VirtualSensor::createThresholds(const Json& threshold,
             debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
                   "PATH", entityPath);
         }
+
+        warningIface->warningHigh(threshold.value(
+            "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
+        warningIface->warningLow(threshold.value(
+            "WarningLow", std::numeric_limits<double>::quiet_NaN()));
+        warningIface->setHighHysteresis(
+            threshold.value("WarningHighHysteresis", defaultHysteresis));
+        warningIface->setLowHysteresis(
+            threshold.value("WarningLowHysteresis", defaultHysteresis));
+
     }
 
     if (threshold.contains("HardShutdownHigh") ||
