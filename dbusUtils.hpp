@@ -42,6 +42,11 @@ std::string getService(sdbusplus::bus_t& bus, const std::string& path,
             // The service isn't on D-Bus yet.
             return std::string{};
         }
+        else if (ex.name() == std::string("org.freedesktop.DBus.Error.Timeout"))
+        {
+            lg2::info("Mapper timeout while looking up {PATH}", "PATH", path);
+            return std::string{};
+        }
 
         throw;
     }
