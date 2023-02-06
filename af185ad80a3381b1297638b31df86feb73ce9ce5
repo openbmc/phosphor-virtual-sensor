@@ -22,6 +22,30 @@
       },
       "revId": "af185ad80a3381b1297638b31df86feb73ce9ce5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66583f46_fd1bf21c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2023-02-06T19:20:55Z",
+      "side": 1,
+      "message": "Looks like it did hit the max restart count, though it was spread over at least 24 hours since the journal goes back that far with no other fails.",
+      "parentUuid": "85271bfa_1f924e48",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "af185ad80a3381b1297638b31df86feb73ce9ce5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
