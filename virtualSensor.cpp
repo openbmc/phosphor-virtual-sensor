@@ -1,7 +1,5 @@
 #include "virtualSensor.hpp"
 
-#include "config.hpp"
-
 #include <phosphor-logging/lg2.hpp>
 
 #include <fstream>
@@ -772,8 +770,25 @@ void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
 }
 
 /** @brief Parsing Virtual Sensor config JSON file  */
-Json VirtualSensors::parseConfigFile(const std::string& configFile)
+Json VirtualSensors::parseConfigFile()
 {
+    using path = std::filesystem::path;
+    auto configFile = []() -> path {
+        static constexpr auto name = "virtual_sensor_config.json";
+
+        for (auto pathSeg : {std::filesystem::current_path(),
+                             path{"/var/lib/phosphor-virtual-sensor"},
+                             path{"/usr/share/phosphor-virtual-sensor"}})
+        {
+            auto file = pathSeg / name;
+            if (std::filesystem::exists(file))
+            {
+                return file;
+            }
+        }
+        return name;
+    }();
+
     std::ifstream jsonFile(configFile);
     if (!jsonFile.is_open())
     {
@@ -955,7 +970,7 @@ void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
 
-    auto data = parseConfigFile(VIRTUAL_SENSOR_CONFIG_FILE);
+    auto data = parseConfigFile();
 
     // print values
     if (DEBUG)
