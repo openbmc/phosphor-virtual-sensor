@@ -55,19 +55,7 @@ packagedir = join_paths(
     meson.project_name(),
 )
 
-configfile = 'virtual_sensor_config.json'
-confpath = '"' + join_paths(
-    packagedir,
-    configfile,
-) + '"'
-
-install_data(sources : configfile, install_dir : packagedir)
-
-conf_data = configuration_data()
-conf_data.set('VIRTUAL_SENSOR_CONFIG_FILE', confpath)
-
-configure_file(output : 'config.hpp',
-               configuration : conf_data)
+install_data(sources : 'virtual_sensor_config.json', install_dir : packagedir)
 
 systemd = dependency('systemd')
 conf_data = configuration_data()

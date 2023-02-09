@@ -281,7 +281,7 @@ class VirtualSensors
     /** @brief Get virual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
-    Json parseConfigFile(const std::string& configFile);
+    Json parseConfigFile();
 
     /** @brief Matches for virtual sensors */
     std::vector<std::unique_ptr<sdbusplus::bus::match_t>> matches;
