@@ -16,6 +16,24 @@
       "message": "nit: maybe this would be more appropriate in the next ## subsection that is just about the json?\n\nI\u0027m not really sure what the \u0027there are two types of data in this file\u0027 statement from the base commit meant.  Maybe more like \u0027... supports two different methods for obtaining configs\u0027, because I can\u0027t think of how there could be two different types inside the file.",
       "revId": "32dff21bf5ec860a359b70b9d9dcae656b40578e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37ed0f4_2da53d3f",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-09T20:38:24Z",
+      "side": 1,
+      "message": "This is probably worded poor.  There really are two flavors of json snippets.\n\n1. Specific sensors can be fully expressed in the JSON itself, using exprtk to represent the math.\n2. Specific sensors can be configured with EM with much simpler mechanisms (only the modifiedMedian that I think you added).\n\nThese two paths co-exist in a single JSON for different sensors.",
+      "parentUuid": "38e57fb2_76b5c1d4",
+      "revId": "32dff21bf5ec860a359b70b9d9dcae656b40578e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
