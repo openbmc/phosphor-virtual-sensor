@@ -70,6 +70,24 @@
       "parentUuid": "108d3d9d_ddb91ee1",
       "revId": "32dff21bf5ec860a359b70b9d9dcae656b40578e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b171013b_cd5adf8a",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2023-02-11T16:59:33Z",
+      "side": 1,
+      "message": "nevermind. i forgot that even though PVS gets the config from EM, there is still a section for the D-Bus config in the virtual_sensor_config.json file.",
+      "parentUuid": "d9a34302_e9d78a84",
+      "revId": "32dff21bf5ec860a359b70b9d9dcae656b40578e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
