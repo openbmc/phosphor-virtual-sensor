@@ -1,7 +1,5 @@
 [Unit]
 Description=Virtual sensors
-Wants=obmc-mapper.target
-After=obmc-mapper.target
 
 [Service]
 Restart=always
