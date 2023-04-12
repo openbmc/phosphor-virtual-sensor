@@ -8,7 +8,7 @@ project(
         'warning_level=3',
         'werror=true',
     ],
-    meson_version: '>=0.57.0',
+    meson_version: '>=0.58.0',
 )
 
 cpp = meson.get_compiler('cpp')
@@ -65,4 +65,4 @@ configure_file(
   output: 'phosphor-virtual-sensor.service',
   configuration: conf_data,
   install: true,
-  install_dir: systemd.get_variable(pkgconfig: 'systemdsystemunitdir'))
+  install_dir: systemd.get_variable('systemdsystemunitdir'))
