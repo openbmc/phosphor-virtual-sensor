@@ -57,8 +57,7 @@ class SensorParam
      *
      * @param[in] value - Value of constant parameter
      */
-    explicit SensorParam(double value) : value(value), paramType(constParam)
-    {}
+    explicit SensorParam(double value) : value(value), paramType(constParam) {}
 
     /** @brief Constructs SensorParam (type = dbusParam)
      *

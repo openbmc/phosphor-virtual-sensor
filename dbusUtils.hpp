@@ -68,8 +68,8 @@ T getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
 {
     Value value;
 
-    auto method =
-        bus.new_method_call(service.c_str(), path.c_str(), propIntf, methodGet);
+    auto method = bus.new_method_call(service.c_str(), path.c_str(), propIntf,
+                                      methodGet);
 
     method.append(intf, property);
 
