@@ -90,3 +90,23 @@ struct FuncSumIgnoreNaN : public exprtk::ivararg_function<T>
         });
     }
 };
+
+template <typename T>
+struct FuncIfNan : public exprtk::ifunction<T>
+{
+    using exprtk::ifunction<T>::operator();
+
+    FuncIfNan() : exprtk::ifunction<T>(2) {}
+
+    inline T operator()(const T& arg1, const T& arg2)
+    {
+        if (std::isnan(arg1))
+        {
+            return arg2;
+        }
+        else
+        {
+            return arg1;
+        }
+    }
+};
