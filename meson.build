@@ -58,11 +58,9 @@ packagedir = join_paths(
 install_data(sources : 'virtual_sensor_config.json', install_dir : packagedir)
 
 systemd = dependency('systemd')
-conf_data = configuration_data()
-conf_data.set('bindir', get_option('prefix') / get_option('bindir'))
-configure_file(
-  input: 'phosphor-virtual-sensor.service.in',
-  output: 'phosphor-virtual-sensor.service',
-  configuration: conf_data,
-  install: true,
-  install_dir: systemd.get_variable('systemdsystemunitdir'))
+fs = import('fs')
+fs.copyfile(
+    'phosphor-virtual-sensor.service',
+    install: true,
+    install_dir: systemd.get_variable('systemdsystemunitdir')
+)

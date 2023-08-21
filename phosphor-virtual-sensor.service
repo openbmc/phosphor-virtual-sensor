@@ -3,7 +3,7 @@ Description=Virtual sensors
 
 [Service]
 Restart=always
-ExecStart=@bindir@/virtual-sensor
+ExecStart=/usr/bin/virtual-sensor
 Type=dbus
 BusName=xyz.openbmc_project.VirtualSensor
 SyslogIdentifier=phosphor-virtual-sensor
