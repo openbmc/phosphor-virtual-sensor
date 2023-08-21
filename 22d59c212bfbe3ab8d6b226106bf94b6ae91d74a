@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27dad8d4_51f5b34e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-21T15:49:30Z",
+      "side": 1,
+      "message": "Who makes this recommendation?  The before and after code are effectively identical, since the \"static\" is \"constexpr\".  I\u0027m not really sure why one is better or worse than another.",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
