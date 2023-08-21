@@ -5,7 +5,6 @@
 #include <fstream>
 
 static constexpr bool DEBUG = false;
-static constexpr auto busName = "xyz.openbmc_project.VirtualSensor";
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
 static constexpr std::array<const char*, 2> calculationIfaces = {
@@ -1075,7 +1074,7 @@ int main()
     phosphor::virtualSensor::VirtualSensors virtualSensors(bus);
 
     // Request service bus name
-    bus.request_name(busName);
+    bus.request_name("xyz.openbmc_project.VirtualSensor");
 
     // Run the dbus loop.
     bus.process_loop();
