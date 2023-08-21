@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5638fd_a7a53090",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-21T15:53:37Z",
+      "side": 1,
+      "message": "Please add safety around these `at` lookups.  Likely prefer `find`.",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147f6304_d46969d4",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-21T15:53:37Z",
+      "side": 1,
+      "message": "This throws if calculationIface isn\u0027t found, which makes the code worse.",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c111ada_7a8ac71e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-21T15:53:37Z",
+      "side": 1,
+      "message": "This throws if the interface doesn\u0027t have \"Units\", which makes the code worse.",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
