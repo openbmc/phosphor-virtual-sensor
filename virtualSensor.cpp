@@ -61,10 +61,8 @@ double SensorParam::getParamValue()
     {
         case constParam:
             return value;
-            break;
         case dbusParam:
             return dbusSensor->getSensorValue();
-            break;
         default:
             throw std::invalid_argument("param type not supported");
     }
