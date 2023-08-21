@@ -874,15 +874,14 @@ void VirtualSensors::createVirtualSensorsFromDBus(
     /* Get virtual sensors config data */
     for (const auto& [path, interfaceMap] : objects)
     {
-        auto objpath = static_cast<std::string>(path);
-        std::string name = path.filename();
-        std::string sensorType, sensorUnit;
-
         /* Find Virtual Sensor interfaces */
-        if (!interfaceMap.contains(calculationIface))
+        auto intfIter = interfaceMap.find(calculationIface);
+        if (intfIter == interfaceMap.end())
         {
             continue;
         }
+
+        std::string name = path.filename();
         if (name.empty())
         {
             error("Virtual Sensor name not found in entity manager config");
@@ -896,18 +895,12 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
         /* Extract the virtual sensor type as we need this to initialize the
          * sensor */
-        for (const auto& [interface, propertyMap] : interfaceMap)
+        std::string sensorType, sensorUnit;
+        auto propertyMap = intfIter->second;
+        auto proIter = propertyMap.find("Units");
+        if (proIter != propertyMap.end())
         {
-            if (interface != calculationIface)
-            {
-                continue;
-            }
-            auto itr = propertyMap.find("Units");
-            if (itr != propertyMap.end())
-            {
-                sensorUnit = std::get<std::string>(itr->second);
-                break;
-            }
+            sensorUnit = std::get<std::string>(proIter->second);
         }
         sensorType = getSensorTypeFromUnit(sensorUnit);
         if (sensorType.empty())
@@ -919,6 +912,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
         try
         {
+            auto objpath = static_cast<std::string>(path);
             auto virtObjPath = sensorDbusPath + sensorType + "/" + name;
 
             auto virtualSensorPtr = std::make_unique<VirtualSensor>(
