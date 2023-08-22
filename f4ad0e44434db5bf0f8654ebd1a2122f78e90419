@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "828fa070_8598be0c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-22T00:41:09Z",
+      "side": 1,
+      "message": "Nope, Because the processing has been done on line 876, I think there is no problem here.",
+      "parentUuid": "147f6304_d46969d4",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c111ada_7a8ac71e",
         "filename": "virtualSensor.cpp",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-21T15:53:37Z",
       "side": 1,
       "message": "This throws if the interface doesn\u0027t have \"Units\", which makes the code worse.",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a410118_710fc8ff",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-22T00:41:09Z",
+      "side": 1,
+      "message": "If the interface does not have \"Units\", the if statement does not enter right?",
+      "parentUuid": "6c111ada_7a8ac71e",
       "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
