@@ -46,6 +46,30 @@
       },
       "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cec84e_d8c7fda9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-22T12:10:40Z",
+      "side": 1,
+      "message": "\u003e We use copyfile instead of configure_file, which is what I am doing recently, but copyfile does not support configuration, so I am more inclined to delete @bin@.\n\n\"We\"?  No... you\u0027ve decided to make some simplifications when there is no configuration done to switch from configure_file to copyfile.  This is fine, but only when there _isn\u0027t_ configuration being done.  The whole point of configure_file is to be able to configure files.\n\nAgain, I don\u0027t really see a benefit to removing the prefix support, unless you want to make a project-wide proposal that we do not support prefix installs in `.service` files.  We shouldn\u0027t be making these changes solely based on what assorted maintainers accept because then we end up with inconsistency across the project.\n\nIf you think we shouldn\u0027t use `@bin@` in any service files (for simplicity reasons), please write a TOF proposal so we can get it documented.",
+      "parentUuid": "6d5ce01f_e5a99962",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
