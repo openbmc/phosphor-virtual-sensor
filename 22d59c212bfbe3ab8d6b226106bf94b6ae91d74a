@@ -22,6 +22,47 @@
       },
       "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a77803_e07acbc6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-22T00:49:07Z",
+      "side": 1,
+      "message": "I agree with you that there is no difference between the two, I just think that busName is only used in line 1078, so there is no need to make a static explicit statement.",
+      "parentUuid": "27dad8d4_51f5b34e",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d65031_3b22ee84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-22T00:49:07Z",
+      "side": 1,
+      "message": "Thanks Patrick\n\nFor my few commits, I only made some minor changes.\nIn addition, our team has solved this problem internally [1], we want to fix this issue based on these changes and can upstream.\n\n[1] https://github.com/openbmc/phosphor-virtual-sensor/issues/1",
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
