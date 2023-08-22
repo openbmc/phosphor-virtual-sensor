@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1e64c6_5bd04b37",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-22T12:07:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "828fa070_8598be0c",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c111ada_7a8ac71e",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "If the interface does not have \"Units\", the if statement does not enter right?",
       "parentUuid": "6c111ada_7a8ac71e",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a84780_fa856efa",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-22T12:07:16Z",
+      "side": 1,
+      "message": "Ack.\n\nThe previous code was \"better\" in that it only searched once.\n\nCan you leave this one alone (as I\u0027m not sure what you\u0027re accomplishing by getting rid of the `find`) and make the one one 896/876 collapse to one search?",
+      "parentUuid": "3a410118_710fc8ff",
       "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
