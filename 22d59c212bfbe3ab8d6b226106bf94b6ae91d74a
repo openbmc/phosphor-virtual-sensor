@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8c11ea0_283de3ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-22T12:03:41Z",
+      "side": 1,
+      "message": "Let\u0027s drop the wording about \"recommended\" then.  This makes it sound like we have some policy (or that there is a best-practice documented somewhere).",
+      "parentUuid": "67a77803_e07acbc6",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68d65031_3b22ee84",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
