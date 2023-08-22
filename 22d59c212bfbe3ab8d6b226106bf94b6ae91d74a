@@ -34,6 +34,24 @@
       "parentUuid": "d07dfea2_c5e2c3eb",
       "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25dce87_eb817a18",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-22T12:04:56Z",
+      "side": 0,
+      "message": "Change for the sake of change seems odd...  To me this is entirely a preference thing.  I could very well see someone else come along later and say \"I think every case should have a break statement for clarity\".",
+      "parentUuid": "3bed0c47_becae207",
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
