@@ -70,6 +70,30 @@
       },
       "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "154ecc7a_90a66a83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-23T01:10:30Z",
+      "side": 1,
+      "message": "\u003e \u003e We use copyfile instead of configure_file, which is what I am doing recently, but copyfile does not support configuration, so I am more inclined to delete @bin@.\n\u003e \n\u003e \"We\"?  No... you\u0027ve decided to make some simplifications when there is no configuration done to switch from configure_file to copyfile.  This is fine, but only when there _isn\u0027t_ configuration being done.  The whole point of configure_file is to be able to configure files.\n\u003e \nI see what you mean, but if we just use something like @bin@ in the config, I think we can optimize and switch to copyfile.\n\u003e Again, I don\u0027t really see a benefit to removing the prefix support, unless you want to make a project-wide proposal that we do not support prefix installs in `.service` files.  We shouldn\u0027t be making these changes solely based on what assorted maintainers accept because then we end up with inconsistency across the project.\n\u003e \nThe original purpose of my submission of this patch is because I saw that @bin@ was only used in this `service.in`, and the `bindir` variable[1] was declared in meson.build. For the get_option(\u0027bindir\u0027) method, its value is actually `/usr/bin`[2]. So my question is, what is the benefit of using prefixes here?\nIf we will put this executable program in a custom directory, for example: `/usr/xxx`, it makes sense to use a prefix at this time.\n\u003e If you think we shouldn\u0027t use `@bin@` in any service files (for simplicity reasons), please write a TOF proposal so we can get it documented.\n\n\n[1]: https://gerrit.openbmc.org/c/openbmc/phosphor-virtual-sensor/+/66172/1/meson.build#b62\n[2]: http://www.embeddedlinux.org.cn/OEManual/directories_installation.html",
+      "parentUuid": "06cec84e_d8c7fda9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
