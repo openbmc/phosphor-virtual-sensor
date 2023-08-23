@@ -122,6 +122,24 @@
       "parentUuid": "3a410118_710fc8ff",
       "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ac6808_c76bce43",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-23T00:40:06Z",
+      "side": 1,
+      "message": "I think `map::find` and `map::contains` are equal[1], it\u0027s just that after c++20, we tend to use the latter to make the code more concise and clear.\n\n[1] https://stackoverflow.com/questions/64167338/container-contains-function\n```\ntemplate\u003ctypename M, typename T\u003e\nbool contains(M const \u0026map, T const \u0026element) {\n  return map.find(element) !\u003d map.end();\n}\n```\n\n\u003e  make the one one 896/876 collapse to one search?\n\nYes, The previous logic is that the for loop will be executed twice。",
+      "parentUuid": "50a84780_fa856efa",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
