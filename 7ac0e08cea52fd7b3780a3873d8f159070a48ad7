@@ -94,6 +94,30 @@
       },
       "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c67b121e_180be212",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-08-23T11:28:09Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/phosphor-virtual-sensor/blob/ce4241cb7173b41ace52a272dc6a52295f949385/meson.build#L62\n\nPlease look over https://mesonbuild.com/Installing.html relative to `prefix` and `DEST_DIR` concepts.",
+      "parentUuid": "154ecc7a_90a66a83",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
