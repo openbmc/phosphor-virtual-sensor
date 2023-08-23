@@ -52,6 +52,24 @@
       "parentUuid": "3bed0c47_becae207",
       "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e014e6b2_9e41bc2d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-23T00:49:19Z",
+      "side": 0,
+      "message": "Okay, I respect the maintainer\u0027s decision\nWill abandon it.",
+      "parentUuid": "d25dce87_eb817a18",
+      "revId": "22d59c212bfbe3ab8d6b226106bf94b6ae91d74a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
