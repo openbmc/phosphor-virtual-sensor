@@ -158,6 +158,24 @@
       "parentUuid": "73ac6808_c76bce43",
       "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a163b6_0c0aa31d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-24T00:08:56Z",
+      "side": 1,
+      "message": "Thanks Patrick\nThis may be something I haven\u0027t considered\nDone",
+      "parentUuid": "4808d2a6_bfd3447a",
+      "revId": "f4ad0e44434db5bf0f8654ebd1a2122f78e90419",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
