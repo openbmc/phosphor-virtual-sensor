@@ -118,6 +118,30 @@
       },
       "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf5c148_8a589538",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-24T00:12:59Z",
+      "side": 1,
+      "message": "I have read this doc, I mean that for this process, we just installed `/usr/bin`, so I think it is ok to remove `prefix`.\nIf there is a disagreement with the maintainer here, I respect the maintainer\u0027s choice and I will abandon this commit.",
+      "parentUuid": "c67b121e_180be212",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "7ac0e08cea52fd7b3780a3873d8f159070a48ad7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
