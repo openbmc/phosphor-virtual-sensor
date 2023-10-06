@@ -22,6 +22,23 @@
       },
       "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14babdaf_9b8cab0c",
+        "filename": "exprtkTools.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-06T21:41:36Z",
+      "side": 1,
+      "message": "Is reference actually beneficial here?  If these are really float, double, etc. you\u0027re making more work by indirecting through a reference.  If these end up being some type-indirection struct for lazy evaluation, then maybe it makes sense for them to be references.",
+      "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
