@@ -16,6 +16,24 @@
       "message": "We should be using range iteration.\n\n```\nfor (auto arg: arglist)\n```\n\nAlternatively this whole thing can be written with std::reduce.\n\n```\nreturn std::reduce(std::begin(arglist), std::end(arglist), std::numeric_limits\u003cdouble\u003e::quiet_NaN(), \n     [](auto a, auto b){\n         if (std::isnan(b))\n             return a;\n         if (std::isnan(a))\n             return b;\n         return std::min(a, b);\n     });\n```",
       "revId": "ad7472240e4e6b46f66ac9a1212038f13593856f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6083c385_60feef3a",
+        "filename": "exprtkTools.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2023-10-07T08:52:40Z",
+      "side": 1,
+      "message": "Got it. I did not use std::reduce before, learnt something new.\n\nBtw, it should use `std::max()` here.",
+      "parentUuid": "3778808c_3860d685",
+      "revId": "ad7472240e4e6b46f66ac9a1212038f13593856f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
