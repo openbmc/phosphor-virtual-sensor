@@ -57,6 +57,24 @@
       "parentUuid": "14babdaf_9b8cab0c",
       "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673ccfbf_87056577",
+        "filename": "exprtkTools.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2023-10-07T09:48:24Z",
+      "side": 1,
+      "message": "Oh, if we change it to T here, it gets compile error:\n\n error: call of ‘(FuncIfNan\u003cdouble\u003e) (double\u0026, double\u0026)’ is ambiguous\n\nUsing `const T\u0026` resolves the issue.",
+      "parentUuid": "c3b7e5e5_4dd8ce10",
+      "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
