@@ -75,6 +75,24 @@
       "parentUuid": "c3b7e5e5_4dd8ce10",
       "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "592c1b19_30a9c5ea",
+        "filename": "exprtkTools.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-08T00:06:02Z",
+      "side": 1,
+      "message": "I don\u0027t really understand why that is necessary but it is probably some intricacy of exprtk.  I was really trying to get rid of the pass-by-reference because it would end up with worse code for a POD type like a double.",
+      "parentUuid": "673ccfbf_87056577",
+      "revId": "9ea1b0ef9929791e2f181fe18cd8ef8df3244020",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
