@@ -937,8 +937,8 @@ void VirtualSensors::createVirtualSensorsFromDBus(
             virtualSensorsMap.emplace(name, std::move(virtualSensorPtr));
 
             /* Setup match for interfaces removed */
-            auto intfRemoved =
-                [this, objpath, name](sdbusplus::message_t& message) {
+            auto intfRemoved = [this, objpath,
+                                name](sdbusplus::message_t& message) {
                 if (!virtualSensorsMap.contains(name))
                 {
                     return;
