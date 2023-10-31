@@ -11,6 +11,13 @@
 #include <map>
 #include <string>
 
+enum SignalType
+{
+    valueChange,
+    interfaceAdd,
+    interfaceRemoved,
+    nameOwnerChange,
+};
 namespace phosphor
 {
 namespace virtualSensor
@@ -57,7 +64,11 @@ class SensorParam
      *
      * @param[in] value - Value of constant parameter
      */
-    explicit SensorParam(double value) : value(value), paramType(constParam) {}
+    explicit SensorParam(double value) : value(value), paramType(constParam)
+    {
+        sensorPath = "";
+        value = std::numeric_limits<double>::quiet_NaN();
+    }
 
     /** @brief Constructs SensorParam (type = dbusParam)
      *
@@ -68,15 +79,27 @@ class SensorParam
     SensorParam(sdbusplus::bus_t& bus, const std::string& path, void* ctx) :
         dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
-    {}
+    {
+        sensorPath = path;
+        value = std::numeric_limits<double>::quiet_NaN();
+    }
+
+    /** @brief Get sensor Path/ServiceName property from D-bus interface */
+    std::string getParamPath();
+    std::string getParamServName();
 
     /** @brief Get sensor value property from D-bus interface */
     double getParamValue();
+
+    /** @brief Set sensor value property from Catched */
+    void setParamValue(double catchValue);
+    void clearSensorValue();
 
   private:
     std::unique_ptr<DbusSensor> dbusSensor = nullptr;
     double value = 0;
     ParamType paramType;
+    std::string sensorPath;
 };
 
 class VirtualSensor : public ValueObject
@@ -93,8 +116,7 @@ class VirtualSensor : public ValueObject
      */
     VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const Json& sensorConfig, const std::string& name) :
-        ValueObject(bus, objPath, action::defer_emit),
-        bus(bus), name(name)
+        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name)
     {
         initVirtualSensor(sensorConfig, objPath);
     }
@@ -114,8 +136,8 @@ class VirtualSensor : public ValueObject
                   const InterfaceMap& ifacemap, const std::string& name,
                   const std::string& type, const std::string& calculationType,
                   const std::string& entityPath) :
-        ValueObject(bus, objPath, action::defer_emit),
-        bus(bus), name(name), entityPath(entityPath)
+        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name),
+        entityPath(entityPath)
     {
         initVirtualSensor(ifacemap, objPath, type, calculationType);
     }
@@ -124,6 +146,12 @@ class VirtualSensor : public ValueObject
     void setSensorValue(double value);
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+
+    /** @brief Update sensor value to DBus*/
+    void checkValueAndUpdateToDbus();
+    /** @brief Update sensor at regular intrval by catched value*/
+    void updateVirtualSensorBySignal(const std::string& str, double value,
+                                     SignalType signalType);
     /** @brief Check if sensor value is in valid range */
     bool sensorInRange(double value);
 
@@ -172,6 +200,10 @@ class VirtualSensor : public ValueObject
     static FuncMaxIgnoreNaN<double> funcMaxIgnoreNaN;
     static FuncSumIgnoreNaN<double> funcSumIgnoreNaN;
     static FuncIfNan<double> funcIfNan;
+
+    /** @brief Matches for virtual sensors */
+    std::vector<std::unique_ptr<sdbusplus::bus::match::match>> matches;
+    void matchParams();
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
