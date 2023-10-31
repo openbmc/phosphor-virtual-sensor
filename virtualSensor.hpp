@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dbusSensor.hpp"
 #include "exprtkTools.hpp"
 #include "thresholds.hpp"
@@ -79,7 +81,7 @@ class SensorParam
     ParamType paramType;
 };
 
-class VirtualSensor : public ValueObject
+class VirtualSensor : public ValueObject, public phosphor::virtualSensor::Sensor
 {
   public:
     VirtualSensor() = delete;
@@ -122,8 +124,13 @@ class VirtualSensor : public ValueObject
 
     /** @brief Set sensor value */
     void setSensorValue(double value);
+
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+
+    /** @brief Update sensor value to DBus*/
+    void checkValueAndUpdateToDbus() override;
+
     /** @brief Check if sensor value is in valid range */
     bool sensorInRange(double value);
 
