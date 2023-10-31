@@ -37,6 +37,8 @@ executable(
     'virtual-sensor',
     [
         'virtualSensor.cpp',
+        'dbusSensor.cpp',
+        'dbusUtils.cpp',
     ],
     dependencies: [
         dependency('phosphor-dbus-interfaces'),

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dbusSensor.hpp"
 #include "exprtkTools.hpp"
 #include "thresholds.hpp"
@@ -65,7 +67,8 @@ class SensorParam
      * @param[in] path    - The Dbus path of sensor
      * @param[in] ctx     - sensor context for update
      */
-    SensorParam(sdbusplus::bus_t& bus, const std::string& path, void* ctx) :
+    SensorParam(sdbusplus::bus_t& bus, const std::string& path,
+                VirtualSensor& ctx) :
         dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
     {}
@@ -75,7 +78,9 @@ class SensorParam
 
   private:
     std::unique_ptr<DbusSensor> dbusSensor = nullptr;
-    double value = 0;
+
+    /** @brief virtual sensor value */
+    double value = std::numeric_limits<double>::quiet_NaN();
     ParamType paramType;
 };
 
@@ -122,8 +127,10 @@ class VirtualSensor : public ValueObject
 
     /** @brief Set sensor value */
     void setSensorValue(double value);
+
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+
     /** @brief Check if sensor value is in valid range */
     bool sensorInRange(double value);
 
