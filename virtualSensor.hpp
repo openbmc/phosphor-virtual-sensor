@@ -11,6 +11,13 @@
 #include <map>
 #include <string>
 
+enum SignalType
+{
+    valueChange,
+    interfaceAdd,
+    interfaceRemoved,
+    nameOwnerChange,
+};
 namespace phosphor
 {
 namespace virtualSensor
@@ -57,7 +64,10 @@ class SensorParam
      *
      * @param[in] value - Value of constant parameter
      */
-    explicit SensorParam(double value) : value(value), paramType(constParam) {}
+    explicit SensorParam(double value) : value(value), paramType(constParam)
+    {
+        sensorPath = "";
+    }
 
     /** @brief Constructs SensorParam (type = dbusParam)
      *
@@ -68,15 +78,32 @@ class SensorParam
     SensorParam(sdbusplus::bus_t& bus, const std::string& path, void* ctx) :
         dbusSensor(std::make_unique<DbusSensor>(bus, path, ctx)),
         paramType(dbusParam)
-    {}
+    {
+        sensorPath = path;
+    }
+
+    /** @brief Get sensor Path property from D-bus interface */
+    std::string getParamPath();
+
+    /** @brief Get sensor ServiceName property from D-bus interface */
+    std::string getParamServName();
 
     /** @brief Get sensor value property from D-bus interface */
     double getParamValue();
 
+    /** @brief Set sensor value property from Catched */
+    void setParamValue(double catchValue);
+
+    /** @brief reset sensor value */
+    void clearSensorValue();
+
   private:
     std::unique_ptr<DbusSensor> dbusSensor = nullptr;
-    double value = 0;
+
+    /** @brief virtual sensor value */
+    double value = std::numeric_limits<double>::quiet_NaN();
     ParamType paramType;
+    std::string sensorPath;
 };
 
 class VirtualSensor : public ValueObject
@@ -122,8 +149,17 @@ class VirtualSensor : public ValueObject
 
     /** @brief Set sensor value */
     void setSensorValue(double value);
+
     /** @brief Update sensor at regular intrval */
     void updateVirtualSensor();
+
+    /** @brief Update sensor value to DBus*/
+    void checkValueAndUpdateToDbus();
+
+    /** @brief Update sensor at regular intrval by catched value*/
+    void updateVirtualSensorBySignal(const std::string& str, double value,
+                                     SignalType signalType);
+
     /** @brief Check if sensor value is in valid range */
     bool sensorInRange(double value);
 
@@ -172,6 +208,9 @@ class VirtualSensor : public ValueObject
     static FuncMaxIgnoreNaN<double> funcMaxIgnoreNaN;
     static FuncSumIgnoreNaN<double> funcSumIgnoreNaN;
     static FuncIfNan<double> funcIfNan;
+
+    /** @brief Matches for virtual sensor */
+    std::vector<std::unique_ptr<sdbusplus::bus::match_t>> matches;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor

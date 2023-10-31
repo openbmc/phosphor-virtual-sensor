@@ -27,15 +27,76 @@ int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
 
     sdbpMsg.read(msgIfce, msgData);
 
+    std::string path = sdbpMsg.get_path();
+    using namespace phosphor::virtualSensor;
+    VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+
     if (msgData.find("Value") != msgData.end())
     {
-        using namespace phosphor::virtualSensor;
-        VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
-        // TODO(openbmc/phosphor-virtual-sensor#1): updateVirtualSensor should
-        // be changed to take the information we got from the signal, to avoid
-        // having to do numerous dbus queries.
-        obj->updateVirtualSensor();
+        auto value = std::get<double>(msgData.at("Value"));
+        if (!std::isfinite(value))
+        {
+            value = std::numeric_limits<double>::quiet_NaN();
+        }
+        obj->updateVirtualSensorBySignal(path, value, SignalType::valueChange);
     }
+
+    return 0;
+}
+
+int handleDbusSignalAdd(sd_bus_message* msg, void* usrData, sd_bus_error*)
+{
+    if (usrData == nullptr)
+    {
+        throw std::runtime_error("Invalid match");
+    }
+
+    auto sdbpMsg = sdbusplus::message_t(msg);
+    sdbusplus::message::object_path objPath;
+    DBusInterfaceMap interfaces;
+
+    sdbpMsg.read(objPath, interfaces);
+    std::string path = static_cast<const std::string&>(objPath);
+
+    using namespace phosphor::virtualSensor;
+    VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+
+    auto iface = interfaces.find(sensorIntf);
+    if (iface != interfaces.end())
+    {
+        auto prop = iface->second.find("Value");
+        if (prop != iface->second.end())
+        {
+            double value = std::get<double>(prop->second);
+            if (!std::isfinite(value))
+            {
+                value = std::numeric_limits<double>::quiet_NaN();
+            }
+            obj->updateVirtualSensorBySignal(path, value,
+                                             SignalType::valueChange);
+        }
+    }
+
+    return 0;
+}
+
+int handleDbusSignalRemove(sd_bus_message* msg, void* usrData, sd_bus_error*)
+{
+    if (usrData == nullptr)
+    {
+        throw std::runtime_error("Invalid match");
+    }
+
+    auto sdbpMsg = sdbusplus::message_t(msg);
+    sdbusplus::message::object_path objPath;
+    sdbpMsg.read(objPath);
+    std::string path = static_cast<const std::string&>(objPath);
+
+    using namespace phosphor::virtualSensor;
+    VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
+    double value = std::numeric_limits<double>::quiet_NaN();
+    obj->updateVirtualSensorBySignal(path, value, SignalType::interfaceRemoved);
+
     return 0;
 }
 
@@ -59,6 +120,39 @@ void printParams(const VirtualSensor::ParamMap& paramMap)
     }
 }
 
+void SensorParam::setParamValue(const double catchValue)
+{
+    value = catchValue;
+    dbusSensor->setSensorValue(value);
+    return;
+}
+
+std::string SensorParam::getParamPath()
+{
+    switch (paramType)
+    {
+        case constParam:
+            return sensorPath;
+        case dbusParam:
+            return dbusSensor->getSensorPath();
+        default:
+            throw std::invalid_argument("param type not supported");
+    }
+}
+
+std::string SensorParam::getParamServName()
+{
+    switch (paramType)
+    {
+        case constParam:
+            return "";
+        case dbusParam:
+            return dbusSensor->getSensorServName();
+        default:
+            throw std::invalid_argument("param type not supported");
+    }
+}
+
 double SensorParam::getParamValue()
 {
     switch (paramType)
@@ -68,6 +162,22 @@ double SensorParam::getParamValue()
             break;
         case dbusParam:
             return dbusSensor->getSensorValue();
+            break;
+        default:
+            throw std::invalid_argument("param type not supported");
+    }
+}
+
+void SensorParam::clearSensorValue()
+{
+    switch (paramType)
+    {
+        case constParam:
+            value = std::numeric_limits<double>::quiet_NaN();
+            break;
+        case dbusParam:
+            value = std::numeric_limits<double>::quiet_NaN();
+            dbusSensor->clearSensorValue();
             break;
         default:
             throw std::invalid_argument("param type not supported");
@@ -483,22 +593,8 @@ bool VirtualSensor::sensorInRange(double value)
     return false;
 }
 
-void VirtualSensor::updateVirtualSensor()
+void VirtualSensor::checkValueAndUpdateToDbus()
 {
-    for (auto& param : paramMap)
-    {
-        auto& name = param.first;
-        auto& data = param.second;
-        if (auto var = symbols.get_variable(name))
-        {
-            var->ref() = data->getParamValue();
-        }
-        else
-        {
-            /* Invalid parameter */
-            throw std::invalid_argument("ParamName not found in symbols");
-        }
-    }
     auto itr = std::find(calculationIfaces.begin(), calculationIfaces.end(),
                          exprStr);
     auto val = (itr == calculationIfaces.end())
@@ -519,6 +615,61 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
+}
+
+void VirtualSensor::updateVirtualSensorBySignal(const std::string& str,
+                                                double value,
+                                                SignalType signalType)
+{
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        auto& data = param.second;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (str == data->getParamServName() || str == data->getParamPath())
+            {
+                // nameOwnerChange can get serviceName
+                // interfaceRemoved can get sensor Path
+                if (signalType == SignalType::nameOwnerChange ||
+                    signalType == SignalType::interfaceRemoved)
+                {
+                    data->clearSensorValue();
+                }
+
+                data->setParamValue(value);
+            }
+            var->ref() = data->getParamValue();
+        }
+        else
+        {
+            /* Invalid parameter */
+            throw std::invalid_argument(
+                "updateVirtualSensorBySignal:ParamName not found in symbols");
+        }
+    }
+
+    checkValueAndUpdateToDbus();
+}
+
+void VirtualSensor::updateVirtualSensor()
+{
+    for (auto& param : paramMap)
+    {
+        auto& name = param.first;
+        auto& data = param.second;
+        if (auto var = symbols.get_variable(name))
+        {
+            var->ref() = data->getParamValue();
+        }
+        else
+        {
+            /* Invalid parameter */
+            throw std::invalid_argument("ParamName not found in symbols");
+        }
+    }
+
+    checkValueAndUpdateToDbus();
 }
 
 double VirtualSensor::calculateModifiedMedianValue(
