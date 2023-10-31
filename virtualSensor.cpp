@@ -14,31 +14,6 @@ static constexpr auto defaultHysteresis = 0;
 
 PHOSPHOR_LOG2_USING_WITH_FLAGS;
 
-int handleDbusSignal(sd_bus_message* msg, void* usrData, sd_bus_error*)
-{
-    if (usrData == nullptr)
-    {
-        throw std::runtime_error("Invalid match");
-    }
-
-    auto sdbpMsg = sdbusplus::message_t(msg);
-    std::string msgIfce;
-    std::map<std::string, std::variant<int64_t, double, bool>> msgData;
-
-    sdbpMsg.read(msgIfce, msgData);
-
-    if (msgData.find("Value") != msgData.end())
-    {
-        using namespace phosphor::virtualSensor;
-        VirtualSensor* obj = static_cast<VirtualSensor*>(usrData);
-        // TODO(openbmc/phosphor-virtual-sensor#1): updateVirtualSensor should
-        // be changed to take the information we got from the signal, to avoid
-        // having to do numerous dbus queries.
-        obj->updateVirtualSensor();
-    }
-    return 0;
-}
-
 namespace phosphor
 {
 namespace virtualSensor
@@ -507,6 +482,8 @@ void VirtualSensor::updateVirtualSensor()
 
     /* Set sensor value to dbus interface */
     setSensorValue(val);
+
+    lg2::warning("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
 
     if (DEBUG)
     {
