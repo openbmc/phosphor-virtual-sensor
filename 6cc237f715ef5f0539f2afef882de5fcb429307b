@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92698506_188044bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-31T18:07:02Z",
+      "side": 1,
+      "message": "Looks like there is a lot of formatting failures in CI.  Please make sure you\u0027re using our clang-format config.",
+      "revId": "6cc237f715ef5f0539f2afef882de5fcb429307b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
