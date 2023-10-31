@@ -1,11 +1,15 @@
 #pragma once
 
+#include "dbusUtils.hpp"
+
 #include <xyz/openbmc_project/Sensor/Threshold/Critical/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/HardShutdown/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/PerformanceLoss/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/SoftShutdown/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Warning/server.hpp>
 
+const constexpr char* entityManagerBusName =
+    "xyz.openbmc_project.EntityManager";
 namespace phosphor::virtualSensor
 {
 
