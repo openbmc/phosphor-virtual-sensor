@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0d9a809_e5bbd0c6",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:59:18Z",
+      "side": 1,
+      "message": "Where is lg2 used?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 35
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98cd381_dddfd7d3",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:59:18Z",
+      "side": 1,
+      "message": "using AssociationList \u003d\n    std::vector\u003cstd::tuple\u003cstd::string, std::string, std::string\u003e\u003e;",
+      "range": {
+        "startLine": 17,
+        "startChar": 17,
+        "endLine": 17,
+        "endChar": 79
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ff340b6_b7c8adc4",
         "filename": "dbusSensor.hpp",
         "patchSetId": 2
@@ -305,6 +351,52 @@
         "startChar": 43,
         "endLine": 522,
         "endChar": 59
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "916ec39c_d6782e68",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:59:18Z",
+      "side": 1,
+      "message": "if (str \u003d\u003d data-\u003egetParamPath() || str \u003d\u003d data-\u003egetParamPath())",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 48
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1447b8bb_201adcc7",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:59:18Z",
+      "side": 1,
+      "message": "if (signalType \u003d\u003d SignalType::nameOwnerChange || signalType \u003d\u003d SignalType::interfaceRemoved)",
+      "range": {
+        "startLine": 683,
+        "startChar": 16,
+        "endLine": 683,
+        "endChar": 62
       },
       "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
