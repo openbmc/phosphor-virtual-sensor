@@ -1,0 +1,456 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea387b8d_50230d61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "add comments:\nResolved: https://github.com/openbmc/phosphor-virtual-sensor/issues/1",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff340b6_b7c8adc4",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "match_t",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 69
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4125def2_dce331a6",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "match_t",
+      "range": {
+        "startLine": 54,
+        "startChar": 60,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9c033e_d6d5570d",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Nit: Add a blank line",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bcd77b_d7c95731",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Set?",
+      "range": {
+        "startLine": 65,
+        "startChar": 15,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0ae452_8cca77b9",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Nit: Add a blank line",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf137d7_4306e095",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Add comment",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01e3c0b_9afba50b",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 81,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecfef1a9_a911f511",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 86,
+        "startChar": 9,
+        "endLine": 86,
+        "endChar": 25
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5079185b_c112ea04",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Nit: updateSensorValue? and return void.",
+      "range": {
+        "startLine": 92,
+        "startChar": 11,
+        "endLine": 92,
+        "endChar": 29
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d766c2_b12ba238",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "This logic is a bit redundant.\nIf servName is equal to empty, the catch will be entered after calling the getDbusProperty method.",
+      "range": {
+        "startLine": 99,
+        "startChar": 15,
+        "endLine": 103,
+        "endChar": 17
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3dbc5c_a026a807",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "match_t",
+      "range": {
+        "startLine": 128,
+        "startChar": 48,
+        "endLine": 128,
+        "endChar": 60
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d576d9d3_6c82c866",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "add comment",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa07c0c_57a450ed",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609255ed_5a7072ce",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "message_t",
+      "range": {
+        "startLine": 522,
+        "startChar": 43,
+        "endLine": 522,
+        "endChar": 59
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14cd4cb_71a1f298",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "add a blank line and add comment",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 35
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc279914_0130849a",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 96,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "074c1f04_ab20edae",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "std::numeric_limits\u003cdouble\u003e::quiet_NaN();?\nand then remove L:69-70, L:83-84?",
+      "range": {
+        "startLine": 100,
+        "startChar": 19,
+        "endLine": 100,
+        "endChar": 20
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45059894_c68336e6",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "Nit: add a blank line",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40992d00_e9c398ef",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a19511_6a5c9991",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "match_t",
+      "range": {
+        "startLine": 205,
+        "startChar": 48,
+        "endLine": 205,
+        "endChar": 60
+      },
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05a78fd_05d8d52d",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-01T05:52:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "b3a1e31e7c44a0a0093bdfa7ed93d751a6d01d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
