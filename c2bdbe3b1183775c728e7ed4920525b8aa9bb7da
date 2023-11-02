@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514fba65_02b94fa5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-02T03:32:16Z",
+      "side": 1,
+      "message": "Do we need to consider service creation here?",
+      "range": {
+        "startLine": 529,
+        "startChar": 16,
+        "endLine": 529,
+        "endChar": 55
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "338eb46a_6ad01f80",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-02T03:32:16Z",
+      "side": 1,
+      "message": "Do you need to filter sensor-related services?\nOtherwise, I think as long as the service is removed, it will be executed here?",
+      "range": {
+        "startLine": 531,
+        "startChar": 25,
+        "endLine": 531,
+        "endChar": 29
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a9240a_fde5e8c9",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-02T03:32:16Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 555,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 11
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd48121_67c271ea",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-11-02T03:32:16Z",
+      "side": 1,
+      "message": "Nit: add blank line.",
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
