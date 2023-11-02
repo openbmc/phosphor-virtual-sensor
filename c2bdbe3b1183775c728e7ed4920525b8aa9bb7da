@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddafd78_c449093d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-02T07:15:15Z",
+      "side": 1,
+      "message": "matchParams did not need anymore.\n\nThe NameOwnerChanged needs to be optimized and submitted next time。",
+      "parentUuid": "514fba65_02b94fa5",
+      "range": {
+        "startLine": 529,
+        "startChar": 16,
+        "endLine": 529,
+        "endChar": 55
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "338eb46a_6ad01f80",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-02T03:32:16Z",
       "side": 1,
       "message": "Do you need to filter sensor-related services?\nOtherwise, I think as long as the service is removed, it will be executed here?",
+      "range": {
+        "startLine": 531,
+        "startChar": 25,
+        "endLine": 531,
+        "endChar": 29
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd95d47_839893cd",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-02T07:15:15Z",
+      "side": 1,
+      "message": "matchParams did not need anymore",
+      "parentUuid": "338eb46a_6ad01f80",
       "range": {
         "startLine": 531,
         "startChar": 25,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8004ee70_240cd625",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-02T07:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a9240a_fde5e8c9",
+      "range": {
+        "startLine": 555,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 11
+      },
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd48121_67c271ea",
@@ -83,6 +155,24 @@
       "writtenOn": "2023-11-02T03:32:16Z",
       "side": 1,
       "message": "Nit: add blank line.",
+      "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5685792d_6d50fdb2",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-02T07:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd48121_67c271ea",
       "revId": "c2bdbe3b1183775c728e7ed4920525b8aa9bb7da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
