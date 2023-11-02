@@ -1,0 +1,547 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f52d8d2_7c51447d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "```\nFixes openbmc/phosphor-virtual-sensor#1\n```",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe2c20cd_abd602f9",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Please switch these to use sdbusplus::bus::callback_t instead of sd_bus_message_handle_t.  It will simplify these functions quite a bit.",
+      "range": {
+        "startLine": 8,
+        "startChar": 22,
+        "endLine": 8,
+        "endChar": 74
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f86f8c7_77aea2a9",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Make these friend functions or static member functions of DbusSensor class.  That will simplify the class implementation.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 79
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce228d2d_5318aed6",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Where did all of this come from??  Please use the phosphor-dbus-interfaces variant type directly rather than defining your own variant.\n\nThe way this is, you\u0027re assuming that all interfaces at a particular Sensor path can _only_ contain these types.  If any daemon comes along and adds a new interface at a path it is going to break all your processing.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 75
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a92f47_ab3c7204",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "interfacesAdded(path), right?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 64
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa7bf15_6fac6e81",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "interfacesRemoved(path), right?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 64
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a97eb62_3930d710",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7ba57a_a5804cf6",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Why are these public?  Why are they not returning auto?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c486dd8f_5a4200e5",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Does this actually need a unique_ptr?\n\nShould we combine this with signal also?\n\nWhy not std::array\u003cmatch_t, 3\u003e?",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 56
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19079183_c189afa8",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "value \u003d nan",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b97de97_a8f48d02",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Based on the comments I\u0027ve made, I really don\u0027t think it is safe to try to parse the property values out of the InterfacesAdded signal.  There is too much that can go wrong.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "364b6293_cb4dfeaf",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "I don\u0027t really like the global typedef in the header that is only used in this one spot.  Just use a local typedef.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b30b63_32f75efa",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Since you\u0027re parsing this stuff out of an sdbus message without any try/catch, any change of property types by external daemons can end up causing your daemon to crash.  This isn\u0027t cool.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a68c105f_b5c4e054",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "This is interface leakage.  There is no reason this code should know that NaN is a magic value and have to pass it along.\n\nThere are way too many places in this commit where you\u0027ve introduced `quiet_NaN` as a magic value.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58ffb94_d0072aec",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Huh?  Is there a sensorPath for a constant parameter??",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6829d63_08bdac90",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Why are we keeping 2 instances of the value?",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 43
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9cbd00d_b2cd103c",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Why do we need the signalType here?  It seems like we\u0027re spreading a lot of information around in various functions.  I\u0027ll comment more on this later.",
+      "range": {
+        "startLine": 621,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 70
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99550bb8_442888b2",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "I don\u0027t know what this is doing.  Why don\u0027t we know this from the signal?\n\nWhy are we only matching one of the two?  I don\u0027t really know why this isn\u0027t using getParamServName + nameOwnerChanged or getParamPath + interfaceRemoved.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d16c5e5f_c5940288",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "We can just have value be a default parameter to NaN.  Then the set will get NaN automatically, right?",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 17
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebddd76_0364d934",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Is this suppose to be an else?  I don\u0027t think so.  I don\u0027t really know what this line is doing.  We potentially cleared the sensor and now we\u0027re setting it to a potentially bogus value?",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5113a2e9_753cdc2b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Isn\u0027t this still calling dbusSensor-\u003egetSensorValue()?",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bdc6d8a_6b039c84",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "enum class",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099a70c0_d62e1c0f",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "I don\u0027t see any place where nameOwnerChange is used.  Is there missing code?",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7fb095_bb7f8d37",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "Why do we have the value in the class *and* in DbusSensor?",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 60
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2322c57_3cb2d35c",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 159,
+        "startChar": 40,
+        "endLine": 159,
+        "endChar": 47
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1724b3d1_837f7547",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "There is absolutely no documentation on these parameters.  Please fix.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 60
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deeb211d_9e335623",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-02T21:47:21Z",
+      "side": 1,
+      "message": "How is this used?",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 66
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
