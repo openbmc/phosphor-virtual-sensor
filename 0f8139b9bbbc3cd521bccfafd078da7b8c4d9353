@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f22c83df_53145655",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f52d8d2_7c51447d",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe2c20cd_abd602f9",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Please switch these to use sdbusplus::bus::callback_t instead of sd_bus_message_handle_t.  It will simplify these functions quite a bit.",
+      "range": {
+        "startLine": 8,
+        "startChar": 22,
+        "endLine": 8,
+        "endChar": 74
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2a1982_b79c3eea",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe2c20cd_abd602f9",
       "range": {
         "startLine": 8,
         "startChar": 22,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a2c122_f063b9e8",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f86f8c7_77aea2a9",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 79
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce228d2d_5318aed6",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Where did all of this come from??  Please use the phosphor-dbus-interfaces variant type directly rather than defining your own variant.\n\nThe way this is, you\u0027re assuming that all interfaces at a particular Sensor path can _only_ contain these types.  If any daemon comes along and adds a new interface at a path it is going to break all your processing.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 75
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe8f19d_57cf67bb",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce228d2d_5318aed6",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5959a69_0a5a1921",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a92f47_ab3c7204",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 64
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fa7bf15_6fac6e81",
@@ -123,6 +237,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "interfacesRemoved(path), right?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 64
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ffa7d8_21304481",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fa7bf15_6fac6e81",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -150,6 +288,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "595c47c8_bc9270e3",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Delete",
+      "parentUuid": "5a97eb62_3930d710",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab7ba57a_a5804cf6",
@@ -163,6 +319,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Why are these public?  Why are they not returning auto?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2b5194_13f0fc20",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "delete",
+      "parentUuid": "ab7ba57a_a5804cf6",
       "range": {
         "startLine": 72,
         "startChar": 0,
@@ -196,6 +376,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce34237_623133a0",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c486dd8f_5a4200e5",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 56
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19079183_c189afa8",
@@ -209,6 +413,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "value \u003d nan",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02ce58a_7529494a",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19079183_c189afa8",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -230,6 +452,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9788119_b82337c4",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b97de97_a8f48d02",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "364b6293_cb4dfeaf",
@@ -243,6 +483,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "I don\u0027t really like the global typedef in the header that is only used in this one spot.  Just use a local typedef.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2fc6f46_c34797db",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364b6293_cb4dfeaf",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -264,6 +522,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f83d4ee_2989820b",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13b30b63_32f75efa",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a68c105f_b5c4e054",
@@ -277,6 +553,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "This is interface leakage.  There is no reason this code should know that NaN is a magic value and have to pass it along.\n\nThere are way too many places in this commit where you\u0027ve introduced `quiet_NaN` as a magic value.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1724b22_d5d858ed",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a68c105f_b5c4e054",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -298,6 +592,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7db9a9b_58e30624",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a58ffb94_d0072aec",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6829d63_08bdac90",
@@ -311,6 +623,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Why are we keeping 2 instances of the value?",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 43
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a1409f_562b1835",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6829d63_08bdac90",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -344,6 +680,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98348bd0_951538f5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "e9cbd00d_b2cd103c",
+      "range": {
+        "startLine": 621,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 70
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99550bb8_442888b2",
@@ -357,6 +717,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "I don\u0027t know what this is doing.  Why don\u0027t we know this from the signal?\n\nWhy are we only matching one of the two?  I don\u0027t really know why this isn\u0027t using getParamServName + nameOwnerChanged or getParamPath + interfaceRemoved.",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241678b6_f03007f5",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "99550bb8_442888b2",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -384,6 +762,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c39fe6_7839562d",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "d16c5e5f_c5940288",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 17
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aebddd76_0364d934",
@@ -397,6 +799,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Is this suppose to be an else?  I don\u0027t think so.  I don\u0027t really know what this line is doing.  We potentially cleared the sensor and now we\u0027re setting it to a potentially bogus value?",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f03382_1dbfda40",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "aebddd76_0364d934",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -418,6 +838,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a6f68b_b27b95c8",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "5113a2e9_753cdc2b",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bdc6d8a_6b039c84",
@@ -431,6 +869,24 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "enum class",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4a16ee_cddc550b",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bdc6d8a_6b039c84",
       "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -452,6 +908,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab23f616_07451d96",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "099a70c0_d62e1c0f",
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f7fb095_bb7f8d37",
@@ -465,6 +939,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "Why do we have the value in the class *and* in DbusSensor?",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 60
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33ea8bb4_b4976c53",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f7fb095_bb7f8d37",
       "range": {
         "startLine": 101,
         "startChar": 0,
@@ -498,6 +996,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711a7dfd_d5dbd574",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2322c57_3cb2d35c",
+      "range": {
+        "startLine": 159,
+        "startChar": 40,
+        "endLine": 159,
+        "endChar": 47
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1724b3d1_837f7547",
@@ -521,6 +1043,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d991f130_84d103ed",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1724b3d1_837f7547",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 60
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "deeb211d_9e335623",
@@ -534,6 +1080,30 @@
       "writtenOn": "2023-11-02T21:47:21Z",
       "side": 1,
       "message": "How is this used?",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 66
+      },
+      "revId": "0f8139b9bbbc3cd521bccfafd078da7b8c4d9353",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f126bec_29e3742a",
+        "filename": "virtualSensor.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1001104
+      },
+      "writtenOn": "2023-11-04T05:55:48Z",
+      "side": 1,
+      "message": "Not need anymore.",
+      "parentUuid": "deeb211d_9e335623",
       "range": {
         "startLine": 212,
         "startChar": 0,
