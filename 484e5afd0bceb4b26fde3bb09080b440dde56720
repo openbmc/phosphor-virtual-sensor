@@ -1,0 +1,547 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a065cf86_eb7db777",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Please use `sdbusplus::common::xyz::openbmc_project::sensor::Value::interface`, etc. as needed.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2333f8d_665dd1a6",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Add all this new boot progress stuff as a separate commit.  We need to handle multi-host designs.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b95f31d_937ef6e9",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Why are we resetting the nameOwnerChanged signal watch on every single sensor update?  I think you want to move this code inside the scope after line 62?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 15
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d90343_32a29792",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Prefer structured binding syntax:\n\n```\nauto [name, oldOwner, newOwner] \u003d msg.unpack\u003cstd::string, std::string, std::string\u003e();\n```",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c0c310_680bab3d",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "What if newOwner is not empty?  Do we want to update name servName?\n\nWhat if the service never comes back?",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3ae002_d40d6f57",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Isn\u0027t this at least a warning?",
+      "range": {
+        "startLine": 111,
+        "startChar": 13,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eda9868_6145b409",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Please use `\"ERROR\"` for all exceptions.\n\nYou don\u0027t need the `.what()` call.  lg2 handles this intrinsicly.",
+      "range": {
+        "startLine": 112,
+        "startChar": 32,
+        "endLine": 112,
+        "endChar": 51
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25e0d0c_881b6d21",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Is it a name or a path?  Seems strange to call it a NAME in the debug log.",
+      "range": {
+        "startLine": 112,
+        "startChar": 26,
+        "endLine": 112,
+        "endChar": 30
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37adc196_347fd46b",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Why are you creating a second reference to the message?  Just use `msg` directly.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c044ad9f_2f7d4aad",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "How did you end up with these types?  I don\u0027t know how we end up with any property changed that isn\u0027t a `double` for `Sensor.Value`.\n\nPlease use `sdbusplus::server::xyz::openbmc_project::sensor::Value::PropertiesVariant`.  (I should move this to common...   https://gerrit.openbmc.org/c/openbmc/sdbusplus/+/67843 sdbus++: common: move PropertiesVariant from server)",
+      "range": {
+        "startLine": 122,
+        "startChar": 30,
+        "endLine": 122,
+        "endChar": 65
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a7134d_708e1f37",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Use structured binding syntax.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9163e9ce_06476e86",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Reduce one map lookup:\n\n```\nif (auto itr \u003d msgData.find(\"Value\"); itr !\u003d msgData.end())\n{\n    value \u003d std::get\u003cdouble\u003e(itr.second);\n```",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04a797f_e3561f65",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Same comments about logging as last handler.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148d66af_6525b5b1",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "No duplicate reference.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d143e65_2bebb403",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Please use `msg.unpack`.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8af8ac1_68a5a0af",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Don\u0027t use static_cast for this.\n\n`this-\u003epath \u003d\u003d objPath` should work just fine.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 34
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69c0567_62405429",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Same logging comments as above.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ed279a_6a446bfd",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Not reviewing.  New function in what is claimed to mostly be a refactoring commit.  Please separate.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d209a80_499757d3",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "namespace phosphor::virtual_sensor\n\n- Style says Namespaces should be lower_snake_case.\n- Prefer modern C++ nested namespaces rather than individual namespaces.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447d2266_e473c6b0",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer to avoid using \"context\" or \"ctx\".  Async code tends to use context/ctx to mean something specific (the executing context of the async operation), which this isn\u0027t.",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25382253_27150b01",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "This isn\u0027t a ptr, which is just asking for confusion on the part of a code reader.  Style says not to use suffixes like this anyhow.",
+      "range": {
+        "startLine": 45,
+        "startChar": 19,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5847bf_4339d654",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Why do we have boot progress code in phosphor-virtual-sensors?  Your implementation only supports single host, which isn\u0027t acceptable.\n\nThere is nothing in the existing code that deals with boot progress, as far as I can tell.  Please separate this into a separate commit.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 46
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd683728_55fbc726",
+        "filename": "dbusSensor.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "nit: Match",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 21
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fecf62_5013ea6e",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Please use `common::...::ObjectMapper::interface` value.",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f2e36d_a4fa01b6",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "ERROR",
+      "range": {
+        "startLine": 73,
+        "startChar": 13,
+        "endLine": 73,
+        "endChar": 19
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ccfede_43a8ed3a",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Uh... is this left over from debug?",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99dca87_086b2c2f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-28T17:07:25Z",
+      "side": 1,
+      "message": "Debug?",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
