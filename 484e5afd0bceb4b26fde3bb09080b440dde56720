@@ -130,6 +130,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce52f94_5d1d883a",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-30T14:23:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5ce31f39_7dcf03f2",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 15
+      },
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d90343_32a29792",
@@ -208,6 +232,24 @@
       "side": 1,
       "message": "My intention is that during the transition from power on to power off, some sensor services will exit. At this time, I would like to clear the Value of the virtualSensor and not consider the scope of the remaining newOwners that are not empty. Perhaps this code may not be suitable, but I haven\u0027t found a better way to write it",
       "parentUuid": "03c0c310_680bab3d",
+      "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911f31bb_2720f8fa",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-30T14:23:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1f59778_20c2dedb",
       "revId": "484e5afd0bceb4b26fde3bb09080b440dde56720",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
