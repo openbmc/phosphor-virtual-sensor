@@ -21,18 +21,6 @@ else
     )
 endif
 
-if cpp.has_header('nlohmann/json.hpp')
-    nlohmann_json = declare_dependency()
-else
-    subproject('nlohmann-json')
-    nlohmann_json = declare_dependency(
-        include_directories: [
-            'subprojects/nlohmann-json/single_include',
-            'subprojects/nlohmann-json/single_include/nlohmann',
-        ]
-    )
-endif
-
 executable(
     'virtual-sensor',
     [
@@ -41,11 +29,11 @@ executable(
         'dbusUtils.cpp',
     ],
     dependencies: [
+        dependency('nlohmann_json', include_type: 'system'),
         dependency('phosphor-dbus-interfaces'),
         dependency('phosphor-logging'),
         dependency('sdbusplus'),
         exprtk,
-        nlohmann_json,
     ],
     install: true,
     install_dir: get_option('bindir')
