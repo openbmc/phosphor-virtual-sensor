@@ -790,6 +790,7 @@ Json VirtualSensors::parseConfigFile()
 std::map<std::string, ValueIface::Unit> unitMap = {
     {"temperature", ValueIface::Unit::DegreesC},
     {"fan_tach", ValueIface::Unit::RPMS},
+    {"fan_pwm", ValueIface::Unit::Percent},
     {"voltage", ValueIface::Unit::Volts},
     {"altitude", ValueIface::Unit::Meters},
     {"current", ValueIface::Unit::Amperes},
