@@ -96,8 +96,7 @@ class VirtualSensor : public ValueObject
      */
     VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const Json& sensorConfig, const std::string& name) :
-        ValueObject(bus, objPath, action::defer_emit),
-        bus(bus), name(name)
+        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name)
     {
         initVirtualSensor(sensorConfig, objPath);
     }
@@ -117,8 +116,8 @@ class VirtualSensor : public ValueObject
                   const InterfaceMap& ifacemap, const std::string& name,
                   const std::string& type, const std::string& calculationType,
                   const std::string& entityPath) :
-        ValueObject(bus, objPath, action::defer_emit),
-        bus(bus), name(name), entityPath(entityPath)
+        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name),
+        entityPath(entityPath)
     {
         initVirtualSensor(ifacemap, objPath, type, calculationType);
     }
