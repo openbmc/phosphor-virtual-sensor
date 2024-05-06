@@ -40,3 +40,7 @@ different virtual sensors for each configuration.
 The virtual sensor configuration in entity manager follows a different format to
 the JSON in `virtual_sensor_config.json` (specified in
 [entity-manager/schemas/VirtualSensor.json](https://github.com/openbmc/entity-manager/blob/master/schemas/virtual_sensor.json)).
+
+## Known issues
+- By design phosphor-virtual-sensor cannot read the initial value of sensors provided by itself.
+  The sensor value will be internally seen as `nan` until the sensor changes at runtime.
