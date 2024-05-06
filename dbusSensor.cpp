@@ -38,6 +38,9 @@ DbusSensor::DbusSensor(sdbusplus::bus_t& bus, const std::string& path,
 
 double DbusSensor::getSensorValue()
 {
+    if (servName.empty())
+        initSensorValue();
+
     return value;
 }
 
@@ -62,7 +65,10 @@ void DbusSensor::initSensorValue()
                 [this](sdbusplus::message_t& message) {
                 handleDbusSignalNameOwnerChanged(message);
             });
-
+            if (servName == "xyz.openbmc_project.VirtualSensor") {
+                lg2::info("Cannot get initial value for self provided sensor at {PATH}", "PATH", path);
+                return;
+	    }
             value = getDbusProperty<double>(bus, servName, path, sensorIntf,
                                             "Value");
         }
