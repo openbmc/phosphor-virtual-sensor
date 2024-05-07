@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee827f8a_cd2641cc",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-05-07T10:38:38Z",
+      "side": 1,
+      "message": "How is this change related to the commit message?",
+      "revId": "85bdffc8e5990941305896223f6285b9b18e6294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
