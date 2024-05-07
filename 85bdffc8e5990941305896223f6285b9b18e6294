@@ -16,6 +16,24 @@
       "message": "How is this change related to the commit message?",
       "revId": "85bdffc8e5990941305896223f6285b9b18e6294",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9192e1a_76379e60",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001422
+      },
+      "writtenOn": "2024-05-07T11:52:31Z",
+      "side": 1,
+      "message": "servName is always empty for sensors provided by self as `bus.request_name(\"xyz.openbmc_project.VirtualSensor\");` haven\u0027t been called and the sdbus event loop isn\u0027t running yet.\nservName is required to be non-empty to warn about the unsupported configuration.",
+      "parentUuid": "ee827f8a_cd2641cc",
+      "revId": "85bdffc8e5990941305896223f6285b9b18e6294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
