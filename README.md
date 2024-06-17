@@ -16,7 +16,7 @@ There are two types of data in this file.
 See `virtual_sensor_config.json` in this repository for an example. Sensors
 added this way can use any expression that is accepted by exprtk.
 
-## information to get a virtual sensor configuraton from D-Bus
+## information to get a virtual sensor configuration from D-Bus
 
 For example:
 

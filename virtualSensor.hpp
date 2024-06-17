@@ -286,7 +286,7 @@ class VirtualSensors
   private:
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus_t& bus;
-    /** @brief Get virual sensor config from DBus**/
+    /** @brief Get virtual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
     Json parseConfigFile();

@@ -71,7 +71,7 @@ int setDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
     catch (const sdbusplus::exception_t& e)
     {
         lg2::error(
-            "Faild to set dbus property. service:{SERVICE} path:{PATH} intf:{INTF} Property:{PROP},{ERROR}",
+            "Failed to set dbus property. service:{SERVICE} path:{PATH} intf:{INTF} Property:{PROP},{ERROR}",
             "SERVICE", service, "PATH", path, "INTF", intf, "PROP", property,
             "ERROR", e);
         return -1;
