@@ -31,7 +31,11 @@ DbusSensor::DbusSensor(sdbusplus::bus_t& bus, const std::string& path,
         sdbusplus::bus::match::rules::interfacesRemoved(interfacesSensorPath),
         [this](sdbusplus::message_t& message) {
     handleDbusSignalRemove(message);
-})
+}),
+    signalAdd(
+        bus,
+        sdbusplus::bus::match::rules::interfacesAdded(interfacesSensorPath),
+        [this](sdbusplus::message_t& message) { handleDbusSignalAdd(message); })
 {
     initSensorValue();
 }
@@ -146,6 +150,35 @@ void DbusSensor::handleDbusSignalRemove(sdbusplus::message_t& msg)
     {
         lg2::error("Error in dbusSensor interfaceRemove: {PATH}  {ERROR}",
                    "PATH", path, "ERROR", e);
+    }
+}
+
+void DbusSensor::handleDbusSignalAdd(sdbusplus::message_t& msg)
+{
+    try
+    {
+        auto objPath = msg.unpack<sdbusplus::message::object_path>();
+
+        if (this->path == objPath)
+        {
+            if (servName.empty())
+            {
+                value = std::numeric_limits<double>::quiet_NaN();
+                servName = getService(bus, path, sensorIntf);
+            }
+
+            if (!servName.empty())
+            {
+                value = getDbusProperty<double>(bus, servName, path, sensorIntf,
+                                                "Value");
+            }
+            virtualSensor.updateVirtualSensor();
+        }
+    }
+    catch (const std::exception& e)
+    {
+        lg2::error("Error in dbusSensor interfaceAdd: {PATH}  {ERROR}", "PATH",
+                   path, "ERROR", e);
     }
 }
 

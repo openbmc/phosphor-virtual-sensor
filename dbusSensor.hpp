@@ -44,6 +44,9 @@ class DbusSensor
     /** @brief signal for sensor interface remove */
     sdbusplus::bus::match_t signalRemove;
 
+    /** @brief signal for sensor interface add */
+    sdbusplus::bus::match_t signalAdd;
+
     /** @brief Match for this dbus sensor service destroy  */
     std::unique_ptr<sdbusplus::bus::match_t> signalNameOwnerChanged;
 
@@ -61,6 +64,9 @@ class DbusSensor
 
     /** @brief Handle for this dbus sensor InterfaceRemove */
     void handleDbusSignalRemove(sdbusplus::message_t& msg);
+
+    /** @brief Handle for this dbus sensor InterfaceAdd */
+    void handleDbusSignalAdd(sdbusplus::message_t& msg);
 };
 
 } // namespace phosphor::virtual_sensor
