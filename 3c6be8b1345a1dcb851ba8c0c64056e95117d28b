@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e11e0ab_595199a0",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2024-08-13T13:45:18Z",
+      "side": 1,
+      "message": "I think you can get the service name from the message itself? The mapper is processing the signal at the same  time, so it could be a race on if it even has it yet.",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
