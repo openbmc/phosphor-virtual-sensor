@@ -129,9 +129,9 @@ const std::string getThresholdType(const std::string& direction,
 
 std::string getSeverityField(const PropertyMap& propertyMap)
 {
-    static const std::array thresholdTypes{"Warning", "Critical",
-                                           "PerformanceLoss", "SoftShutdown",
-                                           "HardShutdown"};
+    static const std::array thresholdTypes{
+        "Warning", "Critical", "PerformanceLoss", "SoftShutdown",
+        "HardShutdown"};
 
     std::string severity;
     if (auto itr = propertyMap.find("Severity"); itr != propertyMap.end())
@@ -148,8 +148,8 @@ std::string getSeverityField(const PropertyMap& propertyMap)
         }
         else
         {
-            auto sev = getNumberFromConfig<uint64_t>(propertyMap, "Severity",
-                                                     true);
+            auto sev =
+                getNumberFromConfig<uint64_t>(propertyMap, "Severity", true);
             /* Checking bounds ourselves so we throw invalid argument on
              * invalid user input */
             if (sev >= thresholdTypes.size())
@@ -180,8 +180,8 @@ void parseThresholds(Json& thresholds, const PropertyMap& propertyMap,
     auto threshold = getThresholdType(direction, severity);
     thresholds[threshold] = value;
 
-    auto hysteresis = getNumberFromConfig<double>(propertyMap, "Hysteresis",
-                                                  false);
+    auto hysteresis =
+        getNumberFromConfig<double>(propertyMap, "Hysteresis", false);
     if (hysteresis != std::numeric_limits<double>::quiet_NaN())
     {
         thresholds[threshold + "Hysteresis"] = hysteresis;
@@ -206,8 +206,8 @@ void VirtualSensor::parseConfigInterface(const PropertyMap& propertyMap,
             std::replace(sensor.begin(), sensor.end(), ' ', '_');
             auto sensorObjPath = sensorDbusPath + sensorType + "/" + sensor;
 
-            auto paramPtr = std::make_unique<SensorParam>(bus, sensorObjPath,
-                                                          *this);
+            auto paramPtr =
+                std::make_unique<SensorParam>(bus, sensorObjPath, *this);
             symbols.create_variable(sensor);
             paramMap.emplace(std::move(sensor), std::move(paramPtr));
         }
@@ -329,8 +329,8 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
                 {
                     auto path = sensorDbusPath + sensorType + "/" + name;
 
-                    auto paramPtr = std::make_unique<SensorParam>(bus, path,
-                                                                  *this);
+                    auto paramPtr =
+                        std::make_unique<SensorParam>(bus, path, *this);
                     std::string paramName = j["ParamName"];
                     symbols.create_variable(paramName);
                     paramMap.emplace(std::move(paramName), std::move(paramPtr));
@@ -380,19 +380,18 @@ void VirtualSensor::createAssociation(const std::string& objPath,
     std::filesystem::path p(entityPath);
     auto assocsDbus =
         AssociationList{{"chassis", "all_sensors", p.parent_path().string()}};
-    associationIface = std::make_unique<AssociationObject>(bus,
-                                                           objPath.c_str());
+    associationIface =
+        std::make_unique<AssociationObject>(bus, objPath.c_str());
     associationIface->associations(assocsDbus);
 }
 
-void VirtualSensor::initVirtualSensor(const InterfaceMap& interfaceMap,
-                                      const std::string& objPath,
-                                      const std::string& sensorType,
-                                      const std::string& calculationIface)
+void VirtualSensor::initVirtualSensor(
+    const InterfaceMap& interfaceMap, const std::string& objPath,
+    const std::string& sensorType, const std::string& calculationIface)
 {
     Json thresholds;
-    const std::string vsThresholdsIntf = calculationIface +
-                                         vsThresholdsIfaceSuffix;
+    const std::string vsThresholdsIntf =
+        calculationIface + vsThresholdsIfaceSuffix;
 
     for (const auto& [interface, propertyMap] : interfaceMap)
     {
@@ -472,8 +471,8 @@ void VirtualSensor::updateVirtualSensor()
             throw std::invalid_argument("ParamName not found in symbols");
         }
     }
-    auto itr = std::find(calculationIfaces.begin(), calculationIfaces.end(),
-                         exprStr);
+    auto itr =
+        std::find(calculationIfaces.begin(), calculationIfaces.end(), exprStr);
     auto val = (itr == calculationIfaces.end())
                    ? expression.value()
                    : calculateValue(exprStr, paramMap);
@@ -710,10 +709,10 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
 
     try
     {
-        auto method = bus.new_method_call("xyz.openbmc_project.EntityManager",
-                                          "/xyz/openbmc_project/inventory",
-                                          "org.freedesktop.DBus.ObjectManager",
-                                          "GetManagedObjects");
+        auto method = bus.new_method_call(
+            "xyz.openbmc_project.EntityManager",
+            "/xyz/openbmc_project/inventory",
+            "org.freedesktop.DBus.ObjectManager", "GetManagedObjects");
         auto reply = bus.call(method);
         reply.read(objects);
     }

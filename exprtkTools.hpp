@@ -57,16 +57,16 @@ struct FuncMaxIgnoreNaN : public exprtk::ivararg_function<T>
         return std::reduce(std::begin(argList), std::end(argList),
                            std::numeric_limits<double>::quiet_NaN(),
                            [](auto a, auto b) {
-            if (std::isnan(b))
-            {
-                return a;
-            }
-            if (std::isnan(a))
-            {
-                return b;
-            }
-            return std::max(a, b);
-        });
+                               if (std::isnan(b))
+                               {
+                                   return a;
+                               }
+                               if (std::isnan(a))
+                               {
+                                   return b;
+                               }
+                               return std::max(a, b);
+                           });
     }
 };
 
@@ -78,16 +78,16 @@ struct FuncSumIgnoreNaN : public exprtk::ivararg_function<T>
         return std::reduce(std::begin(argList), std::end(argList),
                            std::numeric_limits<double>::quiet_NaN(),
                            [](auto a, auto b) {
-            if (std::isnan(b))
-            {
-                return a;
-            }
-            if (std::isnan(a))
-            {
-                return b;
-            }
-            return a + b;
-        });
+                               if (std::isnan(b))
+                               {
+                                   return a;
+                               }
+                               if (std::isnan(a))
+                               {
+                                   return b;
+                               }
+                               return a + b;
+                           });
     }
 };
 

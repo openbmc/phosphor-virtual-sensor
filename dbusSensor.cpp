@@ -19,19 +19,18 @@ namespace phosphor::virtual_sensor
 
 DbusSensor::DbusSensor(sdbusplus::bus_t& bus, const std::string& path,
                        VirtualSensor& virtualSensor) :
-    bus(bus),
-    path(path), virtualSensor(virtualSensor),
+    bus(bus), path(path), virtualSensor(virtualSensor),
     signalPropChange(
         bus, sdbusplus::bus::match::rules::propertiesChanged(path, sensorIntf),
         [this](sdbusplus::message_t& message) {
-    handleDbusSignalPropChange(message);
-}),
+            handleDbusSignalPropChange(message);
+        }),
     signalRemove(
         bus,
         sdbusplus::bus::match::rules::interfacesRemoved(interfacesSensorPath),
         [this](sdbusplus::message_t& message) {
-    handleDbusSignalRemove(message);
-})
+            handleDbusSignalRemove(message);
+        })
 {
     initSensorValue();
 }
@@ -60,8 +59,8 @@ void DbusSensor::initSensorValue()
                 sdbusplus::bus::match::rules::nameOwnerChanged() +
                     sdbusplus::bus::match::rules::arg0namespace(servName),
                 [this](sdbusplus::message_t& message) {
-                handleDbusSignalNameOwnerChanged(message);
-            });
+                    handleDbusSignalNameOwnerChanged(message);
+                });
 
             value = getDbusProperty<double>(bus, servName, path, sensorIntf,
                                             "Value");
