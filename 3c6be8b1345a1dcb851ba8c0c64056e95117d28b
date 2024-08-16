@@ -106,6 +106,24 @@
       "parentUuid": "8cc14f51_7417f53c",
       "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e490dfd_261951f3",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-16T15:56:54Z",
+      "side": 1,
+      "message": "https://en.wikipedia.org/wiki/Causal_consistency\n\nIn this case we have something like this:\n\n```\nAdd(1) -\u003e Mapper\n       |         ^\n       -\u003e PVS(2) | \n```\n\nSince the Add \"causes\" action in both PVS and Mapper, PVS shouldn\u0027t be able to get an answer from Mapper indicating that the action hasn\u0027t happened yet.\n\n1 caused 2, so 2 shouldn\u0027t get an answer that indicated 1 hasn\u0027t happened yet.",
+      "parentUuid": "fd823c42_c509f4c7",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
