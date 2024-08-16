@@ -70,6 +70,24 @@
       "parentUuid": "afcf422c_93141e07",
       "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc14f51_7417f53c",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-16T14:59:31Z",
+      "side": 1,
+      "message": "A mutex doesn\u0027t help because this is a race condition with another process that is also processing this signal.  You can\u0027t know when that process is done completing its processing.\n\n[@Matt - For what it is worth, this is why Mapper was suppose to have causal ordering, but it got removed in the Python -\u003e C++ rewrite that was done years ago now.]\n\nCan we defer the service lookup until the first access after the timer?  If the `servName.empty()`, check with mapper?",
+      "parentUuid": "ff60cd1c_3783ed38",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
