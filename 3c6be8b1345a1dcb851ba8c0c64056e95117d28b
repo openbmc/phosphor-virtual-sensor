@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0944cda7_6361ba76",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002022
+      },
+      "writtenOn": "2024-08-17T07:24:30Z",
+      "side": 1,
+      "message": "Is it suggested to added an [after] other sensor services in PVS service config since PVS monitors sensors from other sensor service?\ne.g.\nAfter\u003dpsusensor.service adcsensor.service fansensor.service\nand other sensors reltaed services.\n\nhttps://github.com/openbmc/phosphor-virtual-sensor/blob/master/phosphor-virtual-sensor.service.in\n\nservName can be set in PSV init function.",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e11e0ab_595199a0",
         "filename": "dbusSensor.cpp",
         "patchSetId": 5
