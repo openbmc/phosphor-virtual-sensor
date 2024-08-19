@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcba002a_c2c25089",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-19T15:10:43Z",
+      "side": 1,
+      "message": "No, it is not suggested to add additional `After` calls like that.  One major issue is that we don\u0027t know which processes will expose the sensors needed by the config.  In addition to the dbus-sensor based entities you mentioned here (likely used by your system), sensors could be coming from PLDM, etc.  All of this is system-specific.",
+      "parentUuid": "0944cda7_6361ba76",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e11e0ab_595199a0",
         "filename": "dbusSensor.cpp",
         "patchSetId": 5
