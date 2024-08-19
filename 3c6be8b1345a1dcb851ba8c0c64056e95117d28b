@@ -38,6 +38,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d88f3c9d_1b0588a5",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002022
+      },
+      "writtenOn": "2024-08-19T16:46:17Z",
+      "side": 1,
+      "message": "Some sensor services might be system-specific, so I use ```After``` without ```Requires``` in the service configuration — just for ordering purposes. Even though we don’t know which processes will expose the necessary sensors, should PVS always be running after all sensor services have started? I\u0027m not sure if my thinking is correct, so please let me know if there are any issues with it. Thank you!",
+      "parentUuid": "dcba002a_c2c25089",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69b0ccf_817b4876",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002022
+      },
+      "writtenOn": "2024-08-19T16:46:17Z",
+      "side": 1,
+      "message": "I’ve considered that there might some  system-specific senosor services.Hence, using",
+      "parentUuid": "dcba002a_c2c25089",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e11e0ab_595199a0",
         "filename": "dbusSensor.cpp",
         "patchSetId": 5
