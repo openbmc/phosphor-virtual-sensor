@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d1e80ad_d867bdf4",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-20T10:29:22Z",
+      "side": 1,
+      "message": "I\u0027d prefer we do not add service dependencies, even for \"known\" ones.  There is no hard dependency that you use any of these dbus-sensor services.",
+      "parentUuid": "d88f3c9d_1b0588a5",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e11e0ab_595199a0",
         "filename": "dbusSensor.cpp",
         "patchSetId": 5
