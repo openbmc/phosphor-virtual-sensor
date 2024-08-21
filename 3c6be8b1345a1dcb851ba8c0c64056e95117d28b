@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27c054fa_f0792497",
+        "filename": "dbusSensor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002022
+      },
+      "writtenOn": "2024-08-21T01:05:56Z",
+      "side": 1,
+      "message": "I see. Thanks for the information!",
+      "parentUuid": "5d1e80ad_d867bdf4",
+      "revId": "3c6be8b1345a1dcb851ba8c0c64056e95117d28b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e11e0ab_595199a0",
         "filename": "dbusSensor.cpp",
         "patchSetId": 5
