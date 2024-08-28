@@ -1,14 +1,13 @@
 #include "virtualSensor.hpp"
 
+#include "calculate.hpp"
+
 #include <phosphor-logging/lg2.hpp>
 
 #include <fstream>
 
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
-static constexpr std::array<const char*, 2> calculationIfaces = {
-    "xyz.openbmc_project.Configuration.ModifiedMedian",
-    "xyz.openbmc_project.Configuration.Maximum"};
 static constexpr auto defaultHysteresis = 0;
 
 PHOSPHOR_LOG2_USING_WITH_FLAGS;
@@ -92,17 +91,6 @@ U getNumberFromConfig(const PropertyMap& map, const std::string& name,
         throw std::invalid_argument("Required field missing in config");
     }
     return defaultValue;
-}
-
-bool isCalculationType(const std::string& interface)
-{
-    auto itr = std::find(calculationIfaces.begin(), calculationIfaces.end(),
-                         interface);
-    if (itr != calculationIfaces.end())
-    {
-        return true;
-    }
-    return false;
 }
 
 const std::string getThresholdType(const std::string& direction,
@@ -212,7 +200,7 @@ void VirtualSensor::parseConfigInterface(const PropertyMap& propertyMap,
         }
     }
     /* Get expression string */
-    if (!isCalculationType(interface))
+    if (!calculationIfaces.contains(interface))
     {
         throw std::invalid_argument("Invalid expression in interface");
     }
@@ -424,21 +412,27 @@ void VirtualSensor::setSensorValue(double value)
 double VirtualSensor::calculateValue(const std::string& calculation,
                                      const VirtualSensor::ParamMap& paramMap)
 {
-    auto itr = std::find(calculationIfaces.begin(), calculationIfaces.end(),
-                         calculation);
-    if (itr == calculationIfaces.end())
+    auto iter = calculationIfaces.find(calculation);
+    if (iter == calculationIfaces.end())
     {
         return std::numeric_limits<double>::quiet_NaN();
     }
-    else if (calculation == "xyz.openbmc_project.Configuration.ModifiedMedian")
+
+    std::vector<double> values;
+    for (auto& param : paramMap)
     {
-        return calculateModifiedMedianValue(paramMap);
+        auto& name = param.first;
+        if (auto var = symbols.get_variable(name))
+        {
+            if (!sensorInRange(var->ref()))
+            {
+                continue;
+            }
+            values.push_back(var->ref());
+        }
     }
-    else if (calculation == "xyz.openbmc_project.Configuration.Maximum")
-    {
-        return calculateMaximumValue(paramMap);
-    }
-    return std::numeric_limits<double>::quiet_NaN();
+
+    return iter->second(values);
 }
 
 bool VirtualSensor::sensorInRange(double value)
@@ -466,9 +460,7 @@ void VirtualSensor::updateVirtualSensor()
             throw std::invalid_argument("ParamName not found in symbols");
         }
     }
-    auto itr =
-        std::find(calculationIfaces.begin(), calculationIfaces.end(), exprStr);
-    auto val = (itr == calculationIfaces.end())
+    auto val = (!calculationIfaces.contains(exprStr))
                    ? expression.value()
                    : calculateValue(exprStr, paramMap);
 
@@ -482,72 +474,6 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, criticalIface);
     checkThresholds(val, softShutdownIface);
     checkThresholds(val, hardShutdownIface);
-}
-
-double VirtualSensor::calculateModifiedMedianValue(
-    const VirtualSensor::ParamMap& paramMap)
-{
-    std::vector<double> values;
-
-    for (auto& param : paramMap)
-    {
-        auto& name = param.first;
-        if (auto var = symbols.get_variable(name))
-        {
-            if (!sensorInRange(var->ref()))
-            {
-                continue;
-            }
-            values.push_back(var->ref());
-        }
-    }
-
-    size_t size = values.size();
-    std::sort(values.begin(), values.end());
-    switch (size)
-    {
-        case 2:
-            /* Choose biggest value */
-            return values.at(1);
-        case 0:
-            return std::numeric_limits<double>::quiet_NaN();
-        default:
-            /* Choose median value */
-            if (size % 2 == 0)
-            {
-                // Average of the two middle values
-                return (values.at(size / 2) + values.at(size / 2 - 1)) / 2;
-            }
-            else
-            {
-                return values.at((size - 1) / 2);
-            }
-    }
-}
-
-double VirtualSensor::calculateMaximumValue(
-    const VirtualSensor::ParamMap& paramMap)
-{
-    std::vector<double> values;
-
-    for (auto& param : paramMap)
-    {
-        auto& name = param.first;
-        if (auto var = symbols.get_variable(name))
-        {
-            if (!sensorInRange(var->ref()))
-            {
-                continue;
-            }
-            values.push_back(var->ref());
-        }
-    }
-    auto maxIt = std::max_element(values.begin(), values.end());
-    if (maxIt == values.end())
-    {
-        return std::numeric_limits<double>::quiet_NaN();
-    }
-    return *maxIt;
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,
@@ -705,18 +631,18 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
 
 void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
 {
-    std::string path;
+    std::string interface;
     PropertyMap properties;
 
-    msg.read(path, properties);
+    msg.read(interface, properties);
 
     /* We get multiple callbacks for one sensor. 'Type' is a required field and
      * is a unique label so use to to only proceed once per sensor */
     if (properties.contains("Type"))
     {
-        if (isCalculationType(path))
+        if (calculationIfaces.contains(interface))
         {
-            createVirtualSensorsFromDBus(path);
+            createVirtualSensorsFromDBus(interface);
         }
     }
 }
@@ -804,7 +730,7 @@ void VirtualSensors::setupMatches()
         this->propertiesChanged(message);
     };
 
-    for (const char* iface : calculationIfaces)
+    for (const auto& [iface, _] : calculationIfaces)
     {
         auto match = std::make_unique<sdbusplus::bus::match_t>(
             bus,
@@ -938,15 +864,15 @@ void VirtualSensors::createVirtualSensors()
                 if (desc.contains("Type"))
                 {
                     auto type = desc.value("Type", "");
-                    auto path = "xyz.openbmc_project.Configuration." + type;
+                    auto intf = "xyz.openbmc_project.Configuration." + type;
 
-                    if (!isCalculationType(path))
+                    if (!calculationIfaces.contains(intf))
                     {
                         error("Invalid calculation type {TYPE} supplied.",
                               "TYPE", type);
                         continue;
                     }
-                    createVirtualSensorsFromDBus(path);
+                    createVirtualSensorsFromDBus(intf);
                 }
                 continue;
             }

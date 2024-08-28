@@ -24,6 +24,7 @@ endif
 executable(
     'virtual-sensor',
     [
+        'calculate.cpp',
         'virtualSensor.cpp',
         'dbusSensor.cpp',
         'dbusUtils.cpp',
