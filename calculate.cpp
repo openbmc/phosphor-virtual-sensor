@@ -40,8 +40,19 @@ double calculateMaximumValue(std::vector<double>& values)
     return *maxIt;
 }
 
+double calculateMinimumValue(std::vector<double>& values)
+{
+    auto maxIt = std::min_element(values.begin(), values.end());
+    if (maxIt == values.end())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    return *maxIt;
+}
+
 std::map<Interface, CalculationFunc> calculationIfaces{
     {"xyz.openbmc_project.Configuration.Maximum", calculateMaximumValue},
+    {"xyz.openbmc_project.Configuration.Minimum", calculateMinimumValue},
     {"xyz.openbmc_project.Configuration.ModifiedMedian",
      calculateModifiedMedianValue}};
 
