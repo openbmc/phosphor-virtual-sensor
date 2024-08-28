@@ -4,7 +4,6 @@
 
 #include <fstream>
 
-static constexpr bool DEBUG = false;
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
 static constexpr std::array<const char*, 2> calculationIfaces = {
@@ -365,8 +364,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     }
 
     /* Print all parameters for debug purpose only */
-    if (DEBUG)
-        printParams(paramMap);
+    printParams(paramMap);
 }
 
 void VirtualSensor::createAssociation(const std::string& objPath,
@@ -414,10 +412,7 @@ void VirtualSensor::initVirtualSensor(
 
     createAssociation(objPath, entityPath);
     /* Print all parameters for debug purpose only */
-    if (DEBUG)
-    {
-        printParams(paramMap);
-    }
+    printParams(paramMap);
 }
 
 void VirtualSensor::setSensorValue(double value)
@@ -479,11 +474,7 @@ void VirtualSensor::updateVirtualSensor()
 
     /* Set sensor value to dbus interface */
     setSensorValue(val);
-
-    if (DEBUG)
-    {
-        debug("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
-    }
+    debug("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
 
     /* Check sensor thresholds and log required message */
     checkThresholds(val, perfLossIface);
@@ -577,29 +568,20 @@ void VirtualSensor::createThresholds(const Json& threshold,
         {
             criticalIface->setEntityInterfaceHigh(
                 threshold.value("CriticalHighDirection", ""));
-            if (DEBUG)
-            {
-                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
-                      "INTF", threshold.value("CriticalHighDirection", ""));
-            }
+            debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                  "INTF", threshold.value("CriticalHighDirection", ""));
         }
         if (threshold.contains("CriticalLow"))
         {
             criticalIface->setEntityInterfaceLow(
                 threshold.value("CriticalLowDirection", ""));
-            if (DEBUG)
-            {
-                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
-                      "INTF", threshold.value("CriticalLowDirection", ""));
-            }
+            debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                  "INTF", threshold.value("CriticalLowDirection", ""));
         }
 
         criticalIface->setEntityPath(entityPath);
-        if (DEBUG)
-        {
-            debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
-                  "PATH", entityPath);
-        }
+        debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath, "PATH",
+              entityPath);
 
         criticalIface->criticalHigh(threshold.value(
             "CriticalHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -620,29 +602,20 @@ void VirtualSensor::createThresholds(const Json& threshold,
         {
             warningIface->setEntityInterfaceHigh(
                 threshold.value("WarningHighDirection", ""));
-            if (DEBUG)
-            {
-                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
-                      "INTF", threshold.value("WarningHighDirection", ""));
-            }
+            debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                  "INTF", threshold.value("WarningHighDirection", ""));
         }
         if (threshold.contains("WarningLow"))
         {
             warningIface->setEntityInterfaceLow(
                 threshold.value("WarningLowDirection", ""));
-            if (DEBUG)
-            {
-                debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
-                      "INTF", threshold.value("WarningLowDirection", ""));
-            }
+            debug("Sensor Threshold:{NAME} = intf:{INTF}", "NAME", objPath,
+                  "INTF", threshold.value("WarningLowDirection", ""));
         }
 
         warningIface->setEntityPath(entityPath);
-        if (DEBUG)
-        {
-            debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath,
-                  "PATH", entityPath);
-        }
+        debug("Sensor Threshold:{NAME} = path:{PATH}", "NAME", objPath, "PATH",
+              entityPath);
 
         warningIface->warningHigh(threshold.value(
             "WarningHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -947,10 +920,7 @@ void VirtualSensors::createVirtualSensors()
     auto data = parseConfigFile();
 
     // print values
-    if (DEBUG)
-    {
-        debug("JSON: {JSON}", "JSON", data.dump());
-    }
+    debug("JSON: {JSON}", "JSON", data.dump());
 
     /* Get virtual sensors  config data */
     for (const auto& j : data)
