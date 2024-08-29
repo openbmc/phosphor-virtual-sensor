@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06f46bea_19ac7046",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-08-29T00:20:05Z",
+      "side": 1,
+      "message": "Oops, updated in patchset 2",
+      "parentUuid": "8bfec19b_13efc6ba",
+      "range": {
+        "startLine": 866,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 76
+      },
+      "revId": "fd6a6c07372d6738eb9d7d7557d70383541e512e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "671882de_93a810d9",
         "filename": "virtualSensor.cpp",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-28T10:54:05Z",
       "side": 1,
       "message": "Why did this change from `path`?\n\nYour map has `xyz.openbmc_project.Configuration...` and `path` is being prepended with that.  We seem to have a mistake somewhere.",
+      "range": {
+        "startLine": 869,
+        "startChar": 52,
+        "endLine": 869,
+        "endChar": 56
+      },
+      "revId": "fd6a6c07372d6738eb9d7d7557d70383541e512e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a756d20_d356be36",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-08-29T00:20:05Z",
+      "side": 1,
+      "message": "updated in patchset 2",
+      "parentUuid": "671882de_93a810d9",
       "range": {
         "startLine": 869,
         "startChar": 52,
