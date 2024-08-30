@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8548e4ce_bfd1de5f",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-30T12:00:02Z",
+      "side": 1,
+      "message": "Remember to mark this \"resolved\".",
+      "parentUuid": "06f46bea_19ac7046",
+      "range": {
+        "startLine": 866,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 76
+      },
+      "revId": "fd6a6c07372d6738eb9d7d7557d70383541e512e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "671882de_93a810d9",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "updated in patchset 2",
       "parentUuid": "671882de_93a810d9",
+      "range": {
+        "startLine": 869,
+        "startChar": 52,
+        "endLine": 869,
+        "endChar": 56
+      },
+      "revId": "fd6a6c07372d6738eb9d7d7557d70383541e512e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107fca46_64886c9e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-30T12:00:02Z",
+      "side": 1,
+      "message": "Remember to mark these \"resolved\".",
+      "parentUuid": "0a756d20_d356be36",
       "range": {
         "startLine": 869,
         "startChar": 52,
