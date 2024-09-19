@@ -1,6 +1,7 @@
 #include "calculate.hpp"
 
 #include <limits>
+#include <numeric>
 
 namespace phosphor::virtual_sensor
 {
@@ -50,9 +51,19 @@ double calculateMinimumValue(std::vector<double>& values)
     return *maxIt;
 }
 
+double calculateSumValue(std::vector<double>& values)
+{
+    if (values.empty())
+    {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+    return std::accumulate(values.begin(), values.end(), 0.0);
+}
+
 std::map<Interface, CalculationFunc> calculationIfaces{
     {"xyz.openbmc_project.Configuration.Maximum", calculateMaximumValue},
     {"xyz.openbmc_project.Configuration.Minimum", calculateMinimumValue},
+    {"xyz.openbmc_project.Configuration.Sum", calculateSumValue},
     {"xyz.openbmc_project.Configuration.ModifiedMedian",
      calculateModifiedMedianValue}};
 
