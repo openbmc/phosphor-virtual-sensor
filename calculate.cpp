@@ -1,5 +1,6 @@
 #include "calculate.hpp"
 
+#include <algorithm>
 #include <limits>
 #include <numeric>
 
