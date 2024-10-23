@@ -1,16 +1,19 @@
 #include "dbusUtils.hpp"
 
+#include <phosphor-logging/lg2.hpp>
+#include <xyz/openbmc_project/Common/error.hpp>
 #include <xyz/openbmc_project/ObjectMapper/common.hpp>
 
-const char* propIntf = "org.freedesktop.DBus.Properties";
-const char* mapperBusName = "xyz.openbmc_project.ObjectMapper";
-const char* mapperPath = "/xyz/openbmc_project/object_mapper";
-const char* mapperIntf =
-    sdbusplus::common::xyz::openbmc_project::ObjectMapper::interface;
+#include <unordered_map>
 
-const char* methodGetObject = "GetObject";
-const char* methodGet = "Get";
-const char* methodSet = "Set";
+constexpr auto propIntf = "org.freedesktop.DBus.Properties";
+constexpr auto mapperBusName = "xyz.openbmc_project.ObjectMapper";
+constexpr auto mapperPath = "/xyz/openbmc_project/object_mapper";
+constexpr auto mapperIntf =
+    sdbusplus::common::xyz::openbmc_project::ObjectMapper::interface;
+constexpr auto methodGetObject = "GetObject";
+constexpr auto methodGet = "Get";
+constexpr auto methodSet = "Set";
 
 using namespace sdbusplus::xyz::openbmc_project::Common::Error;
 
@@ -33,8 +36,7 @@ std::string getService(sdbusplus::bus_t& bus, const std::string& path,
     }
     catch (const sdbusplus::exception_t& ex)
     {
-        if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
-                                         Error::ResourceNotFound::errName))
+        if (ex.name() == std::string(ResourceNotFound::errName))
         {
             // The service isn't on D-Bus yet.
             return std::string{};
@@ -57,6 +59,22 @@ std::string getService(sdbusplus::bus_t& bus, const std::string& path,
     return resp.begin()->first;
 }
 
+Value getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
+                      const std::string& path, const std::string& intf,
+                      const std::string& property)
+{
+    Value value;
+
+    auto method =
+        bus.new_method_call(service.c_str(), path.c_str(), propIntf, methodGet);
+    method.append(intf, property);
+
+    auto msg = bus.call(method);
+    msg.read(value);
+
+    return value;
+}
+
 int setDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
                     const std::string& path, const std::string& intf,
                     const std::string& property, const Value& value)
@@ -70,10 +88,10 @@ int setDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
     }
     catch (const sdbusplus::exception_t& e)
     {
-        lg2::error(
-            "Failed to set dbus property. service:{SERVICE} path:{PATH} intf:{INTF} Property:{PROP},{ERROR}",
-            "SERVICE", service, "PATH", path, "INTF", intf, "PROP", property,
-            "ERROR", e);
+        lg2::error("Failed to set dbus property. service:{SERVICE} path:{PATH} "
+                   "intf:{INTF} Property:{PROP},{ERROR}",
+                   "SERVICE", service, "PATH", path, "INTF", intf, "PROP",
+                   property, "ERROR", e);
         return -1;
     }
 

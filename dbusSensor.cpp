@@ -62,8 +62,9 @@ void DbusSensor::initSensorValue()
                     handleDbusSignalNameOwnerChanged(message);
                 });
 
-            value = getDbusProperty<double>(bus, servName, path, sensorIntf,
-                                            "Value");
+            auto proValue =
+                getDbusProperty(bus, servName, path, sensorIntf, "Value");
+            value = std::get<double>(proValue);
         }
     }
     catch (const std::exception& e)
