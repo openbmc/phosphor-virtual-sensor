@@ -127,10 +127,15 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
         if (!entityPath.empty() && !entityInterfaceHigh.empty())
         {
             // persistThreshold
-            setDbusProperty(bus, entityManagerBusName, entityPath,
-                            entityInterfaceHigh, "Value", value);
+            int ret = setDbusProperty(bus, entityManagerBusName, entityPath,
+                                      entityInterfaceHigh, "Value", value);
+            if (ret == 0)
+            {
+                return WarningObject::warningHigh(value);
+            }
         }
-        return WarningObject::warningHigh(value);
+
+        return value;
     }
 
     /** @brief Set value of WarningLow */
@@ -139,10 +144,14 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
         if (!entityPath.empty() && !entityInterfaceLow.empty())
         {
             // persistThreshold
-            setDbusProperty(bus, entityManagerBusName, entityPath,
-                            entityInterfaceLow, "Value", value);
+            int ret = setDbusProperty(bus, entityManagerBusName, entityPath,
+                                      entityInterfaceLow, "Value", value);
+            if (ret == 0)
+            {
+                return WarningObject::warningLow(value);
+            }
         }
-        return WarningObject::warningLow(value);
+        return value;
     }
 
     /** @brief Set the entitymanager interface corresponding to virtualsensor
@@ -246,10 +255,14 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
         // persistThreshold
         if (!entityPath.empty() && !entityInterfaceHigh.empty())
         {
-            setDbusProperty(bus, entityManagerBusName, entityPath,
-                            entityInterfaceHigh, "Value", value);
+            int ret = setDbusProperty(bus, entityManagerBusName, entityPath,
+                                      entityInterfaceHigh, "Value", value);
+            if (ret == 0)
+            {
+                return CriticalObject::criticalHigh(value);
+            }
         }
-        return CriticalObject::criticalHigh(value);
+        return value;
     }
 
     /** @brief Set value of CriticalLow */
@@ -257,10 +270,14 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     {
         if (!entityPath.empty() && !entityInterfaceLow.empty())
         {
-            setDbusProperty(bus, entityManagerBusName, entityPath,
-                            entityInterfaceLow, "Value", value);
+            int ret = setDbusProperty(bus, entityManagerBusName, entityPath,
+                                      entityInterfaceLow, "Value", value);
+            if (ret == 0)
+            {
+                return CriticalObject::criticalLow(value);
+            }
         }
-        return CriticalObject::criticalLow(value);
+        return value;
     }
 
     /** @brief Set the entitymanager interface corresponding to virtualsensor
