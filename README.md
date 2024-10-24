@@ -24,7 +24,7 @@ For example:
 {
   "Desc": {
     "Config": "D-Bus",
-    "Type": "ModifiedMedian"
+    "Types": ["ModifiedMedian"]
   }
 }
 ```

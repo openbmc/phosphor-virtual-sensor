@@ -861,18 +861,28 @@ void VirtualSensors::createVirtualSensors()
                  * don't want to miss them */
                 setupMatches();
 
-                if (desc.contains("Type"))
+                if (desc.contains("Types"))
                 {
-                    auto type = desc.value("Type", "");
-                    auto intf = "xyz.openbmc_project.Configuration." + type;
-
-                    if (!calculationIfaces.contains(intf))
+                    auto types = desc.value("Types", empty);
+                    if (!types.is_array())
                     {
-                        error("Invalid calculation type {TYPE} supplied.",
-                              "TYPE", type);
+                        error("Invalid types supplied.");
                         continue;
                     }
-                    createVirtualSensorsFromDBus(intf);
+
+                    for (const auto& item : types)
+                    {
+                        auto type = item.get<std::string>();
+                        auto intf = "xyz.openbmc_project.Configuration." + type;
+
+                        if (!calculationIfaces.contains(intf))
+                        {
+                            error("Invalid calculation type {TYPE} supplied.",
+                                  "TYPE", type);
+                            continue;
+                        }
+                        createVirtualSensorsFromDBus(intf);
+                    }
                 }
                 continue;
             }
