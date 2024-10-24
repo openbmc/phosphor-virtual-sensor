@@ -860,18 +860,8 @@ void VirtualSensors::createVirtualSensors()
                  * first because the configs may not be on D-Bus yet and we
                  * don't want to miss them */
                 setupMatches();
-
-                if (desc.contains("Type"))
+                for (const auto& [intf, _] : calculationIfaces)
                 {
-                    auto type = desc.value("Type", "");
-                    auto intf = "xyz.openbmc_project.Configuration." + type;
-
-                    if (!calculationIfaces.contains(intf))
-                    {
-                        error("Invalid calculation type {TYPE} supplied.",
-                              "TYPE", type);
-                        continue;
-                    }
                     createVirtualSensorsFromDBus(intf);
                 }
                 continue;

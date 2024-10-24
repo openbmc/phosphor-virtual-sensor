@@ -23,8 +23,7 @@ For example:
 ```json
 {
   "Desc": {
-    "Config": "D-Bus",
-    "Type": "ModifiedMedian"
+    "Config": "D-Bus"
   }
 }
 ```
