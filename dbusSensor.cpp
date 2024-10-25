@@ -42,37 +42,35 @@ double DbusSensor::getSensorValue()
 
 void DbusSensor::initSensorValue()
 {
-    try
+    // If servName is not empty, reduce one DbusCall
+    if (servName.empty())
     {
-        // If servName is not empty, reduce one DbusCall
-        if (servName.empty())
-        {
-            value = std::numeric_limits<double>::quiet_NaN();
-            servName = getService(bus, path, sensorIntf);
-        }
+        value = std::numeric_limits<double>::quiet_NaN();
+        servName = getService(bus, path, sensorIntf);
+    }
 
-        if (!servName.empty())
-        {
-            signalNameOwnerChanged.reset();
-            signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
-                bus,
-                sdbusplus::bus::match::rules::nameOwnerChanged() +
-                    sdbusplus::bus::match::rules::arg0namespace(servName),
-                [this](sdbusplus::message_t& message) {
-                    handleDbusSignalNameOwnerChanged(message);
-                });
+    if (!servName.empty())
+    {
+        signalNameOwnerChanged.reset();
+        signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
+            bus,
+            sdbusplus::bus::match::rules::nameOwnerChanged() +
+                sdbusplus::bus::match::rules::arg0namespace(servName),
+            [this](sdbusplus::message_t& message) {
+                handleDbusSignalNameOwnerChanged(message);
+            });
 
+        try
+        {
             auto proValue =
                 getDbusProperty(bus, servName, path, sensorIntf, "Value");
             value = std::get<double>(proValue);
         }
+        catch (const sdbusplus::exception_t&)
+        {
+            value = std::numeric_limits<double>::quiet_NaN();
+        }
     }
-    catch (const std::exception& e)
-    {
-        value = std::numeric_limits<double>::quiet_NaN();
-    }
-
-    return;
 }
 
 void DbusSensor::handleDbusSignalNameOwnerChanged(sdbusplus::message_t& msg)
