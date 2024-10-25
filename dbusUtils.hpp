@@ -7,7 +7,7 @@
 using Value = std::variant<int64_t, double, std::string, bool>;
 
 std::string getService(sdbusplus::bus_t& bus, const std::string& path,
-                       const char* intf);
+                       const std::string& intf);
 
 Value getDbusProperty(sdbusplus::bus_t& bus, const std::string& service,
                       const std::string& path, const std::string& intf,
