@@ -25,9 +25,10 @@ executable(
     'virtual-sensor',
     [
         'calculate.cpp',
-        'virtualSensor.cpp',
         'dbusSensor.cpp',
         'dbusUtils.cpp',
+        'main.cpp',
+        'virtualSensor.cpp',
     ],
     dependencies: [
         dependency('nlohmann_json', include_type: 'system'),
