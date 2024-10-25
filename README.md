@@ -30,7 +30,7 @@ For example:
 ```
 
 Sensors added this way can only use a set of restricted calculations. Currently
-the only type supported is `modifiedMedian`.
+supported types are `Average`, `Maximum`, `Minimum`, `Sum` and `ModifiedMedian`.
 
 The virtual sensor configuration information needs to be added into the relevant
 hardware configuration file in entity-manager. This method of adding a virtual
