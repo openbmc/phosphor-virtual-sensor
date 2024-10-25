@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd5bfa3_9f814673",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-25T21:06:56Z",
+      "side": 1,
+      "message": "I don\u0027t understand how removing a template is an optimization.  Can you explain?",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e176dc_5c7141e1",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-25T21:06:56Z",
+      "side": 1,
+      "message": "You now removed all the error handling.  Why?",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
