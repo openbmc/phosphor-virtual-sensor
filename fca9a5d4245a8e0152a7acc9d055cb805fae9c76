@@ -22,6 +22,30 @@
       },
       "revId": "fca9a5d4245a8e0152a7acc9d055cb805fae9c76",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef97826_6e16efb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-25T00:33:02Z",
+      "side": 1,
+      "message": "If this commit can be merged, I can push a new patch to update all the virtual_sensor_config.json configs",
+      "parentUuid": "b7515f13_11ef4da2",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "fca9a5d4245a8e0152a7acc9d055cb805fae9c76",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
