@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "024e240d_2a4f5c70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-28T01:02:52Z",
+      "side": 1,
+      "message": "Two problems are solved here:\n\nThis template does not support all types, std::numeric_limits\u003cT\u003e::quiet_NaN(); only supports double, float types.\nThe method has been captured when it is called, and the value has been set to Nan in the catch (https://github.com/openbmc/phosphor-virtual-sensor/blob/d98174e9c83d1eb585b58aa0c7c24e745b4a9688/dbusSensor.cpp#L65-L71)\nTherefore, there is no need to declare this method as a template, and you want the caller to capture the exception",
+      "parentUuid": "abd5bfa3_9f814673",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8e176dc_5c7141e1",
         "filename": "dbusUtils.cpp",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-25T21:06:56Z",
       "side": 1,
       "message": "You now removed all the error handling.  Why?",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3584ea7_32121bdb",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-28T01:02:52Z",
+      "side": 1,
+      "message": "As above",
+      "parentUuid": "b8e176dc_5c7141e1",
       "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
