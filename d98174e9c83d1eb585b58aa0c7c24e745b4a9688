@@ -1,0 +1,8 @@
+Code-Review+1: Matt Spinler <spinler@us.ibm.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Patrick Williams <patrick@stwcx.xyz>
+Submitted-by: George Liu <liuxiwei@ieisystem.com>
+Submitted-at: Mon, 28 Oct 2024 00:24:30 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/phosphor-virtual-sensor/+/75488
+Project: openbmc/phosphor-virtual-sensor
+Branch: refs/heads/master
