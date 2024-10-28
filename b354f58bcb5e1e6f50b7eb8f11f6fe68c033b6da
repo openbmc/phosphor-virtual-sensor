@@ -22,6 +22,30 @@
       },
       "revId": "b354f58bcb5e1e6f50b7eb8f11f6fe68c033b6da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b83d53b1_1badb690",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-28T01:59:20Z",
+      "side": 1,
+      "message": "Because EM holds all sensor thresholds and manages them persistently (`/var/configuration/system.json`), without this patch, if the update fails in EM, the virtual sensor thresholds will not persist when reset bmc. This is a bug.",
+      "parentUuid": "393baa7a_2b255a19",
+      "range": {
+        "startLine": 10,
+        "startChar": 46,
+        "endLine": 12,
+        "endChar": 39
+      },
+      "revId": "b354f58bcb5e1e6f50b7eb8f11f6fe68c033b6da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
