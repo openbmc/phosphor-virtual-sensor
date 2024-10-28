@@ -22,6 +22,30 @@
       },
       "revId": "1954bf5b94a2dfc4bb5b9d8f99cb31c47a339de2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8cc459_b4432582",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-28T02:48:50Z",
+      "side": 1,
+      "message": "This patch solves two issues:\n1. If `getService` catches an exception and the caller does not handle the exception again, a coredump will occur.\n2. From the context, even if an exception occurs when calling getService, `string{}` can be directly returned. Therefore, if getService handles the exception, the caller does not need to catch the exception of getService again, and can directly determine whether the return value is `string{}`.",
+      "parentUuid": "da008f67_dc8df601",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "1954bf5b94a2dfc4bb5b9d8f99cb31c47a339de2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
