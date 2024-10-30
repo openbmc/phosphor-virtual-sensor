@@ -46,6 +46,30 @@
       },
       "revId": "1954bf5b94a2dfc4bb5b9d8f99cb31c47a339de2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd1e2bd_ac745375",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-30T19:56:38Z",
+      "side": 1,
+      "message": "I\u0027m not understanding the \"issue\".  You\u0027ve restated what the code does.  How is this bad?  When using exception handling, exceptions are used to represent unexpected conditions and not magic values.  An empty string is a magic value.",
+      "parentUuid": "6f8cc459_b4432582",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "1954bf5b94a2dfc4bb5b9d8f99cb31c47a339de2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
