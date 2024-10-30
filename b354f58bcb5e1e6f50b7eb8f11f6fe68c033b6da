@@ -46,6 +46,30 @@
       },
       "revId": "b354f58bcb5e1e6f50b7eb8f11f6fe68c033b6da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47b6f9a_5d5454a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-30T19:49:10Z",
+      "side": 1,
+      "message": "I disagree.  We can still change the threshold for now, right?\n\nWith the code change we\u0027re just silently ignoring the request.  This seems just a s bad.\n\nThe fact we couldn\u0027t save to EM maybe is a bug, but we shouldn\u0027t react to one bug by adding another.",
+      "parentUuid": "b83d53b1_1badb690",
+      "range": {
+        "startLine": 10,
+        "startChar": 46,
+        "endLine": 12,
+        "endChar": 39
+      },
+      "revId": "b354f58bcb5e1e6f50b7eb8f11f6fe68c033b6da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
