@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62f8032a_55d1ff56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-30T19:54:03Z",
+      "side": 1,
+      "message": "\u003e This template does not support all types, std::numeric_limits\u003cT\u003e::quiet_NaN(); only supports double, float types.\n\nThere is currently one user of this function.  The line you linked to above.  It only uses double.",
+      "parentUuid": "024e240d_2a4f5c70",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8e176dc_5c7141e1",
         "filename": "dbusUtils.cpp",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "As above",
       "parentUuid": "b8e176dc_5c7141e1",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de02d057_485dacb2",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-10-30T19:54:03Z",
+      "side": 1,
+      "message": "But the code was explicit before where as now it is implicit.  Now if someone makes changes elsewhere and doesn\u0027t know that this is an exception they need to handle, introduce a bug.  This change just moves an implementation detail from a centralized place to a decentralized place; I don\u0027t see that as a net positive.",
+      "parentUuid": "f3584ea7_32121bdb",
       "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
