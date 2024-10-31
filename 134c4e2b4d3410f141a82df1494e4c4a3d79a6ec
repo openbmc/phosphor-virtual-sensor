@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4091cd7e_0d179796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-31T08:54:26Z",
+      "side": 1,
+      "message": "Yes, but this defeats the purpose of using templates.\n\nAnd because the getProperty method is declared a template, it must be implemented in hpp. Although this is not a problem, I think it is also an optimization item 😊\n\nAlso, if we think that the user only uses `double` when calling, then I don\u0027t think it is necessary to use a template here, and then directly `return std::numeric_limits\u003cdouble\u003e::quiet_NaN();` when hitting the catch.",
+      "parentUuid": "62f8032a_55d1ff56",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8e176dc_5c7141e1",
         "filename": "dbusUtils.cpp",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "But the code was explicit before where as now it is implicit.  Now if someone makes changes elsewhere and doesn\u0027t know that this is an exception they need to handle, introduce a bug.  This change just moves an implementation detail from a centralized place to a decentralized place; I don\u0027t see that as a net positive.",
       "parentUuid": "f3584ea7_32121bdb",
+      "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8231e063_9e0c9bcc",
+        "filename": "dbusUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-10-31T08:54:26Z",
+      "side": 1,
+      "message": "As mentioned above, I think this is where we disagree. I prefer to remove the template and try-catch, and hope that the caller will handle the exception.\n\nBecause there may be different ways to handle exceptions for different callers.\n\nIf we insist that the caller only uses double, then I accept handling exceptions in getProperty and returning `return std::numeric_limits\u003cdouble\u003e::quiet_NaN();`, but this also loses the meaning of using templates.",
+      "parentUuid": "de02d057_485dacb2",
       "revId": "134c4e2b4d3410f141a82df1494e4c4a3d79a6ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
