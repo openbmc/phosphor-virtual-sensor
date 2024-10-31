@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f2ee61c_7d6be81e",
+        "filename": "virtualSensor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2024-10-31T13:22:55Z",
+      "side": 1,
+      "message": "could also do:\nfor (const auto\u0026 intf : std::views::keys(calculationIfaces)",
+      "revId": "68ce824deaa4b4871fa641d3db088f6acfd1fe96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
