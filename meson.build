@@ -60,6 +60,6 @@ configure_file(
   install_dir: systemd.get_variable('systemdsystemunitdir'))
 
 build_tests = get_option('tests')
-if not build_tests.disabled()
+if build_tests.allowed()
   subdir('test')
 endif
