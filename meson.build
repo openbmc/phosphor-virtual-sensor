@@ -16,9 +16,7 @@ if cpp.has_header('exprtk.hpp')
     exprtk = declare_dependency()
 else
     subproject('exprtk', required: false)
-    exprtk = declare_dependency(
-        include_directories: 'subprojects/exprtk'
-    )
+    exprtk = declare_dependency(include_directories: 'subprojects/exprtk')
 endif
 
 executable(
@@ -38,7 +36,7 @@ executable(
         exprtk,
     ],
     install: true,
-    install_dir: get_option('bindir')
+    install_dir: get_option('bindir'),
 )
 
 packagedir = join_paths(
@@ -47,19 +45,20 @@ packagedir = join_paths(
     meson.project_name(),
 )
 
-install_data(sources : 'virtual_sensor_config.json', install_dir : packagedir)
+install_data(sources: 'virtual_sensor_config.json', install_dir: packagedir)
 
 systemd = dependency('systemd')
 conf_data = configuration_data()
 conf_data.set('bindir', get_option('prefix') / get_option('bindir'))
 configure_file(
-  input: 'phosphor-virtual-sensor.service.in',
-  output: 'phosphor-virtual-sensor.service',
-  configuration: conf_data,
-  install: true,
-  install_dir: systemd.get_variable('systemdsystemunitdir'))
+    input: 'phosphor-virtual-sensor.service.in',
+    output: 'phosphor-virtual-sensor.service',
+    configuration: conf_data,
+    install: true,
+    install_dir: systemd.get_variable('systemdsystemunitdir'),
+)
 
 build_tests = get_option('tests')
 if build_tests.allowed()
-  subdir('test')
+    subdir('test')
 endif
