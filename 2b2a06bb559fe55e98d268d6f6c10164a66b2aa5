@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb35837_ef001df1",
+        "filename": ".clang-tidy-ignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-02-07T03:06:16Z",
+      "side": 1,
+      "message": "Why?  This shouldn’t be general behavior in the project to ignore tests.",
+      "revId": "2b2a06bb559fe55e98d268d6f6c10164a66b2aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
