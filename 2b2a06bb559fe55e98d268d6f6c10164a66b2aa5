@@ -16,6 +16,24 @@
       "message": "Why?  This shouldn’t be general behavior in the project to ignore tests.",
       "revId": "2b2a06bb559fe55e98d268d6f6c10164a66b2aa5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6623a638_df292487",
+        "filename": ".clang-tidy-ignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2025-02-07T03:15:00Z",
+      "side": 1,
+      "message": "It\u0027s down stream behavior. We usually disable the check for test code...\nLet me remove it here.",
+      "parentUuid": "5fb35837_ef001df1",
+      "revId": "2b2a06bb559fe55e98d268d6f6c10164a66b2aa5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
