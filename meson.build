@@ -36,7 +36,7 @@ executable(
         exprtk,
     ],
     install: true,
-    install_dir: get_option('bindir'),
+    install_dir: get_option('libexecdir') / meson.project_name(),
 )
 
 packagedir = join_paths(
@@ -49,7 +49,7 @@ install_data(sources: 'virtual_sensor_config.json', install_dir: packagedir)
 
 systemd = dependency('systemd')
 conf_data = configuration_data()
-conf_data.set('bindir', get_option('prefix') / get_option('bindir'))
+conf_data.set('libexecdir', get_option('prefix') / get_option('libexecdir'))
 configure_file(
     input: 'phosphor-virtual-sensor.service.in',
     output: 'phosphor-virtual-sensor.service',
