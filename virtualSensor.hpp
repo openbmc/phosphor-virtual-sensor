@@ -205,24 +205,27 @@ class VirtualSensor : public ValueObject
 
     /** @brief Check Sensor threshold and update alarm and log */
     template <typename V, typename T>
-    void checkThresholds(V value, T& threshold)
+    bool checkThresholds(V value, T& threshold, bool& change)
     {
         if (!threshold)
-            return;
+            return true;
 
         static constexpr auto tname = T::element_type::name;
 
+        bool normal = true;
         auto alarmHigh = threshold->alarmHigh();
         auto highHysteresis = threshold->getHighHysteresis();
         if ((!alarmHigh && value >= threshold->high()) ||
             (alarmHigh && value < (threshold->high() - highHysteresis)))
         {
+            change = true;
             if (!alarmHigh)
             {
                 error("ASSERT: sensor {SENSOR} is above the upper threshold "
                       "{THRESHOLD}.",
                       "SENSOR", name, "THRESHOLD", tname);
-                threshold->alarmHighSignalAsserted(value);
+                threshold->alarmHighSignalAsserted(value, entityPath, units);
+                normal = false;
             }
             else
             {
@@ -239,12 +242,14 @@ class VirtualSensor : public ValueObject
         if ((!alarmLow && value <= threshold->low()) ||
             (alarmLow && value > (threshold->low() + lowHysteresis)))
         {
+            change = true;
             if (!alarmLow)
             {
                 error("ASSERT: sensor {SENSOR} is below the lower threshold "
                       "{THRESHOLD}.",
                       "SENSOR", name, "THRESHOLD", tname);
-                threshold->alarmLowSignalAsserted(value);
+                threshold->alarmLowSignalAsserted(value, entityPath, units);
+                normal = false;
             }
             else
             {
@@ -255,6 +260,7 @@ class VirtualSensor : public ValueObject
             }
             threshold->alarmLow(!alarmLow);
         }
+        return normal;
     }
 
     /** @brief Create Association from entityPath*/
