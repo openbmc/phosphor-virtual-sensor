@@ -141,6 +141,8 @@ class VirtualSensor : public ValueObject
     sdbusplus::bus_t& bus;
     /** @brief name of sensor */
     std::string name;
+    /** @brief unit of sensor */
+    ValueIface::Unit units;
 
     /** @brief Virtual sensor path in entityManager Dbus.
      * This value is used to set thresholds/create association
