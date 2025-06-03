@@ -93,12 +93,16 @@ class VirtualSensor : public ValueObject
      * @param[in] bus          - Handle to system dbus
      * @param[in] objPath      - The Dbus path of sensor
      * @param[in] sensorConfig - Json object for sensor config
+     * @param[in] name         - Sensor name
+     * @param[in] type         - sensor type/unit
      */
     VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
-                  const Json& sensorConfig, const std::string& name) :
-        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name)
+                  const Json& sensorConfig, const std::string& name,
+                  const std::string& type) :
+        ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name),
+        objPath(objPath)
     {
-        initVirtualSensor(sensorConfig, objPath);
+        initVirtualSensor(sensorConfig, objPath, type);
     }
 
     /** @brief Constructs VirtualSensor
@@ -117,7 +121,7 @@ class VirtualSensor : public ValueObject
                   const std::string& type, const std::string& calculationType,
                   const std::string& entityPath) :
         ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name),
-        entityPath(entityPath)
+        objPath(objPath), entityPath(entityPath)
     {
         initVirtualSensor(ifacemap, objPath, type, calculationType);
     }
@@ -141,6 +145,10 @@ class VirtualSensor : public ValueObject
     sdbusplus::bus_t& bus;
     /** @brief name of sensor */
     std::string name;
+    /** @brief unit of sensor */
+    ValueIface::Unit units;
+    /** @brief object path of this sensor */
+    std::string objPath;
 
     /** @brief Virtual sensor path in entityManager Dbus.
      * This value is used to set thresholds/create association
@@ -180,8 +188,8 @@ class VirtualSensor : public ValueObject
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor
      */
-    void initVirtualSensor(const Json& sensorConfig,
-                           const std::string& objPath);
+    void initVirtualSensor(const Json& sensorConfig, const std::string& objPath,
+                           const std::string& type);
 
     /** @brief Read config from interface map and initialize sensor data
      * for each virtual sensor
@@ -195,7 +203,8 @@ class VirtualSensor : public ValueObject
     double calculateValue(const std::string& sensortype,
                           const VirtualSensor::ParamMap& paramMap);
     /** @brief create threshold objects from json config */
-    void createThresholds(const Json& threshold, const std::string& objPath);
+    void createThresholds(const Json& threshold, const std::string& objPath,
+                          ValueIface::Unit units);
     /** @brief parse config from entity manager **/
     void parseConfigInterface(const PropertyMap& propertyMap,
                               const std::string& sensorType,
