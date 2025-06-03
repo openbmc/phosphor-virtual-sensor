@@ -19,6 +19,19 @@ FuncMaxIgnoreNaN<double> VirtualSensor::funcMaxIgnoreNaN;
 FuncSumIgnoreNaN<double> VirtualSensor::funcSumIgnoreNaN;
 FuncIfNan<double> VirtualSensor::funcIfNan;
 
+std::map<std::string, ValueIface::Unit> unitMap = {
+    {"temperature", ValueIface::Unit::DegreesC},
+    {"fan_tach", ValueIface::Unit::RPMS},
+    {"fan_pwm", ValueIface::Unit::Percent},
+    {"voltage", ValueIface::Unit::Volts},
+    {"altitude", ValueIface::Unit::Meters},
+    {"current", ValueIface::Unit::Amperes},
+    {"power", ValueIface::Unit::Watts},
+    {"energy", ValueIface::Unit::Joules},
+    {"utilization", ValueIface::Unit::Percent},
+    {"airflow", ValueIface::Unit::CFM},
+    {"pressure", ValueIface::Unit::Pascals}};
+
 void printParams(const VirtualSensor::ParamMap& paramMap)
 {
     for (const auto& p : paramMap)
@@ -315,6 +328,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
                 if (!sensorType.empty() && !name.empty())
                 {
                     auto path = sensorDbusPath + sensorType + "/" + name;
+                    units = unitMap[sensorType];
 
                     auto paramPtr =
                         std::make_unique<SensorParam>(bus, path, *this);
@@ -378,6 +392,8 @@ void VirtualSensor::initVirtualSensor(
     Json thresholds;
     const std::string vsThresholdsIntf =
         calculationIface + vsThresholdsIfaceSuffix;
+
+    units = unitMap[sensorType];
 
     for (const auto& [interface, propertyMap] : interfaceMap)
     {
@@ -684,19 +700,6 @@ Json VirtualSensors::parseConfigFile()
 
     return data;
 }
-
-std::map<std::string, ValueIface::Unit> unitMap = {
-    {"temperature", ValueIface::Unit::DegreesC},
-    {"fan_tach", ValueIface::Unit::RPMS},
-    {"fan_pwm", ValueIface::Unit::Percent},
-    {"voltage", ValueIface::Unit::Volts},
-    {"altitude", ValueIface::Unit::Meters},
-    {"current", ValueIface::Unit::Amperes},
-    {"power", ValueIface::Unit::Watts},
-    {"energy", ValueIface::Unit::Joules},
-    {"utilization", ValueIface::Unit::Percent},
-    {"airflow", ValueIface::Unit::CFM},
-    {"pressure", ValueIface::Unit::Pascals}};
 
 const std::string getSensorTypeFromUnit(const std::string& unit)
 {
