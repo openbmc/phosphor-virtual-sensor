@@ -147,6 +147,8 @@ class VirtualSensor : public ValueObject
     /** @brief object path of this sensor */
     std::string objPath;
 
+    /** @brief object path of this sensor */
+    std::string objPath;
     /** @brief Virtual sensor path in entityManager Dbus.
      * This value is used to set thresholds/create association
      */
@@ -208,10 +210,10 @@ class VirtualSensor : public ValueObject
 
     /** @brief Check Sensor threshold and update alarm and log */
     template <typename V, typename T>
-    void checkThresholds(V value, T& threshold)
+    bool checkThresholds(V value, T& threshold, bool& change)
     {
         if (!threshold)
-            return;
+            return true;
 
         static constexpr auto tname = T::element_type::name;
 
@@ -220,12 +222,13 @@ class VirtualSensor : public ValueObject
         if ((!alarmHigh && value >= threshold->high()) ||
             (alarmHigh && value < (threshold->high() - highHysteresis)))
         {
+            change = true;
             if (!alarmHigh)
             {
                 error("ASSERT: sensor {SENSOR} is above the upper threshold "
                       "{THRESHOLD}.",
                       "SENSOR", name, "THRESHOLD", tname);
-                threshold->alarmHighSignalAsserted(value);
+                threshold->alarmHighSignalAsserted(value, units);
             }
             else
             {
@@ -234,7 +237,8 @@ class VirtualSensor : public ValueObject
                      "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmHighSignalDeasserted(value);
             }
-            threshold->alarmHigh(!alarmHigh);
+            alarmHigh = !alarmHigh;
+            threshold->alarmHigh(alarmHigh);
         }
 
         auto alarmLow = threshold->alarmLow();
@@ -242,12 +246,13 @@ class VirtualSensor : public ValueObject
         if ((!alarmLow && value <= threshold->low()) ||
             (alarmLow && value > (threshold->low() + lowHysteresis)))
         {
+            change = true;
             if (!alarmLow)
             {
                 error("ASSERT: sensor {SENSOR} is below the lower threshold "
                       "{THRESHOLD}.",
                       "SENSOR", name, "THRESHOLD", tname);
-                threshold->alarmLowSignalAsserted(value);
+                threshold->alarmLowSignalAsserted(value, units);
             }
             else
             {
@@ -256,8 +261,10 @@ class VirtualSensor : public ValueObject
                      "SENSOR", name, "THRESHOLD", tname);
                 threshold->alarmLowSignalDeasserted(value);
             }
-            threshold->alarmLow(!alarmLow);
+            alarmLow = !alarmLow;
+            threshold->alarmLow(alarmLow);
         }
+        return !alarmHigh && !alarmLow;
     }
 
     /** @brief Create Association from entityPath*/
