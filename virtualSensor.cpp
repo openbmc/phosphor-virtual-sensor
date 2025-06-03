@@ -485,11 +485,20 @@ void VirtualSensor::updateVirtualSensor()
     debug("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
 
     /* Check sensor thresholds and log required message */
-    checkThresholds(val, perfLossIface);
-    checkThresholds(val, warningIface);
-    checkThresholds(val, criticalIface);
-    checkThresholds(val, softShutdownIface);
-    checkThresholds(val, hardShutdownIface);
+    auto changed = false;
+    auto normal = checkThresholds(val, perfLossIface, changed);
+    normal &= checkThresholds(val, warningIface, changed);
+    normal &= checkThresholds(val, criticalIface, changed);
+    normal &= checkThresholds(val, softShutdownIface, changed);
+    normal &= checkThresholds(val, hardShutdownIface, changed);
+    if (changed && normal)
+    {
+        namespace Events =
+            sdbusplus::event::xyz::openbmc_project::sensor::Threshold;
+
+        lg2::commit(Events::SensorReadingNormalRange(
+            "SENSOR_NAME", objPath, "READING_VALUE", val, "UNITS", units));
+    }
 }
 
 void VirtualSensor::createThresholds(const Json& threshold,
