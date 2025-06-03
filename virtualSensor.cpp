@@ -19,6 +19,19 @@ FuncMaxIgnoreNaN<double> VirtualSensor::funcMaxIgnoreNaN;
 FuncSumIgnoreNaN<double> VirtualSensor::funcSumIgnoreNaN;
 FuncIfNan<double> VirtualSensor::funcIfNan;
 
+std::map<std::string, ValueIface::Unit> unitMap = {
+    {"temperature", ValueIface::Unit::DegreesC},
+    {"fan_tach", ValueIface::Unit::RPMS},
+    {"fan_pwm", ValueIface::Unit::Percent},
+    {"voltage", ValueIface::Unit::Volts},
+    {"altitude", ValueIface::Unit::Meters},
+    {"current", ValueIface::Unit::Amperes},
+    {"power", ValueIface::Unit::Watts},
+    {"energy", ValueIface::Unit::Joules},
+    {"utilization", ValueIface::Unit::Percent},
+    {"airflow", ValueIface::Unit::CFM},
+    {"pressure", ValueIface::Unit::Pascals}};
+
 void printParams(const VirtualSensor::ParamMap& paramMap)
 {
     for (const auto& p : paramMap)
@@ -220,14 +233,17 @@ void VirtualSensor::parseConfigInterface(const PropertyMap& propertyMap,
 }
 
 void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
-                                      const std::string& objPath)
+                                      const std::string& objPath,
+                                      const std::string& type)
 {
     static const Json empty{};
+
+    units = unitMap.at(type);
 
     /* Get threshold values if defined in config */
     auto threshold = sensorConfig.value("Threshold", empty);
 
-    createThresholds(threshold, objPath);
+    createThresholds(threshold, objPath, units);
 
     /* Get MaxValue, MinValue setting if defined in config */
     auto confDesc = sensorConfig.value("Desc", empty);
@@ -315,7 +331,6 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
                 if (!sensorType.empty() && !name.empty())
                 {
                     auto path = sensorDbusPath + sensorType + "/" + name;
-
                     auto paramPtr =
                         std::make_unique<SensorParam>(bus, path, *this);
                     std::string paramName = j["ParamName"];
@@ -379,6 +394,8 @@ void VirtualSensor::initVirtualSensor(
     const std::string vsThresholdsIntf =
         calculationIface + vsThresholdsIfaceSuffix;
 
+    units = unitMap.at(sensorType);
+
     for (const auto& [interface, propertyMap] : interfaceMap)
     {
         /* Each threshold is on it's own interface with a number as a suffix
@@ -393,7 +410,7 @@ void VirtualSensor::initVirtualSensor(
         }
     }
 
-    createThresholds(thresholds, objPath);
+    createThresholds(thresholds, objPath, units);
     symbols.add_constants();
     symbols.add_package(vecopsPackage);
     expression.register_symbol_table(symbols);
@@ -476,8 +493,8 @@ void VirtualSensor::updateVirtualSensor()
     checkThresholds(val, hardShutdownIface);
 }
 
-void VirtualSensor::createThresholds(const Json& threshold,
-                                     const std::string& objPath)
+void VirtualSensor::createThresholds(
+    const Json& threshold, const std::string& objPath, ValueIface::Unit units)
 {
     if (threshold.empty())
     {
@@ -487,8 +504,8 @@ void VirtualSensor::createThresholds(const Json& threshold,
     // at least one of their values is present.
     if (threshold.contains("CriticalHigh") || threshold.contains("CriticalLow"))
     {
-        criticalIface =
-            std::make_unique<Threshold<CriticalObject>>(bus, objPath.c_str());
+        criticalIface = std::make_unique<Threshold<CriticalObject>>(
+            bus, objPath.c_str(), units);
 
         if (threshold.contains("CriticalHigh"))
         {
@@ -521,8 +538,8 @@ void VirtualSensor::createThresholds(const Json& threshold,
 
     if (threshold.contains("WarningHigh") || threshold.contains("WarningLow"))
     {
-        warningIface =
-            std::make_unique<Threshold<WarningObject>>(bus, objPath.c_str());
+        warningIface = std::make_unique<Threshold<WarningObject>>(
+            bus, objPath.c_str(), units);
 
         if (threshold.contains("WarningHigh"))
         {
@@ -557,7 +574,7 @@ void VirtualSensor::createThresholds(const Json& threshold,
         threshold.contains("HardShutdownLow"))
     {
         hardShutdownIface = std::make_unique<Threshold<HardShutdownObject>>(
-            bus, objPath.c_str());
+            bus, objPath.c_str(), units);
 
         hardShutdownIface->hardShutdownHigh(threshold.value(
             "HardShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -573,7 +590,7 @@ void VirtualSensor::createThresholds(const Json& threshold,
         threshold.contains("SoftShutdownLow"))
     {
         softShutdownIface = std::make_unique<Threshold<SoftShutdownObject>>(
-            bus, objPath.c_str());
+            bus, objPath.c_str(), units);
 
         softShutdownIface->softShutdownHigh(threshold.value(
             "SoftShutdownHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -589,7 +606,7 @@ void VirtualSensor::createThresholds(const Json& threshold,
         threshold.contains("PerformanceLossLow"))
     {
         perfLossIface = std::make_unique<Threshold<PerformanceLossObject>>(
-            bus, objPath.c_str());
+            bus, objPath.c_str(), units);
 
         perfLossIface->performanceLossHigh(threshold.value(
             "PerformanceLossHigh", std::numeric_limits<double>::quiet_NaN()));
@@ -684,19 +701,6 @@ Json VirtualSensors::parseConfigFile()
 
     return data;
 }
-
-std::map<std::string, ValueIface::Unit> unitMap = {
-    {"temperature", ValueIface::Unit::DegreesC},
-    {"fan_tach", ValueIface::Unit::RPMS},
-    {"fan_pwm", ValueIface::Unit::Percent},
-    {"voltage", ValueIface::Unit::Volts},
-    {"altitude", ValueIface::Unit::Meters},
-    {"current", ValueIface::Unit::Amperes},
-    {"power", ValueIface::Unit::Watts},
-    {"energy", ValueIface::Unit::Joules},
-    {"utilization", ValueIface::Unit::Percent},
-    {"airflow", ValueIface::Unit::CFM},
-    {"pressure", ValueIface::Unit::Pascals}};
 
 const std::string getSensorTypeFromUnit(const std::string& unit)
 {
@@ -890,7 +894,7 @@ void VirtualSensors::createVirtualSensors()
                     auto objPath = sensorDbusPath + sensorType + "/" + name;
 
                     auto virtualSensorPtr = std::make_unique<VirtualSensor>(
-                        bus, objPath.c_str(), j, name);
+                        bus, objPath.c_str(), j, name, sensorType);
 
                     info("Added a new virtual sensor: {NAME}", "NAME", name);
                     virtualSensorPtr->updateVirtualSensor();

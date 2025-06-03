@@ -7,6 +7,7 @@
 #include <xyz/openbmc_project/Sensor/Threshold/PerformanceLoss/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/SoftShutdown/server.hpp>
 #include <xyz/openbmc_project/Sensor/Threshold/Warning/server.hpp>
+#include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
 const constexpr char* entityManagerBusName =
     "xyz.openbmc_project.EntityManager";
@@ -18,6 +19,7 @@ using ServerObject = typename sdbusplus::server::object_t<T...>;
 
 namespace threshold_ns =
     sdbusplus::xyz::openbmc_project::Sensor::Threshold::server;
+using Unit = sdbusplus::xyz::openbmc_project::Sensor::server::Value::Unit;
 using CriticalObject = ServerObject<threshold_ns::Critical>;
 using WarningObject = ServerObject<threshold_ns::Warning>;
 using SoftShutdownObject = ServerObject<threshold_ns::SoftShutdown>;
@@ -60,6 +62,7 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus_t& bus;
     std::string objPath;
+    Unit units;
 
     /** @brief Virtual sensor path/interface in entityManagerDbus.
      * This 3 value is used to set thresholds
@@ -71,9 +74,11 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
      *  @param[in] path - Path to attach at.
+     *  @param[in] units - units
      */
-    Threshold(sdbusplus::bus_t& bus, const char* path) :
-        WarningObject(bus, path), bus(bus), objPath(std::string(path))
+    Threshold(sdbusplus::bus_t& bus, const char* path, Unit units) :
+        WarningObject(bus, path), bus(bus), objPath(std::string(path)),
+        units(units)
     {}
 
     auto high()
@@ -177,6 +182,7 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus_t& bus;
     std::string objPath;
+    Unit units;
 
     /** @brief Virtual sensor path/interface in entityManagerDbus.
      * This 3 value is used to set thresholds
@@ -190,9 +196,11 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
      *  @param[in] path - Path to attach at.
+     *  @param[in] units - units
      */
-    Threshold(sdbusplus::bus_t& bus, const char* path) :
-        CriticalObject(bus, path), bus(bus), objPath(std::string(path))
+    Threshold(sdbusplus::bus_t& bus, const char* path, Unit units) :
+        CriticalObject(bus, path), bus(bus), objPath(std::string(path)),
+        units(units)
     {}
 
     auto high()
@@ -294,6 +302,20 @@ struct Threshold<SoftShutdownObject> :
 {
     static constexpr auto name = "SoftShutdown";
     using SoftShutdownObject::SoftShutdownObject;
+    /** @brief sdbusplus bus client connection. */
+    sdbusplus::bus_t& bus;
+    std::string objPath;
+    Unit units;
+
+    /** @brief Constructor to put object onto bus at a dbus path.
+     *  @param[in] bus - Bus to attach to.
+     *  @param[in] path - Path to attach at.
+     *  @param[in] units - units
+     */
+    Threshold(sdbusplus::bus_t& bus, const char* path, Unit units) :
+        SoftShutdownObject(bus, path), bus(bus), objPath(std::string(path)),
+        units(units)
+    {}
 
     auto high()
     {
@@ -347,7 +369,22 @@ struct Threshold<HardShutdownObject> :
     public Hysteresis
 {
     static constexpr auto name = "HardShutdown";
+    /** @brief sdbusplus bus client connection. */
+    sdbusplus::bus_t& bus;
+    std::string objPath;
+    Unit units;
+
     using HardShutdownObject::HardShutdownObject;
+
+    /** @brief Constructor to put object onto bus at a dbus path.
+     *  @param[in] bus - Bus to attach to.
+     *  @param[in] path - Path to attach at.
+     *  @param[in] units - units
+     */
+    Threshold(sdbusplus::bus_t& bus, const char* path, Unit units) :
+        HardShutdownObject(bus, path), bus(bus), objPath(std::string(path)),
+        units(units)
+    {}
 
     auto high()
     {
@@ -401,9 +438,24 @@ struct Threshold<PerformanceLossObject> :
     public Hysteresis
 {
     static constexpr auto name = "PerformanceLoss";
+    /** @brief sdbusplus bus client connection. */
+    sdbusplus::bus_t& bus;
+    std::string objPath;
+    Unit units;
+
     using PerformanceLossObject::PerformanceLossObject;
     double performanceLossHighHysteresis;
     double performanceLossLowHysteresis;
+
+    /** @brief Constructor to put object onto bus at a dbus path.
+     *  @param[in] bus - Bus to attach to.
+     *  @param[in] path - Path to attach at.
+     *  @param[in] units - units
+     */
+    Threshold(sdbusplus::bus_t& bus, const char* path, Unit units) :
+        PerformanceLossObject(bus, path), bus(bus), objPath(std::string(path)),
+        units(units)
+    {}
 
     auto high()
     {
