@@ -109,8 +109,6 @@ void DbusSensor::handleDbusSignalPropChange(sdbusplus::message_t& msg)
             msg.unpack<std::string,
                        std::map<std::string, SensorValuePropertiesVariant>>();
 
-        std::string path = msg.get_path();
-
         if (auto itr = msgData.find("Value"); itr != msgData.end())
         {
             value = std::get<double>(itr->second);
