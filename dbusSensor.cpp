@@ -113,13 +113,22 @@ void DbusSensor::handleDbusSignalPropChange(sdbusplus::message_t& msg)
 
         if (auto itr = msgData.find("Value"); itr != msgData.end())
         {
-            value = std::get<double>(itr->second);
-            if (!std::isfinite(value))
+            double tmpValue = std::get<double>(itr->second);
+            if (!std::isfinite(tmpValue))
             {
-                value = std::numeric_limits<double>::quiet_NaN();
+                if (std::isnan(value))
+                {
+                    return;
+                }
+
+                tmpValue = std::numeric_limits<double>::quiet_NaN();
             }
 
-            virtualSensor.updateVirtualSensor();
+            if (tmpValue != value)
+            {
+                value = tmpValue;
+                virtualSensor.updateVirtualSensor();
+            }
         }
     }
     catch (const std::exception& e)
