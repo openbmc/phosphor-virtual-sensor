@@ -1,0 +1,9 @@
+Code-Review+1: John Wang <wangzhiqiang02@ieisystem.com>
+Code-Review+2: Patrick Williams <patrick@stwcx.xyz>
+Code-Review+1: lintao.lc <lintao.lc@ieisystem.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Patrick Williams <patrick@stwcx.xyz>
+Submitted-at: Fri, 25 Jul 2025 11:57:31 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/phosphor-virtual-sensor/+/82285
+Project: openbmc/phosphor-virtual-sensor
+Branch: refs/heads/master
