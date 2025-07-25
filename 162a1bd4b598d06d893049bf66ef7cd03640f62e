@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f60118fa_f6fdd899",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-07-25T11:57:26Z",
+      "side": 1,
+      "message": "Thanks. Ideally we would have used the value from the signal in the update call itself so that we didn’t need to re-read from dbus but Vijay never implemented that.",
+      "revId": "162a1bd4b598d06d893049bf66ef7cd03640f62e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
