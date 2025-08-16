@@ -38,11 +38,14 @@ class DbusSensor
     /** @brief point to the VirtualSensor */
     VirtualSensor& virtualSensor;
 
+    /** @brief signal for sensor interface added */
+    std::unique_ptr<sdbusplus::bus::match_t> signalInterfacesAdded;
+
     /** @brief signal for sensor value change */
-    sdbusplus::bus::match_t signalPropChange;
+    std::unique_ptr<sdbusplus::bus::match_t> signalPropChange;
 
     /** @brief signal for sensor interface remove */
-    sdbusplus::bus::match_t signalRemove;
+    std::unique_ptr<sdbusplus::bus::match_t> signalRemove;
 
     /** @brief Match for this dbus sensor service destroy  */
     std::unique_ptr<sdbusplus::bus::match_t> signalNameOwnerChanged;
@@ -52,6 +55,9 @@ class DbusSensor
 
     /** @brief Get sensor value property from D-bus interface */
     void initSensorValue();
+
+    /** @brief Set up the matchers */
+    void postInit();
 
     /** @brief Handle for this dbus sensor NameOwnerChanged */
     void handleDbusSignalNameOwnerChanged(sdbusplus::message_t& msg);

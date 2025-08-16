@@ -44,34 +44,67 @@ void DbusSensor::initSensorValue()
 {
     try
     {
-        // If servName is not empty, reduce one DbusCall
-        if (servName.empty())
-        {
-            value = std::numeric_limits<double>::quiet_NaN();
-            servName = getService(bus, path, sensorIntf);
-        }
-
+        // Try a one-shot synchronous read.
+        servName = getService(bus, path, sensorIntf);
         if (!servName.empty())
         {
-            signalNameOwnerChanged.reset();
-            signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
-                bus,
-                sdbusplus::bus::match::rules::nameOwnerChanged() +
-                    sdbusplus::bus::match::rules::arg0namespace(servName),
-                [this](sdbusplus::message_t& message) {
-                    handleDbusSignalNameOwnerChanged(message);
-                });
-
             value = getDbusProperty<double>(bus, servName, path, sensorIntf,
                                             "Value");
+            lg2::info("Successfully initialized sensor on first try: {PATH}",
+                      "PATH", path);
+            postInit();
+            return;
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
-        value = std::numeric_limits<double>::quiet_NaN();
-    }
+        // This is expected if the sensor isn't ready.
+        // Set up a match to wait for it.
+        lg2::info("Sensor {PATH} not found, waiting for InterfacesAdded signal",
+                  "PATH", path);
+        signalInterfacesAdded = std::make_unique<sdbusplus::bus::match_t>(
+            bus, sdbusplus::bus::match::rules::interfacesAdded(path),
+            [this](sdbusplus::message_t&) {
+            // We got the signal, the object has been created.
+            lg2::info("Received InterfacesAdded for {PATH}, initializing",
+                      "PATH", path);
 
-    return;
+            // The matcher is no longer needed.
+            signalInterfacesAdded.reset();
+
+            // Now we can initialize.
+            initSensorValue();
+        });
+    }
+}
+
+void DbusSensor::postInit()
+{
+    // This function sets up the matches we need *after* the sensor is known
+    // to exist.
+    signalPropChange = std::make_unique<sdbusplus::bus::match_t>(
+        bus, sdbusplus::bus::match::rules::propertiesChanged(path, sensorIntf),
+        [this](sdbusplus::message_t& message) {
+        handleDbusSignalPropChange(message);
+    });
+
+    signalRemove = std::make_unique<sdbusplus::bus::match_t>(
+        bus,
+        sdbusplus::bus::match::rules::interfacesRemoved(interfacesSensorPath),
+        [this](sdbusplus::message_t& message) {
+        handleDbusSignalRemove(message);
+    });
+
+    signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
+        bus,
+        sdbusplus::bus::match::rules::nameOwnerChanged() +
+            sdbusplus::bus::match::rules::arg0namespace(servName),
+        [this](sdbusplus::message_t& message) {
+        handleDbusSignalNameOwnerChanged(message);
+    });
+
+    // Trigger an update now that we're initialized.
+    virtualSensor.updateVirtualSensor();
 }
 
 void DbusSensor::handleDbusSignalNameOwnerChanged(sdbusplus::message_t& msg)
