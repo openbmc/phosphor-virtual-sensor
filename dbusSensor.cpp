@@ -5,7 +5,9 @@
 #include <sdbusplus/bus.hpp>
 #include <sdbusplus/bus/match.hpp>
 
+#include <chrono>
 #include <cmath>
+#include <thread>
 static constexpr auto sensorIntf =
     sdbusplus::common::xyz::openbmc_project::sensor::Value::interface;
 
@@ -42,36 +44,61 @@ double DbusSensor::getSensorValue()
 
 void DbusSensor::initSensorValue()
 {
-    try
+    // Retry for up to a minute (12 * 5s)
+    constexpr int maxRetries = 12;
+    constexpr auto retryDelay = std::chrono::seconds(5);
+
+    for (int retries = 0; retries < maxRetries; ++retries)
     {
-        // If servName is not empty, reduce one DbusCall
-        if (servName.empty())
+        try
         {
+            // If servName is not empty, we can skip the service lookup
+            if (servName.empty())
+            {
+                servName = getService(bus, path, sensorIntf);
+            }
+
+            if (!servName.empty())
+            {
+                // We only need to set up the NameOwnerChanged signal once.
+                if (!signalNameOwnerChanged)
+                {
+                    signalNameOwnerChanged =
+                        std::make_unique<sdbusplus::bus::match_t>(
+                            bus,
+                            sdbusplus::bus::match::rules::nameOwnerChanged() +
+                                sdbusplus::bus::match::rules::arg0namespace(
+                                    servName),
+                            [this](sdbusplus::message_t& message) {
+                                handleDbusSignalNameOwnerChanged(message);
+                            });
+                }
+
+                value = getDbusProperty<double>(bus, servName, path, sensorIntf,
+                                                "Value");
+
+                lg2::info("Successfully initialized sensor {PATH}", "PATH",
+                          path);
+                return;
+            }
+        }
+        catch (const std::exception& e)
+        {
+            // This is expected if the sensor service isn't up yet.
+            // Invalidate service name so we re-query it next time.
+            servName.clear();
             value = std::numeric_limits<double>::quiet_NaN();
-            servName = getService(bus, path, sensorIntf);
         }
 
-        if (!servName.empty())
-        {
-            signalNameOwnerChanged.reset();
-            signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
-                bus,
-                sdbusplus::bus::match::rules::nameOwnerChanged() +
-                    sdbusplus::bus::match::rules::arg0namespace(servName),
-                [this](sdbusplus::message_t& message) {
-                    handleDbusSignalNameOwnerChanged(message);
-                });
-
-            value = getDbusProperty<double>(bus, servName, path, sensorIntf,
-                                            "Value");
-        }
-    }
-    catch (const std::exception& e)
-    {
-        value = std::numeric_limits<double>::quiet_NaN();
+        lg2::info(
+            "Could not initialize sensor {PATH}, retrying in {SECONDS}s...",
+            "PATH", path, "SECONDS", retryDelay.count());
+        std::this_thread::sleep_for(retryDelay);
     }
 
-    return;
+    lg2::error("Failed to initialize sensor {PATH} after {RETRIES} retries.",
+               "PATH", path, "RETRIES", maxRetries);
+    value = std::numeric_limits<double>::quiet_NaN();
 }
 
 void DbusSensor::handleDbusSignalNameOwnerChanged(sdbusplus::message_t& msg)
