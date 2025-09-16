@@ -1,7 +1,6 @@
 gtest = dependency('gtest', main: true, disabler: true, required: build_tests)
 gmock = dependency('gmock', disabler: true, required: build_tests)
 test_inc = include_directories('.')
-src_inc = include_directories('..')
 
 common_dep = [gtest, gmock]
 
