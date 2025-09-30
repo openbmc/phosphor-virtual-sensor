@@ -167,6 +167,9 @@ class VirtualSensor : public ValueObject
     /** @brief The minimum valid value for an input sensor **/
     double minValidInput = -std::numeric_limits<double>::infinity();
 
+    /** @brief Flag for invalid reading event */
+    bool invalidReadingLogged = false;
+
     /** @brief The critical threshold interface object */
     std::unique_ptr<Threshold<CriticalObject>> criticalIface;
     /** @brief The warning threshold interface object */
@@ -275,6 +278,11 @@ class VirtualSensor : public ValueObject
     /** @brief Create Association from entityPath*/
     void createAssociation(const std::string& objPath,
                            const std::string& entityPath);
+
+    /** @brief Log invalid virtual sensor reading event */
+    void logInvalidVirtualSensorReading();
+    /** @brief Log virtual sensor restored event */
+    void logVirtualSensorRestored();
 };
 
 class VirtualSensors
