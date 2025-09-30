@@ -2,7 +2,9 @@
 
 #include "calculate.hpp"
 
+#include <phosphor-logging/commit.hpp>
 #include <phosphor-logging/lg2.hpp>
+#include <xyz/openbmc_project/Sensor/event.hpp>
 
 #include <fstream>
 
@@ -461,6 +463,37 @@ bool VirtualSensor::sensorInRange(double value)
     return false;
 }
 
+void VirtualSensor::logInvalidVirtualSensorReading()
+{
+    namespace errors = sdbusplus::error::xyz::openbmc_project::Sensor;
+    try
+    {
+        lg2::commit(errors::InvalidSensorReading("SENSOR_NAME", objPath));
+        invalidReadingLogged = true;
+    }
+    catch (const std::exception& e)
+    {
+        lg2::error(
+            "Could not create InvalidSensorReading log entry for {SENSOR}",
+            "SENSOR", objPath);
+    }
+}
+
+void VirtualSensor::logVirtualSensorRestored()
+{
+    namespace events = sdbusplus::event::xyz::openbmc_project::Sensor;
+    try
+    {
+        lg2::commit(events::SensorRestored("SENSOR_NAME", objPath));
+        invalidReadingLogged = false;
+    }
+    catch (const std::exception& e)
+    {
+        lg2::error("Could not create SensorRestored log entry for {SENSOR}",
+                   "SENSOR", objPath);
+    }
+}
+
 void VirtualSensor::updateVirtualSensor()
 {
     for (auto& param : paramMap)
@@ -484,6 +517,16 @@ void VirtualSensor::updateVirtualSensor()
     /* Set sensor value to dbus interface */
     setSensorValue(val);
     debug("Sensor {NAME} = {VALUE}", "NAME", this->name, "VALUE", val);
+
+    if (std::isnan(val) && !invalidReadingLogged)
+    {
+        logInvalidVirtualSensorReading();
+    }
+    else if (!std::isnan(val) && invalidReadingLogged)
+    {
+        logVirtualSensorRestored();
+    }
+    oldValue = val;
 
     /* Check sensor thresholds and log required message */
     auto changed = false;
