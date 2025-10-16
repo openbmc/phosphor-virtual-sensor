@@ -16,6 +16,24 @@
       "message": "Where is the oldValue used?",
       "revId": "02ce7eaf548354b9f3f8d4d1afcc5ef79753b1dd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9ff4ed3_392b539e",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1002528
+      },
+      "writtenOn": "2025-10-16T05:47:05Z",
+      "side": 1,
+      "message": "Thank you for pointing that out. \nThe oldValue is indeed not used. \nI forgot to remove it in the last change.",
+      "parentUuid": "9221daee_bd7d63f7",
+      "revId": "02ce7eaf548354b9f3f8d4d1afcc5ef79753b1dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
