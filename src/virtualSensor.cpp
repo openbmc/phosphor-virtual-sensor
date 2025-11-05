@@ -828,8 +828,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
                 {
                     return;
                 }
-                sdbusplus::object_path path;
-                message.read(path);
+                auto path = message.unpack<sdbusplus::object_path>();
                 if (static_cast<const std::string&>(path) == objpath)
                 {
                     info("Removed a virtual sensor: {NAME}", "NAME", name);
