@@ -22,6 +22,30 @@
       },
       "revId": "d3857b517798444a6aefdddc76161a230e32603b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c7b6759_6649cc0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002528
+      },
+      "writtenOn": "2025-12-02T08:44:09Z",
+      "side": 1,
+      "message": "OK, I understand. \nI will abandon this commit and focus on the sensor event feature for the dbus-sensor.",
+      "parentUuid": "06765a0f_05f7905e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "d3857b517798444a6aefdddc76161a230e32603b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
