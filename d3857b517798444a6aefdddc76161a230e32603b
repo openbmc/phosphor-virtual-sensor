@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06765a0f_05f7905e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-12-02T03:23:35Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have phosphor-virtual-sensors report an InvalidSensorReading event for NaN results, especially ones which are purely software calculations.  The Redfish event is really suppose to indicate some kind of repair action that should be done on the system, but a phosphor-virtual-sensor does not point to any specific hardware repair action that needs to take place.  If there is a real hardware sensor failure, the underlying dbus-sensor would/should have already reported this event.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "d3857b517798444a6aefdddc76161a230e32603b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
