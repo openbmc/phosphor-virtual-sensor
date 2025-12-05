@@ -184,6 +184,7 @@ class VirtualSensor : public ValueObject
     static FuncMaxIgnoreNaN<double> funcMaxIgnoreNaN;
     static FuncSumIgnoreNaN<double> funcSumIgnoreNaN;
     static FuncIfNan<double> funcIfNan;
+    static FuncInrangeIgnoreNaN<double> funcInrangeIgnoreNaN;
 
     /** @brief Read config from json object and initialize sensor data
      * for each virtual sensor

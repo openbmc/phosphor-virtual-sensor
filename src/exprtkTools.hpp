@@ -110,3 +110,18 @@ struct FuncIfNan : public exprtk::ifunction<T>
         }
     }
 };
+
+template <typename T>
+struct FuncInrangeIgnoreNaN : public exprtk::ifunction<T>
+{
+    FuncInrangeIgnoreNaN() : exprtk::ifunction<T>(3) {}
+
+    inline T operator()(const T& arg0, const T& arg1, const T& arg2)
+    {
+        if (std::isnan(arg0) || std::isnan(arg1) || std::isnan(arg2))
+        {
+            return T{0};
+        }
+        return (arg1 < arg0) ? T{0} : ((arg1 > arg2) ? T{0} : T{1});
+    }
+};

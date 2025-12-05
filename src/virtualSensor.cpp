@@ -18,6 +18,7 @@ namespace phosphor::virtual_sensor
 FuncMaxIgnoreNaN<double> VirtualSensor::funcMaxIgnoreNaN;
 FuncSumIgnoreNaN<double> VirtualSensor::funcSumIgnoreNaN;
 FuncIfNan<double> VirtualSensor::funcIfNan;
+FuncInrangeIgnoreNaN<double> VirtualSensor::funcInrangeIgnoreNaN;
 
 std::map<std::string, ValueIface::Unit> unitMap = {
     {"temperature", ValueIface::Unit::DegreesC},
@@ -346,6 +347,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
     symbols.add_function("maxIgnoreNaN", funcMaxIgnoreNaN);
     symbols.add_function("sumIgnoreNaN", funcSumIgnoreNaN);
     symbols.add_function("ifNan", funcIfNan);
+    symbols.add_function("inrangeIgnoreNaN", funcInrangeIgnoreNaN);
 
     expression.register_symbol_table(symbols);
 
