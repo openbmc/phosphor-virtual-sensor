@@ -34,6 +34,24 @@
       "parentUuid": "f21e3c4f_95dbc638",
       "revId": "0441fe9d078969192bcef0799e6fd8aabafa38fc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be927f4_54ae0eff",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-12-10T14:22:35Z",
+      "side": 1,
+      "message": "I made another attempt an an upstream fix.  I don\u0027t think his \"zero-overhead principle\" argument applies to the change that I made (because it actually made his benchmark slightly faster in my case).\n\nhttps://github.com/ArashPartow/exprtk/pull/54",
+      "parentUuid": "699cb6ad_9a716250",
+      "revId": "0441fe9d078969192bcef0799e6fd8aabafa38fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
