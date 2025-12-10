@@ -52,6 +52,24 @@
       "parentUuid": "699cb6ad_9a716250",
       "revId": "0441fe9d078969192bcef0799e6fd8aabafa38fc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27766ea2_a38fa3e1",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1002528
+      },
+      "writtenOn": "2025-12-10T18:37:40Z",
+      "side": 1,
+      "message": "Your fix is an excellent approach to handling the NaN values with no overhead. \nI hadn\u0027t considered this solution before. \nI truly appreciate your idea—thank you!",
+      "parentUuid": "3be927f4_54ae0eff",
+      "revId": "0441fe9d078969192bcef0799e6fd8aabafa38fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
