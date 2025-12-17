@@ -741,23 +741,15 @@ void VirtualSensors::setupMatches()
         return;
     }
 
-    /* Setup matches */
-    auto eventHandler = [this](sdbusplus::message_t& message) {
-        if (message.is_method_error())
-        {
-            error("Callback method error");
-            return;
-        }
-        this->propertiesChanged(message);
-    };
-
     for (const auto& [iface, _] : calculationIfaces)
     {
         auto match = std::make_unique<sdbusplus::bus::match_t>(
             bus,
             sdbusplus::bus::match::rules::propertiesChangedNamespace(
                 "/xyz/openbmc_project/inventory", iface),
-            eventHandler);
+            [this](sdbusplus::message_t& msg) {
+                this->propertiesChanged(msg);
+            });
         this->matches.emplace_back(std::move(match));
     }
 }
