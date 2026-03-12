@@ -8,6 +8,7 @@
 #include <phosphor-logging/lg2.hpp>
 #include <sdbusplus/bus.hpp>
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
+#include <xyz/openbmc_project/Sensor/Purpose/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
 #include <map>
@@ -40,6 +41,10 @@ using ValueObject = ServerObject<ValueIface>;
 using AssociationIface =
     sdbusplus::xyz::openbmc_project::Association::server::Definitions;
 using AssociationObject = ServerObject<AssociationIface>;
+
+using PurposeIface = sdbusplus::xyz::openbmc_project::Sensor::server::Purpose;
+using PurposeObject = ServerObject<PurposeIface>;
+using SensorPurpose = PurposeIface::SensorPurpose;
 
 class SensorParam
 {
@@ -112,18 +117,21 @@ class VirtualSensor : public ValueObject
      * @param[in] ifacemap     - All the sensor information
      * @param[in] name         - Virtual sensor name
      * @param[in] type         - Virtual sensor type/unit
+     * @param[in] purpose      - Virtual sensor purpose
      * @param[in] calcType     - Calculation used to calculate sensor value
      * @param[in] entityPath   - Virtual sensor path in entityManager Dbus
      *
      */
     VirtualSensor(sdbusplus::bus_t& bus, const char* objPath,
                   const InterfaceMap& ifacemap, const std::string& name,
-                  const std::string& type, const std::string& calculationType,
+                  const std::string& type, const std::string& purpose,
+                  const std::string& calculationType,
                   const std::string& entityPath) :
         ValueObject(bus, objPath, action::defer_emit), bus(bus), name(name),
         objPath(objPath), entityPath(entityPath)
     {
         initVirtualSensor(ifacemap, objPath, type, calculationType);
+        createPurpose(objPath, purpose);
     }
 
     /** @brief Set sensor value */
@@ -181,6 +189,9 @@ class VirtualSensor : public ValueObject
     /** @brief The association interface object */
     std::unique_ptr<AssociationObject> associationIface;
 
+    /** @brief The Sensor Purpose interface object */
+    std::unique_ptr<PurposeIface> purposeIface;
+
     static FuncMaxIgnoreNaN<double> funcMaxIgnoreNaN;
     static FuncSumIgnoreNaN<double> funcSumIgnoreNaN;
     static FuncIfNan<double> funcIfNan;
@@ -209,6 +220,9 @@ class VirtualSensor : public ValueObject
     void parseConfigInterface(const PropertyMap& propertyMap,
                               const std::string& sensorType,
                               const std::string& interface);
+
+    /** @brief initialize sensor purpose interface if configured **/
+    void initPurpose(const Json& sensorConfig, const std::string& objPath);
 
     /** @brief Check Sensor threshold and update alarm and log. Returns
      * true if the threshold range has no alarms set. change will be
@@ -271,6 +285,9 @@ class VirtualSensor : public ValueObject
         }
         return !alarmHigh && !alarmLow;
     }
+
+    /** @brief Create Purpose Iface from dbus config */
+    void createPurpose(const std::string& purpose, const std::string& objPath);
 
     /** @brief Create Association from entityPath*/
     void createAssociation(const std::string& objPath,
