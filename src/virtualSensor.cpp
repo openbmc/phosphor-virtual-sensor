@@ -366,6 +366,9 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
         throw std::runtime_error("Expression compilation failed");
     }
 
+    /* Initialize purpose interface */
+    initPurpose(sensorConfig, objPath);
+
     /* Print all parameters for debug purpose only */
     printParams(paramMap);
 }
@@ -384,6 +387,30 @@ void VirtualSensor::createAssociation(const std::string& objPath,
     associationIface =
         std::make_unique<AssociationObject>(bus, objPath.c_str());
     associationIface->associations(assocsDbus);
+}
+
+void VirtualSensor::createPurpose(const std::string& purpose,
+                                  const sdbusplus::message::object_path objPath)
+{
+    if (objPath.str.empty() || purpose.empty())
+    {
+        return;
+    }
+
+    std::set<SensorPurpose> sensorPurposes;
+
+    if (purpose == "TotalPower")
+    {
+        sensorPurposes.emplace(SensorPurpose::TotalPower);
+    }
+    else
+    {
+        error("Sensor purpose ({PURPOSE}) not valid", "PURPOSE", purpose);
+        return;
+    }
+
+    purposeIface = std::make_unique<PurposeObject>(bus, objPath.str.c_str());
+    purposeIface->purpose(sensorPurposes);
 }
 
 void VirtualSensor::initVirtualSensor(
@@ -803,6 +830,19 @@ void VirtualSensors::createVirtualSensorsFromDBus(
             continue;
         }
 
+        /* Extract sensor purpose */
+        std::string purpose;
+        if (auto itr = interfaceMap.find(calculationIface);
+            itr != interfaceMap.end())
+        {
+            const auto& propertyMap = itr->second;
+            if (auto purposeItr = propertyMap.find("Purpose");
+                purposeItr != propertyMap.end())
+            {
+                purpose = std::get<std::string>(purposeItr->second);
+            }
+        }
+
         try
         {
             auto objpath = static_cast<std::string>(path);
@@ -810,7 +850,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
 
             auto virtualSensorPtr = std::make_unique<VirtualSensor>(
                 bus, virtObjPath.c_str(), interfaceMap, name, sensorType,
-                calculationIface, objpath);
+                purpose, calculationIface, objpath);
             info("Added a new virtual sensor: {NAME} {TYPE}", "NAME", name,
                  "TYPE", sensorType);
             virtualSensorPtr->updateVirtualSensor();
@@ -927,6 +967,45 @@ void VirtualSensors::createVirtualSensors()
         {
             error("Descriptor for new virtual sensor not found in config file");
         }
+    }
+}
+
+void VirtualSensor::initPurpose(const Json& sensorConfig,
+                                const sdbusplus::message::object_path objPath)
+{
+    static const Json empty{};
+
+    auto desc = sensorConfig.value("Desc", empty);
+    if (desc.empty())
+    {
+        return;
+    }
+
+    const std::string purpose = desc.value("Purpose", "");
+
+    if (!purpose.empty())
+    {
+        std::set<SensorPurpose> sensorPurposes;
+
+        if (purpose == "TotalPower")
+        {
+            sensorPurposes.emplace(SensorPurpose::TotalPower);
+        }
+        else
+        {
+            error("Sensor purpose ({PURPOSE}) not valid", "PURPOSE", purpose);
+            return;
+        }
+
+        purposeIface =
+            std::make_unique<PurposeObject>(bus, objPath.str.c_str());
+        purposeIface->purpose(sensorPurposes);
+        info("Added virtual sensor purpose: {PURPOSE}", "PURPOSE", purpose);
+    }
+    else
+    {
+        warning("Sensor purpose ({PURPOSE}) not found in config", "PURPOSE",
+                purpose);
     }
 }
 
