@@ -16,6 +16,86 @@
       "message": "Done",
       "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98300634_2af5ee6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-25T15:53:54Z",
+      "side": 1,
+      "message": "Thanks for addressing all the previous comment.",
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cacbbb_0dd5d0f1",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-25T15:53:54Z",
+      "side": 1,
+      "message": "```suggestion\n    purposeIface-\u003epurpose({SensorPurpose::TotalPower});\n```\n\nC++ can create a temporary object for the set just for this call. So we can avoid creating a mutable local variable for it and the code becomes more compact.",
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a786ea9_25ba5f0c",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-25T15:53:54Z",
+      "side": 1,
+      "message": "```suggestion\n    const std::string purpose \u003d desc.value(\"Purpose\", \"\");\n```",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 2
+      },
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3986a5b2_26c7b90f",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-03-25T15:53:54Z",
+      "side": 1,
+      "message": "To me it looks like you could re-use `VirtualSensor::createPurpose` here, is it right?",
+      "range": {
+        "startLine": 987,
+        "startChar": 5,
+        "endLine": 1003,
+        "endChar": 76
+      },
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
