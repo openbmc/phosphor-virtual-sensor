@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf40930_8b52cb58",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-02T14:04:20Z",
+      "side": 1,
+      "message": "`schemas/virtual_sensor.json` does not define a `Purpose` property.\n\nAnd i did not find any linked patch / gerrit topic.\n\n\n\nIf this gets merged as-is, it means upstream boards will not be able to configure the feature, right?\n\n\nDo we need to get the `Purpose` property added to that EM schema.",
+      "range": {
+        "startLine": 839,
+        "startChar": 0,
+        "endLine": 839,
+        "endChar": 2
+      },
+      "revId": "6a957e369477bcf6a3b496c7867e6afa3d435d0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f529111e_e462f7b0",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-04-02T14:04:20Z",
+      "side": 1,
+      "message": "```suggestion\n        /* Extract sensor purpose */\n        std::string purpose;\n        if (auto purposeItr \u003d propertyMap.find(\"Purpose\");\n                purposeItr !\u003d propertyMap.end())\n        {\n                purpose \u003d std::get\u003cstd::string\u003e(purposeItr-\u003esecond);\n        }\n```\n\nwould that work... Can we re-use the `propertyMap` that was already defined.",
+      "range": {
+        "startLine": 833,
+        "startChar": 7,
+        "endLine": 844,
+        "endChar": 9
+      },
+      "revId": "6a957e369477bcf6a3b496c7867e6afa3d435d0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
