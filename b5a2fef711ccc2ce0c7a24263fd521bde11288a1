@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c2f853_ffa60400",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1002746
+      },
+      "writtenOn": "2026-04-02T13:07:14Z",
+      "side": 1,
+      "message": "This makes sense now that there\u0027s only one purpose, but what if more purposes are added to one sensor in the future?",
+      "parentUuid": "52cacbbb_0dd5d0f1",
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a786ea9_25ba5f0c",
@@ -75,6 +93,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4fbd47_44810fc2",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1002746
+      },
+      "writtenOn": "2026-04-02T13:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a786ea9_25ba5f0c",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 2
+      },
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3986a5b2_26c7b90f",
@@ -88,6 +130,30 @@
       "writtenOn": "2026-03-25T15:53:54Z",
       "side": 1,
       "message": "To me it looks like you could re-use `VirtualSensor::createPurpose` here, is it right?",
+      "range": {
+        "startLine": 987,
+        "startChar": 5,
+        "endLine": 1003,
+        "endChar": 76
+      },
+      "revId": "b5a2fef711ccc2ce0c7a24263fd521bde11288a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf91bc7_8361d42c",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1002746
+      },
+      "writtenOn": "2026-04-02T13:07:14Z",
+      "side": 1,
+      "message": "Yes, just that it drops the warning msg if not present.",
+      "parentUuid": "3986a5b2_26c7b90f",
       "range": {
         "startLine": 987,
         "startChar": 5,
