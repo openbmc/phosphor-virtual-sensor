@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "942163e4_8d918b1c",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1002746
+      },
+      "writtenOn": "2026-04-02T14:12:47Z",
+      "side": 1,
+      "message": "Indeed, for configuring it via EM we will need to add the Purpose property to the `virtual_sensor.json` schema. \n\nThis was actually intended to be used with a include json config file from the recipe bbappend, as stated in the example (that\u0027s a bit outdated) and I added the EM support to allow the newer approach for configuration.\n\nMy idea was that, merging this, I could propose the schema patch later.",
+      "parentUuid": "fcf40930_8b52cb58",
+      "range": {
+        "startLine": 839,
+        "startChar": 0,
+        "endLine": 839,
+        "endChar": 2
+      },
+      "revId": "6a957e369477bcf6a3b496c7867e6afa3d435d0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f529111e_e462f7b0",
         "filename": "src/virtualSensor.cpp",
         "patchSetId": 4
