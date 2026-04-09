@@ -140,7 +140,7 @@ void DbusSensor::handleDbusSignalRemove(sdbusplus::message_t& msg)
 {
     try
     {
-        auto objPath = msg.unpack<sdbusplus::message::object_path>();
+        auto objPath = msg.unpack<sdbusplus::object_path>();
 
         if (this->path == objPath)
         {

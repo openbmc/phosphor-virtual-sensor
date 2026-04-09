@@ -26,8 +26,7 @@ using PropertyMap = std::map<std::string, BasicVariantType>;
 
 using InterfaceMap = std::map<std::string, PropertyMap>;
 
-using ManagedObjectType =
-    std::map<sdbusplus::message::object_path, InterfaceMap>;
+using ManagedObjectType = std::map<sdbusplus::object_path, InterfaceMap>;
 
 using Json = nlohmann::json;
 

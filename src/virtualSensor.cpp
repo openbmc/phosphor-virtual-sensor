@@ -828,7 +828,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
                 {
                     return;
                 }
-                sdbusplus::message::object_path path;
+                sdbusplus::object_path path;
                 message.read(path);
                 if (static_cast<const std::string&>(path) == objpath)
                 {

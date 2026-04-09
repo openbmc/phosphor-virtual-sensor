@@ -58,8 +58,7 @@ struct Hysteresis
 
 template <typename error>
 auto tryCommit(const std::string& objPath, double value, Unit unit,
-               double thresholdValue)
-    -> std::optional<sdbusplus::message::object_path>
+               double thresholdValue) -> std::optional<sdbusplus::object_path>
 {
     try
     {
@@ -76,8 +75,7 @@ auto tryCommit(const std::string& objPath, double value, Unit unit,
     }
 }
 
-static inline void tryResolve(
-    std::optional<sdbusplus::message::object_path>& log)
+static inline void tryResolve(std::optional<sdbusplus::object_path>& log)
 {
     if (log)
     {
@@ -113,8 +111,8 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
     std::string entityPath;
     std::string entityInterfaceHigh;
     std::string entityInterfaceLow;
-    std::optional<sdbusplus::message::object_path> assertedHighLog;
-    std::optional<sdbusplus::message::object_path> assertedLowLog;
+    std::optional<sdbusplus::object_path> assertedHighLog;
+    std::optional<sdbusplus::object_path> assertedLowLog;
 
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
@@ -241,8 +239,8 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
     std::string entityPath;
     std::string entityInterfaceHigh;
     std::string entityInterfaceLow;
-    std::optional<sdbusplus::message::object_path> assertedHighLog;
-    std::optional<sdbusplus::message::object_path> assertedLowLog;
+    std::optional<sdbusplus::object_path> assertedHighLog;
+    std::optional<sdbusplus::object_path> assertedLowLog;
 
     using CriticalObject::CriticalObject;
     using ReadingAboveUpperCriticalThreshold = sdbusplus::error::xyz::
@@ -377,8 +375,8 @@ struct Threshold<SoftShutdownObject> :
     using ReadingBelowLowerSoftShutdownThreshold =
         sdbusplus::error::xyz::openbmc_project::sensor::Threshold::
             ReadingBelowLowerSoftShutdownThreshold;
-    std::optional<sdbusplus::message::object_path> assertedHighLog;
-    std::optional<sdbusplus::message::object_path> assertedLowLog;
+    std::optional<sdbusplus::object_path> assertedHighLog;
+    std::optional<sdbusplus::object_path> assertedLowLog;
 
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
@@ -461,8 +459,8 @@ struct Threshold<HardShutdownObject> :
     using ReadingBelowLowerHardShutdownThreshold =
         sdbusplus::error::xyz::openbmc_project::sensor::Threshold::
             ReadingBelowLowerHardShutdownThreshold;
-    std::optional<sdbusplus::message::object_path> assertedHighLog;
-    std::optional<sdbusplus::message::object_path> assertedLowLog;
+    std::optional<sdbusplus::object_path> assertedHighLog;
+    std::optional<sdbusplus::object_path> assertedLowLog;
 
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
@@ -546,8 +544,8 @@ struct Threshold<PerformanceLossObject> :
             ReadingBelowLowerPerformanceLossThreshold;
     double performanceLossHighHysteresis;
     double performanceLossLowHysteresis;
-    std::optional<sdbusplus::message::object_path> assertedHighLog;
-    std::optional<sdbusplus::message::object_path> assertedLowLog;
+    std::optional<sdbusplus::object_path> assertedHighLog;
+    std::optional<sdbusplus::object_path> assertedLowLog;
 
     /** @brief Constructor to put object onto bus at a dbus path.
      *  @param[in] bus - Bus to attach to.
