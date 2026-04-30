@@ -182,7 +182,7 @@ void parseThresholds(Json& thresholds, const PropertyMap& propertyMap,
 
     auto hysteresis =
         getNumberFromConfig<double>(propertyMap, "Hysteresis", false);
-    if (hysteresis != std::numeric_limits<double>::quiet_NaN())
+    if (!std::isnan(hysteresis))
     {
         thresholds[threshold + "Hysteresis"] = hysteresis;
     }
