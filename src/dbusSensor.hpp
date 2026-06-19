@@ -39,13 +39,13 @@ class DbusSensor
     VirtualSensor& virtualSensor;
 
     /** @brief signal for sensor value change */
-    sdbusplus::bus::match_t signalPropChange;
+    sdbusplus::match signalPropChange;
 
     /** @brief signal for sensor interface remove */
-    sdbusplus::bus::match_t signalRemove;
+    sdbusplus::match signalRemove;
 
     /** @brief Match for this dbus sensor service destroy  */
-    std::unique_ptr<sdbusplus::bus::match_t> signalNameOwnerChanged;
+    std::unique_ptr<sdbusplus::match> signalNameOwnerChanged;
 
     /** @brief dbus sensor value */
     double value = std::numeric_limits<double>::quiet_NaN();

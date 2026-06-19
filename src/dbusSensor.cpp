@@ -21,13 +21,12 @@ DbusSensor::DbusSensor(sdbusplus::bus_t& bus, const std::string& path,
                        VirtualSensor& virtualSensor) :
     bus(bus), path(path), virtualSensor(virtualSensor),
     signalPropChange(
-        bus, sdbusplus::bus::match::rules::propertiesChanged(path, sensorIntf),
+        bus, sdbusplus::match_rules::propertiesChanged(path, sensorIntf),
         [this](sdbusplus::message_t& message) {
             handleDbusSignalPropChange(message);
         }),
     signalRemove(
-        bus,
-        sdbusplus::bus::match::rules::interfacesRemoved(interfacesSensorPath),
+        bus, sdbusplus::match_rules::interfacesRemoved(interfacesSensorPath),
         [this](sdbusplus::message_t& message) {
             handleDbusSignalRemove(message);
         })
@@ -54,10 +53,10 @@ void DbusSensor::initSensorValue()
         if (!servName.empty())
         {
             signalNameOwnerChanged.reset();
-            signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
+            signalNameOwnerChanged = std::make_unique<sdbusplus::match>(
                 bus,
-                sdbusplus::bus::match::rules::nameOwnerChanged() +
-                    sdbusplus::bus::match::rules::arg0namespace(servName),
+                sdbusplus::match_rules::nameOwnerChanged() +
+                    sdbusplus::match_rules::arg0namespace(servName),
                 [this](sdbusplus::message_t& message) {
                     handleDbusSignalNameOwnerChanged(message);
                 });
