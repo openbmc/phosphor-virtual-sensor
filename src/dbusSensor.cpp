@@ -54,7 +54,7 @@ void DbusSensor::initSensorValue()
         if (!servName.empty())
         {
             signalNameOwnerChanged.reset();
-            signalNameOwnerChanged = std::make_unique<sdbusplus::bus::match_t>(
+            signalNameOwnerChanged = std::make_unique<sdbusplus::match>(
                 bus,
                 sdbusplus::bus::match::rules::nameOwnerChanged() +
                     sdbusplus::bus::match::rules::arg0namespace(servName),

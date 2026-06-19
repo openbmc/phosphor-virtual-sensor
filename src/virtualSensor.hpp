@@ -302,7 +302,7 @@ class VirtualSensors
     Json parseConfigFile();
 
     /** @brief Matches for virtual sensors */
-    std::vector<std::unique_ptr<sdbusplus::bus::match_t>> matches;
+    std::vector<std::unique_ptr<sdbusplus::match>> matches;
     /** @brief Map of the object VirtualSensor */
     std::unordered_map<std::string, std::unique_ptr<VirtualSensor>>
         virtualSensorsMap;

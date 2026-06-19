@@ -743,7 +743,7 @@ void VirtualSensors::setupMatches()
 
     for (const auto& [iface, _] : calculationIfaces)
     {
-        auto match = std::make_unique<sdbusplus::bus::match_t>(
+        auto match = std::make_unique<sdbusplus::match>(
             bus,
             sdbusplus::bus::match::rules::propertiesChangedNamespace(
                 "/xyz/openbmc_project/inventory", iface),
@@ -836,7 +836,7 @@ void VirtualSensors::createVirtualSensorsFromDBus(
                     virtualSensorsMap.erase(name);
                 }
             };
-            auto matchOnRemove = std::make_unique<sdbusplus::bus::match_t>(
+            auto matchOnRemove = std::make_unique<sdbusplus::match>(
                 bus,
                 sdbusplus::bus::match::rules::interfacesRemoved() +
                     sdbusplus::bus::match::rules::argNpath(0, objpath),
