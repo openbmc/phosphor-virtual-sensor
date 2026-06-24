@@ -133,34 +133,25 @@ std::string getSeverityField(const PropertyMap& propertyMap)
         "Warning", "Critical", "PerformanceLoss", "SoftShutdown",
         "HardShutdown"};
 
-    std::string severity;
     if (auto itr = propertyMap.find("Severity"); itr != propertyMap.end())
     {
-        /* Severity should be a string, but can be an unsigned int */
-        if (std::holds_alternative<std::string>(itr->second))
+        if (!std::holds_alternative<std::string>(itr->second))
         {
-            severity = std::get<std::string>(itr->second);
-            if (0 == std::ranges::count(thresholdTypes, severity))
-            {
-                throw std::invalid_argument(
-                    "Invalid threshold severity specified in entity manager");
-            }
+            throw std::invalid_argument(
+                "Threshold severity must be a string in entity manager");
         }
-        else
+
+        std::string severity = std::get<std::string>(itr->second);
+        if (0 == std::ranges::count(thresholdTypes, severity))
         {
-            auto sev =
-                getNumberFromConfig<uint64_t>(propertyMap, "Severity", true);
-            /* Checking bounds ourselves so we throw invalid argument on
-             * invalid user input */
-            if (sev >= thresholdTypes.size())
-            {
-                throw std::invalid_argument(
-                    "Invalid threshold severity specified in entity manager");
-            }
-            severity = thresholdTypes.at(sev);
+            throw std::invalid_argument(
+                "Invalid threshold severity specified in entity manager");
         }
+        return severity;
     }
-    return severity;
+
+    throw std::invalid_argument(
+        "Required threshold severity field missing in entity manager");
 }
 
 void parseThresholds(Json& thresholds, const PropertyMap& propertyMap,
