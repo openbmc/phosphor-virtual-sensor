@@ -33,7 +33,6 @@
 
 owners:
 - patrick@stwcx.xyz
-- vijaykhemkalinux@gmail.com
 
 reviewers:
 
@@ -43,6 +42,3 @@ openbmc:
 - name: Patrick Williams
   email: patrick@stwcx.xyz
   discord: stwcx
-- name: Vijay Khemka
-  email: vijaykhemkalinux@gmail.com
-  discord: vijay
