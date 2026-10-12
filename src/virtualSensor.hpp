@@ -11,6 +11,7 @@
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
+#include <filesystem>
 #include <map>
 #include <string>
 
@@ -283,9 +284,13 @@ class VirtualSensors
 
     /** @brief Constructs VirtualSensors
      *
-     * @param[in] bus     - Handle to system dbus
+     * @param[in] bus       - Handle to system dbus
+     * @param[in] configDir - Additional directory to search for the config
+     *                        file, ahead of the default ones
      */
-    explicit VirtualSensors(sdbusplus::bus_t& bus) : bus(bus)
+    explicit VirtualSensors(sdbusplus::bus_t& bus,
+                            std::filesystem::path configDir = {}) :
+        bus(bus), configDir(std::move(configDir))
     {
         createVirtualSensors();
     }
@@ -295,6 +300,8 @@ class VirtualSensors
   private:
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus_t& bus;
+    /** @brief Additional config directory, empty if none */
+    std::filesystem::path configDir;
     /** @brief Get virtual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
     /** @brief Parsing virtual sensor config JSON file  */
