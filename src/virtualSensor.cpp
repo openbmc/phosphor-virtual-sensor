@@ -688,8 +688,7 @@ Json VirtualSensors::parseConfigFile()
     auto configFile = []() -> path {
         static constexpr auto name = "virtual_sensor_config.json";
 
-        for (auto pathSeg : {std::filesystem::current_path(),
-                             path{"/var/lib/phosphor-virtual-sensor"},
+        for (auto pathSeg : {path{"/var/lib/phosphor-virtual-sensor"},
                              path{"/usr/share/phosphor-virtual-sensor"}})
         {
             auto file = pathSeg / name;
