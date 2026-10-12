@@ -8,6 +8,7 @@ executable(
         'virtualSensor.cpp',
     ],
     dependencies: [
+        CLI11_dep,
         dependency('nlohmann_json', include_type: 'system'),
         dependency('phosphor-dbus-interfaces'),
         dependency('phosphor-logging'),

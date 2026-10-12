@@ -19,6 +19,16 @@ else
     exprtk = declare_dependency(include_directories: 'subprojects/exprtk')
 endif
 
+if cpp.has_header('CLI/CLI.hpp')
+    CLI11_dep = declare_dependency()
+else
+    CLI11_dep = dependency(
+        'CLI11',
+        include_type: 'system',
+        default_options: ['tests=disabled'],
+    )
+endif
+
 subdir('src')
 
 packagedir = join_paths(
