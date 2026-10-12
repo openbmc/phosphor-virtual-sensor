@@ -9,8 +9,8 @@ int main(int argc, char** argv)
 
     std::filesystem::path configDir;
     app.add_option("-c,--config-dir", configDir,
-                   "Also search <dir> for config files, ahead of the default "
-                   "directories")
+                   "Also read config files from <dir>, with priority over the "
+                   "default directories")
         ->type_name("<dir>");
 
     CLI11_PARSE(app, argc, argv);

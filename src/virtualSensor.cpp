@@ -5,7 +5,10 @@
 #include <org/freedesktop/DBus/Error/event.hpp>
 #include <phosphor-logging/lg2.hpp>
 
+#include <filesystem>
 #include <fstream>
+#include <map>
+#include <ranges>
 
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
@@ -682,48 +685,100 @@ void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
     }
 }
 
-/** @brief Parsing Virtual Sensor config JSON file  */
-Json VirtualSensors::parseConfigFile()
+/** @brief Parsing Virtual Sensor config JSON files */
+Json VirtualSensors::parseConfigFiles()
 {
-    using path = std::filesystem::path;
-    auto configFile = [this]() -> path {
-        static constexpr auto name = "virtual_sensor_config.json";
+    namespace fs = std::filesystem;
+    static constexpr auto configName = "virtual_sensor_config.json";
+    static constexpr auto dropInDirName = "virtual_sensor_config.d";
 
-        std::vector<path> searchDirs{
-            path{"/var/lib/phosphor-virtual-sensor"},
-            path{"/usr/share/phosphor-virtual-sensor"}};
-        if (!configDir.empty())
+    /* Config directories in increasing order of priority */
+    std::vector<fs::path> configDirs{
+        fs::path{"/usr/share/phosphor-virtual-sensor"},
+        fs::path{"/var/lib/phosphor-virtual-sensor"}};
+    if (!configDir.empty())
+    {
+        configDirs.push_back(configDir);
+    }
+
+    std::vector<fs::path> configFiles;
+
+    /* Only the highest priority virtual_sensor_config.json is used. Other
+     * files next to it are not read, so a platform can ship several configs
+     * in /usr/share and pick one at runtime by placing it in /var/lib. */
+    for (const auto& dir : std::views::reverse(configDirs))
+    {
+        std::error_code ec;
+        auto file = dir / configName;
+        if (fs::exists(file, ec))
         {
-            searchDirs.insert(searchDirs.begin(), configDir);
+            configFiles.push_back(std::move(file));
+            break;
         }
+    }
 
-        for (const auto& pathSeg : searchDirs)
+    /* Every JSON file in the virtual_sensor_config.d drop-in directories is
+     * used. A file replaces a file of the same name in a lower priority
+     * directory, so /var/lib can override or extend the drop-ins shipped in
+     * /usr/share. Drop-ins are processed in name order. */
+    std::map<std::string, fs::path> dropIns;
+    for (const auto& dir : configDirs)
+    {
+        std::error_code ec;
+        for (const auto& entry :
+             fs::directory_iterator(dir / dropInDirName, ec))
         {
-            auto file = pathSeg / name;
-            if (std::filesystem::exists(file))
+            if (entry.is_regular_file(ec) &&
+                entry.path().extension() == ".json")
             {
-                return file;
+                dropIns[entry.path().filename()] = entry.path();
             }
         }
-        return name;
-    }();
-
-    std::ifstream jsonFile(configFile);
-    if (!jsonFile.is_open())
+    }
+    for (auto& file : std::views::values(dropIns))
     {
-        error("config JSON file {FILENAME} not found", "FILENAME", configFile);
+        configFiles.push_back(std::move(file));
+    }
+
+    if (configFiles.empty())
+    {
+        error("No config JSON files found");
         return {};
     }
 
-    auto data = Json::parse(jsonFile, nullptr, false);
-    if (data.is_discarded())
+    auto sensors = Json::array();
+    for (const auto& configFile : configFiles)
     {
-        error("config readings JSON parser failure with {FILENAME}", "FILENAME",
-              configFile);
-        throw std::exception{};
+        std::ifstream jsonFile(configFile);
+        if (!jsonFile.is_open())
+        {
+            error("Unable to open config JSON file {FILENAME}", "FILENAME",
+                  configFile);
+            continue;
+        }
+
+        auto data = Json::parse(jsonFile, nullptr, false);
+        if (data.is_discarded())
+        {
+            error("config readings JSON parser failure with {FILENAME}",
+                  "FILENAME", configFile);
+            continue;
+        }
+        if (!data.is_array())
+        {
+            error("Config file {FILENAME} is not a JSON array", "FILENAME",
+                  configFile);
+            continue;
+        }
+        debug("Config loaded from {FILENAME}", "FILENAME", configFile);
+
+        for (auto& j : data)
+        {
+            sensors.push_back(std::move(j));
+        }
     }
 
-    return data;
+    return sensors;
 }
 
 const std::string getSensorTypeFromUnit(const std::string& unit)
@@ -862,10 +917,7 @@ void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
 
-    auto data = parseConfigFile();
-
-    // print values
-    debug("JSON: {JSON}", "JSON", data.dump());
+    auto data = parseConfigFiles();
 
     /* Get virtual sensors  config data */
     for (const auto& j : data)
