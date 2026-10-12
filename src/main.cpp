@@ -10,8 +10,8 @@ static void printUsage(const char* name)
 {
     std::cerr << "Usage: " << name << " [options]\n"
               << "Options:\n"
-              << "  -c, --config-dir <dir>  Also search <dir> for config "
-                 "files, ahead of the default directories\n"
+              << "  -c, --config-dir <dir>  Also read config files from <dir>, "
+                 "overriding the default directories\n"
               << "  -h, --help              Print this help and exit\n";
 }
 

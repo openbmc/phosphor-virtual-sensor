@@ -4,7 +4,10 @@
 
 #include <phosphor-logging/lg2.hpp>
 
+#include <filesystem>
 #include <fstream>
+#include <map>
+#include <ranges>
 
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";
@@ -681,48 +684,77 @@ void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
     }
 }
 
-/** @brief Parsing Virtual Sensor config JSON file  */
-Json VirtualSensors::parseConfigFile()
+/** @brief Parsing Virtual Sensor config JSON files */
+Json VirtualSensors::parseConfigFiles()
 {
-    using path = std::filesystem::path;
-    auto configFile = [this]() -> path {
-        static constexpr auto name = "virtual_sensor_config.json";
+    namespace fs = std::filesystem;
 
-        std::vector<path> searchDirs{
-            path{"/var/lib/phosphor-virtual-sensor"},
-            path{"/usr/share/phosphor-virtual-sensor"}};
-        if (!configDir.empty())
-        {
-            searchDirs.insert(searchDirs.begin(), configDir);
-        }
+    /* Collect every JSON file from the config directories. A file in a later
+     * directory replaces a file of the same name in an earlier one, so
+     * /var/lib can override or extend the defaults shipped in /usr/share,
+     * and a directory passed with --config-dir can override both. Files are
+     * processed in name order. */
+    std::vector<fs::path> configDirs{
+        fs::path{"/usr/share/phosphor-virtual-sensor"},
+        fs::path{"/var/lib/phosphor-virtual-sensor"}};
+    if (!configDir.empty())
+    {
+        configDirs.push_back(configDir);
+    }
 
-        for (const auto& pathSeg : searchDirs)
+    std::map<std::string, fs::path> configFiles;
+    for (const auto& dir : configDirs)
+    {
+        std::error_code ec;
+        for (const auto& entry : fs::directory_iterator(dir, ec))
         {
-            auto file = pathSeg / name;
-            if (std::filesystem::exists(file))
+            if (entry.is_regular_file(ec) &&
+                entry.path().extension() == ".json")
             {
-                return file;
+                configFiles[entry.path().filename()] = entry.path();
             }
         }
-        return name;
-    }();
+    }
 
-    std::ifstream jsonFile(configFile);
-    if (!jsonFile.is_open())
+    if (configFiles.empty())
     {
-        error("config JSON file {FILENAME} not found", "FILENAME", configFile);
+        error("No config JSON files found");
         return {};
     }
 
-    auto data = Json::parse(jsonFile, nullptr, false);
-    if (data.is_discarded())
+    auto sensors = Json::array();
+    for (const auto& configFile : std::views::values(configFiles))
     {
-        error("config readings JSON parser failure with {FILENAME}", "FILENAME",
-              configFile);
-        throw std::exception{};
+        std::ifstream jsonFile(configFile);
+        if (!jsonFile.is_open())
+        {
+            error("Unable to open config JSON file {FILENAME}", "FILENAME",
+                  configFile);
+            continue;
+        }
+
+        auto data = Json::parse(jsonFile, nullptr, false);
+        if (data.is_discarded())
+        {
+            error("config readings JSON parser failure with {FILENAME}",
+                  "FILENAME", configFile);
+            continue;
+        }
+        if (!data.is_array())
+        {
+            error("Config file {FILENAME} is not a JSON array", "FILENAME",
+                  configFile);
+            continue;
+        }
+        debug("Config loaded from {FILENAME}", "FILENAME", configFile);
+
+        for (auto& j : data)
+        {
+            sensors.push_back(std::move(j));
+        }
     }
 
-    return data;
+    return sensors;
 }
 
 const std::string getSensorTypeFromUnit(const std::string& unit)
@@ -862,10 +894,7 @@ void VirtualSensors::createVirtualSensors()
 {
     static const Json empty{};
 
-    auto data = parseConfigFile();
-
-    // print values
-    debug("JSON: {JSON}", "JSON", data.dump());
+    auto data = parseConfigFiles();
 
     /* Get virtual sensors  config data */
     for (const auto& j : data)
