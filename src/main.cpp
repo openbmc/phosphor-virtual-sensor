@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 
     std::filesystem::path configDir;
     app.add_option("-c,--config-dir", configDir,
-                   "Also search <dir> for config files, ahead of the default "
+                   "Also read config files from <dir>, overriding the default "
                    "directories")
         ->type_name("<dir>");
 

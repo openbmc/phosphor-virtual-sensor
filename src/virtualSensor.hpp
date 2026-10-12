@@ -285,8 +285,8 @@ class VirtualSensors
     /** @brief Constructs VirtualSensors
      *
      * @param[in] bus       - Handle to system dbus
-     * @param[in] configDir - Additional directory to search for the config
-     *                        file, ahead of the default ones
+     * @param[in] configDir - Additional directory to read config files from,
+     *                        overriding the default ones
      */
     explicit VirtualSensors(sdbusplus::bus_t& bus,
                             std::filesystem::path configDir = {}) :
@@ -304,8 +304,8 @@ class VirtualSensors
     std::filesystem::path configDir;
     /** @brief Get virtual sensor config from DBus**/
     ManagedObjectType getObjectsFromDBus();
-    /** @brief Parsing virtual sensor config JSON file  */
-    Json parseConfigFile();
+    /** @brief Parse all virtual sensor config JSON files into one array */
+    Json parseConfigFiles();
 
     /** @brief Matches for virtual sensors */
     std::vector<std::unique_ptr<sdbusplus::match>> matches;
