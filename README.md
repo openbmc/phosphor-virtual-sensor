@@ -1,14 +1,19 @@
 # phosphor-virtual-sensor
 
-phosphor-virtual-sensor reads the configuration file
-`virtual_sensor_config.json` from one of two locations:
+phosphor-virtual-sensor reads every `*.json` configuration file from these
+directories:
 
-1. `/var/lib/phosphor-virtual-sensor`
-2. `/usr/share/phosphor-virtual-sensor`
+1. `/usr/share/phosphor-virtual-sensor`
+2. `/var/lib/phosphor-virtual-sensor`
 
-By default the repository will install a sample config into (2).
+A file in (2) replaces a file with the same name in (1), so (2) can be used to
+override or extend the defaults. Files are processed in name order. Each file
+contains a JSON array of sensor entries, and sensor names must be unique across
+all files.
 
-There are two types of data in this file.
+By default the repository will install a sample config into (1).
+
+There are two types of entries in these files.
 
 ## virtual sensor configuration information
 
