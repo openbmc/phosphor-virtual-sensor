@@ -869,6 +869,13 @@ void VirtualSensors::createVirtualSensors()
         {
             if (desc.value("Config", "") == "D-Bus")
             {
+                /* Only look on D-Bus once, even if several config files ask
+                 * for it */
+                if (!matches.empty())
+                {
+                    continue;
+                }
+
                 /* Look on D-Bus for a virtual sensor config. Set up matches
                  * first because the configs may not be on D-Bus yet and we
                  * don't want to miss them */
