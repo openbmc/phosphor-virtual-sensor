@@ -685,12 +685,18 @@ void VirtualSensors::propertiesChanged(sdbusplus::message_t& msg)
 Json VirtualSensors::parseConfigFile()
 {
     using path = std::filesystem::path;
-    auto configFile = []() -> path {
+    auto configFile = [this]() -> path {
         static constexpr auto name = "virtual_sensor_config.json";
 
-        for (auto pathSeg : {std::filesystem::current_path(),
-                             path{"/var/lib/phosphor-virtual-sensor"},
-                             path{"/usr/share/phosphor-virtual-sensor"}})
+        std::vector<path> searchDirs{
+            path{"/var/lib/phosphor-virtual-sensor"},
+            path{"/usr/share/phosphor-virtual-sensor"}};
+        if (!configDir.empty())
+        {
+            searchDirs.insert(searchDirs.begin(), configDir);
+        }
+
+        for (const auto& pathSeg : searchDirs)
         {
             auto file = pathSeg / name;
             if (std::filesystem::exists(file))
