@@ -4,7 +4,13 @@
 
 #include <phosphor-logging/lg2.hpp>
 
+#include <algorithm>
+#include <array>
+#include <filesystem>
 #include <fstream>
+#include <memory>
+#include <stdexcept>
+#include <variant>
 
 static constexpr auto sensorDbusPath = "/xyz/openbmc_project/sensors/";
 static constexpr auto vsThresholdsIfaceSuffix = ".Thresholds";

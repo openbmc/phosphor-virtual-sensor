@@ -6,6 +6,9 @@
 #include <sdbusplus/bus/match.hpp>
 
 #include <cmath>
+#include <map>
+#include <string>
+
 static constexpr auto sensorIntf =
     sdbusplus::common::xyz::openbmc_project::sensor::Value::interface;
 

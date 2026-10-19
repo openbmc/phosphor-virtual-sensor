@@ -11,6 +11,10 @@
 #include <xyz/openbmc_project/Sensor/Threshold/event.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
+#include <optional>
+#include <string>
+#include <utility>
+
 const constexpr char* entityManagerBusName =
     "xyz.openbmc_project.EntityManager";
 namespace phosphor::virtual_sensor

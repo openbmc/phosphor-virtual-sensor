@@ -4,6 +4,11 @@
 #include <phosphor-logging/lg2.hpp>
 #include <xyz/openbmc_project/Common/error.hpp>
 
+#include <cstdint>
+#include <limits>
+#include <string>
+#include <variant>
+
 using namespace sdbusplus::xyz::openbmc_project::Common::Error;
 
 using Value = std::variant<int64_t, double, std::string, bool>;

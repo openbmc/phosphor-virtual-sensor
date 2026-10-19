@@ -2,6 +2,11 @@
 
 #include <xyz/openbmc_project/ObjectMapper/common.hpp>
 
+#include <stdexcept>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
 const char* propIntf = "org.freedesktop.DBus.Properties";
 const char* mapperBusName = "xyz.openbmc_project.ObjectMapper";
 const char* mapperPath = "/xyz/openbmc_project/object_mapper";

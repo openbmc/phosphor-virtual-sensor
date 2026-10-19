@@ -3,6 +3,10 @@
 #include <sdbusplus/bus.hpp>
 #include <sdbusplus/bus/match.hpp>
 
+#include <limits>
+#include <memory>
+#include <string>
+
 namespace phosphor::virtual_sensor
 {
 

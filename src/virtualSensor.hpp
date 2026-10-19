@@ -10,8 +10,13 @@
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
+#include <cstdint>
+#include <limits>
 #include <map>
+#include <memory>
 #include <string>
+#include <unordered_map>
+#include <variant>
 
 namespace phosphor::virtual_sensor
 {
