@@ -44,12 +44,12 @@ double calculateMaximumValue(std::vector<double>& values)
 
 double calculateMinimumValue(std::vector<double>& values)
 {
-    auto maxIt = std::min_element(values.begin(), values.end());
-    if (maxIt == values.end())
+    auto minIt = std::min_element(values.begin(), values.end());
+    if (minIt == values.end())
     {
         return std::numeric_limits<double>::quiet_NaN();
     }
-    return *maxIt;
+    return *minIt;
 }
 
 double calculateSumValue(std::vector<double>& values)
