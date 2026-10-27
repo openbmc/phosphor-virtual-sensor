@@ -644,8 +644,8 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
     {
         auto method = bus.new_method_call(
             "xyz.openbmc_project.EntityManager",
-            "/xyz/openbmc_project/inventory",
-            "org.freedesktop.DBus.ObjectManager", "GetManagedObjects");
+            "/xyz/openbmc_project/inventory", ObjectManager::interface,
+            ObjectManager::method_names::get_managed_objects);
         auto reply = bus.call(method);
         reply.read(objects);
     }

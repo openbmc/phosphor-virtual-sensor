@@ -5,6 +5,7 @@
 #include "thresholds.hpp"
 
 #include <nlohmann/json.hpp>
+#include <org/freedesktop/DBus/ObjectManager/common.hpp>
 #include <phosphor-logging/lg2.hpp>
 #include <sdbusplus/bus.hpp>
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
@@ -18,15 +19,13 @@ namespace phosphor::virtual_sensor
 
 PHOSPHOR_LOG2_USING_WITH_FLAGS;
 
-using BasicVariantType =
-    std::variant<std::string, int64_t, uint64_t, double, int32_t, uint32_t,
-                 int16_t, uint16_t, uint8_t, bool, std::vector<std::string>>;
+using ObjectManager = sdbusplus::common::org::freedesktop::d_bus::ObjectManager;
 
-using PropertyMap = std::map<std::string, BasicVariantType>;
+using ManagedObjectType = ObjectManager::get_managed_objects_t::return_type;
 
-using InterfaceMap = std::map<std::string, PropertyMap>;
+using InterfaceMap = ManagedObjectType::mapped_type;
 
-using ManagedObjectType = std::map<sdbusplus::object_path, InterfaceMap>;
+using PropertyMap = InterfaceMap::mapped_type;
 
 using Json = nlohmann::json;
 
