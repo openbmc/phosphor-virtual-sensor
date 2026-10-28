@@ -11,6 +11,8 @@
 #include <xyz/openbmc_project/Sensor/Threshold/event.hpp>
 #include <xyz/openbmc_project/Sensor/Value/server.hpp>
 
+#include <functional>
+
 const constexpr char* entityManagerBusName =
     "xyz.openbmc_project.EntityManager";
 namespace phosphor::virtual_sensor
@@ -95,6 +97,7 @@ template <>
 struct Threshold<WarningObject> : public WarningObject, public Hysteresis
 {
     static constexpr auto name = "Warning";
+    std::function<void()> updateSensorCallback;
     using WarningObject::WarningObject;
     using ReadingAboveUpperWarningThreshold = sdbusplus::error::xyz::
         openbmc_project::sensor::Threshold::ReadingAboveUpperWarningThreshold;
@@ -184,7 +187,12 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
             setDbusProperty(bus, entityManagerBusName, entityPath,
                             entityInterfaceHigh, "Value", value);
         }
-        return WarningObject::warningHigh(value);
+        const double result = WarningObject::warningHigh(value);
+        if (updateSensorCallback)
+        {
+            updateSensorCallback();
+        }
+        return result;
     }
 
     /** @brief Set value of WarningLow */
@@ -196,7 +204,12 @@ struct Threshold<WarningObject> : public WarningObject, public Hysteresis
             setDbusProperty(bus, entityManagerBusName, entityPath,
                             entityInterfaceLow, "Value", value);
         }
-        return WarningObject::warningLow(value);
+        const double result = WarningObject::warningLow(value);
+        if (updateSensorCallback)
+        {
+            updateSensorCallback();
+        }
+        return result;
     }
 
     /** @brief Set the entitymanager interface corresponding to virtualsensor
@@ -227,6 +240,7 @@ template <>
 struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
 {
     static constexpr auto name = "Critical";
+    std::function<void()> updateSensorCallback;
 
     /** @brief sdbusplus bus client connection. */
     sdbusplus::bus_t& bus;
@@ -318,7 +332,12 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
             setDbusProperty(bus, entityManagerBusName, entityPath,
                             entityInterfaceHigh, "Value", value);
         }
-        return CriticalObject::criticalHigh(value);
+        const double result = CriticalObject::criticalHigh(value);
+        if (updateSensorCallback)
+        {
+            updateSensorCallback();
+        }
+        return result;
     }
 
     /** @brief Set value of CriticalLow */
@@ -329,7 +348,12 @@ struct Threshold<CriticalObject> : public CriticalObject, public Hysteresis
             setDbusProperty(bus, entityManagerBusName, entityPath,
                             entityInterfaceLow, "Value", value);
         }
-        return CriticalObject::criticalLow(value);
+        const double result = CriticalObject::criticalLow(value);
+        if (updateSensorCallback)
+        {
+            updateSensorCallback();
+        }
+        return result;
     }
 
     /** @brief Set the entitymanager interface corresponding to virtualsensor
