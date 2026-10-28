@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b550ad8e_9fea10a7",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2026-10-28T19:50:51Z",
+      "side": 1,
+      "message": "CLI/CLI instead of getopt.",
+      "revId": "7a6fd98bd8033ef6e686171b8be223ea888d063e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
