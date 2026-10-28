@@ -368,6 +368,7 @@ void VirtualSensor::initVirtualSensor(const Json& sensorConfig,
 
     /* Print all parameters for debug purpose only */
     printParams(paramMap);
+    setSensorUpdateCallback();
 }
 
 void VirtualSensor::createAssociation(const std::string& objPath,
@@ -418,6 +419,20 @@ void VirtualSensor::initVirtualSensor(
     createAssociation(objPath, entityPath);
     /* Print all parameters for debug purpose only */
     printParams(paramMap);
+    setSensorUpdateCallback();
+}
+
+void VirtualSensor::setSensorUpdateCallback()
+{
+    // Initialization writes thresholds before the calculation is ready.
+    const auto setCallback = [this](auto& threshold) {
+        if (threshold)
+        {
+            threshold->sensorUpdateCallback = [this] { updateVirtualSensor(); };
+        }
+    };
+    setCallback(warningIface);
+    setCallback(criticalIface);
 }
 
 void VirtualSensor::setSensorValue(double value)
