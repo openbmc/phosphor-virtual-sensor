@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this break existing configs like:\n\n```\nmeta-facebook/meta-ventura2/recipes-phosphor/sensors/phosphor-virtual-sensor_%.bbappend\n```",
       "revId": "97c60d181718ad44d100e8b4c2fc43aea6515d3e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783b5cd9_972a5fa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000212
+      },
+      "writtenOn": "2026-10-28T19:58:23Z",
+      "side": 1,
+      "message": "Great catch. Back to the drawing board.",
+      "parentUuid": "193194fe_73a68ec4",
+      "revId": "97c60d181718ad44d100e8b4c2fc43aea6515d3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
