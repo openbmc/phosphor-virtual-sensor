@@ -200,6 +200,8 @@ class VirtualSensor : public ValueObject
     /** @brief Returns which calculation function or expression to use */
     double calculateValue(const std::string& sensortype,
                           const VirtualSensor::ParamMap& paramMap);
+    void attachThresholdCallbacks();
+
     /** @brief create threshold objects from json config */
     void createThresholds(const Json& threshold, const std::string& objPath,
                           ValueIface::Unit units);
