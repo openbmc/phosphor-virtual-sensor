@@ -2,6 +2,7 @@
 
 #include "calculate.hpp"
 
+#include <org/freedesktop/DBus/Error/event.hpp>
 #include <phosphor-logging/lg2.hpp>
 
 #include <fstream>
@@ -649,15 +650,15 @@ ManagedObjectType VirtualSensors::getObjectsFromDBus()
         auto reply = bus.call(method);
         reply.read(objects);
     }
-    catch (const sdbusplus::exception_t& ex)
+    catch (
+        const sdbusplus::error::org::freedesktop::d_bus::Error::ServiceUnknown&)
     {
         // If entity manager isn't running yet, keep going.
-        if (std::string("org.freedesktop.DBus.Error.ServiceUnknown") !=
-            ex.name())
-        {
-            error("Could not reach entity-manager: {ERROR}", "ERROR", ex);
-            throw;
-        }
+    }
+    catch (const sdbusplus::exception_t& ex)
+    {
+        error("Could not reach entity-manager: {ERROR}", "ERROR", ex);
+        throw;
     }
 
     return objects;

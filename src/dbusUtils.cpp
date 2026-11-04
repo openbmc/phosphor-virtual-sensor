@@ -1,5 +1,6 @@
 #include "dbusUtils.hpp"
 
+#include <org/freedesktop/DBus/Error/event.hpp>
 #include <xyz/openbmc_project/ObjectMapper/common.hpp>
 
 const char* propIntf = "org.freedesktop.DBus.Properties";
@@ -31,20 +32,19 @@ std::string getService(sdbusplus::bus_t& bus, const std::string& path,
         auto msg = bus.call(mapper);
         msg.read(resp);
     }
-    catch (const sdbusplus::exception_t& ex)
+    catch (
+        const sdbusplus::xyz::openbmc_project::Common::Error::ResourceNotFound&)
     {
-        if (ex.name() == std::string(sdbusplus::xyz::openbmc_project::Common::
-                                         Error::ResourceNotFound::errName))
-        {
-            // The service isn't on D-Bus yet.
-            return std::string{};
-        }
-        else if (ex.name() == std::string("org.freedesktop.DBus.Error.Timeout"))
-        {
-            lg2::info("Mapper timeout while looking up {PATH}", "PATH", path);
-            return std::string{};
-        }
-
+        // The service isn't on D-Bus yet.
+        return std::string{};
+    }
+    catch (const sdbusplus::error::org::freedesktop::d_bus::Error::Timeout&)
+    {
+        lg2::info("Mapper timeout while looking up {PATH}", "PATH", path);
+        return std::string{};
+    }
+    catch (const sdbusplus::exception_t&)
+    {
         throw;
     }
 
