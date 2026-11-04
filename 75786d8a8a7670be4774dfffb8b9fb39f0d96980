@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3cdb62a_7fe59d1a",
+        "filename": "src/virtualSensor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2026-11-04T06:58:24Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "458ec656_e276d58f",
+      "revId": "75786d8a8a7670be4774dfffb8b9fb39f0d96980",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2c4b8f3_d2ec9bbb",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-30T16:41:40Z",
       "side": 1,
       "message": "These are sensor value update callbacks being set in thresholds struct to be called when threshold change. Its better if nomenclature is around that sensor value rather than threshold, probably setSensorUpdateCallback ?",
+      "revId": "75786d8a8a7670be4774dfffb8b9fb39f0d96980",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a9476c_6ee27ff5",
+        "filename": "src/virtualSensor.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2026-11-04T06:58:24Z",
+      "side": 1,
+      "message": "Done. Renamed to setSensorUpdateCallback, and also renamed the member to\nsensorUpdateCallback for consistency.",
+      "parentUuid": "b2c4b8f3_d2ec9bbb",
       "revId": "75786d8a8a7670be4774dfffb8b9fb39f0d96980",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
