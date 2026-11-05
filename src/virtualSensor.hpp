@@ -127,7 +127,7 @@ class VirtualSensor : public ValueObject
     /** @brief Set sensor value */
     void setSensorValue(double value);
 
-    /** @brief Update sensor at regular intrval */
+    /** @brief Update sensor at regular interval */
     void updateVirtualSensor();
 
     /** @brief Check if sensor value is in valid range */
